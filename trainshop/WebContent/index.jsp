@@ -7,13 +7,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
-<%@ include file="/common/jsp/includeFile.jsp"%>
+<%@ include file="/common/includeFile.jsp"%>
 <title>后台管理</title>
 
 </head>
 <body>
 	<div id="wrapper">
-		<%@ include file="/common/jsp/nav.jsp"%>
+		<%@ include file="/common/nav.jsp"%>
 		<div id="page-wrapper">
 			<div class="row">
 				<div class="col-lg-12">

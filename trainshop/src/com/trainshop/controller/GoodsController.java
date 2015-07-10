@@ -16,7 +16,7 @@ import com.trainshop.model.Goods;
 import com.trainshop.service.IGoodsService;
 
 @Controller
-@RequestMapping("/goodsController")
+@RequestMapping("/goods")
 public class GoodsController {
 
 	@Resource(name = "goodsService")

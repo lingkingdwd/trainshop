@@ -16,7 +16,7 @@ import com.trainshop.model.Category;
 import com.trainshop.service.ICategoryService;
 
 @Controller
-@RequestMapping("/categoryController")
+@RequestMapping("/category")
 public class CategoryController {
 
 	@Resource(name = "categoryService")
