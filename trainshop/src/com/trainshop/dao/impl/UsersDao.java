@@ -1,5 +1,6 @@
 package com.trainshop.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -25,6 +26,15 @@ public class UsersDao extends AbstractHibernateDao<Users> implements IUsersDao {
 		Criteria cri = session.createCriteria(Users.class);
 		cri.add(Restrictions.eq("userName", userName));
 		cri.add(Restrictions.eq("password", password));
+		List<Users> list = cri.list();
+		
+		return list;
+	}
+	
+	public List<Users> findOne(String userName) {
+		Session session = getCurrentSession();
+		Criteria cri = session.createCriteria(Users.class);
+		cri.add(Restrictions.eq("userName", userName));
 		List<Users> list = cri.list();
 		
 		return list;

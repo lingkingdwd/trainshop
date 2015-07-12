@@ -4,8 +4,8 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.trainshop.common.IOperations;
 import com.trainshop.dao.IUserAccountDao;
-import com.trainshop.dao.common.IOperations;
 import com.trainshop.model.UserAccount;
 import com.trainshop.service.IUserAccountService;
 import com.trainshop.service.common.AbstractService;

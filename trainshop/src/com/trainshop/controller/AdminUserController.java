@@ -17,7 +17,7 @@ import com.trainshop.service.IAdminUserService;
 
 @Controller
 @RequestMapping("/adminUserController")
-public class AdminUserController {
+public class AdminUserController extends BaseController {
 
 	@Resource(name = "adminUserService")
 	private IAdminUserService adminUserService;
@@ -34,11 +34,11 @@ public class AdminUserController {
 
 	@ResponseBody
 	@RequestMapping(value = "usersCount", method = RequestMethod.POST, produces = { "text/json;charset=UTF-8" })
-	public int usersCount() {
+	public String usersCount() {
 
 		int count = adminUserService.findAll().size();
 
-		return count;
+		return super.returnData(count);
 	}
 
 	/**
@@ -57,7 +57,7 @@ public class AdminUserController {
 
 		result = JsonPluginsUtil.beanListToJson(userList);
 
-		return result;
+		return super.returnData(result);
 	}
 
 	/**
@@ -72,10 +72,6 @@ public class AdminUserController {
 	public String loginAction(HttpServletRequest request, HttpSession session) {
 		String result = null;
 
-//		String loginType = request.getParameter("loginType");
-//		String userName = request.getParameter("userName");
-//		String password = request.getParameter("password");
-		
 		String data = request.getParameter("data");
 		
 		AdminUser paraUser = JsonPluginsUtil.jsonToBean(data, AdminUser.class);

@@ -5,8 +5,8 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.trainshop.common.IOperations;
 import com.trainshop.dao.IGoodsDao;
-import com.trainshop.dao.common.IOperations;
 import com.trainshop.model.Goods;
 import com.trainshop.service.IGoodsService;
 import com.trainshop.service.common.AbstractService;

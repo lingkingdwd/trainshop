@@ -17,7 +17,7 @@ import com.trainshop.service.IGoodsService;
 
 @Controller
 @RequestMapping("/goods")
-public class GoodsController {
+public class GoodsController extends BaseController {
 
 	@Resource(name = "goodsService")
 	private IGoodsService goodsService;
@@ -34,11 +34,11 @@ public class GoodsController {
 
 	@ResponseBody
 	@RequestMapping(value = "goodsCount", method = RequestMethod.POST, produces = { "text/json;charset=UTF-8" })
-	public int goodssCount() {
+	public String goodssCount() {
 
 		int count = goodsService.findAll().size();
 
-		return count;
+		return super.returnData(count);
 	}
 
 	/**
@@ -56,7 +56,7 @@ public class GoodsController {
 		List<Goods> userList = goodsService.findAll();
 
 		result = JsonPluginsUtil.beanListToJson(userList);
-
-		return result;
+		
+		return super.returnData(result);
 	}
 }

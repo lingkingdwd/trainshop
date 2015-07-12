@@ -17,7 +17,7 @@ import com.trainshop.service.ICategoryService;
 
 @Controller
 @RequestMapping("/category")
-public class CategoryController {
+public class CategoryController extends BaseController{
 
 	@Resource(name = "categoryService")
 	private ICategoryService categoryService;
@@ -25,7 +25,7 @@ public class CategoryController {
 	@RequestMapping(value = "/init", method = RequestMethod.GET)
 	public String init(HttpServletRequest request, HttpSession session) {
 		try {
-			return "list";
+			return "shop/category/list";
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "/error";
@@ -34,11 +34,11 @@ public class CategoryController {
 
 	@ResponseBody
 	@RequestMapping(value = "count", method = RequestMethod.POST, produces = { "text/json;charset=UTF-8" })
-	public int count() {
+	public String count() {
 
 		int count = categoryService.findAll().size();
 
-		return count;
+		return super.returnData(count);
 	}
 
 	/**
@@ -56,7 +56,7 @@ public class CategoryController {
 		List<Category> list = categoryService.findAll();
 
 		result = JsonPluginsUtil.beanListToJson(list);
-
-		return result;
+		
+		return super.returnData(result);
 	}
 }

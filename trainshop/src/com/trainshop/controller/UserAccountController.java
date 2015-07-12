@@ -23,18 +23,18 @@ import com.trainshop.service.IUserAccountService;
 
 @Controller
 @RequestMapping("/userAccount")
-public class UserAccountController {
+public class UserAccountController extends BaseController {
 
     @Resource(name="userAccountService")
     private IUserAccountService userAccountService;
     
     @ResponseBody
 	@RequestMapping(value = "accountCount", method = RequestMethod.POST, produces = { "text/json;charset=UTF-8"})
-    public int userAccountCount() {
+    public String userAccountCount() {
         
         int count = userAccountService.findAll().size();
         
-        return count;
+        return super.returnData(count);
     }
     
     /**
@@ -52,6 +52,6 @@ public class UserAccountController {
 		
 		result = JsonPluginsUtil.beanListToJson(userList);
 		
-		return result;
+		return super.returnData(result);
 	}
 }

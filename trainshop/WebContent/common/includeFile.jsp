@@ -21,6 +21,7 @@
 <link rel="stylesheet" href="<%=basePath %>css/timeline.css" />
 <link rel="stylesheet" href="<%=basePath %>css/sb-admin-2.css" />
 <link rel="stylesheet" href="<%=basePath %>js/morrisjs/morris.css" />
+<link rel="stylesheet" href="<%=basePath %>css/common.css" />
 
 <script type="text/javascript" src="<%=basePath %>js/jquery-1.11.3.js"></script>
 <script type="text/javascript" src="<%=basePath %>js/bootstrap/js/bootstrap.min.js"></script>

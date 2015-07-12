@@ -34,9 +34,9 @@ public class Users implements java.io.Serializable {
 	private Integer payPoints;
 	private Integer rankPoints;
 	private Integer addressId;
-	private Integer regTime;
+	private Long regTime;
 	private Integer lastLogin;
-	private Timestamp lastTime;
+	private Long lastTime;
 	private String lastIp;
 	private Short visitCount;
 	private Short userRank;
@@ -66,8 +66,8 @@ public class Users implements java.io.Serializable {
 	public Users(String email, String userName, String password,
 			String question, String answer, Boolean sex, Date birthday,
 			Double userMoney, Double frozenMoney, Integer payPoints,
-			Integer rankPoints, Integer addressId, Integer regTime,
-			Integer lastLogin, Timestamp lastTime, String lastIp,
+			Integer rankPoints, Integer addressId, Long regTime,
+			Integer lastLogin, Long lastTime, String lastIp,
 			Short visitCount, Short userRank, Short isSpecial, String salt,
 			Integer parentId, Short flag, String alias, String msn, String qq,
 			String officePhone, String homePhone, String mobilePhone,
@@ -108,8 +108,8 @@ public class Users implements java.io.Serializable {
 	public Users(String email, String userName, String password,
 			String question, String answer, Boolean sex, Date birthday,
 			Double userMoney, Double frozenMoney, Integer payPoints,
-			Integer rankPoints, Integer addressId, Integer regTime,
-			Integer lastLogin, Timestamp lastTime, String lastIp,
+			Integer rankPoints, Integer addressId, Long regTime,
+			Integer lastLogin, Long lastTime, String lastIp,
 			Short visitCount, Short userRank, Short isSpecial, String ecSalt,
 			String salt, Integer parentId, Short flag, String alias,
 			String msn, String qq, String officePhone, String homePhone,
@@ -217,7 +217,7 @@ public class Users implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.DATE)
-	@Column(name = "birthday", nullable = false, length = 10)
+	@Column(name = "birthday", length = 10)
 	public Date getBirthday() {
 		return this.birthday;
 	}
@@ -226,7 +226,7 @@ public class Users implements java.io.Serializable {
 		this.birthday = birthday;
 	}
 
-	@Column(name = "user_money", nullable = false, precision = 10)
+	@Column(name = "user_money", precision = 10)
 	public Double getUserMoney() {
 		return this.userMoney;
 	}
@@ -235,7 +235,7 @@ public class Users implements java.io.Serializable {
 		this.userMoney = userMoney;
 	}
 
-	@Column(name = "frozen_money", nullable = false, precision = 10)
+	@Column(name = "frozen_money", precision = 10)
 	public Double getFrozenMoney() {
 		return this.frozenMoney;
 	}
@@ -244,7 +244,7 @@ public class Users implements java.io.Serializable {
 		this.frozenMoney = frozenMoney;
 	}
 
-	@Column(name = "pay_points", nullable = false)
+	@Column(name = "pay_points")
 	public Integer getPayPoints() {
 		return this.payPoints;
 	}
@@ -253,7 +253,7 @@ public class Users implements java.io.Serializable {
 		this.payPoints = payPoints;
 	}
 
-	@Column(name = "rank_points", nullable = false)
+	@Column(name = "rank_points")
 	public Integer getRankPoints() {
 		return this.rankPoints;
 	}
@@ -262,7 +262,7 @@ public class Users implements java.io.Serializable {
 		this.rankPoints = rankPoints;
 	}
 
-	@Column(name = "address_id", nullable = false)
+	@Column(name = "address_id")
 	public Integer getAddressId() {
 		return this.addressId;
 	}
@@ -272,15 +272,15 @@ public class Users implements java.io.Serializable {
 	}
 
 	@Column(name = "reg_time", nullable = false)
-	public Integer getRegTime() {
+	public Long getRegTime() {
 		return this.regTime;
 	}
 
-	public void setRegTime(Integer regTime) {
+	public void setRegTime(Long regTime) {
 		this.regTime = regTime;
 	}
 
-	@Column(name = "last_login", nullable = false)
+	@Column(name = "last_login")
 	public Integer getLastLogin() {
 		return this.lastLogin;
 	}
@@ -289,16 +289,16 @@ public class Users implements java.io.Serializable {
 		this.lastLogin = lastLogin;
 	}
 
-	@Column(name = "last_time", nullable = false, length = 19)
-	public Timestamp getLastTime() {
+	@Column(name = "last_time", length = 19)
+	public Long getLastTime() {
 		return this.lastTime;
 	}
 
-	public void setLastTime(Timestamp lastTime) {
+	public void setLastTime(Long lastTime) {
 		this.lastTime = lastTime;
 	}
 
-	@Column(name = "last_ip", nullable = false, length = 15)
+	@Column(name = "last_ip", length = 15)
 	public String getLastIp() {
 		return this.lastIp;
 	}
@@ -316,7 +316,7 @@ public class Users implements java.io.Serializable {
 		this.visitCount = visitCount;
 	}
 
-	@Column(name = "user_rank", nullable = false)
+	@Column(name = "user_rank")
 	public Short getUserRank() {
 		return this.userRank;
 	}
@@ -325,7 +325,7 @@ public class Users implements java.io.Serializable {
 		this.userRank = userRank;
 	}
 
-	@Column(name = "is_special", nullable = false)
+	@Column(name = "is_special")
 	public Short getIsSpecial() {
 		return this.isSpecial;
 	}
@@ -343,7 +343,7 @@ public class Users implements java.io.Serializable {
 		this.ecSalt = ecSalt;
 	}
 
-	@Column(name = "salt", nullable = false, length = 10)
+	@Column(name = "salt", length = 10)
 	public String getSalt() {
 		return this.salt;
 	}
@@ -352,7 +352,7 @@ public class Users implements java.io.Serializable {
 		this.salt = salt;
 	}
 
-	@Column(name = "parent_id", nullable = false)
+	@Column(name = "parent_id")
 	public Integer getParentId() {
 		return this.parentId;
 	}
@@ -370,7 +370,7 @@ public class Users implements java.io.Serializable {
 		this.flag = flag;
 	}
 
-	@Column(name = "alias", nullable = false, length = 60)
+	@Column(name = "alias", length = 60)
 	public String getAlias() {
 		return this.alias;
 	}
@@ -379,7 +379,7 @@ public class Users implements java.io.Serializable {
 		this.alias = alias;
 	}
 
-	@Column(name = "msn", nullable = false, length = 60)
+	@Column(name = "msn", length = 60)
 	public String getMsn() {
 		return this.msn;
 	}
@@ -388,7 +388,7 @@ public class Users implements java.io.Serializable {
 		this.msn = msn;
 	}
 
-	@Column(name = "qq", nullable = false, length = 20)
+	@Column(name = "qq", length = 20)
 	public String getQq() {
 		return this.qq;
 	}
@@ -397,7 +397,7 @@ public class Users implements java.io.Serializable {
 		this.qq = qq;
 	}
 
-	@Column(name = "office_phone", nullable = false, length = 20)
+	@Column(name = "office_phone", length = 20)
 	public String getOfficePhone() {
 		return this.officePhone;
 	}
@@ -406,7 +406,7 @@ public class Users implements java.io.Serializable {
 		this.officePhone = officePhone;
 	}
 
-	@Column(name = "home_phone", nullable = false, length = 20)
+	@Column(name = "home_phone", length = 20)
 	public String getHomePhone() {
 		return this.homePhone;
 	}
@@ -424,7 +424,7 @@ public class Users implements java.io.Serializable {
 		this.mobilePhone = mobilePhone;
 	}
 
-	@Column(name = "is_validated", nullable = false)
+	@Column(name = "is_validated")
 	public Short getIsValidated() {
 		return this.isValidated;
 	}
@@ -433,7 +433,7 @@ public class Users implements java.io.Serializable {
 		this.isValidated = isValidated;
 	}
 
-	@Column(name = "credit_line", nullable = false, precision = 10)
+	@Column(name = "credit_line", precision = 10)
 	public Double getCreditLine() {
 		return this.creditLine;
 	}

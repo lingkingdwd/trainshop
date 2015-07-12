@@ -6,9 +6,9 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.trainshop.common.IOperations;
 import com.trainshop.dao.IAdminUserDao;
 import com.trainshop.dao.IUsersDao;
-import com.trainshop.dao.common.IOperations;
 import com.trainshop.model.AdminUser;
 import com.trainshop.model.Users;
 import com.trainshop.service.IAdminUserService;

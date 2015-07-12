@@ -12,7 +12,7 @@
 
 </head>
 <body>
-	<div id="wrapper">
+	<div id="wrapper" class="page-wrap">
 		<%@ include file="/common/nav.jsp"%>
 		<div id="page-wrapper">
 			<div class="row">

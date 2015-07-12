@@ -1,23 +1,28 @@
 package com.trainshop.controller;
 
 import java.util.List;
+import java.io.Serializable;
+import java.lang.reflect.Field;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.trainshop.common.util.JsonPluginsUtil;
+import com.trainshop.common.util.PageParameters;
+import com.trainshop.common.util.PageTools;
 import com.trainshop.model.Users;
 import com.trainshop.service.IUsersService;
 
 @Controller
 @RequestMapping("/users")
-public class UsersController {
+public class UsersController extends BaseController {
 
 	@Resource(name = "usersService")
 	private IUsersService usersService;
@@ -34,11 +39,11 @@ public class UsersController {
 
 	@ResponseBody
 	@RequestMapping(value = "usersCount", method = RequestMethod.POST, produces = { "text/json;charset=UTF-8" })
-	public int usersCount() {
+	public String usersCount() {
 
 		int count = usersService.findAll().size();
-
-		return count;
+		
+		return super.returnData(count);
 	}
 
 	/**
@@ -52,12 +57,35 @@ public class UsersController {
 	@RequestMapping(value = "getUserslist", method = RequestMethod.POST, produces = { "text/json;charset=UTF-8" })
 	public String getUserslist(HttpServletRequest request, HttpSession session) {
 		String result = null;
+		
+		String data = request.getParameter("data");
+		int start = 0;
+		int limit = 10;
+		if(!request.getParameter("start").equals(null)){
+			start = new Integer(request.getParameter("start"));
+		}
+		if(!request.getParameter("limit").equals(null)){
+			limit = new Integer(request.getParameter("limit"));
+		}
+		
+		Users user = JsonPluginsUtil.jsonToBean(data, Users.class);
+		
+		DetachedCriteria dc = DetachedCriteria.forClass(Users.class);  
+		
+		Field[] fields = Users.class.getDeclaredFields();
+		for(Field f : fields){
+			f.getName();
+		}
+		
+		PageTools page = new PageTools();
+		page.setDataList(usersService.searchByDetachedCriteria(dc, start, limit));
+		page.setTotalProperty(usersService.getCountByDetachedCriteria(dc));
+		
+		//List<Users> userList = usersService.searchByDetachedCriteria(dc, para.getStart(), para.getLimit()).findAll();
 
-		List<Users> userList = usersService.findAll();
+		result = JsonPluginsUtil.beanToJson(page);
 
-		result = JsonPluginsUtil.beanListToJson(userList);
-
-		return result;
+		return super.returnData(result);
 	}
 
 	/**
@@ -72,10 +100,6 @@ public class UsersController {
 	public String loginAction(HttpServletRequest request, HttpSession session) {
 		String result = null;
 
-//		String loginType = request.getParameter("loginType");
-//		String userName = request.getParameter("userName");
-//		String password = request.getParameter("password");
-		
 		String data = request.getParameter("data");
 		
 		Users paraUser = JsonPluginsUtil.jsonToBean(data, Users.class);
@@ -102,6 +126,84 @@ public class UsersController {
 			}
 			else{
 				result = "{\"flag\":\"0\",\"message\":\"密码不能为空！\"}";
+			}
+		}
+		else{
+			result = "{\"flag\":\"0\",\"message\":\"用户名不能为空！\"}";
+		}
+
+		return result;
+	}
+	
+	/**
+	 * 会员注册
+	 * 
+	 * @param request
+	 * @param session
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "register", method = RequestMethod.POST, produces = { "text/json;charset=UTF-8" })
+	public String register(HttpServletRequest request, HttpSession session) {
+		String result = null;
+
+		String data = request.getParameter("data");
+		
+		Users paraUser = JsonPluginsUtil.jsonToBean(data, Users.class);
+
+		if (!paraUser.getUserName().trim().equals("")) {
+			if(!paraUser.getPassword().trim().equals("")){
+				try {
+					paraUser.setFlag(new Short("1"));
+					paraUser.setRegTime(System.currentTimeMillis());
+					paraUser.setVisitCount(new Short("0"));
+					usersService.create(paraUser);
+					result = "{\"flag\":\"1\",\"message\":\"注册成功！\"}";
+
+					request.getSession(true).setAttribute("CurrentUser", paraUser);
+					request.getSession().setAttribute("CurrentUserID", "" + paraUser.getUserId());
+					request.getSession().setAttribute("CurrentUserName", paraUser.getUserName());
+				} catch (Exception e       ) {
+					result = "{\"flag\":\"0\",\"message\":\"注册失败\"}";
+					return result;
+				}
+			}
+			else{ 
+				result = "{\"flag\":\"0\",\"message\":\"密码不能为空！\"}";
+			}
+		}
+		else{
+			result = "{\"flag\":\"0\",\"message\":\"用户名不能为空！\"}";
+		}
+
+		return result;
+	}
+	
+	/**
+	 * 会员注册用户名检查
+	 * 
+	 * @param request
+	 * @param session
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "checkUserName", method = RequestMethod.POST, produces = { "text/json;charset=UTF-8" })
+	public String checkUserName(HttpServletRequest request, HttpSession session) {
+		String result = null;
+
+		String data = request.getParameter("data");
+		
+		Users paraUser = JsonPluginsUtil.jsonToBean(data, Users.class);
+
+		if (!paraUser.getUserName().trim().equals("")) {
+			try {
+				List<Users> user = usersService.findOne(paraUser.getUserName());
+				if(user.size() > 0){
+					result = "{\"flag\":\"1\",\"message\":\"用户名已经存在，请重新输入！\"}";
+				}
+			} catch (Exception e) {
+				result = "{\"flag\":\"0\",\"message\":\"用户名检查失败!\"}";
+				return result;
 			}
 		}
 		else{
