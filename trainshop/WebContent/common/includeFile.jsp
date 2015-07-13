@@ -15,13 +15,14 @@
 <script type="text/javascript">
 	var basePath = '<%=basePath %>';
 </script>
-<link rel="stylesheet" href="<%=basePath %>js/bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet" href="<%=basePath %>js/bootstrap/css/bootstrap.css" />
+<link rel="stylesheet" href="<%=basePath %>css/common.css" />
 <link rel="stylesheet" href="<%=basePath %>js/metisMenu/dist/metisMenu.min.css" />
 <link rel="stylesheet" href="<%=basePath %>js/font-awesome/css/font-awesome.min.css" />
 <link rel="stylesheet" href="<%=basePath %>css/timeline.css" />
 <link rel="stylesheet" href="<%=basePath %>css/sb-admin-2.css" />
 <link rel="stylesheet" href="<%=basePath %>js/morrisjs/morris.css" />
-<link rel="stylesheet" href="<%=basePath %>css/common.css" />
+<link rel="stylesheet" href="<%=basePath %>js/zTree/css/zTreeStyle.css" type="text/css">
 
 <script type="text/javascript" src="<%=basePath %>js/jquery-1.11.3.js"></script>
 <script type="text/javascript" src="<%=basePath %>js/bootstrap/js/bootstrap.min.js"></script>
@@ -30,3 +31,6 @@
 <script type="text/javascript" src="<%=basePath %>js/morrisjs/morris.min.js"></script>
 <script type="text/javascript" src="<%=basePath %>js/sb-admin-2.js"></script>
 <script type="text/javascript" src="<%=basePath %>js/layer/layer.js"></script>
+
+<script src="<%=basePath %>js/zTree/jquery.ztree.core-3.5.js"></script>
+<script src="<%=basePath %>js/zTree/jquery.ztree.excheck-3.5.js"></script>

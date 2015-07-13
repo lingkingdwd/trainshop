@@ -59,4 +59,25 @@ public class CategoryController extends BaseController{
 		
 		return super.returnData(result);
 	}
+	
+	/**
+	 * 添加分类
+	 * 
+	 * @param request
+	 * @param session
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "create", method = RequestMethod.POST, produces = { "text/json;charset=UTF-8" })
+	public String create(HttpServletRequest request, HttpSession session) {
+		String result = "";
+		
+		String data = request.getParameter("data");
+		
+		Category entity = JsonPluginsUtil.jsonToBean(data, Category.class);
+
+		categoryService.create(entity);;
+
+		return super.returnData(result);
+	}
 }

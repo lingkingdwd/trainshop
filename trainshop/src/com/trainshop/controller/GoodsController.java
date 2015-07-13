@@ -42,7 +42,7 @@ public class GoodsController extends BaseController {
 	}
 
 	/**
-	 * 获取用户信息
+	 * 获取商品列表
 	 * 
 	 * @param request
 	 * @param session
@@ -57,6 +57,27 @@ public class GoodsController extends BaseController {
 
 		result = JsonPluginsUtil.beanListToJson(userList);
 		
+		return super.returnData(result);
+	}
+	
+	/**
+	 * 添加商品
+	 * 
+	 * @param request
+	 * @param session
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "create", method = RequestMethod.POST, produces = { "text/json;charset=UTF-8" })
+	public String create(HttpServletRequest request, HttpSession session) {
+		String result = "";
+		
+		String data = request.getParameter("data");
+		
+		Goods entity = JsonPluginsUtil.jsonToBean(data, Goods.class);
+
+		goodsService.create(entity);;
+
 		return super.returnData(result);
 	}
 }
