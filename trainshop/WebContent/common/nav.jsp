@@ -168,7 +168,7 @@
 						商品管理<span class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
 						<li><a href="flot.html">发布商品</a></li>
-						<li><a href="morris.html">商品管理</a></li>
+						<li><a href="<%=basePath %>goods/init">商品管理</a></li>
 						<li><a href="<%=basePath %>category/init">分类管理</a></li>
 						<li><a href="morris.html">品牌管理</a></li>
 						<li><a href="morris.html">消息管理</a></li>

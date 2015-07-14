@@ -16,8 +16,8 @@ public class MemberPrice implements java.io.Serializable {
 
 	// Fields
 
-	private Integer priceId;
-	private Integer goodsId;
+	private Long priceId;
+	private Long goodsId;
 	private Short userRank;
 	private Double userPrice;
 
@@ -28,7 +28,7 @@ public class MemberPrice implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public MemberPrice(Integer goodsId, Short userRank, Double userPrice) {
+	public MemberPrice(Long goodsId, Short userRank, Double userPrice) {
 		this.goodsId = goodsId;
 		this.userRank = userRank;
 		this.userPrice = userPrice;
@@ -38,20 +38,20 @@ public class MemberPrice implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "price_id", unique = true, nullable = false)
-	public Integer getPriceId() {
+	public Long getPriceId() {
 		return this.priceId;
 	}
 
-	public void setPriceId(Integer priceId) {
+	public void setPriceId(Long priceId) {
 		this.priceId = priceId;
 	}
 
 	@Column(name = "goods_id", nullable = false)
-	public Integer getGoodsId() {
+	public Long getGoodsId() {
 		return this.goodsId;
 	}
 
-	public void setGoodsId(Integer goodsId) {
+	public void setGoodsId(Long goodsId) {
 		this.goodsId = goodsId;
 	}
 

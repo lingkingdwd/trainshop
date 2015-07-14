@@ -16,20 +16,20 @@ public class Crons implements java.io.Serializable {
 
 	// Fields
 
-	private Short cronId;
+	private Long cronId;
 	private String cronCode;
 	private String cronName;
 	private String cronDesc;
-	private Short cronOrder;
+	private Integer cronOrder;
 	private String cronConfig;
 	private Integer thistime;
 	private Integer nextime;
-	private Short day;
+	private Integer day;
 	private String week;
 	private String hour;
 	private String minute;
-	private Boolean enable;
-	private Boolean runOnce;
+	private Integer enable;
+	private Integer runOnce;
 	private String allowIp;
 	private String alowFiles;
 
@@ -40,10 +40,10 @@ public class Crons implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Crons(String cronCode, String cronName, Short cronOrder,
-			String cronConfig, Integer thistime, Integer nextime, Short day,
-			String week, String hour, String minute, Boolean enable,
-			Boolean runOnce, String allowIp, String alowFiles) {
+	public Crons(String cronCode, String cronName, Integer cronOrder,
+			String cronConfig, Integer thistime, Integer nextime, Integer day,
+			String week, String hour, String minute, Integer enable,
+			Integer runOnce, String allowIp, String alowFiles) {
 		this.cronCode = cronCode;
 		this.cronName = cronName;
 		this.cronOrder = cronOrder;
@@ -62,9 +62,9 @@ public class Crons implements java.io.Serializable {
 
 	/** full constructor */
 	public Crons(String cronCode, String cronName, String cronDesc,
-			Short cronOrder, String cronConfig, Integer thistime,
-			Integer nextime, Short day, String week, String hour,
-			String minute, Boolean enable, Boolean runOnce, String allowIp,
+			Integer cronOrder, String cronConfig, Integer thistime,
+			Integer nextime, Integer day, String week, String hour,
+			String minute, Integer enable, Integer runOnce, String allowIp,
 			String alowFiles) {
 		this.cronCode = cronCode;
 		this.cronName = cronName;
@@ -87,11 +87,11 @@ public class Crons implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "cron_id", unique = true, nullable = false)
-	public Short getCronId() {
+	public Long getCronId() {
 		return this.cronId;
 	}
 
-	public void setCronId(Short cronId) {
+	public void setCronId(Long cronId) {
 		this.cronId = cronId;
 	}
 
@@ -123,11 +123,11 @@ public class Crons implements java.io.Serializable {
 	}
 
 	@Column(name = "cron_order", nullable = false)
-	public Short getCronOrder() {
+	public Integer getCronOrder() {
 		return this.cronOrder;
 	}
 
-	public void setCronOrder(Short cronOrder) {
+	public void setCronOrder(Integer cronOrder) {
 		this.cronOrder = cronOrder;
 	}
 
@@ -159,11 +159,11 @@ public class Crons implements java.io.Serializable {
 	}
 
 	@Column(name = "day", nullable = false)
-	public Short getDay() {
+	public Integer getDay() {
 		return this.day;
 	}
 
-	public void setDay(Short day) {
+	public void setDay(Integer day) {
 		this.day = day;
 	}
 
@@ -195,20 +195,20 @@ public class Crons implements java.io.Serializable {
 	}
 
 	@Column(name = "enable", nullable = false)
-	public Boolean getEnable() {
+	public Integer getEnable() {
 		return this.enable;
 	}
 
-	public void setEnable(Boolean enable) {
+	public void setEnable(Integer enable) {
 		this.enable = enable;
 	}
 
 	@Column(name = "run_once", nullable = false)
-	public Boolean getRunOnce() {
+	public Integer getRunOnce() {
 		return this.runOnce;
 	}
 
-	public void setRunOnce(Boolean runOnce) {
+	public void setRunOnce(Integer runOnce) {
 		this.runOnce = runOnce;
 	}
 

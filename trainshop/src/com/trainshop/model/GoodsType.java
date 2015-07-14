@@ -16,7 +16,7 @@ public class GoodsType implements java.io.Serializable {
 
 	// Fields
 
-	private Short catId;
+	private Long catId;
 	private String catName;
 	private Boolean enabled;
 	private String attrGroup;
@@ -38,11 +38,11 @@ public class GoodsType implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "cat_id", unique = true, nullable = false)
-	public Short getCatId() {
+	public Long getCatId() {
 		return this.catId;
 	}
 
-	public void setCatId(Short catId) {
+	public void setCatId(Long catId) {
 		this.catId = catId;
 	}
 

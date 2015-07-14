@@ -16,9 +16,9 @@ public class AdminLog implements java.io.Serializable {
 
 	// Fields
 
-	private Integer logId;
-	private Integer logTime;
-	private Short userId;
+	private Long logId;
+	private Long logTime;
+	private Integer userId;
 	private String logInfo;
 	private String ipAddress;
 
@@ -29,7 +29,7 @@ public class AdminLog implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public AdminLog(Integer logTime, Short userId, String logInfo,
+	public AdminLog(Long logTime, Integer userId, String logInfo,
 			String ipAddress) {
 		this.logTime = logTime;
 		this.userId = userId;
@@ -41,29 +41,29 @@ public class AdminLog implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "log_id", unique = true, nullable = false)
-	public Integer getLogId() {
+	public Long getLogId() {
 		return this.logId;
 	}
 
-	public void setLogId(Integer logId) {
+	public void setLogId(Long logId) {
 		this.logId = logId;
 	}
 
 	@Column(name = "log_time", nullable = false)
-	public Integer getLogTime() {
+	public Long getLogTime() {
 		return this.logTime;
 	}
 
-	public void setLogTime(Integer logTime) {
+	public void setLogTime(Long logTime) {
 		this.logTime = logTime;
 	}
 
 	@Column(name = "user_id", nullable = false)
-	public Short getUserId() {
+	public Integer getUserId() {
 		return this.userId;
 	}
 
-	public void setUserId(Short userId) {
+	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
 

@@ -16,7 +16,7 @@ public class Suppliers implements java.io.Serializable {
 
 	// Fields
 
-	private Short suppliersId;
+	private Long suppliersId;
 	private String suppliersName;
 	private String suppliersDesc;
 	private Boolean isCheck;
@@ -43,11 +43,11 @@ public class Suppliers implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "suppliers_id", unique = true, nullable = false)
-	public Short getSuppliersId() {
+	public Long getSuppliersId() {
 		return this.suppliersId;
 	}
 
-	public void setSuppliersId(Short suppliersId) {
+	public void setSuppliersId(Long suppliersId) {
 		this.suppliersId = suppliersId;
 	}
 

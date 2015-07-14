@@ -16,7 +16,7 @@ public class PayLog implements java.io.Serializable {
 
 	// Fields
 
-	private Integer logId;
+	private Long logId;
 	private Integer orderId;
 	private Double orderAmount;
 	private Boolean orderType;
@@ -41,11 +41,11 @@ public class PayLog implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "log_id", unique = true, nullable = false)
-	public Integer getLogId() {
+	public Long getLogId() {
 		return this.logId;
 	}
 
-	public void setLogId(Integer logId) {
+	public void setLogId(Long logId) {
 		this.logId = logId;
 	}
 

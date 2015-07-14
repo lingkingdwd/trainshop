@@ -16,7 +16,7 @@ public class RegFields implements java.io.Serializable {
 
 	// Fields
 
-	private Short id;
+	private Long id;
 	private String regFieldName;
 	private Short disOrder;
 	private Boolean display;
@@ -43,11 +43,11 @@ public class RegFields implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
-	public Short getId() {
+	public Long getId() {
 		return this.id;
 	}
 
-	public void setId(Short id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

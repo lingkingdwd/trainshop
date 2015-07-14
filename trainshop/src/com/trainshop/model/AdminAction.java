@@ -16,8 +16,8 @@ public class AdminAction implements java.io.Serializable {
 
 	// Fields
 
-	private Short actionId;
-	private Short parentId;
+	private Long actionId;
+	private Integer parentId;
 	private String actionCode;
 	private String relevance;
 
@@ -28,7 +28,7 @@ public class AdminAction implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public AdminAction(Short parentId, String actionCode, String relevance) {
+	public AdminAction(Integer parentId, String actionCode, String relevance) {
 		this.parentId = parentId;
 		this.actionCode = actionCode;
 		this.relevance = relevance;
@@ -38,20 +38,20 @@ public class AdminAction implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "action_id", unique = true, nullable = false)
-	public Short getActionId() {
+	public Long getActionId() {
 		return this.actionId;
 	}
 
-	public void setActionId(Short actionId) {
+	public void setActionId(Long actionId) {
 		this.actionId = actionId;
 	}
 
 	@Column(name = "parent_id", nullable = false)
-	public Short getParentId() {
+	public Integer getParentId() {
 		return this.parentId;
 	}
 
-	public void setParentId(Short parentId) {
+	public void setParentId(Integer parentId) {
 		this.parentId = parentId;
 	}
 

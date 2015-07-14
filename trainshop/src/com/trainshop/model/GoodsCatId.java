@@ -11,8 +11,8 @@ public class GoodsCatId implements java.io.Serializable {
 
 	// Fields
 
-	private Integer goodsId;
-	private Short catId;
+	private Long goodsId;
+	private Long catId;
 
 	// Constructors
 
@@ -21,7 +21,7 @@ public class GoodsCatId implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public GoodsCatId(Integer goodsId, Short catId) {
+	public GoodsCatId(Long goodsId, Long catId) {
 		this.goodsId = goodsId;
 		this.catId = catId;
 	}
@@ -29,20 +29,20 @@ public class GoodsCatId implements java.io.Serializable {
 	// Property accessors
 
 	@Column(name = "goods_id", nullable = false)
-	public Integer getGoodsId() {
+	public Long getGoodsId() {
 		return this.goodsId;
 	}
 
-	public void setGoodsId(Integer goodsId) {
+	public void setGoodsId(Long goodsId) {
 		this.goodsId = goodsId;
 	}
 
 	@Column(name = "cat_id", nullable = false)
-	public Short getCatId() {
+	public Long getCatId() {
 		return this.catId;
 	}
 
-	public void setCatId(Short catId) {
+	public void setCatId(Long catId) {
 		this.catId = catId;
 	}
 

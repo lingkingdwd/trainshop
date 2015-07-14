@@ -16,9 +16,9 @@ public class Ad implements java.io.Serializable {
 
 	// Fields
 
-	private Short adId;
-	private Short positionId;
-	private Short mediaType;
+	private Long adId;
+	private Long positionId;
+	private Integer mediaType;
 	private String adName;
 	private String adLink;
 	private String adCode;
@@ -28,7 +28,7 @@ public class Ad implements java.io.Serializable {
 	private String linkEmail;
 	private String linkPhone;
 	private Integer clickCount;
-	private Short enabled;
+	private Integer enabled;
 
 	// Constructors
 
@@ -37,10 +37,10 @@ public class Ad implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Ad(Short positionId, Short mediaType, String adName, String adLink,
+	public Ad(Long positionId, Integer mediaType, String adName, String adLink,
 			String adCode, Integer startTime, Integer endTime, String linkMan,
 			String linkEmail, String linkPhone, Integer clickCount,
-			Short enabled) {
+			Integer enabled) {
 		this.positionId = positionId;
 		this.mediaType = mediaType;
 		this.adName = adName;
@@ -59,29 +59,29 @@ public class Ad implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "ad_id", unique = true, nullable = false)
-	public Short getAdId() {
+	public Long getAdId() {
 		return this.adId;
 	}
 
-	public void setAdId(Short adId) {
+	public void setAdId(Long adId) {
 		this.adId = adId;
 	}
 
 	@Column(name = "position_id", nullable = false)
-	public Short getPositionId() {
+	public Long getPositionId() {
 		return this.positionId;
 	}
 
-	public void setPositionId(Short positionId) {
+	public void setPositionId(Long positionId) {
 		this.positionId = positionId;
 	}
 
 	@Column(name = "media_type", nullable = false)
-	public Short getMediaType() {
+	public Integer getMediaType() {
 		return this.mediaType;
 	}
 
-	public void setMediaType(Short mediaType) {
+	public void setMediaType(Integer mediaType) {
 		this.mediaType = mediaType;
 	}
 
@@ -167,11 +167,11 @@ public class Ad implements java.io.Serializable {
 	}
 
 	@Column(name = "enabled", nullable = false)
-	public Short getEnabled() {
+	public Integer getEnabled() {
 		return this.enabled;
 	}
 
-	public void setEnabled(Short enabled) {
+	public void setEnabled(Integer enabled) {
 		this.enabled = enabled;
 	}
 

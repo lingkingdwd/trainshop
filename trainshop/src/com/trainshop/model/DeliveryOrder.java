@@ -16,22 +16,22 @@ public class DeliveryOrder implements java.io.Serializable {
 
 	// Fields
 
-	private Integer deliveryId;
+	private Long deliveryId;
 	private String deliverySn;
 	private String orderSn;
-	private Integer orderId;
+	private Long orderId;
 	private String invoiceNo;
-	private Integer addTime;
-	private Short shippingId;
+	private Long addTime;
+	private Integer shippingId;
 	private String shippingName;
 	private Integer userId;
 	private String actionUser;
 	private String consignee;
 	private String address;
-	private Short country;
-	private Short province;
-	private Short city;
-	private Short district;
+	private Integer country;
+	private Integer province;
+	private Integer city;
+	private Integer district;
 	private String signBuilding;
 	private String email;
 	private String zipcode;
@@ -43,9 +43,9 @@ public class DeliveryOrder implements java.io.Serializable {
 	private Double insureFee;
 	private Double shippingFee;
 	private Integer updateTime;
-	private Short suppliersId;
-	private Boolean status;
-	private Short agencyId;
+	private Integer suppliersId;
+	private Integer status;
+	private Integer agencyId;
 
 	// Constructors
 
@@ -54,8 +54,8 @@ public class DeliveryOrder implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public DeliveryOrder(String deliverySn, String orderSn, Integer orderId,
-			Boolean status) {
+	public DeliveryOrder(String deliverySn, String orderSn, Long orderId,
+			Integer status) {
 		this.deliverySn = deliverySn;
 		this.orderSn = orderSn;
 		this.orderId = orderId;
@@ -63,15 +63,15 @@ public class DeliveryOrder implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public DeliveryOrder(String deliverySn, String orderSn, Integer orderId,
-			String invoiceNo, Integer addTime, Short shippingId,
+	public DeliveryOrder(String deliverySn, String orderSn, Long orderId,
+			String invoiceNo, Long addTime, Integer shippingId,
 			String shippingName, Integer userId, String actionUser,
-			String consignee, String address, Short country, Short province,
-			Short city, Short district, String signBuilding, String email,
-			String zipcode, String tel, String mobile, String bestTime,
-			String postscript, String howOos, Double insureFee,
-			Double shippingFee, Integer updateTime, Short suppliersId,
-			Boolean status, Short agencyId) {
+			String consignee, String address, Integer country,
+			Integer province, Integer city, Integer district,
+			String signBuilding, String email, String zipcode, String tel,
+			String mobile, String bestTime, String postscript, String howOos,
+			Double insureFee, Double shippingFee, Integer updateTime,
+			Integer suppliersId, Integer status, Integer agencyId) {
 		this.deliverySn = deliverySn;
 		this.orderSn = orderSn;
 		this.orderId = orderId;
@@ -107,11 +107,11 @@ public class DeliveryOrder implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "delivery_id", unique = true, nullable = false)
-	public Integer getDeliveryId() {
+	public Long getDeliveryId() {
 		return this.deliveryId;
 	}
 
-	public void setDeliveryId(Integer deliveryId) {
+	public void setDeliveryId(Long deliveryId) {
 		this.deliveryId = deliveryId;
 	}
 
@@ -134,11 +134,11 @@ public class DeliveryOrder implements java.io.Serializable {
 	}
 
 	@Column(name = "order_id", nullable = false)
-	public Integer getOrderId() {
+	public Long getOrderId() {
 		return this.orderId;
 	}
 
-	public void setOrderId(Integer orderId) {
+	public void setOrderId(Long orderId) {
 		this.orderId = orderId;
 	}
 
@@ -152,20 +152,20 @@ public class DeliveryOrder implements java.io.Serializable {
 	}
 
 	@Column(name = "add_time")
-	public Integer getAddTime() {
+	public Long getAddTime() {
 		return this.addTime;
 	}
 
-	public void setAddTime(Integer addTime) {
+	public void setAddTime(Long addTime) {
 		this.addTime = addTime;
 	}
 
 	@Column(name = "shipping_id")
-	public Short getShippingId() {
+	public Integer getShippingId() {
 		return this.shippingId;
 	}
 
-	public void setShippingId(Short shippingId) {
+	public void setShippingId(Integer shippingId) {
 		this.shippingId = shippingId;
 	}
 
@@ -215,38 +215,38 @@ public class DeliveryOrder implements java.io.Serializable {
 	}
 
 	@Column(name = "country")
-	public Short getCountry() {
+	public Integer getCountry() {
 		return this.country;
 	}
 
-	public void setCountry(Short country) {
+	public void setCountry(Integer country) {
 		this.country = country;
 	}
 
 	@Column(name = "province")
-	public Short getProvince() {
+	public Integer getProvince() {
 		return this.province;
 	}
 
-	public void setProvince(Short province) {
+	public void setProvince(Integer province) {
 		this.province = province;
 	}
 
 	@Column(name = "city")
-	public Short getCity() {
+	public Integer getCity() {
 		return this.city;
 	}
 
-	public void setCity(Short city) {
+	public void setCity(Integer city) {
 		this.city = city;
 	}
 
 	@Column(name = "district")
-	public Short getDistrict() {
+	public Integer getDistrict() {
 		return this.district;
 	}
 
-	public void setDistrict(Short district) {
+	public void setDistrict(Integer district) {
 		this.district = district;
 	}
 
@@ -350,29 +350,29 @@ public class DeliveryOrder implements java.io.Serializable {
 	}
 
 	@Column(name = "suppliers_id")
-	public Short getSuppliersId() {
+	public Integer getSuppliersId() {
 		return this.suppliersId;
 	}
 
-	public void setSuppliersId(Short suppliersId) {
+	public void setSuppliersId(Integer suppliersId) {
 		this.suppliersId = suppliersId;
 	}
 
 	@Column(name = "status", nullable = false)
-	public Boolean getStatus() {
+	public Integer getStatus() {
 		return this.status;
 	}
 
-	public void setStatus(Boolean status) {
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
 
 	@Column(name = "agency_id")
-	public Short getAgencyId() {
+	public Integer getAgencyId() {
 		return this.agencyId;
 	}
 
-	public void setAgencyId(Short agencyId) {
+	public void setAgencyId(Integer agencyId) {
 		this.agencyId = agencyId;
 	}
 

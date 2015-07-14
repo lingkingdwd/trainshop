@@ -16,12 +16,12 @@ public class UserAccount implements java.io.Serializable {
 
 	// Fields
 
-	private Integer id;
-	private Integer userId;
-	private String adminUser;
+	private Long id;
+	private Long userId;
+	private Long adminUser;
 	private Double amount;
-	private Integer addTime;
-	private Integer paidTime;
+	private Long addTime;
+	private Long paidTime;
 	private String adminNote;
 	private String userNote;
 	private Boolean processType;
@@ -35,9 +35,9 @@ public class UserAccount implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public UserAccount(Integer userId, String adminUser, Double amount,
-			Integer addTime, Integer paidTime, String adminNote,
-			String userNote, Boolean processType, String payment, Boolean isPaid) {
+	public UserAccount(Long userId, Long adminUser, Double amount,
+			Long addTime, Long paidTime, String adminNote, String userNote,
+			Boolean processType, String payment, Boolean isPaid) {
 		this.userId = userId;
 		this.adminUser = adminUser;
 		this.amount = amount;
@@ -54,29 +54,29 @@ public class UserAccount implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
-	public Integer getId() {
+	public Long getId() {
 		return this.id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
 	@Column(name = "user_id", nullable = false)
-	public Integer getUserId() {
+	public Long getUserId() {
 		return this.userId;
 	}
 
-	public void setUserId(Integer userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 
 	@Column(name = "admin_user", nullable = false)
-	public String getAdminUser() {
+	public Long getAdminUser() {
 		return this.adminUser;
 	}
 
-	public void setAdminUser(String adminUser) {
+	public void setAdminUser(Long adminUser) {
 		this.adminUser = adminUser;
 	}
 
@@ -90,20 +90,20 @@ public class UserAccount implements java.io.Serializable {
 	}
 
 	@Column(name = "add_time", nullable = false)
-	public Integer getAddTime() {
+	public Long getAddTime() {
 		return this.addTime;
 	}
 
-	public void setAddTime(Integer addTime) {
+	public void setAddTime(Long addTime) {
 		this.addTime = addTime;
 	}
 
 	@Column(name = "paid_time", nullable = false)
-	public Integer getPaidTime() {
+	public Long getPaidTime() {
 		return this.paidTime;
 	}
 
-	public void setPaidTime(Integer paidTime) {
+	public void setPaidTime(Long paidTime) {
 		this.paidTime = paidTime;
 	}
 

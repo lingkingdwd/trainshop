@@ -16,7 +16,7 @@ public class Card implements java.io.Serializable {
 
 	// Fields
 
-	private Short cardId;
+	private Long cardId;
 	private String cardName;
 	private String cardImg;
 	private Double cardFee;
@@ -43,11 +43,11 @@ public class Card implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "card_id", unique = true, nullable = false)
-	public Short getCardId() {
+	public Long getCardId() {
 		return this.cardId;
 	}
 
-	public void setCardId(Short cardId) {
+	public void setCardId(Long cardId) {
 		this.cardId = cardId;
 	}
 

@@ -13,4 +13,10 @@ public class BaseController {
 		
 		return result;
 	}
+	
+	public String returnSucess(String message){
+		String result = "{\"flag\":\"1\",\"message\":\"" + message + "\"}";
+		
+		return result;
+	}
 }

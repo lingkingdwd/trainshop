@@ -16,24 +16,24 @@ public class Cart implements java.io.Serializable {
 
 	// Fields
 
-	private Integer recId;
-	private Integer userId;
+	private Long recId;
+	private Long userId;
 	private String sessionId;
-	private Integer goodsId;
+	private Long goodsId;
 	private String goodsSn;
 	private Integer productId;
 	private String goodsName;
 	private Double marketPrice;
 	private Double goodsPrice;
-	private Short goodsNumber;
+	private Integer goodsNumber;
 	private String goodsAttr;
-	private Boolean isReal;
+	private Integer isReal;
 	private String extensionCode;
 	private Integer parentId;
-	private Boolean recType;
-	private Short isGift;
-	private Boolean isShipping;
-	private Short canHandsel;
+	private Integer recType;
+	private Integer isGift;
+	private Integer isShipping;
+	private Integer canHandsel;
 	private String goodsAttrId;
 
 	// Constructors
@@ -43,12 +43,12 @@ public class Cart implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Cart(Integer userId, String sessionId, Integer goodsId,
-			String goodsSn, Integer productId, String goodsName,
-			Double marketPrice, Double goodsPrice, Short goodsNumber,
-			String goodsAttr, Boolean isReal, String extensionCode,
-			Integer parentId, Boolean recType, Short isGift,
-			Boolean isShipping, Short canHandsel, String goodsAttrId) {
+	public Cart(Long userId, String sessionId, Long goodsId, String goodsSn,
+			Integer productId, String goodsName, Double marketPrice,
+			Double goodsPrice, Integer goodsNumber, String goodsAttr,
+			Integer isReal, String extensionCode, Integer parentId,
+			Integer recType, Integer isGift, Integer isShipping,
+			Integer canHandsel, String goodsAttrId) {
 		this.userId = userId;
 		this.sessionId = sessionId;
 		this.goodsId = goodsId;
@@ -73,20 +73,20 @@ public class Cart implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "rec_id", unique = true, nullable = false)
-	public Integer getRecId() {
+	public Long getRecId() {
 		return this.recId;
 	}
 
-	public void setRecId(Integer recId) {
+	public void setRecId(Long recId) {
 		this.recId = recId;
 	}
 
 	@Column(name = "user_id", nullable = false)
-	public Integer getUserId() {
+	public Long getUserId() {
 		return this.userId;
 	}
 
-	public void setUserId(Integer userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 
@@ -100,11 +100,11 @@ public class Cart implements java.io.Serializable {
 	}
 
 	@Column(name = "goods_id", nullable = false)
-	public Integer getGoodsId() {
+	public Long getGoodsId() {
 		return this.goodsId;
 	}
 
-	public void setGoodsId(Integer goodsId) {
+	public void setGoodsId(Long goodsId) {
 		this.goodsId = goodsId;
 	}
 
@@ -154,11 +154,11 @@ public class Cart implements java.io.Serializable {
 	}
 
 	@Column(name = "goods_number", nullable = false)
-	public Short getGoodsNumber() {
+	public Integer getGoodsNumber() {
 		return this.goodsNumber;
 	}
 
-	public void setGoodsNumber(Short goodsNumber) {
+	public void setGoodsNumber(Integer goodsNumber) {
 		this.goodsNumber = goodsNumber;
 	}
 
@@ -172,11 +172,11 @@ public class Cart implements java.io.Serializable {
 	}
 
 	@Column(name = "is_real", nullable = false)
-	public Boolean getIsReal() {
+	public Integer getIsReal() {
 		return this.isReal;
 	}
 
-	public void setIsReal(Boolean isReal) {
+	public void setIsReal(Integer isReal) {
 		this.isReal = isReal;
 	}
 
@@ -199,38 +199,38 @@ public class Cart implements java.io.Serializable {
 	}
 
 	@Column(name = "rec_type", nullable = false)
-	public Boolean getRecType() {
+	public Integer getRecType() {
 		return this.recType;
 	}
 
-	public void setRecType(Boolean recType) {
+	public void setRecType(Integer recType) {
 		this.recType = recType;
 	}
 
 	@Column(name = "is_gift", nullable = false)
-	public Short getIsGift() {
+	public Integer getIsGift() {
 		return this.isGift;
 	}
 
-	public void setIsGift(Short isGift) {
+	public void setIsGift(Integer isGift) {
 		this.isGift = isGift;
 	}
 
 	@Column(name = "is_shipping", nullable = false)
-	public Boolean getIsShipping() {
+	public Integer getIsShipping() {
 		return this.isShipping;
 	}
 
-	public void setIsShipping(Boolean isShipping) {
+	public void setIsShipping(Integer isShipping) {
 		this.isShipping = isShipping;
 	}
 
 	@Column(name = "can_handsel", nullable = false)
-	public Short getCanHandsel() {
+	public Integer getCanHandsel() {
 		return this.canHandsel;
 	}
 
-	public void setCanHandsel(Short canHandsel) {
+	public void setCanHandsel(Integer canHandsel) {
 		this.canHandsel = canHandsel;
 	}
 

@@ -70,14 +70,29 @@ public class CategoryController extends BaseController{
 	@ResponseBody
 	@RequestMapping(value = "create", method = RequestMethod.POST, produces = { "text/json;charset=UTF-8" })
 	public String create(HttpServletRequest request, HttpSession session) {
-		String result = "";
-		
 		String data = request.getParameter("data");
 		
 		Category entity = JsonPluginsUtil.jsonToBean(data, Category.class);
 
 		categoryService.create(entity);;
 
-		return super.returnData(result);
+		return super.returnSucess("保存成功！");
+	}
+	
+	/**
+	 * 删除分类
+	 * 
+	 * @param request
+	 * @param session
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "delete", method = RequestMethod.POST, produces = { "text/json;charset=UTF-8" })
+	public String delete(HttpServletRequest request, HttpSession session) {
+		Short entityId = Short.valueOf(request.getParameter("data"));
+		
+		categoryService.delete(categoryService.find(entityId));
+
+		return super.returnSucess("删除成功！");
 	}
 }

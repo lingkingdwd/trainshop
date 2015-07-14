@@ -11,8 +11,8 @@ public class AreaRegionId implements java.io.Serializable {
 
 	// Fields
 
-	private Short shippingAreaId;
-	private Short regionId;
+	private Long shippingAreaId;
+	private Long regionId;
 
 	// Constructors
 
@@ -21,7 +21,7 @@ public class AreaRegionId implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public AreaRegionId(Short shippingAreaId, Short regionId) {
+	public AreaRegionId(Long shippingAreaId, Long regionId) {
 		this.shippingAreaId = shippingAreaId;
 		this.regionId = regionId;
 	}
@@ -29,20 +29,20 @@ public class AreaRegionId implements java.io.Serializable {
 	// Property accessors
 
 	@Column(name = "shipping_area_id", nullable = false)
-	public Short getShippingAreaId() {
+	public Long getShippingAreaId() {
 		return this.shippingAreaId;
 	}
 
-	public void setShippingAreaId(Short shippingAreaId) {
+	public void setShippingAreaId(Long shippingAreaId) {
 		this.shippingAreaId = shippingAreaId;
 	}
 
 	@Column(name = "region_id", nullable = false)
-	public Short getRegionId() {
+	public Long getRegionId() {
 		return this.regionId;
 	}
 
-	public void setRegionId(Short regionId) {
+	public void setRegionId(Long regionId) {
 		this.regionId = regionId;
 	}
 

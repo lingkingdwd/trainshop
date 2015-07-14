@@ -16,11 +16,11 @@ public class SnatchLog implements java.io.Serializable {
 
 	// Fields
 
-	private Integer logId;
-	private Short snatchId;
-	private Integer userId;
+	private Long logId;
+	private Long snatchId;
+	private Long userId;
 	private Double bidPrice;
-	private Integer bidTime;
+	private Long bidTime;
 
 	// Constructors
 
@@ -29,8 +29,7 @@ public class SnatchLog implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public SnatchLog(Short snatchId, Integer userId, Double bidPrice,
-			Integer bidTime) {
+	public SnatchLog(Long snatchId, Long userId, Double bidPrice, Long bidTime) {
 		this.snatchId = snatchId;
 		this.userId = userId;
 		this.bidPrice = bidPrice;
@@ -41,29 +40,29 @@ public class SnatchLog implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "log_id", unique = true, nullable = false)
-	public Integer getLogId() {
+	public Long getLogId() {
 		return this.logId;
 	}
 
-	public void setLogId(Integer logId) {
+	public void setLogId(Long logId) {
 		this.logId = logId;
 	}
 
 	@Column(name = "snatch_id", nullable = false)
-	public Short getSnatchId() {
+	public Long getSnatchId() {
 		return this.snatchId;
 	}
 
-	public void setSnatchId(Short snatchId) {
+	public void setSnatchId(Long snatchId) {
 		this.snatchId = snatchId;
 	}
 
 	@Column(name = "user_id", nullable = false)
-	public Integer getUserId() {
+	public Long getUserId() {
 		return this.userId;
 	}
 
-	public void setUserId(Integer userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 
@@ -77,11 +76,11 @@ public class SnatchLog implements java.io.Serializable {
 	}
 
 	@Column(name = "bid_time", nullable = false)
-	public Integer getBidTime() {
+	public Long getBidTime() {
 		return this.bidTime;
 	}
 
-	public void setBidTime(Integer bidTime) {
+	public void setBidTime(Long bidTime) {
 		this.bidTime = bidTime;
 	}
 

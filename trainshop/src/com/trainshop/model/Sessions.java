@@ -16,8 +16,8 @@ public class Sessions implements java.io.Serializable {
 
 	private String sesskey;
 	private Integer expiry;
-	private Integer userid;
-	private Integer adminid;
+	private Long userid;
+	private Long adminid;
 	private String ip;
 	private String userName;
 	private Short userRank;
@@ -32,9 +32,9 @@ public class Sessions implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Sessions(String sesskey, Integer expiry, Integer userid,
-			Integer adminid, String ip, String userName, Short userRank,
-			Double discount, String email, String data) {
+	public Sessions(String sesskey, Integer expiry, Long userid, Long adminid,
+			String ip, String userName, Short userRank, Double discount,
+			String email, String data) {
 		this.sesskey = sesskey;
 		this.expiry = expiry;
 		this.userid = userid;
@@ -68,20 +68,20 @@ public class Sessions implements java.io.Serializable {
 	}
 
 	@Column(name = "userid", nullable = false)
-	public Integer getUserid() {
+	public Long getUserid() {
 		return this.userid;
 	}
 
-	public void setUserid(Integer userid) {
+	public void setUserid(Long userid) {
 		this.userid = userid;
 	}
 
 	@Column(name = "adminid", nullable = false)
-	public Integer getAdminid() {
+	public Long getAdminid() {
 		return this.adminid;
 	}
 
-	public void setAdminid(Integer adminid) {
+	public void setAdminid(Long adminid) {
 		this.adminid = adminid;
 	}
 

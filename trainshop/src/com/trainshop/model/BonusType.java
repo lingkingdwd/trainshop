@@ -16,16 +16,16 @@ public class BonusType implements java.io.Serializable {
 
 	// Fields
 
-	private Short typeId;
+	private Long typeId;
 	private String typeName;
 	private Double typeMoney;
-	private Short sendType;
+	private Integer sendType;
 	private Double minAmount;
 	private Double maxAmount;
-	private Integer sendStartDate;
-	private Integer sendEndDate;
-	private Integer useStartDate;
-	private Integer useEndDate;
+	private Long sendStartDate;
+	private Long sendEndDate;
+	private Long useStartDate;
+	private Long useEndDate;
 	private Double minGoodsAmount;
 
 	// Constructors
@@ -35,9 +35,9 @@ public class BonusType implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public BonusType(String typeName, Double typeMoney, Short sendType,
-			Double minAmount, Double maxAmount, Integer sendStartDate,
-			Integer sendEndDate, Integer useStartDate, Integer useEndDate,
+	public BonusType(String typeName, Double typeMoney, Integer sendType,
+			Double minAmount, Double maxAmount, Long sendStartDate,
+			Long sendEndDate, Long useStartDate, Long useEndDate,
 			Double minGoodsAmount) {
 		this.typeName = typeName;
 		this.typeMoney = typeMoney;
@@ -55,11 +55,11 @@ public class BonusType implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "type_id", unique = true, nullable = false)
-	public Short getTypeId() {
+	public Long getTypeId() {
 		return this.typeId;
 	}
 
-	public void setTypeId(Short typeId) {
+	public void setTypeId(Long typeId) {
 		this.typeId = typeId;
 	}
 
@@ -82,11 +82,11 @@ public class BonusType implements java.io.Serializable {
 	}
 
 	@Column(name = "send_type", nullable = false)
-	public Short getSendType() {
+	public Integer getSendType() {
 		return this.sendType;
 	}
 
-	public void setSendType(Short sendType) {
+	public void setSendType(Integer sendType) {
 		this.sendType = sendType;
 	}
 
@@ -109,38 +109,38 @@ public class BonusType implements java.io.Serializable {
 	}
 
 	@Column(name = "send_start_date", nullable = false)
-	public Integer getSendStartDate() {
+	public Long getSendStartDate() {
 		return this.sendStartDate;
 	}
 
-	public void setSendStartDate(Integer sendStartDate) {
+	public void setSendStartDate(Long sendStartDate) {
 		this.sendStartDate = sendStartDate;
 	}
 
 	@Column(name = "send_end_date", nullable = false)
-	public Integer getSendEndDate() {
+	public Long getSendEndDate() {
 		return this.sendEndDate;
 	}
 
-	public void setSendEndDate(Integer sendEndDate) {
+	public void setSendEndDate(Long sendEndDate) {
 		this.sendEndDate = sendEndDate;
 	}
 
 	@Column(name = "use_start_date", nullable = false)
-	public Integer getUseStartDate() {
+	public Long getUseStartDate() {
 		return this.useStartDate;
 	}
 
-	public void setUseStartDate(Integer useStartDate) {
+	public void setUseStartDate(Long useStartDate) {
 		this.useStartDate = useStartDate;
 	}
 
 	@Column(name = "use_end_date", nullable = false)
-	public Integer getUseEndDate() {
+	public Long getUseEndDate() {
 		return this.useEndDate;
 	}
 
-	public void setUseEndDate(Integer useEndDate) {
+	public void setUseEndDate(Long useEndDate) {
 		this.useEndDate = useEndDate;
 	}
 

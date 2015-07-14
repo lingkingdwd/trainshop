@@ -34,7 +34,7 @@ public class Keywords implements java.io.Serializable {
 	// Property accessors
 	@EmbeddedId
 	@AttributeOverrides({
-			@AttributeOverride(name = "date", column = @Column(name = "date", nullable = false, length = 10)),
+			@AttributeOverride(name = "date", column = @Column(name = "date", nullable = false)),
 			@AttributeOverride(name = "searchengine", column = @Column(name = "searchengine", nullable = false, length = 20)),
 			@AttributeOverride(name = "keyword", column = @Column(name = "keyword", nullable = false, length = 90)) })
 	public KeywordsId getId() {

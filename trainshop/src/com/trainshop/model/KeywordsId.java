@@ -1,10 +1,7 @@
 package com.trainshop.model;
 
-import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
  * KeywordsId entity. @author MyEclipse Persistence Tools
@@ -14,7 +11,7 @@ public class KeywordsId implements java.io.Serializable {
 
 	// Fields
 
-	private Date date;
+	private Long date;
 	private String searchengine;
 	private String keyword;
 
@@ -25,20 +22,20 @@ public class KeywordsId implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public KeywordsId(Date date, String searchengine, String keyword) {
+	public KeywordsId(Long date, String searchengine, String keyword) {
 		this.date = date;
 		this.searchengine = searchengine;
 		this.keyword = keyword;
 	}
 
 	// Property accessors
-	@Temporal(TemporalType.DATE)
-	@Column(name = "date", nullable = false, length = 10)
-	public Date getDate() {
+
+	@Column(name = "date", nullable = false)
+	public Long getDate() {
 		return this.date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(Long date) {
 		this.date = date;
 	}
 

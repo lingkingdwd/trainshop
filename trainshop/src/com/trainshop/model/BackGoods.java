@@ -16,16 +16,16 @@ public class BackGoods implements java.io.Serializable {
 
 	// Fields
 
-	private Integer recId;
-	private Integer backId;
-	private Integer goodsId;
-	private Integer productId;
+	private Long recId;
+	private Long backId;
+	private Long goodsId;
+	private Long productId;
 	private String productSn;
 	private String goodsName;
 	private String brandName;
 	private String goodsSn;
-	private Boolean isReal;
-	private Short sendNumber;
+	private Integer isReal;
+	private Integer sendNumber;
 	private String goodsAttr;
 
 	// Constructors
@@ -35,15 +35,15 @@ public class BackGoods implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public BackGoods(Integer goodsId, Integer productId) {
+	public BackGoods(Long goodsId, Long productId) {
 		this.goodsId = goodsId;
 		this.productId = productId;
 	}
 
 	/** full constructor */
-	public BackGoods(Integer backId, Integer goodsId, Integer productId,
+	public BackGoods(Long backId, Long goodsId, Long productId,
 			String productSn, String goodsName, String brandName,
-			String goodsSn, Boolean isReal, Short sendNumber, String goodsAttr) {
+			String goodsSn, Integer isReal, Integer sendNumber, String goodsAttr) {
 		this.backId = backId;
 		this.goodsId = goodsId;
 		this.productId = productId;
@@ -60,38 +60,38 @@ public class BackGoods implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "rec_id", unique = true, nullable = false)
-	public Integer getRecId() {
+	public Long getRecId() {
 		return this.recId;
 	}
 
-	public void setRecId(Integer recId) {
+	public void setRecId(Long recId) {
 		this.recId = recId;
 	}
 
 	@Column(name = "back_id")
-	public Integer getBackId() {
+	public Long getBackId() {
 		return this.backId;
 	}
 
-	public void setBackId(Integer backId) {
+	public void setBackId(Long backId) {
 		this.backId = backId;
 	}
 
 	@Column(name = "goods_id", nullable = false)
-	public Integer getGoodsId() {
+	public Long getGoodsId() {
 		return this.goodsId;
 	}
 
-	public void setGoodsId(Integer goodsId) {
+	public void setGoodsId(Long goodsId) {
 		this.goodsId = goodsId;
 	}
 
 	@Column(name = "product_id", nullable = false)
-	public Integer getProductId() {
+	public Long getProductId() {
 		return this.productId;
 	}
 
-	public void setProductId(Integer productId) {
+	public void setProductId(Long productId) {
 		this.productId = productId;
 	}
 
@@ -132,20 +132,20 @@ public class BackGoods implements java.io.Serializable {
 	}
 
 	@Column(name = "is_real")
-	public Boolean getIsReal() {
+	public Integer getIsReal() {
 		return this.isReal;
 	}
 
-	public void setIsReal(Boolean isReal) {
+	public void setIsReal(Integer isReal) {
 		this.isReal = isReal;
 	}
 
 	@Column(name = "send_number")
-	public Short getSendNumber() {
+	public Integer getSendNumber() {
 		return this.sendNumber;
 	}
 
-	public void setSendNumber(Short sendNumber) {
+	public void setSendNumber(Integer sendNumber) {
 		this.sendNumber = sendNumber;
 	}
 

@@ -12,7 +12,7 @@ public class VolumePriceId implements java.io.Serializable {
 	// Fields
 
 	private Boolean priceType;
-	private Integer goodsId;
+	private Long goodsId;
 	private Short volumeNumber;
 
 	// Constructors
@@ -22,7 +22,7 @@ public class VolumePriceId implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public VolumePriceId(Boolean priceType, Integer goodsId, Short volumeNumber) {
+	public VolumePriceId(Boolean priceType, Long goodsId, Short volumeNumber) {
 		this.priceType = priceType;
 		this.goodsId = goodsId;
 		this.volumeNumber = volumeNumber;
@@ -40,11 +40,11 @@ public class VolumePriceId implements java.io.Serializable {
 	}
 
 	@Column(name = "goods_id", nullable = false)
-	public Integer getGoodsId() {
+	public Long getGoodsId() {
 		return this.goodsId;
 	}
 
-	public void setGoodsId(Integer goodsId) {
+	public void setGoodsId(Long goodsId) {
 		this.goodsId = goodsId;
 	}
 

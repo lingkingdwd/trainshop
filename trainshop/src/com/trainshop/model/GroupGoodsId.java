@@ -11,8 +11,8 @@ public class GroupGoodsId implements java.io.Serializable {
 
 	// Fields
 
-	private Integer parentId;
-	private Integer goodsId;
+	private Long parentId;
+	private Long goodsId;
 	private Short adminId;
 
 	// Constructors
@@ -22,7 +22,7 @@ public class GroupGoodsId implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public GroupGoodsId(Integer parentId, Integer goodsId, Short adminId) {
+	public GroupGoodsId(Long parentId, Long goodsId, Short adminId) {
 		this.parentId = parentId;
 		this.goodsId = goodsId;
 		this.adminId = adminId;
@@ -31,20 +31,20 @@ public class GroupGoodsId implements java.io.Serializable {
 	// Property accessors
 
 	@Column(name = "parent_id", nullable = false)
-	public Integer getParentId() {
+	public Long getParentId() {
 		return this.parentId;
 	}
 
-	public void setParentId(Integer parentId) {
+	public void setParentId(Long parentId) {
 		this.parentId = parentId;
 	}
 
 	@Column(name = "goods_id", nullable = false)
-	public Integer getGoodsId() {
+	public Long getGoodsId() {
 		return this.goodsId;
 	}
 
-	public void setGoodsId(Integer goodsId) {
+	public void setGoodsId(Long goodsId) {
 		this.goodsId = goodsId;
 	}
 

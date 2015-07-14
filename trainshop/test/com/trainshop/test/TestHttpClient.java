@@ -20,7 +20,7 @@ import org.apache.http.util.EntityUtils;
 
 public class TestHttpClient {
 	// 接口地址
-	private String ipAddress = "http://103.41.54.30:8080/";
+	private String ipAddress = "http://192.168.21.217:8080";
 	private String apiURL = "";
 	private Log logger = LogFactory.getLog(this.getClass());
 	private static final String pattern = "yyyy-MM-dd HH:mm:ss:SSS";
@@ -46,10 +46,10 @@ public class TestHttpClient {
 	}
 	
 	public static void main(String[] args) throws Exception {
-        System.out.println(new TestHttpClient("/users/loginAction")
+        /*System.out.println(new TestHttpClient("/trainshop/users/loginAction")
         	.post("{\"userName\":\"kele\",\"password\":\"123456\"}"));
         
-        /*System.out.println(new TestHttpClient("/trainshop/users/checkUserName")
+        System.out.println(new TestHttpClient("/trainshop/users/checkUserName")
     		.post("{\"userName\":\"kele\"}"));
         
         System.out.println(new TestHttpClient("/trainshop/users/register")
@@ -59,6 +59,9 @@ public class TestHttpClient {
         
         System.out.println(new TestHttpClient("/trainshop/users/getUserslist")
     		.post("{\"userName\":\"kele\"}", 0, 10));*/
+        
+        System.out.println(new TestHttpClient("/trainshop/goods/getlist")
+			.post("{\"goodsName\":\"xxx\",\"catId\":\"xxx\",\"brandId\":\"xxx\"}", 0, 10));
     }
 
 	/**

@@ -16,14 +16,14 @@ public class ArticleCat implements java.io.Serializable {
 
 	// Fields
 
-	private Short catId;
+	private Long catId;
 	private String catName;
-	private Boolean catType;
+	private Integer catType;
 	private String keywords;
 	private String catDesc;
-	private Short sortOrder;
-	private Boolean showInNav;
-	private Short parentId;
+	private Integer sortOrder;
+	private Integer showInNav;
+	private Long parentId;
 
 	// Constructors
 
@@ -32,8 +32,8 @@ public class ArticleCat implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public ArticleCat(String catName, Boolean catType, String keywords,
-			String catDesc, Short sortOrder, Boolean showInNav, Short parentId) {
+	public ArticleCat(String catName, Integer catType, String keywords,
+			String catDesc, Integer sortOrder, Integer showInNav, Long parentId) {
 		this.catName = catName;
 		this.catType = catType;
 		this.keywords = keywords;
@@ -47,11 +47,11 @@ public class ArticleCat implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "cat_id", unique = true, nullable = false)
-	public Short getCatId() {
+	public Long getCatId() {
 		return this.catId;
 	}
 
-	public void setCatId(Short catId) {
+	public void setCatId(Long catId) {
 		this.catId = catId;
 	}
 
@@ -65,11 +65,11 @@ public class ArticleCat implements java.io.Serializable {
 	}
 
 	@Column(name = "cat_type", nullable = false)
-	public Boolean getCatType() {
+	public Integer getCatType() {
 		return this.catType;
 	}
 
-	public void setCatType(Boolean catType) {
+	public void setCatType(Integer catType) {
 		this.catType = catType;
 	}
 
@@ -92,29 +92,29 @@ public class ArticleCat implements java.io.Serializable {
 	}
 
 	@Column(name = "sort_order", nullable = false)
-	public Short getSortOrder() {
+	public Integer getSortOrder() {
 		return this.sortOrder;
 	}
 
-	public void setSortOrder(Short sortOrder) {
+	public void setSortOrder(Integer sortOrder) {
 		this.sortOrder = sortOrder;
 	}
 
 	@Column(name = "show_in_nav", nullable = false)
-	public Boolean getShowInNav() {
+	public Integer getShowInNav() {
 		return this.showInNav;
 	}
 
-	public void setShowInNav(Boolean showInNav) {
+	public void setShowInNav(Integer showInNav) {
 		this.showInNav = showInNav;
 	}
 
 	@Column(name = "parent_id", nullable = false)
-	public Short getParentId() {
+	public Long getParentId() {
 		return this.parentId;
 	}
 
-	public void setParentId(Short parentId) {
+	public void setParentId(Long parentId) {
 		this.parentId = parentId;
 	}
 

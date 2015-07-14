@@ -16,16 +16,16 @@ public class Attribute implements java.io.Serializable {
 
 	// Fields
 
-	private Short attrId;
-	private Short catId;
+	private Long attrId;
+	private Long catId;
 	private String attrName;
-	private Boolean attrInputType;
-	private Boolean attrType;
+	private Integer attrInputType;
+	private Integer attrType;
 	private String attrValues;
-	private Boolean attrIndex;
-	private Short sortOrder;
-	private Boolean isLinked;
-	private Boolean attrGroup;
+	private Integer attrIndex;
+	private Integer sortOrder;
+	private Integer isLinked;
+	private Integer attrGroup;
 
 	// Constructors
 
@@ -34,9 +34,9 @@ public class Attribute implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Attribute(Short catId, String attrName, Boolean attrInputType,
-			Boolean attrType, String attrValues, Boolean attrIndex,
-			Short sortOrder, Boolean isLinked, Boolean attrGroup) {
+	public Attribute(Long catId, String attrName, Integer attrInputType,
+			Integer attrType, String attrValues, Integer attrIndex,
+			Integer sortOrder, Integer isLinked, Integer attrGroup) {
 		this.catId = catId;
 		this.attrName = attrName;
 		this.attrInputType = attrInputType;
@@ -52,20 +52,20 @@ public class Attribute implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "attr_id", unique = true, nullable = false)
-	public Short getAttrId() {
+	public Long getAttrId() {
 		return this.attrId;
 	}
 
-	public void setAttrId(Short attrId) {
+	public void setAttrId(Long attrId) {
 		this.attrId = attrId;
 	}
 
 	@Column(name = "cat_id", nullable = false)
-	public Short getCatId() {
+	public Long getCatId() {
 		return this.catId;
 	}
 
-	public void setCatId(Short catId) {
+	public void setCatId(Long catId) {
 		this.catId = catId;
 	}
 
@@ -79,20 +79,20 @@ public class Attribute implements java.io.Serializable {
 	}
 
 	@Column(name = "attr_input_type", nullable = false)
-	public Boolean getAttrInputType() {
+	public Integer getAttrInputType() {
 		return this.attrInputType;
 	}
 
-	public void setAttrInputType(Boolean attrInputType) {
+	public void setAttrInputType(Integer attrInputType) {
 		this.attrInputType = attrInputType;
 	}
 
 	@Column(name = "attr_type", nullable = false)
-	public Boolean getAttrType() {
+	public Integer getAttrType() {
 		return this.attrType;
 	}
 
-	public void setAttrType(Boolean attrType) {
+	public void setAttrType(Integer attrType) {
 		this.attrType = attrType;
 	}
 
@@ -106,38 +106,38 @@ public class Attribute implements java.io.Serializable {
 	}
 
 	@Column(name = "attr_index", nullable = false)
-	public Boolean getAttrIndex() {
+	public Integer getAttrIndex() {
 		return this.attrIndex;
 	}
 
-	public void setAttrIndex(Boolean attrIndex) {
+	public void setAttrIndex(Integer attrIndex) {
 		this.attrIndex = attrIndex;
 	}
 
 	@Column(name = "sort_order", nullable = false)
-	public Short getSortOrder() {
+	public Integer getSortOrder() {
 		return this.sortOrder;
 	}
 
-	public void setSortOrder(Short sortOrder) {
+	public void setSortOrder(Integer sortOrder) {
 		this.sortOrder = sortOrder;
 	}
 
 	@Column(name = "is_linked", nullable = false)
-	public Boolean getIsLinked() {
+	public Integer getIsLinked() {
 		return this.isLinked;
 	}
 
-	public void setIsLinked(Boolean isLinked) {
+	public void setIsLinked(Integer isLinked) {
 		this.isLinked = isLinked;
 	}
 
 	@Column(name = "attr_group", nullable = false)
-	public Boolean getAttrGroup() {
+	public Integer getAttrGroup() {
 		return this.attrGroup;
 	}
 
-	public void setAttrGroup(Boolean attrGroup) {
+	public void setAttrGroup(Integer attrGroup) {
 		this.attrGroup = attrGroup;
 	}
 

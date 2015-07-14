@@ -16,7 +16,7 @@ public class Role implements java.io.Serializable {
 
 	// Fields
 
-	private Short roleId;
+	private Long roleId;
 	private String roleName;
 	private String actionList;
 	private String roleDescribe;
@@ -44,11 +44,11 @@ public class Role implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "role_id", unique = true, nullable = false)
-	public Short getRoleId() {
+	public Long getRoleId() {
 		return this.roleId;
 	}
 
-	public void setRoleId(Short roleId) {
+	public void setRoleId(Long roleId) {
 		this.roleId = roleId;
 	}
 

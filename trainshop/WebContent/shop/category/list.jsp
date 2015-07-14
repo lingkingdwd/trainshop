@@ -46,8 +46,9 @@
 												<div class="col-md-6">
 													<div class="form-group">
 														<label class="col-sm-4 control-label">父级分类：</label>
-														<div class="col-sm-8 martop7">
-															<span>xxx</span>
+														<div class="col-sm-">
+															<span id="parCategoryName"></span>
+															<input type="hidden" id="parCategoryId">
 														</div>
 													</div>
 												</div>
@@ -57,40 +58,41 @@
 											<div class="col-md-12">
 												<div class="col-md-6">
 													<div class="form-group">
-														<label class="col-sm-4 control-label">分类名称：</label>
+														<label class="col-sm-4 control-label martop10">分类名称：</label>
 														<div class="col-sm-8 martop7">
+															<input type="hidden" id="categoryId">
 															<input type="text" class="form-control" id="categoryName">
 														</div>
 													</div>
 												</div>
 												<div class="col-md-6">
 													<div class="form-group">
-														<label class="col-sm-4 control-label"> 是否显示：</label>
-														<div class="col-sm-8">
-															<select class=" form-control" id="selectSPZT">
-							
+														<label class="col-sm-4 control-label martop10"> 是否显示：</label>
+														<div class="col-sm-8 martop7">
+															<select class=" form-control" id="isShow">
+																<option value ="1">是</option>
+																<option value ="0">否</option>
 															</select>
 														</div>
 													</div>
 												</div>
 											</div>
+											<div class="col-md-12">
+												<label></label>
+											</div>
 											<div id="garage-show">
-												<div class="row marbot10">
-													<div class="col-md-10 padding-left-none">
-														<button class="btn btn-success" style="display: none"
-															id="cancel-select">
-															<span class="fa fa-minus-square"></span> 取消全选
+												<div class="row martop7">
+													<div class="col-md-10 padding-left-none text-center">
+														<button type="button" class="btn btn-success" id="addCategory">
+															<span class="fa fa-plus"></span> 添加分类
 														</button>
-														<button type="button" class="btn btn-danger"
-															id="garage-delete">
-															<i class="fa fa-times"></i> 删除
-														</button>
-														<button class="btn btn-success" id="cancel-delete">
-															<span class="fa fa-minus-square"></span> 取消删除
-														</button>
-														<button type="button" class="btn btn-primary"
+														<button type="button" id="saveCategory" type="button" class="btn btn-primary"
 															id="save-garage">
-															<i class="fa fa-check-circle"></i> 保存
+															<i class="fa fa-save"></i> 保存修改
+														</button>
+														<button type="button" id="deleteCategory" type="button" class="btn btn-danger"
+															id="deleteCategory">
+															<i class="fa fa-times"></i> 删除分类
 														</button>
 													</div>
 												</div>

@@ -17,7 +17,7 @@ public class Payment implements java.io.Serializable {
 
 	// Fields
 
-	private Short payId;
+	private Long payId;
 	private String payCode;
 	private String payName;
 	private String payFee;
@@ -53,11 +53,11 @@ public class Payment implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "pay_id", unique = true, nullable = false)
-	public Short getPayId() {
+	public Long getPayId() {
 		return this.payId;
 	}
 
-	public void setPayId(Short payId) {
+	public void setPayId(Long payId) {
 		this.payId = payId;
 	}
 

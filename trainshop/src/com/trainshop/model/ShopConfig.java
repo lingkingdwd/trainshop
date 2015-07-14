@@ -17,8 +17,8 @@ public class ShopConfig implements java.io.Serializable {
 
 	// Fields
 
-	private Short id;
-	private Short parentId;
+	private Long id;
+	private Long parentId;
 	private String code;
 	private String type;
 	private String storeRange;
@@ -33,7 +33,7 @@ public class ShopConfig implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public ShopConfig(Short parentId, String code, String type,
+	public ShopConfig(Long parentId, String code, String type,
 			String storeRange, String storeDir, String value, Short sortOrder) {
 		this.parentId = parentId;
 		this.code = code;
@@ -48,20 +48,20 @@ public class ShopConfig implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
-	public Short getId() {
+	public Long getId() {
 		return this.id;
 	}
 
-	public void setId(Short id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
 	@Column(name = "parent_id", nullable = false)
-	public Short getParentId() {
+	public Long getParentId() {
 		return this.parentId;
 	}
 
-	public void setParentId(Short parentId) {
+	public void setParentId(Long parentId) {
 		this.parentId = parentId;
 	}
 

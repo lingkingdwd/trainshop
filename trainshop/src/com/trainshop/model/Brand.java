@@ -16,13 +16,13 @@ public class Brand implements java.io.Serializable {
 
 	// Fields
 
-	private Short brandId;
+	private Long brandId;
 	private String brandName;
 	private String brandLogo;
 	private String brandDesc;
 	private String siteUrl;
-	private Short sortOrder;
-	private Boolean isShow;
+	private Integer sortOrder;
+	private Integer isShow;
 
 	// Constructors
 
@@ -32,7 +32,7 @@ public class Brand implements java.io.Serializable {
 
 	/** full constructor */
 	public Brand(String brandName, String brandLogo, String brandDesc,
-			String siteUrl, Short sortOrder, Boolean isShow) {
+			String siteUrl, Integer sortOrder, Integer isShow) {
 		this.brandName = brandName;
 		this.brandLogo = brandLogo;
 		this.brandDesc = brandDesc;
@@ -45,11 +45,11 @@ public class Brand implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "brand_id", unique = true, nullable = false)
-	public Short getBrandId() {
+	public Long getBrandId() {
 		return this.brandId;
 	}
 
-	public void setBrandId(Short brandId) {
+	public void setBrandId(Long brandId) {
 		this.brandId = brandId;
 	}
 
@@ -90,20 +90,20 @@ public class Brand implements java.io.Serializable {
 	}
 
 	@Column(name = "sort_order", nullable = false)
-	public Short getSortOrder() {
+	public Integer getSortOrder() {
 		return this.sortOrder;
 	}
 
-	public void setSortOrder(Short sortOrder) {
+	public void setSortOrder(Integer sortOrder) {
 		this.sortOrder = sortOrder;
 	}
 
 	@Column(name = "is_show", nullable = false)
-	public Boolean getIsShow() {
+	public Integer getIsShow() {
 		return this.isShow;
 	}
 
-	public void setIsShow(Boolean isShow) {
+	public void setIsShow(Integer isShow) {
 		this.isShow = isShow;
 	}
 

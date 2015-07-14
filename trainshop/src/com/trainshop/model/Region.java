@@ -16,8 +16,8 @@ public class Region implements java.io.Serializable {
 
 	// Fields
 
-	private Short regionId;
-	private Short parentId;
+	private Long regionId;
+	private Long parentId;
 	private String regionName;
 	private Boolean regionType;
 	private Short agencyId;
@@ -29,7 +29,7 @@ public class Region implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Region(Short parentId, String regionName, Boolean regionType,
+	public Region(Long parentId, String regionName, Boolean regionType,
 			Short agencyId) {
 		this.parentId = parentId;
 		this.regionName = regionName;
@@ -41,20 +41,20 @@ public class Region implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "region_id", unique = true, nullable = false)
-	public Short getRegionId() {
+	public Long getRegionId() {
 		return this.regionId;
 	}
 
-	public void setRegionId(Short regionId) {
+	public void setRegionId(Long regionId) {
 		this.regionId = regionId;
 	}
 
 	@Column(name = "parent_id", nullable = false)
-	public Short getParentId() {
+	public Long getParentId() {
 		return this.parentId;
 	}
 
-	public void setParentId(Short parentId) {
+	public void setParentId(Long parentId) {
 		this.parentId = parentId;
 	}
 

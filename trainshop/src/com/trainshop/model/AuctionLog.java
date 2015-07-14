@@ -16,9 +16,9 @@ public class AuctionLog implements java.io.Serializable {
 
 	// Fields
 
-	private Integer logId;
-	private Integer actId;
-	private Integer bidUser;
+	private Long logId;
+	private Long actId;
+	private Long bidUser;
 	private Double bidPrice;
 	private Integer bidTime;
 
@@ -29,8 +29,7 @@ public class AuctionLog implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public AuctionLog(Integer actId, Integer bidUser, Double bidPrice,
-			Integer bidTime) {
+	public AuctionLog(Long actId, Long bidUser, Double bidPrice, Integer bidTime) {
 		this.actId = actId;
 		this.bidUser = bidUser;
 		this.bidPrice = bidPrice;
@@ -41,29 +40,29 @@ public class AuctionLog implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "log_id", unique = true, nullable = false)
-	public Integer getLogId() {
+	public Long getLogId() {
 		return this.logId;
 	}
 
-	public void setLogId(Integer logId) {
+	public void setLogId(Long logId) {
 		this.logId = logId;
 	}
 
 	@Column(name = "act_id", nullable = false)
-	public Integer getActId() {
+	public Long getActId() {
 		return this.actId;
 	}
 
-	public void setActId(Integer actId) {
+	public void setActId(Long actId) {
 		this.actId = actId;
 	}
 
 	@Column(name = "bid_user", nullable = false)
-	public Integer getBidUser() {
+	public Long getBidUser() {
 		return this.bidUser;
 	}
 
-	public void setBidUser(Integer bidUser) {
+	public void setBidUser(Long bidUser) {
 		this.bidUser = bidUser;
 	}
 

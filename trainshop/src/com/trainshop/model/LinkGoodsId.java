@@ -11,8 +11,8 @@ public class LinkGoodsId implements java.io.Serializable {
 
 	// Fields
 
-	private Integer goodsId;
-	private Integer linkGoodsId;
+	private Long goodsId;
+	private Long linkGoodsId;
 	private Short adminId;
 
 	// Constructors
@@ -22,7 +22,7 @@ public class LinkGoodsId implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public LinkGoodsId(Integer goodsId, Integer linkGoodsId, Short adminId) {
+	public LinkGoodsId(Long goodsId, Long linkGoodsId, Short adminId) {
 		this.goodsId = goodsId;
 		this.linkGoodsId = linkGoodsId;
 		this.adminId = adminId;
@@ -31,20 +31,20 @@ public class LinkGoodsId implements java.io.Serializable {
 	// Property accessors
 
 	@Column(name = "goods_id", nullable = false)
-	public Integer getGoodsId() {
+	public Long getGoodsId() {
 		return this.goodsId;
 	}
 
-	public void setGoodsId(Integer goodsId) {
+	public void setGoodsId(Long goodsId) {
 		this.goodsId = goodsId;
 	}
 
 	@Column(name = "link_goods_id", nullable = false)
-	public Integer getLinkGoodsId() {
+	public Long getLinkGoodsId() {
 		return this.linkGoodsId;
 	}
 
-	public void setLinkGoodsId(Integer linkGoodsId) {
+	public void setLinkGoodsId(Long linkGoodsId) {
 		this.linkGoodsId = linkGoodsId;
 	}
 

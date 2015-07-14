@@ -16,9 +16,9 @@ public class Tag implements java.io.Serializable {
 
 	// Fields
 
-	private Integer tagId;
-	private Integer userId;
-	private Integer goodsId;
+	private Long tagId;
+	private Long userId;
+	private Long goodsId;
 	private String tagWords;
 
 	// Constructors
@@ -28,7 +28,7 @@ public class Tag implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Tag(Integer userId, Integer goodsId, String tagWords) {
+	public Tag(Long userId, Long goodsId, String tagWords) {
 		this.userId = userId;
 		this.goodsId = goodsId;
 		this.tagWords = tagWords;
@@ -38,29 +38,29 @@ public class Tag implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "tag_id", unique = true, nullable = false)
-	public Integer getTagId() {
+	public Long getTagId() {
 		return this.tagId;
 	}
 
-	public void setTagId(Integer tagId) {
+	public void setTagId(Long tagId) {
 		this.tagId = tagId;
 	}
 
 	@Column(name = "user_id", nullable = false)
-	public Integer getUserId() {
+	public Long getUserId() {
 		return this.userId;
 	}
 
-	public void setUserId(Integer userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 
 	@Column(name = "goods_id", nullable = false)
-	public Integer getGoodsId() {
+	public Long getGoodsId() {
 		return this.goodsId;
 	}
 
-	public void setGoodsId(Integer goodsId) {
+	public void setGoodsId(Long goodsId) {
 		this.goodsId = goodsId;
 	}
 

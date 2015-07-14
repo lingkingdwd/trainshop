@@ -16,7 +16,7 @@ public class FavourableActivity implements java.io.Serializable {
 
 	// Fields
 
-	private Short actId;
+	private Long actId;
 	private String actName;
 	private Integer startTime;
 	private Integer endTime;
@@ -59,11 +59,11 @@ public class FavourableActivity implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "act_id", unique = true, nullable = false)
-	public Short getActId() {
+	public Long getActId() {
 		return this.actId;
 	}
 
-	public void setActId(Short actId) {
+	public void setActId(Long actId) {
 		this.actId = actId;
 	}
 

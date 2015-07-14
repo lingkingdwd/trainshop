@@ -11,7 +11,7 @@ public class AdsenseId implements java.io.Serializable {
 
 	// Fields
 
-	private Short fromAd;
+	private Long fromAd;
 	private String referer;
 	private Integer clicks;
 
@@ -22,7 +22,7 @@ public class AdsenseId implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public AdsenseId(Short fromAd, String referer, Integer clicks) {
+	public AdsenseId(Long fromAd, String referer, Integer clicks) {
 		this.fromAd = fromAd;
 		this.referer = referer;
 		this.clicks = clicks;
@@ -31,11 +31,11 @@ public class AdsenseId implements java.io.Serializable {
 	// Property accessors
 
 	@Column(name = "from_ad", nullable = false)
-	public Short getFromAd() {
+	public Long getFromAd() {
 		return this.fromAd;
 	}
 
-	public void setFromAd(Short fromAd) {
+	public void setFromAd(Long fromAd) {
 		this.fromAd = fromAd;
 	}
 

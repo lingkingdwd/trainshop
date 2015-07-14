@@ -14,7 +14,7 @@ public class ExchangeGoods implements java.io.Serializable {
 
 	// Fields
 
-	private Integer goodsId;
+	private Long goodsId;
 	private Integer exchangeIntegral;
 	private Boolean isExchange;
 	private Boolean isHot;
@@ -26,7 +26,7 @@ public class ExchangeGoods implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public ExchangeGoods(Integer goodsId, Integer exchangeIntegral,
+	public ExchangeGoods(Long goodsId, Integer exchangeIntegral,
 			Boolean isExchange, Boolean isHot) {
 		this.goodsId = goodsId;
 		this.exchangeIntegral = exchangeIntegral;
@@ -37,11 +37,11 @@ public class ExchangeGoods implements java.io.Serializable {
 	// Property accessors
 	@Id
 	@Column(name = "goods_id", unique = true, nullable = false)
-	public Integer getGoodsId() {
+	public Long getGoodsId() {
 		return this.goodsId;
 	}
 
-	public void setGoodsId(Integer goodsId) {
+	public void setGoodsId(Long goodsId) {
 		this.goodsId = goodsId;
 	}
 

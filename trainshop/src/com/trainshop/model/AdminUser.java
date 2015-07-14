@@ -16,21 +16,21 @@ public class AdminUser implements java.io.Serializable {
 
 	// Fields
 
-	private Short userId;
+	private Long userId;
 	private String userName;
 	private String email;
 	private String password;
 	private String ecSalt;
-	private Integer addTime;
-	private Integer lastLogin;
+	private Long addTime;
+	private Long lastLogin;
 	private String lastIp;
 	private String actionList;
 	private String navList;
 	private String langType;
-	private Short agencyId;
-	private Short suppliersId;
+	private Integer agencyId;
+	private Long suppliersId;
 	private String todolist;
-	private Short roleId;
+	private Long roleId;
 
 	// Constructors
 
@@ -40,8 +40,8 @@ public class AdminUser implements java.io.Serializable {
 
 	/** minimal constructor */
 	public AdminUser(String userName, String email, String password,
-			Integer addTime, Integer lastLogin, String lastIp,
-			String actionList, String navList, String langType, Short agencyId) {
+			Long addTime, Long lastLogin, String lastIp, String actionList,
+			String navList, String langType, Integer agencyId) {
 		this.userName = userName;
 		this.email = email;
 		this.password = password;
@@ -56,9 +56,9 @@ public class AdminUser implements java.io.Serializable {
 
 	/** full constructor */
 	public AdminUser(String userName, String email, String password,
-			String ecSalt, Integer addTime, Integer lastLogin, String lastIp,
-			String actionList, String navList, String langType, Short agencyId,
-			Short suppliersId, String todolist, Short roleId) {
+			String ecSalt, Long addTime, Long lastLogin, String lastIp,
+			String actionList, String navList, String langType,
+			Integer agencyId, Long suppliersId, String todolist, Long roleId) {
 		this.userName = userName;
 		this.email = email;
 		this.password = password;
@@ -79,11 +79,11 @@ public class AdminUser implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "user_id", unique = true, nullable = false)
-	public Short getUserId() {
+	public Long getUserId() {
 		return this.userId;
 	}
 
-	public void setUserId(Short userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 
@@ -124,20 +124,20 @@ public class AdminUser implements java.io.Serializable {
 	}
 
 	@Column(name = "add_time", nullable = false)
-	public Integer getAddTime() {
+	public Long getAddTime() {
 		return this.addTime;
 	}
 
-	public void setAddTime(Integer addTime) {
+	public void setAddTime(Long addTime) {
 		this.addTime = addTime;
 	}
 
 	@Column(name = "last_login", nullable = false)
-	public Integer getLastLogin() {
+	public Long getLastLogin() {
 		return this.lastLogin;
 	}
 
-	public void setLastLogin(Integer lastLogin) {
+	public void setLastLogin(Long lastLogin) {
 		this.lastLogin = lastLogin;
 	}
 
@@ -178,20 +178,20 @@ public class AdminUser implements java.io.Serializable {
 	}
 
 	@Column(name = "agency_id", nullable = false)
-	public Short getAgencyId() {
+	public Integer getAgencyId() {
 		return this.agencyId;
 	}
 
-	public void setAgencyId(Short agencyId) {
+	public void setAgencyId(Integer agencyId) {
 		this.agencyId = agencyId;
 	}
 
 	@Column(name = "suppliers_id")
-	public Short getSuppliersId() {
+	public Long getSuppliersId() {
 		return this.suppliersId;
 	}
 
-	public void setSuppliersId(Short suppliersId) {
+	public void setSuppliersId(Long suppliersId) {
 		this.suppliersId = suppliersId;
 	}
 
@@ -205,11 +205,11 @@ public class AdminUser implements java.io.Serializable {
 	}
 
 	@Column(name = "role_id")
-	public Short getRoleId() {
+	public Long getRoleId() {
 		return this.roleId;
 	}
 
-	public void setRoleId(Short roleId) {
+	public void setRoleId(Long roleId) {
 		this.roleId = roleId;
 	}
 

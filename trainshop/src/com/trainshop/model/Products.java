@@ -16,8 +16,8 @@ public class Products implements java.io.Serializable {
 
 	// Fields
 
-	private Integer productId;
-	private Integer goodsId;
+	private Long productId;
+	private Long goodsId;
 	private String goodsAttr;
 	private String productSn;
 	private Short productNumber;
@@ -29,12 +29,12 @@ public class Products implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Products(Integer goodsId) {
+	public Products(Long goodsId) {
 		this.goodsId = goodsId;
 	}
 
 	/** full constructor */
-	public Products(Integer goodsId, String goodsAttr, String productSn,
+	public Products(Long goodsId, String goodsAttr, String productSn,
 			Short productNumber) {
 		this.goodsId = goodsId;
 		this.goodsAttr = goodsAttr;
@@ -46,20 +46,20 @@ public class Products implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "product_id", unique = true, nullable = false)
-	public Integer getProductId() {
+	public Long getProductId() {
 		return this.productId;
 	}
 
-	public void setProductId(Integer productId) {
+	public void setProductId(Long productId) {
 		this.productId = productId;
 	}
 
 	@Column(name = "goods_id", nullable = false)
-	public Integer getGoodsId() {
+	public Long getGoodsId() {
 		return this.goodsId;
 	}
 
-	public void setGoodsId(Integer goodsId) {
+	public void setGoodsId(Long goodsId) {
 		this.goodsId = goodsId;
 	}
 

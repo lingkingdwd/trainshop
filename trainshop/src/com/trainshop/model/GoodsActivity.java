@@ -16,16 +16,16 @@ public class GoodsActivity implements java.io.Serializable {
 
 	// Fields
 
-	private Integer actId;
+	private Long actId;
 	private String actName;
 	private String actDesc;
-	private Short actType;
+	private Integer actType;
 	private Integer goodsId;
 	private Integer productId;
 	private String goodsName;
-	private Integer startTime;
-	private Integer endTime;
-	private Short isFinished;
+	private Long startTime;
+	private Long endTime;
+	private Integer isFinished;
 	private String extInfo;
 
 	// Constructors
@@ -35,9 +35,9 @@ public class GoodsActivity implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public GoodsActivity(String actName, String actDesc, Short actType,
+	public GoodsActivity(String actName, String actDesc, Integer actType,
 			Integer goodsId, Integer productId, String goodsName,
-			Integer startTime, Integer endTime, Short isFinished, String extInfo) {
+			Long startTime, Long endTime, Integer isFinished, String extInfo) {
 		this.actName = actName;
 		this.actDesc = actDesc;
 		this.actType = actType;
@@ -54,11 +54,11 @@ public class GoodsActivity implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "act_id", unique = true, nullable = false)
-	public Integer getActId() {
+	public Long getActId() {
 		return this.actId;
 	}
 
-	public void setActId(Integer actId) {
+	public void setActId(Long actId) {
 		this.actId = actId;
 	}
 
@@ -81,11 +81,11 @@ public class GoodsActivity implements java.io.Serializable {
 	}
 
 	@Column(name = "act_type", nullable = false)
-	public Short getActType() {
+	public Integer getActType() {
 		return this.actType;
 	}
 
-	public void setActType(Short actType) {
+	public void setActType(Integer actType) {
 		this.actType = actType;
 	}
 
@@ -117,29 +117,29 @@ public class GoodsActivity implements java.io.Serializable {
 	}
 
 	@Column(name = "start_time", nullable = false)
-	public Integer getStartTime() {
+	public Long getStartTime() {
 		return this.startTime;
 	}
 
-	public void setStartTime(Integer startTime) {
+	public void setStartTime(Long startTime) {
 		this.startTime = startTime;
 	}
 
 	@Column(name = "end_time", nullable = false)
-	public Integer getEndTime() {
+	public Long getEndTime() {
 		return this.endTime;
 	}
 
-	public void setEndTime(Integer endTime) {
+	public void setEndTime(Long endTime) {
 		this.endTime = endTime;
 	}
 
 	@Column(name = "is_finished", nullable = false)
-	public Short getIsFinished() {
+	public Integer getIsFinished() {
 		return this.isFinished;
 	}
 
-	public void setIsFinished(Short isFinished) {
+	public void setIsFinished(Integer isFinished) {
 		this.isFinished = isFinished;
 	}
 

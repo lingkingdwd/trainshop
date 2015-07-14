@@ -154,9 +154,9 @@ public class UsersController extends BaseController {
 		if (!paraUser.getUserName().trim().equals("")) {
 			if(!paraUser.getPassword().trim().equals("")){
 				try {
-					paraUser.setFlag(new Short("1"));
+					paraUser.setFlag(new Integer("1"));
 					paraUser.setRegTime(System.currentTimeMillis());
-					paraUser.setVisitCount(new Short("0"));
+					paraUser.setVisitCount(new Integer("0"));
 					usersService.create(paraUser);
 					result = "{\"flag\":\"1\",\"message\":\"注册成功！\"}";
 

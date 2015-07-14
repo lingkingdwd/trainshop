@@ -16,18 +16,18 @@ public class BookingGoods implements java.io.Serializable {
 
 	// Fields
 
-	private Integer recId;
-	private Integer userId;
+	private Long recId;
+	private Long userId;
 	private String email;
 	private String linkMan;
 	private String tel;
 	private Integer goodsId;
 	private String goodsDesc;
-	private Short goodsNumber;
-	private Integer bookingTime;
-	private Boolean isDispose;
+	private Long goodsNumber;
+	private Long bookingTime;
+	private Integer isDispose;
 	private String disposeUser;
-	private Integer disposeTime;
+	private Long disposeTime;
 	private String disposeNote;
 
 	// Constructors
@@ -37,10 +37,10 @@ public class BookingGoods implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public BookingGoods(Integer userId, String email, String linkMan,
-			String tel, Integer goodsId, String goodsDesc, Short goodsNumber,
-			Integer bookingTime, Boolean isDispose, String disposeUser,
-			Integer disposeTime, String disposeNote) {
+	public BookingGoods(Long userId, String email, String linkMan, String tel,
+			Integer goodsId, String goodsDesc, Long goodsNumber,
+			Long bookingTime, Integer isDispose, String disposeUser,
+			Long disposeTime, String disposeNote) {
 		this.userId = userId;
 		this.email = email;
 		this.linkMan = linkMan;
@@ -59,20 +59,20 @@ public class BookingGoods implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "rec_id", unique = true, nullable = false)
-	public Integer getRecId() {
+	public Long getRecId() {
 		return this.recId;
 	}
 
-	public void setRecId(Integer recId) {
+	public void setRecId(Long recId) {
 		this.recId = recId;
 	}
 
 	@Column(name = "user_id", nullable = false)
-	public Integer getUserId() {
+	public Long getUserId() {
 		return this.userId;
 	}
 
-	public void setUserId(Integer userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 
@@ -122,29 +122,29 @@ public class BookingGoods implements java.io.Serializable {
 	}
 
 	@Column(name = "goods_number", nullable = false)
-	public Short getGoodsNumber() {
+	public Long getGoodsNumber() {
 		return this.goodsNumber;
 	}
 
-	public void setGoodsNumber(Short goodsNumber) {
+	public void setGoodsNumber(Long goodsNumber) {
 		this.goodsNumber = goodsNumber;
 	}
 
 	@Column(name = "booking_time", nullable = false)
-	public Integer getBookingTime() {
+	public Long getBookingTime() {
 		return this.bookingTime;
 	}
 
-	public void setBookingTime(Integer bookingTime) {
+	public void setBookingTime(Long bookingTime) {
 		this.bookingTime = bookingTime;
 	}
 
 	@Column(name = "is_dispose", nullable = false)
-	public Boolean getIsDispose() {
+	public Integer getIsDispose() {
 		return this.isDispose;
 	}
 
-	public void setIsDispose(Boolean isDispose) {
+	public void setIsDispose(Integer isDispose) {
 		this.isDispose = isDispose;
 	}
 
@@ -158,11 +158,11 @@ public class BookingGoods implements java.io.Serializable {
 	}
 
 	@Column(name = "dispose_time", nullable = false)
-	public Integer getDisposeTime() {
+	public Long getDisposeTime() {
 		return this.disposeTime;
 	}
 
-	public void setDisposeTime(Integer disposeTime) {
+	public void setDisposeTime(Long disposeTime) {
 		this.disposeTime = disposeTime;
 	}
 

@@ -16,18 +16,18 @@ public class Article implements java.io.Serializable {
 
 	// Fields
 
-	private Integer articleId;
-	private Short catId;
+	private Long articleId;
+	private Long catId;
 	private String title;
 	private String content;
 	private String author;
 	private String authorEmail;
 	private String keywords;
-	private Boolean articleType;
-	private Boolean isOpen;
+	private Integer articleType;
+	private Integer isOpen;
 	private Integer addTime;
 	private String fileUrl;
-	private Boolean openType;
+	private Integer openType;
 	private String link;
 	private String description;
 
@@ -38,9 +38,9 @@ public class Article implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Article(Short catId, String title, String content, String author,
-			String authorEmail, String keywords, Boolean articleType,
-			Boolean isOpen, Integer addTime, String fileUrl, Boolean openType,
+	public Article(Long catId, String title, String content, String author,
+			String authorEmail, String keywords, Integer articleType,
+			Integer isOpen, Integer addTime, String fileUrl, Integer openType,
 			String link) {
 		this.catId = catId;
 		this.title = title;
@@ -57,9 +57,9 @@ public class Article implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Article(Short catId, String title, String content, String author,
-			String authorEmail, String keywords, Boolean articleType,
-			Boolean isOpen, Integer addTime, String fileUrl, Boolean openType,
+	public Article(Long catId, String title, String content, String author,
+			String authorEmail, String keywords, Integer articleType,
+			Integer isOpen, Integer addTime, String fileUrl, Integer openType,
 			String link, String description) {
 		this.catId = catId;
 		this.title = title;
@@ -80,20 +80,20 @@ public class Article implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "article_id", unique = true, nullable = false)
-	public Integer getArticleId() {
+	public Long getArticleId() {
 		return this.articleId;
 	}
 
-	public void setArticleId(Integer articleId) {
+	public void setArticleId(Long articleId) {
 		this.articleId = articleId;
 	}
 
 	@Column(name = "cat_id", nullable = false)
-	public Short getCatId() {
+	public Long getCatId() {
 		return this.catId;
 	}
 
-	public void setCatId(Short catId) {
+	public void setCatId(Long catId) {
 		this.catId = catId;
 	}
 
@@ -143,20 +143,20 @@ public class Article implements java.io.Serializable {
 	}
 
 	@Column(name = "article_type", nullable = false)
-	public Boolean getArticleType() {
+	public Integer getArticleType() {
 		return this.articleType;
 	}
 
-	public void setArticleType(Boolean articleType) {
+	public void setArticleType(Integer articleType) {
 		this.articleType = articleType;
 	}
 
 	@Column(name = "is_open", nullable = false)
-	public Boolean getIsOpen() {
+	public Integer getIsOpen() {
 		return this.isOpen;
 	}
 
-	public void setIsOpen(Boolean isOpen) {
+	public void setIsOpen(Integer isOpen) {
 		this.isOpen = isOpen;
 	}
 
@@ -179,11 +179,11 @@ public class Article implements java.io.Serializable {
 	}
 
 	@Column(name = "open_type", nullable = false)
-	public Boolean getOpenType() {
+	public Integer getOpenType() {
 		return this.openType;
 	}
 
-	public void setOpenType(Boolean openType) {
+	public void setOpenType(Integer openType) {
 		this.openType = openType;
 	}
 

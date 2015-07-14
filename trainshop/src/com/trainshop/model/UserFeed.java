@@ -16,10 +16,10 @@ public class UserFeed implements java.io.Serializable {
 
 	// Fields
 
-	private Integer feedId;
-	private Integer userId;
-	private Integer valueId;
-	private Integer goodsId;
+	private Long feedId;
+	private Long userId;
+	private Long valueId;
+	private Long goodsId;
 	private Boolean feedType;
 	private Boolean isFeed;
 
@@ -30,8 +30,8 @@ public class UserFeed implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public UserFeed(Integer userId, Integer valueId, Integer goodsId,
-			Boolean feedType, Boolean isFeed) {
+	public UserFeed(Long userId, Long valueId, Long goodsId, Boolean feedType,
+			Boolean isFeed) {
 		this.userId = userId;
 		this.valueId = valueId;
 		this.goodsId = goodsId;
@@ -43,38 +43,38 @@ public class UserFeed implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "feed_id", unique = true, nullable = false)
-	public Integer getFeedId() {
+	public Long getFeedId() {
 		return this.feedId;
 	}
 
-	public void setFeedId(Integer feedId) {
+	public void setFeedId(Long feedId) {
 		this.feedId = feedId;
 	}
 
 	@Column(name = "user_id", nullable = false)
-	public Integer getUserId() {
+	public Long getUserId() {
 		return this.userId;
 	}
 
-	public void setUserId(Integer userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 
 	@Column(name = "value_id", nullable = false)
-	public Integer getValueId() {
+	public Long getValueId() {
 		return this.valueId;
 	}
 
-	public void setValueId(Integer valueId) {
+	public void setValueId(Long valueId) {
 		this.valueId = valueId;
 	}
 
 	@Column(name = "goods_id", nullable = false)
-	public Integer getGoodsId() {
+	public Long getGoodsId() {
 		return this.goodsId;
 	}
 
-	public void setGoodsId(Integer goodsId) {
+	public void setGoodsId(Long goodsId) {
 		this.goodsId = goodsId;
 	}
 

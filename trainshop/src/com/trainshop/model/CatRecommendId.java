@@ -11,8 +11,8 @@ public class CatRecommendId implements java.io.Serializable {
 
 	// Fields
 
-	private Short catId;
-	private Boolean recommendType;
+	private Long catId;
+	private Integer recommendType;
 
 	// Constructors
 
@@ -21,7 +21,7 @@ public class CatRecommendId implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public CatRecommendId(Short catId, Boolean recommendType) {
+	public CatRecommendId(Long catId, Integer recommendType) {
 		this.catId = catId;
 		this.recommendType = recommendType;
 	}
@@ -29,20 +29,20 @@ public class CatRecommendId implements java.io.Serializable {
 	// Property accessors
 
 	@Column(name = "cat_id", nullable = false)
-	public Short getCatId() {
+	public Long getCatId() {
 		return this.catId;
 	}
 
-	public void setCatId(Short catId) {
+	public void setCatId(Long catId) {
 		this.catId = catId;
 	}
 
 	@Column(name = "recommend_type", nullable = false)
-	public Boolean getRecommendType() {
+	public Integer getRecommendType() {
 		return this.recommendType;
 	}
 
-	public void setRecommendType(Boolean recommendType) {
+	public void setRecommendType(Integer recommendType) {
 		this.recommendType = recommendType;
 	}
 

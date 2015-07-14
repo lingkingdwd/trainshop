@@ -16,7 +16,7 @@ public class Feedback implements java.io.Serializable {
 
 	// Fields
 
-	private Integer msgId;
+	private Long msgId;
 	private Integer parentId;
 	private Integer userId;
 	private String userName;
@@ -59,11 +59,11 @@ public class Feedback implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "msg_id", unique = true, nullable = false)
-	public Integer getMsgId() {
+	public Long getMsgId() {
 		return this.msgId;
 	}
 
-	public void setMsgId(Integer msgId) {
+	public void setMsgId(Long msgId) {
 		this.msgId = msgId;
 	}
 

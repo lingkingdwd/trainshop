@@ -25,7 +25,7 @@ public class GoodsController extends BaseController {
 	@RequestMapping(value = "/init", method = RequestMethod.GET)
 	public String init(HttpServletRequest request, HttpSession session) {
 		try {
-			return "goodList";
+			return "shop/goods/list";
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "/error";
@@ -53,9 +53,9 @@ public class GoodsController extends BaseController {
 	public String getlist(HttpServletRequest request, HttpSession session) {
 		String result = null;
 
-		List<Goods> userList = goodsService.findAll();
+		List<Goods> list = goodsService.findAll();
 
-		result = JsonPluginsUtil.beanListToJson(userList);
+		result = JsonPluginsUtil.beanListToJson(list);
 		
 		return super.returnData(result);
 	}

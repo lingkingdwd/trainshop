@@ -11,7 +11,7 @@ public class StatsId implements java.io.Serializable {
 
 	// Fields
 
-	private Integer accessTime;
+	private Long accessTime;
 	private String ipAddress;
 	private Short visitTimes;
 	private String browser;
@@ -29,7 +29,7 @@ public class StatsId implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public StatsId(Integer accessTime, String ipAddress, Short visitTimes,
+	public StatsId(Long accessTime, String ipAddress, Short visitTimes,
 			String browser, String system, String language, String area,
 			String refererDomain, String refererPath, String accessUrl) {
 		this.accessTime = accessTime;
@@ -47,11 +47,11 @@ public class StatsId implements java.io.Serializable {
 	// Property accessors
 
 	@Column(name = "access_time", nullable = false)
-	public Integer getAccessTime() {
+	public Long getAccessTime() {
 		return this.accessTime;
 	}
 
-	public void setAccessTime(Integer accessTime) {
+	public void setAccessTime(Long accessTime) {
 		this.accessTime = accessTime;
 	}
 

@@ -11,10 +11,10 @@ public class PackageGoodsId implements java.io.Serializable {
 
 	// Fields
 
-	private Integer packageId;
-	private Integer goodsId;
+	private Long packageId;
+	private Long goodsId;
 	private Short adminId;
-	private Integer productId;
+	private Long productId;
 
 	// Constructors
 
@@ -23,8 +23,8 @@ public class PackageGoodsId implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public PackageGoodsId(Integer packageId, Integer goodsId, Short adminId,
-			Integer productId) {
+	public PackageGoodsId(Long packageId, Long goodsId, Short adminId,
+			Long productId) {
 		this.packageId = packageId;
 		this.goodsId = goodsId;
 		this.adminId = adminId;
@@ -34,20 +34,20 @@ public class PackageGoodsId implements java.io.Serializable {
 	// Property accessors
 
 	@Column(name = "package_id", nullable = false)
-	public Integer getPackageId() {
+	public Long getPackageId() {
 		return this.packageId;
 	}
 
-	public void setPackageId(Integer packageId) {
+	public void setPackageId(Long packageId) {
 		this.packageId = packageId;
 	}
 
 	@Column(name = "goods_id", nullable = false)
-	public Integer getGoodsId() {
+	public Long getGoodsId() {
 		return this.goodsId;
 	}
 
-	public void setGoodsId(Integer goodsId) {
+	public void setGoodsId(Long goodsId) {
 		this.goodsId = goodsId;
 	}
 
@@ -61,11 +61,11 @@ public class PackageGoodsId implements java.io.Serializable {
 	}
 
 	@Column(name = "product_id", nullable = false)
-	public Integer getProductId() {
+	public Long getProductId() {
 		return this.productId;
 	}
 
-	public void setProductId(Integer productId) {
+	public void setProductId(Long productId) {
 		this.productId = productId;
 	}
 

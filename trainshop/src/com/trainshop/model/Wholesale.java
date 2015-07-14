@@ -16,8 +16,8 @@ public class Wholesale implements java.io.Serializable {
 
 	// Fields
 
-	private Integer actId;
-	private Integer goodsId;
+	private Long actId;
+	private Long goodsId;
 	private String goodsName;
 	private String rankIds;
 	private String prices;
@@ -30,7 +30,7 @@ public class Wholesale implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Wholesale(Integer goodsId, String goodsName, String rankIds,
+	public Wholesale(Long goodsId, String goodsName, String rankIds,
 			String prices, Short enabled) {
 		this.goodsId = goodsId;
 		this.goodsName = goodsName;
@@ -43,20 +43,20 @@ public class Wholesale implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "act_id", unique = true, nullable = false)
-	public Integer getActId() {
+	public Long getActId() {
 		return this.actId;
 	}
 
-	public void setActId(Integer actId) {
+	public void setActId(Long actId) {
 		this.actId = actId;
 	}
 
 	@Column(name = "goods_id", nullable = false)
-	public Integer getGoodsId() {
+	public Long getGoodsId() {
 		return this.goodsId;
 	}
 
-	public void setGoodsId(Integer goodsId) {
+	public void setGoodsId(Long goodsId) {
 		this.goodsId = goodsId;
 	}
 

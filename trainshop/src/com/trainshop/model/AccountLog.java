@@ -16,15 +16,15 @@ public class AccountLog implements java.io.Serializable {
 
 	// Fields
 
-	private Integer logId;
-	private Integer userId;
+	private Long logId;
+	private Long userId;
 	private Double userMoney;
 	private Double frozenMoney;
 	private Integer rankPoints;
 	private Integer payPoints;
 	private Integer changeTime;
 	private String changeDesc;
-	private Short changeType;
+	private Integer changeType;
 
 	// Constructors
 
@@ -33,9 +33,9 @@ public class AccountLog implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public AccountLog(Integer userId, Double userMoney, Double frozenMoney,
+	public AccountLog(Long userId, Double userMoney, Double frozenMoney,
 			Integer rankPoints, Integer payPoints, Integer changeTime,
-			String changeDesc, Short changeType) {
+			String changeDesc, Integer changeType) {
 		this.userId = userId;
 		this.userMoney = userMoney;
 		this.frozenMoney = frozenMoney;
@@ -50,20 +50,20 @@ public class AccountLog implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "log_id", unique = true, nullable = false)
-	public Integer getLogId() {
+	public Long getLogId() {
 		return this.logId;
 	}
 
-	public void setLogId(Integer logId) {
+	public void setLogId(Long logId) {
 		this.logId = logId;
 	}
 
 	@Column(name = "user_id", nullable = false)
-	public Integer getUserId() {
+	public Long getUserId() {
 		return this.userId;
 	}
 
-	public void setUserId(Integer userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 
@@ -122,11 +122,11 @@ public class AccountLog implements java.io.Serializable {
 	}
 
 	@Column(name = "change_type", nullable = false)
-	public Short getChangeType() {
+	public Integer getChangeType() {
 		return this.changeType;
 	}
 
-	public void setChangeType(Short changeType) {
+	public void setChangeType(Integer changeType) {
 		this.changeType = changeType;
 	}
 

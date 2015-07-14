@@ -1,9 +1,13 @@
 package com.trainshop.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+
 import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -17,9 +21,9 @@ public class OrderInfo implements java.io.Serializable {
 
 	// Fields
 
-	private Integer orderId;
+	private Long orderId;
 	private String orderSn;
-	private Integer userId;
+	private Long userId;
 	private Boolean orderStatus;
 	private Boolean shippingStatus;
 	private Boolean payStatus;
@@ -79,6 +83,8 @@ public class OrderInfo implements java.io.Serializable {
 	private Boolean isSeparate;
 	private Integer parentId;
 	private Double discount;
+	
+	private List<OrderGoods> orderGoods;
 
 	// Constructors
 
@@ -87,7 +93,7 @@ public class OrderInfo implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public OrderInfo(String orderSn, Integer userId, Boolean orderStatus,
+	public OrderInfo(String orderSn, Long userId, Boolean orderStatus,
 			Boolean shippingStatus, Boolean payStatus, String consignee,
 			Short country, Short province, Short city, Short district,
 			String address, String zipcode, String tel, String mobile,
@@ -172,11 +178,11 @@ public class OrderInfo implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "order_id", unique = true, nullable = false)
-	public Integer getOrderId() {
+	public Long getOrderId() {
 		return this.orderId;
 	}
 
-	public void setOrderId(Integer orderId) {
+	public void setOrderId(Long orderId) {
 		this.orderId = orderId;
 	}
 
@@ -190,11 +196,11 @@ public class OrderInfo implements java.io.Serializable {
 	}
 
 	@Column(name = "user_id", nullable = false)
-	public Integer getUserId() {
+	public Long getUserId() {
 		return this.userId;
 	}
 
-	public void setUserId(Integer userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 
@@ -729,4 +735,11 @@ public class OrderInfo implements java.io.Serializable {
 		this.discount = discount;
 	}
 
+	public List<OrderGoods> getOrderGoods() {
+		return orderGoods;
+	}
+
+	public void setOrderGoods(List<OrderGoods> orderGoods) {
+		this.orderGoods = orderGoods;
+	}
 }

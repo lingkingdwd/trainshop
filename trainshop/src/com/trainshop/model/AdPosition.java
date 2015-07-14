@@ -16,10 +16,10 @@ public class AdPosition implements java.io.Serializable {
 
 	// Fields
 
-	private Short positionId;
+	private Integer positionId;
 	private String positionName;
-	private Short adWidth;
-	private Short adHeight;
+	private Integer adWidth;
+	private Integer adHeight;
 	private String positionDesc;
 	private String positionStyle;
 
@@ -30,7 +30,7 @@ public class AdPosition implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public AdPosition(String positionName, Short adWidth, Short adHeight,
+	public AdPosition(String positionName, Integer adWidth, Integer adHeight,
 			String positionDesc, String positionStyle) {
 		this.positionName = positionName;
 		this.adWidth = adWidth;
@@ -43,11 +43,11 @@ public class AdPosition implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "position_id", unique = true, nullable = false)
-	public Short getPositionId() {
+	public Integer getPositionId() {
 		return this.positionId;
 	}
 
-	public void setPositionId(Short positionId) {
+	public void setPositionId(Integer positionId) {
 		this.positionId = positionId;
 	}
 
@@ -61,20 +61,20 @@ public class AdPosition implements java.io.Serializable {
 	}
 
 	@Column(name = "ad_width", nullable = false)
-	public Short getAdWidth() {
+	public Integer getAdWidth() {
 		return this.adWidth;
 	}
 
-	public void setAdWidth(Short adWidth) {
+	public void setAdWidth(Integer adWidth) {
 		this.adWidth = adWidth;
 	}
 
 	@Column(name = "ad_height", nullable = false)
-	public Short getAdHeight() {
+	public Integer getAdHeight() {
 		return this.adHeight;
 	}
 
-	public void setAdHeight(Short adHeight) {
+	public void setAdHeight(Integer adHeight) {
 		this.adHeight = adHeight;
 	}
 

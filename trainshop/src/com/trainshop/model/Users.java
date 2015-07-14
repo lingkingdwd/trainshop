@@ -1,15 +1,11 @@
 package com.trainshop.model;
 
-import java.sql.Timestamp;
-import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 
 /**
@@ -21,37 +17,37 @@ public class Users implements java.io.Serializable {
 
 	// Fields
 
-	private Integer userId;
+	private Long userId;
 	private String email;
 	private String userName;
 	private String password;
 	private String question;
 	private String answer;
-	private Boolean sex;
-	private Date birthday;
+	private Integer sex;
+	private Long birthday;
 	private Double userMoney;
 	private Double frozenMoney;
 	private Integer payPoints;
 	private Integer rankPoints;
 	private Integer addressId;
 	private Long regTime;
-	private Integer lastLogin;
+	private Long lastLogin;
 	private Long lastTime;
 	private String lastIp;
-	private Short visitCount;
-	private Short userRank;
-	private Short isSpecial;
+	private Integer visitCount;
+	private Integer userRank;
+	private Integer isSpecial;
 	private String ecSalt;
 	private String salt;
 	private Integer parentId;
-	private Short flag;
+	private Integer flag;
 	private String alias;
 	private String msn;
 	private String qq;
 	private String officePhone;
 	private String homePhone;
 	private String mobilePhone;
-	private Short isValidated;
+	private Integer isValidated;
 	private Double creditLine;
 	private String passwdQuestion;
 	private String passwdAnswer;
@@ -63,57 +59,24 @@ public class Users implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Users(String email, String userName, String password,
-			String question, String answer, Boolean sex, Date birthday,
-			Double userMoney, Double frozenMoney, Integer payPoints,
-			Integer rankPoints, Integer addressId, Long regTime,
-			Integer lastLogin, Long lastTime, String lastIp,
-			Short visitCount, Short userRank, Short isSpecial, String salt,
-			Integer parentId, Short flag, String alias, String msn, String qq,
-			String officePhone, String homePhone, String mobilePhone,
-			Short isValidated, Double creditLine) {
-		this.email = email;
+	public Users(String userName, String password, Integer flag,
+			String mobilePhone) {
 		this.userName = userName;
 		this.password = password;
-		this.question = question;
-		this.answer = answer;
-		this.sex = sex;
-		this.birthday = birthday;
-		this.userMoney = userMoney;
-		this.frozenMoney = frozenMoney;
-		this.payPoints = payPoints;
-		this.rankPoints = rankPoints;
-		this.addressId = addressId;
-		this.regTime = regTime;
-		this.lastLogin = lastLogin;
-		this.lastTime = lastTime;
-		this.lastIp = lastIp;
-		this.visitCount = visitCount;
-		this.userRank = userRank;
-		this.isSpecial = isSpecial;
-		this.salt = salt;
-		this.parentId = parentId;
 		this.flag = flag;
-		this.alias = alias;
-		this.msn = msn;
-		this.qq = qq;
-		this.officePhone = officePhone;
-		this.homePhone = homePhone;
 		this.mobilePhone = mobilePhone;
-		this.isValidated = isValidated;
-		this.creditLine = creditLine;
 	}
 
 	/** full constructor */
 	public Users(String email, String userName, String password,
-			String question, String answer, Boolean sex, Date birthday,
+			String question, String answer, Integer sex, Long birthday,
 			Double userMoney, Double frozenMoney, Integer payPoints,
 			Integer rankPoints, Integer addressId, Long regTime,
-			Integer lastLogin, Long lastTime, String lastIp,
-			Short visitCount, Short userRank, Short isSpecial, String ecSalt,
-			String salt, Integer parentId, Short flag, String alias,
-			String msn, String qq, String officePhone, String homePhone,
-			String mobilePhone, Short isValidated, Double creditLine,
+			Long lastLogin, Long lastTime, String lastIp, Integer visitCount,
+			Integer userRank, Integer isSpecial, String ecSalt, String salt,
+			Integer parentId, Integer flag, String alias, String msn,
+			String qq, String officePhone, String homePhone,
+			String mobilePhone, Integer isValidated, Double creditLine,
 			String passwdQuestion, String passwdAnswer) {
 		this.email = email;
 		this.userName = userName;
@@ -154,15 +117,15 @@ public class Users implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "user_id", unique = true, nullable = false)
-	public Integer getUserId() {
+	public Long getUserId() {
 		return this.userId;
 	}
 
-	public void setUserId(Integer userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 
-	@Column(name = "email", nullable = false, length = 60)
+	@Column(name = "email")
 	public String getEmail() {
 		return this.email;
 	}
@@ -180,7 +143,7 @@ public class Users implements java.io.Serializable {
 		this.userName = userName;
 	}
 
-	@Column(name = "password", nullable = false, length = 32)
+	@Column(name = "password", nullable = false, length = 128)
 	public String getPassword() {
 		return this.password;
 	}
@@ -189,7 +152,7 @@ public class Users implements java.io.Serializable {
 		this.password = password;
 	}
 
-	@Column(name = "question", nullable = false)
+	@Column(name = "question")
 	public String getQuestion() {
 		return this.question;
 	}
@@ -198,7 +161,7 @@ public class Users implements java.io.Serializable {
 		this.question = question;
 	}
 
-	@Column(name = "answer", nullable = false)
+	@Column(name = "answer")
 	public String getAnswer() {
 		return this.answer;
 	}
@@ -207,22 +170,21 @@ public class Users implements java.io.Serializable {
 		this.answer = answer;
 	}
 
-	@Column(name = "sex", nullable = false)
-	public Boolean getSex() {
+	@Column(name = "sex")
+	public Integer getSex() {
 		return this.sex;
 	}
 
-	public void setSex(Boolean sex) {
+	public void setSex(Integer sex) {
 		this.sex = sex;
 	}
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "birthday", length = 10)
-	public Date getBirthday() {
+	@Column(name = "birthday")
+	public Long getBirthday() {
 		return this.birthday;
 	}
 
-	public void setBirthday(Date birthday) {
+	public void setBirthday(Long birthday) {
 		this.birthday = birthday;
 	}
 
@@ -271,7 +233,7 @@ public class Users implements java.io.Serializable {
 		this.addressId = addressId;
 	}
 
-	@Column(name = "reg_time", nullable = false)
+	@Column(name = "reg_time")
 	public Long getRegTime() {
 		return this.regTime;
 	}
@@ -281,15 +243,15 @@ public class Users implements java.io.Serializable {
 	}
 
 	@Column(name = "last_login")
-	public Integer getLastLogin() {
+	public Long getLastLogin() {
 		return this.lastLogin;
 	}
 
-	public void setLastLogin(Integer lastLogin) {
+	public void setLastLogin(Long lastLogin) {
 		this.lastLogin = lastLogin;
 	}
 
-	@Column(name = "last_time", length = 19)
+	@Column(name = "last_time")
 	public Long getLastTime() {
 		return this.lastTime;
 	}
@@ -307,30 +269,30 @@ public class Users implements java.io.Serializable {
 		this.lastIp = lastIp;
 	}
 
-	@Column(name = "visit_count", nullable = false)
-	public Short getVisitCount() {
+	@Column(name = "visit_count")
+	public Integer getVisitCount() {
 		return this.visitCount;
 	}
 
-	public void setVisitCount(Short visitCount) {
+	public void setVisitCount(Integer visitCount) {
 		this.visitCount = visitCount;
 	}
 
 	@Column(name = "user_rank")
-	public Short getUserRank() {
+	public Integer getUserRank() {
 		return this.userRank;
 	}
 
-	public void setUserRank(Short userRank) {
+	public void setUserRank(Integer userRank) {
 		this.userRank = userRank;
 	}
 
 	@Column(name = "is_special")
-	public Short getIsSpecial() {
+	public Integer getIsSpecial() {
 		return this.isSpecial;
 	}
 
-	public void setIsSpecial(Short isSpecial) {
+	public void setIsSpecial(Integer isSpecial) {
 		this.isSpecial = isSpecial;
 	}
 
@@ -362,11 +324,11 @@ public class Users implements java.io.Serializable {
 	}
 
 	@Column(name = "flag", nullable = false)
-	public Short getFlag() {
+	public Integer getFlag() {
 		return this.flag;
 	}
 
-	public void setFlag(Short flag) {
+	public void setFlag(Integer flag) {
 		this.flag = flag;
 	}
 
@@ -425,11 +387,11 @@ public class Users implements java.io.Serializable {
 	}
 
 	@Column(name = "is_validated")
-	public Short getIsValidated() {
+	public Integer getIsValidated() {
 		return this.isValidated;
 	}
 
-	public void setIsValidated(Short isValidated) {
+	public void setIsValidated(Integer isValidated) {
 		this.isValidated = isValidated;
 	}
 

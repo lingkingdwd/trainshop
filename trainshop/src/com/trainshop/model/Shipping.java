@@ -16,7 +16,7 @@ public class Shipping implements java.io.Serializable {
 
 	// Fields
 
-	private Short shippingId;
+	private Long shippingId;
 	private String shippingCode;
 	private String shippingName;
 	private String shippingDesc;
@@ -71,11 +71,11 @@ public class Shipping implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "shipping_id", unique = true, nullable = false)
-	public Short getShippingId() {
+	public Long getShippingId() {
 		return this.shippingId;
 	}
 
-	public void setShippingId(Short shippingId) {
+	public void setShippingId(Long shippingId) {
 		this.shippingId = shippingId;
 	}
 

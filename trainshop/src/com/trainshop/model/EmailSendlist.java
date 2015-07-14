@@ -16,9 +16,9 @@ public class EmailSendlist implements java.io.Serializable {
 
 	// Fields
 
-	private Integer id;
+	private Long id;
 	private String email;
-	private Integer templateId;
+	private Long templateId;
 	private String emailContent;
 	private Boolean error;
 	private Short pri;
@@ -31,7 +31,7 @@ public class EmailSendlist implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public EmailSendlist(String email, Integer templateId, String emailContent,
+	public EmailSendlist(String email, Long templateId, String emailContent,
 			Boolean error, Short pri, Integer lastSend) {
 		this.email = email;
 		this.templateId = templateId;
@@ -45,11 +45,11 @@ public class EmailSendlist implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
-	public Integer getId() {
+	public Long getId() {
 		return this.id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -63,11 +63,11 @@ public class EmailSendlist implements java.io.Serializable {
 	}
 
 	@Column(name = "template_id", nullable = false)
-	public Integer getTemplateId() {
+	public Long getTemplateId() {
 		return this.templateId;
 	}
 
-	public void setTemplateId(Integer templateId) {
+	public void setTemplateId(Long templateId) {
 		this.templateId = templateId;
 	}
 

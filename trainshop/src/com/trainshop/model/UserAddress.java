@@ -16,9 +16,9 @@ public class UserAddress implements java.io.Serializable {
 
 	// Fields
 
-	private Integer addressId;
+	private Long addressId;
 	private String addressName;
-	private Integer userId;
+	private Long userId;
 	private String consignee;
 	private String email;
 	private Short country;
@@ -39,7 +39,7 @@ public class UserAddress implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public UserAddress(String addressName, Integer userId, String consignee,
+	public UserAddress(String addressName, Long userId, String consignee,
 			String email, Short country, Short province, Short city,
 			Short district, String address, String zipcode, String tel,
 			String mobile, String signBuilding, String bestTime) {
@@ -63,11 +63,11 @@ public class UserAddress implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "address_id", unique = true, nullable = false)
-	public Integer getAddressId() {
+	public Long getAddressId() {
 		return this.addressId;
 	}
 
-	public void setAddressId(Integer addressId) {
+	public void setAddressId(Long addressId) {
 		this.addressId = addressId;
 	}
 
@@ -81,11 +81,11 @@ public class UserAddress implements java.io.Serializable {
 	}
 
 	@Column(name = "user_id", nullable = false)
-	public Integer getUserId() {
+	public Long getUserId() {
 		return this.userId;
 	}
 
-	public void setUserId(Integer userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 

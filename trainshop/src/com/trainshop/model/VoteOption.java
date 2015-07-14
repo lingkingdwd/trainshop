@@ -16,8 +16,8 @@ public class VoteOption implements java.io.Serializable {
 
 	// Fields
 
-	private Short optionId;
-	private Short voteId;
+	private Long optionId;
+	private Long voteId;
 	private String optionName;
 	private Integer optionCount;
 	private Short optionOrder;
@@ -29,7 +29,7 @@ public class VoteOption implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public VoteOption(Short voteId, String optionName, Integer optionCount,
+	public VoteOption(Long voteId, String optionName, Integer optionCount,
 			Short optionOrder) {
 		this.voteId = voteId;
 		this.optionName = optionName;
@@ -41,20 +41,20 @@ public class VoteOption implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "option_id", unique = true, nullable = false)
-	public Short getOptionId() {
+	public Long getOptionId() {
 		return this.optionId;
 	}
 
-	public void setOptionId(Short optionId) {
+	public void setOptionId(Long optionId) {
 		this.optionId = optionId;
 	}
 
 	@Column(name = "vote_id", nullable = false)
-	public Short getVoteId() {
+	public Long getVoteId() {
 		return this.voteId;
 	}
 
-	public void setVoteId(Short voteId) {
+	public void setVoteId(Long voteId) {
 		this.voteId = voteId;
 	}
 

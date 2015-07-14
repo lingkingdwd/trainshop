@@ -16,13 +16,13 @@ public class AdminMessage implements java.io.Serializable {
 
 	// Fields
 
-	private Short messageId;
-	private Short senderId;
-	private Short receiverId;
-	private Integer sentTime;
-	private Integer readTime;
-	private Boolean readed;
-	private Boolean deleted;
+	private Long messageId;
+	private Integer senderId;
+	private Integer receiverId;
+	private Long sentTime;
+	private Long readTime;
+	private Integer readed;
+	private Integer deleted;
 	private String title;
 	private String message;
 
@@ -33,8 +33,8 @@ public class AdminMessage implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public AdminMessage(Short senderId, Short receiverId, Integer sentTime,
-			Integer readTime, Boolean readed, Boolean deleted, String title,
+	public AdminMessage(Integer senderId, Integer receiverId, Long sentTime,
+			Long readTime, Integer readed, Integer deleted, String title,
 			String message) {
 		this.senderId = senderId;
 		this.receiverId = receiverId;
@@ -50,65 +50,65 @@ public class AdminMessage implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "message_id", unique = true, nullable = false)
-	public Short getMessageId() {
+	public Long getMessageId() {
 		return this.messageId;
 	}
 
-	public void setMessageId(Short messageId) {
+	public void setMessageId(Long messageId) {
 		this.messageId = messageId;
 	}
 
 	@Column(name = "sender_id", nullable = false)
-	public Short getSenderId() {
+	public Integer getSenderId() {
 		return this.senderId;
 	}
 
-	public void setSenderId(Short senderId) {
+	public void setSenderId(Integer senderId) {
 		this.senderId = senderId;
 	}
 
 	@Column(name = "receiver_id", nullable = false)
-	public Short getReceiverId() {
+	public Integer getReceiverId() {
 		return this.receiverId;
 	}
 
-	public void setReceiverId(Short receiverId) {
+	public void setReceiverId(Integer receiverId) {
 		this.receiverId = receiverId;
 	}
 
 	@Column(name = "sent_time", nullable = false)
-	public Integer getSentTime() {
+	public Long getSentTime() {
 		return this.sentTime;
 	}
 
-	public void setSentTime(Integer sentTime) {
+	public void setSentTime(Long sentTime) {
 		this.sentTime = sentTime;
 	}
 
 	@Column(name = "read_time", nullable = false)
-	public Integer getReadTime() {
+	public Long getReadTime() {
 		return this.readTime;
 	}
 
-	public void setReadTime(Integer readTime) {
+	public void setReadTime(Long readTime) {
 		this.readTime = readTime;
 	}
 
 	@Column(name = "readed", nullable = false)
-	public Boolean getReaded() {
+	public Integer getReaded() {
 		return this.readed;
 	}
 
-	public void setReaded(Boolean readed) {
+	public void setReaded(Integer readed) {
 		this.readed = readed;
 	}
 
 	@Column(name = "deleted", nullable = false)
-	public Boolean getDeleted() {
+	public Integer getDeleted() {
 		return this.deleted;
 	}
 
-	public void setDeleted(Boolean deleted) {
+	public void setDeleted(Integer deleted) {
 		this.deleted = deleted;
 	}
 

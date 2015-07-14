@@ -16,8 +16,8 @@ public class GoodsGallery implements java.io.Serializable {
 
 	// Fields
 
-	private Integer imgId;
-	private Integer goodsId;
+	private Long imgId;
+	private Long goodsId;
 	private String imgUrl;
 	private String imgDesc;
 	private String thumbUrl;
@@ -30,7 +30,7 @@ public class GoodsGallery implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public GoodsGallery(Integer goodsId, String imgUrl, String imgDesc,
+	public GoodsGallery(Long goodsId, String imgUrl, String imgDesc,
 			String thumbUrl, String imgOriginal) {
 		this.goodsId = goodsId;
 		this.imgUrl = imgUrl;
@@ -43,20 +43,20 @@ public class GoodsGallery implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "img_id", unique = true, nullable = false)
-	public Integer getImgId() {
+	public Long getImgId() {
 		return this.imgId;
 	}
 
-	public void setImgId(Integer imgId) {
+	public void setImgId(Long imgId) {
 		this.imgId = imgId;
 	}
 
 	@Column(name = "goods_id", nullable = false)
-	public Integer getGoodsId() {
+	public Long getGoodsId() {
 		return this.goodsId;
 	}
 
-	public void setGoodsId(Integer goodsId) {
+	public void setGoodsId(Long goodsId) {
 		this.goodsId = goodsId;
 	}
 

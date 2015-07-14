@@ -16,14 +16,14 @@ public class AffiliateLog implements java.io.Serializable {
 
 	// Fields
 
-	private Integer logId;
-	private Integer orderId;
-	private Integer time;
-	private Integer userId;
+	private Long logId;
+	private Long orderId;
+	private Long time;
+	private Long userId;
 	private String userName;
 	private Double money;
 	private Integer point;
-	private Boolean separateType;
+	private Integer separateType;
 
 	// Constructors
 
@@ -32,8 +32,8 @@ public class AffiliateLog implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public AffiliateLog(Integer orderId, Integer time, Integer userId,
-			Double money, Integer point, Boolean separateType) {
+	public AffiliateLog(Long orderId, Long time, Long userId, Double money,
+			Integer point, Integer separateType) {
 		this.orderId = orderId;
 		this.time = time;
 		this.userId = userId;
@@ -43,8 +43,8 @@ public class AffiliateLog implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public AffiliateLog(Integer orderId, Integer time, Integer userId,
-			String userName, Double money, Integer point, Boolean separateType) {
+	public AffiliateLog(Long orderId, Long time, Long userId, String userName,
+			Double money, Integer point, Integer separateType) {
 		this.orderId = orderId;
 		this.time = time;
 		this.userId = userId;
@@ -58,38 +58,38 @@ public class AffiliateLog implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "log_id", unique = true, nullable = false)
-	public Integer getLogId() {
+	public Long getLogId() {
 		return this.logId;
 	}
 
-	public void setLogId(Integer logId) {
+	public void setLogId(Long logId) {
 		this.logId = logId;
 	}
 
 	@Column(name = "order_id", nullable = false)
-	public Integer getOrderId() {
+	public Long getOrderId() {
 		return this.orderId;
 	}
 
-	public void setOrderId(Integer orderId) {
+	public void setOrderId(Long orderId) {
 		this.orderId = orderId;
 	}
 
 	@Column(name = "time", nullable = false)
-	public Integer getTime() {
+	public Long getTime() {
 		return this.time;
 	}
 
-	public void setTime(Integer time) {
+	public void setTime(Long time) {
 		this.time = time;
 	}
 
 	@Column(name = "user_id", nullable = false)
-	public Integer getUserId() {
+	public Long getUserId() {
 		return this.userId;
 	}
 
-	public void setUserId(Integer userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 
@@ -121,11 +121,11 @@ public class AffiliateLog implements java.io.Serializable {
 	}
 
 	@Column(name = "separate_type", nullable = false)
-	public Boolean getSeparateType() {
+	public Integer getSeparateType() {
 		return this.separateType;
 	}
 
-	public void setSeparateType(Boolean separateType) {
+	public void setSeparateType(Integer separateType) {
 		this.separateType = separateType;
 	}
 

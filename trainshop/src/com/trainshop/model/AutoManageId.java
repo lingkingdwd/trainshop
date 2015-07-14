@@ -11,7 +11,7 @@ public class AutoManageId implements java.io.Serializable {
 
 	// Fields
 
-	private Integer itemId;
+	private Long itemId;
 	private String type;
 
 	// Constructors
@@ -21,7 +21,7 @@ public class AutoManageId implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public AutoManageId(Integer itemId, String type) {
+	public AutoManageId(Long itemId, String type) {
 		this.itemId = itemId;
 		this.type = type;
 	}
@@ -29,11 +29,11 @@ public class AutoManageId implements java.io.Serializable {
 	// Property accessors
 
 	@Column(name = "item_id", nullable = false)
-	public Integer getItemId() {
+	public Long getItemId() {
 		return this.itemId;
 	}
 
-	public void setItemId(Integer itemId) {
+	public void setItemId(Long itemId) {
 		this.itemId = itemId;
 	}
 

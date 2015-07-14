@@ -16,12 +16,12 @@ public class UserBonus implements java.io.Serializable {
 
 	// Fields
 
-	private Integer bonusId;
+	private Long bonusId;
 	private Short bonusTypeId;
 	private Long bonusSn;
-	private Integer userId;
-	private Integer usedTime;
-	private Integer orderId;
+	private Long userId;
+	private Long usedTime;
+	private Long orderId;
 	private Short emailed;
 
 	// Constructors
@@ -31,8 +31,8 @@ public class UserBonus implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public UserBonus(Short bonusTypeId, Long bonusSn, Integer userId,
-			Integer usedTime, Integer orderId, Short emailed) {
+	public UserBonus(Short bonusTypeId, Long bonusSn, Long userId,
+			Long usedTime, Long orderId, Short emailed) {
 		this.bonusTypeId = bonusTypeId;
 		this.bonusSn = bonusSn;
 		this.userId = userId;
@@ -45,11 +45,11 @@ public class UserBonus implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "bonus_id", unique = true, nullable = false)
-	public Integer getBonusId() {
+	public Long getBonusId() {
 		return this.bonusId;
 	}
 
-	public void setBonusId(Integer bonusId) {
+	public void setBonusId(Long bonusId) {
 		this.bonusId = bonusId;
 	}
 
@@ -72,29 +72,29 @@ public class UserBonus implements java.io.Serializable {
 	}
 
 	@Column(name = "user_id", nullable = false)
-	public Integer getUserId() {
+	public Long getUserId() {
 		return this.userId;
 	}
 
-	public void setUserId(Integer userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 
 	@Column(name = "used_time", nullable = false)
-	public Integer getUsedTime() {
+	public Long getUsedTime() {
 		return this.usedTime;
 	}
 
-	public void setUsedTime(Integer usedTime) {
+	public void setUsedTime(Long usedTime) {
 		this.usedTime = usedTime;
 	}
 
 	@Column(name = "order_id", nullable = false)
-	public Integer getOrderId() {
+	public Long getOrderId() {
 		return this.orderId;
 	}
 
-	public void setOrderId(Integer orderId) {
+	public void setOrderId(Long orderId) {
 		this.orderId = orderId;
 	}
 

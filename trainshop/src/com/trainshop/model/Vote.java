@@ -16,7 +16,7 @@ public class Vote implements java.io.Serializable {
 
 	// Fields
 
-	private Short voteId;
+	private Long voteId;
 	private String voteName;
 	private Integer startTime;
 	private Integer endTime;
@@ -43,11 +43,11 @@ public class Vote implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "vote_id", unique = true, nullable = false)
-	public Short getVoteId() {
+	public Long getVoteId() {
 		return this.voteId;
 	}
 
-	public void setVoteId(Short voteId) {
+	public void setVoteId(Long voteId) {
 		this.voteId = voteId;
 	}
 

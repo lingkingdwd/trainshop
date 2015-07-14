@@ -16,7 +16,7 @@ public class UserRank implements java.io.Serializable {
 
 	// Fields
 
-	private Short rankId;
+	private Long rankId;
 	private String rankName;
 	private Integer minPoints;
 	private Integer maxPoints;
@@ -45,11 +45,11 @@ public class UserRank implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "rank_id", unique = true, nullable = false)
-	public Short getRankId() {
+	public Long getRankId() {
 		return this.rankId;
 	}
 
-	public void setRankId(Short rankId) {
+	public void setRankId(Long rankId) {
 		this.rankId = rankId;
 	}
 

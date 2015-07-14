@@ -16,18 +16,18 @@ public class Category implements java.io.Serializable {
 
 	// Fields
 
-	private Short catId;
+	private Long catId;
 	private String catName;
 	private String keywords;
 	private String catDesc;
-	private Short parentId;
-	private Boolean sortOrder;
+	private Integer parentId;
+	private Integer sortOrder;
 	private String templateFile;
 	private String measureUnit;
-	private Boolean showInNav;
+	private Integer showInNav;
 	private String style;
-	private Boolean isShow;
-	private Short grade;
+	private Integer isShow;
+	private Integer grade;
 	private String filterAttr;
 
 	// Constructors
@@ -36,11 +36,22 @@ public class Category implements java.io.Serializable {
 	public Category() {
 	}
 
+	/** minimal constructor */
+	public Category(String catName, String keywords, String catDesc,
+			Integer parentId, Integer sortOrder, Integer isShow) {
+		this.catName = catName;
+		this.keywords = keywords;
+		this.catDesc = catDesc;
+		this.parentId = parentId;
+		this.sortOrder = sortOrder;
+		this.isShow = isShow;
+	}
+
 	/** full constructor */
 	public Category(String catName, String keywords, String catDesc,
-			Short parentId, Boolean sortOrder, String templateFile,
-			String measureUnit, Boolean showInNav, String style,
-			Boolean isShow, Short grade, String filterAttr) {
+			Integer parentId, Integer sortOrder, String templateFile,
+			String measureUnit, Integer showInNav, String style,
+			Integer isShow, Integer grade, String filterAttr) {
 		this.catName = catName;
 		this.keywords = keywords;
 		this.catDesc = catDesc;
@@ -59,11 +70,11 @@ public class Category implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "cat_id", unique = true, nullable = false)
-	public Short getCatId() {
+	public Long getCatId() {
 		return this.catId;
 	}
 
-	public void setCatId(Short catId) {
+	public void setCatId(Long catId) {
 		this.catId = catId;
 	}
 
@@ -95,24 +106,24 @@ public class Category implements java.io.Serializable {
 	}
 
 	@Column(name = "parent_id", nullable = false)
-	public Short getParentId() {
+	public Integer getParentId() {
 		return this.parentId;
 	}
 
-	public void setParentId(Short parentId) {
+	public void setParentId(Integer parentId) {
 		this.parentId = parentId;
 	}
 
 	@Column(name = "sort_order", nullable = false)
-	public Boolean getSortOrder() {
+	public Integer getSortOrder() {
 		return this.sortOrder;
 	}
 
-	public void setSortOrder(Boolean sortOrder) {
+	public void setSortOrder(Integer sortOrder) {
 		this.sortOrder = sortOrder;
 	}
 
-	@Column(name = "template_file", nullable = false, length = 50)
+	@Column(name = "template_file", length = 50)
 	public String getTemplateFile() {
 		return this.templateFile;
 	}
@@ -121,7 +132,7 @@ public class Category implements java.io.Serializable {
 		this.templateFile = templateFile;
 	}
 
-	@Column(name = "measure_unit", nullable = false, length = 15)
+	@Column(name = "measure_unit", length = 15)
 	public String getMeasureUnit() {
 		return this.measureUnit;
 	}
@@ -130,16 +141,16 @@ public class Category implements java.io.Serializable {
 		this.measureUnit = measureUnit;
 	}
 
-	@Column(name = "show_in_nav", nullable = false)
-	public Boolean getShowInNav() {
+	@Column(name = "show_in_nav")
+	public Integer getShowInNav() {
 		return this.showInNav;
 	}
 
-	public void setShowInNav(Boolean showInNav) {
+	public void setShowInNav(Integer showInNav) {
 		this.showInNav = showInNav;
 	}
 
-	@Column(name = "style", nullable = false, length = 150)
+	@Column(name = "style", length = 150)
 	public String getStyle() {
 		return this.style;
 	}
@@ -149,24 +160,24 @@ public class Category implements java.io.Serializable {
 	}
 
 	@Column(name = "is_show", nullable = false)
-	public Boolean getIsShow() {
+	public Integer getIsShow() {
 		return this.isShow;
 	}
 
-	public void setIsShow(Boolean isShow) {
+	public void setIsShow(Integer isShow) {
 		this.isShow = isShow;
 	}
 
-	@Column(name = "grade", nullable = false)
-	public Short getGrade() {
+	@Column(name = "grade")
+	public Integer getGrade() {
 		return this.grade;
 	}
 
-	public void setGrade(Short grade) {
+	public void setGrade(Integer grade) {
 		this.grade = grade;
 	}
 
-	@Column(name = "filter_attr", nullable = false)
+	@Column(name = "filter_attr")
 	public String getFilterAttr() {
 		return this.filterAttr;
 	}

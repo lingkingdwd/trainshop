@@ -16,13 +16,13 @@ public class AdCustom implements java.io.Serializable {
 
 	// Fields
 
-	private Integer adId;
-	private Boolean adType;
+	private Long adId;
+	private Integer adType;
 	private String adName;
 	private Integer addTime;
 	private String content;
 	private String url;
-	private Short adStatus;
+	private Integer adStatus;
 
 	// Constructors
 
@@ -31,15 +31,15 @@ public class AdCustom implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public AdCustom(Boolean adType, Integer addTime, Short adStatus) {
+	public AdCustom(Integer adType, Integer addTime, Integer adStatus) {
 		this.adType = adType;
 		this.addTime = addTime;
 		this.adStatus = adStatus;
 	}
 
 	/** full constructor */
-	public AdCustom(Boolean adType, String adName, Integer addTime,
-			String content, String url, Short adStatus) {
+	public AdCustom(Integer adType, String adName, Integer addTime,
+			String content, String url, Integer adStatus) {
 		this.adType = adType;
 		this.adName = adName;
 		this.addTime = addTime;
@@ -52,20 +52,20 @@ public class AdCustom implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "ad_id", unique = true, nullable = false)
-	public Integer getAdId() {
+	public Long getAdId() {
 		return this.adId;
 	}
 
-	public void setAdId(Integer adId) {
+	public void setAdId(Long adId) {
 		this.adId = adId;
 	}
 
 	@Column(name = "ad_type", nullable = false)
-	public Boolean getAdType() {
+	public Integer getAdType() {
 		return this.adType;
 	}
 
-	public void setAdType(Boolean adType) {
+	public void setAdType(Integer adType) {
 		this.adType = adType;
 	}
 
@@ -106,11 +106,11 @@ public class AdCustom implements java.io.Serializable {
 	}
 
 	@Column(name = "ad_status", nullable = false)
-	public Short getAdStatus() {
+	public Integer getAdStatus() {
 		return this.adStatus;
 	}
 
-	public void setAdStatus(Short adStatus) {
+	public void setAdStatus(Integer adStatus) {
 		this.adStatus = adStatus;
 	}
 

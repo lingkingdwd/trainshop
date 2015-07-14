@@ -16,11 +16,11 @@ public class CollectGoods implements java.io.Serializable {
 
 	// Fields
 
-	private Integer recId;
-	private Integer userId;
-	private Integer goodsId;
+	private Long recId;
+	private Long userId;
+	private Long goodsId;
 	private Integer addTime;
-	private Boolean isAttention;
+	private Integer isAttention;
 
 	// Constructors
 
@@ -29,8 +29,8 @@ public class CollectGoods implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public CollectGoods(Integer userId, Integer goodsId, Integer addTime,
-			Boolean isAttention) {
+	public CollectGoods(Long userId, Long goodsId, Integer addTime,
+			Integer isAttention) {
 		this.userId = userId;
 		this.goodsId = goodsId;
 		this.addTime = addTime;
@@ -41,29 +41,29 @@ public class CollectGoods implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "rec_id", unique = true, nullable = false)
-	public Integer getRecId() {
+	public Long getRecId() {
 		return this.recId;
 	}
 
-	public void setRecId(Integer recId) {
+	public void setRecId(Long recId) {
 		this.recId = recId;
 	}
 
 	@Column(name = "user_id", nullable = false)
-	public Integer getUserId() {
+	public Long getUserId() {
 		return this.userId;
 	}
 
-	public void setUserId(Integer userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 
 	@Column(name = "goods_id", nullable = false)
-	public Integer getGoodsId() {
+	public Long getGoodsId() {
 		return this.goodsId;
 	}
 
-	public void setGoodsId(Integer goodsId) {
+	public void setGoodsId(Long goodsId) {
 		this.goodsId = goodsId;
 	}
 
@@ -77,11 +77,11 @@ public class CollectGoods implements java.io.Serializable {
 	}
 
 	@Column(name = "is_attention", nullable = false)
-	public Boolean getIsAttention() {
+	public Integer getIsAttention() {
 		return this.isAttention;
 	}
 
-	public void setIsAttention(Boolean isAttention) {
+	public void setIsAttention(Integer isAttention) {
 		this.isAttention = isAttention;
 	}
 

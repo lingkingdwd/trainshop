@@ -16,7 +16,7 @@ public class Agency implements java.io.Serializable {
 
 	// Fields
 
-	private Short agencyId;
+	private Long agencyId;
 	private String agencyName;
 	private String agencyDesc;
 
@@ -36,11 +36,11 @@ public class Agency implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "agency_id", unique = true, nullable = false)
-	public Short getAgencyId() {
+	public Long getAgencyId() {
 		return this.agencyId;
 	}
 
-	public void setAgencyId(Short agencyId) {
+	public void setAgencyId(Long agencyId) {
 		this.agencyId = agencyId;
 	}
 

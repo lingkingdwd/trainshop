@@ -16,7 +16,7 @@ public class ErrorLog implements java.io.Serializable {
 
 	// Fields
 
-	private Integer id;
+	private Long id;
 	private String info;
 	private String file;
 	private Integer time;
@@ -38,11 +38,11 @@ public class ErrorLog implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
-	public Integer getId() {
+	public Long getId() {
 		return this.id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

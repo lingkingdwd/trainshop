@@ -11,11 +11,11 @@ public class TopicId implements java.io.Serializable {
 
 	// Fields
 
-	private Integer topicId;
+	private Long topicId;
 	private String title;
 	private String intro;
-	private Integer startTime;
-	private Integer endTime;
+	private Long startTime;
+	private Long endTime;
 	private String data;
 	private String template;
 	private String css;
@@ -33,9 +33,8 @@ public class TopicId implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public TopicId(Integer topicId, String title, String intro,
-			Integer startTime, Integer endTime, String data, String template,
-			String css) {
+	public TopicId(Long topicId, String title, String intro, Long startTime,
+			Long endTime, String data, String template, String css) {
 		this.topicId = topicId;
 		this.title = title;
 		this.intro = intro;
@@ -47,10 +46,10 @@ public class TopicId implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public TopicId(Integer topicId, String title, String intro,
-			Integer startTime, Integer endTime, String data, String template,
-			String css, String topicImg, String titlePic, String baseStyle,
-			String htmls, String keywords, String description) {
+	public TopicId(Long topicId, String title, String intro, Long startTime,
+			Long endTime, String data, String template, String css,
+			String topicImg, String titlePic, String baseStyle, String htmls,
+			String keywords, String description) {
 		this.topicId = topicId;
 		this.title = title;
 		this.intro = intro;
@@ -70,11 +69,11 @@ public class TopicId implements java.io.Serializable {
 	// Property accessors
 
 	@Column(name = "topic_id", nullable = false)
-	public Integer getTopicId() {
+	public Long getTopicId() {
 		return this.topicId;
 	}
 
-	public void setTopicId(Integer topicId) {
+	public void setTopicId(Long topicId) {
 		this.topicId = topicId;
 	}
 
@@ -97,20 +96,20 @@ public class TopicId implements java.io.Serializable {
 	}
 
 	@Column(name = "start_time", nullable = false)
-	public Integer getStartTime() {
+	public Long getStartTime() {
 		return this.startTime;
 	}
 
-	public void setStartTime(Integer startTime) {
+	public void setStartTime(Long startTime) {
 		this.startTime = startTime;
 	}
 
 	@Column(name = "end_time", nullable = false)
-	public Integer getEndTime() {
+	public Long getEndTime() {
 		return this.endTime;
 	}
 
-	public void setEndTime(Integer endTime) {
+	public void setEndTime(Long endTime) {
 		this.endTime = endTime;
 	}
 

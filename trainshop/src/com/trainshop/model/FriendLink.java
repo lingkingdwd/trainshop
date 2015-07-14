@@ -16,7 +16,7 @@ public class FriendLink implements java.io.Serializable {
 
 	// Fields
 
-	private Short linkId;
+	private Long linkId;
 	private String linkName;
 	private String linkUrl;
 	private String linkLogo;
@@ -41,11 +41,11 @@ public class FriendLink implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "link_id", unique = true, nullable = false)
-	public Short getLinkId() {
+	public Long getLinkId() {
 		return this.linkId;
 	}
 
-	public void setLinkId(Short linkId) {
+	public void setLinkId(Long linkId) {
 		this.linkId = linkId;
 	}
 

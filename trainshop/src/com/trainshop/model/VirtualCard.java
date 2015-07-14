@@ -16,12 +16,12 @@ public class VirtualCard implements java.io.Serializable {
 
 	// Fields
 
-	private Integer cardId;
-	private Integer goodsId;
+	private Long cardId;
+	private Long goodsId;
 	private String cardSn;
 	private String cardPassword;
-	private Integer addDate;
-	private Integer endDate;
+	private Long addDate;
+	private Long endDate;
 	private Boolean isSaled;
 	private String orderSn;
 	private String crc32;
@@ -33,8 +33,8 @@ public class VirtualCard implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public VirtualCard(Integer goodsId, String cardSn, String cardPassword,
-			Integer addDate, Integer endDate, Boolean isSaled, String orderSn,
+	public VirtualCard(Long goodsId, String cardSn, String cardPassword,
+			Long addDate, Long endDate, Boolean isSaled, String orderSn,
 			String crc32) {
 		this.goodsId = goodsId;
 		this.cardSn = cardSn;
@@ -50,20 +50,20 @@ public class VirtualCard implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "card_id", unique = true, nullable = false)
-	public Integer getCardId() {
+	public Long getCardId() {
 		return this.cardId;
 	}
 
-	public void setCardId(Integer cardId) {
+	public void setCardId(Long cardId) {
 		this.cardId = cardId;
 	}
 
 	@Column(name = "goods_id", nullable = false)
-	public Integer getGoodsId() {
+	public Long getGoodsId() {
 		return this.goodsId;
 	}
 
-	public void setGoodsId(Integer goodsId) {
+	public void setGoodsId(Long goodsId) {
 		this.goodsId = goodsId;
 	}
 
@@ -86,20 +86,20 @@ public class VirtualCard implements java.io.Serializable {
 	}
 
 	@Column(name = "add_date", nullable = false)
-	public Integer getAddDate() {
+	public Long getAddDate() {
 		return this.addDate;
 	}
 
-	public void setAddDate(Integer addDate) {
+	public void setAddDate(Long addDate) {
 		this.addDate = addDate;
 	}
 
 	@Column(name = "end_date", nullable = false)
-	public Integer getEndDate() {
+	public Long getEndDate() {
 		return this.endDate;
 	}
 
-	public void setEndDate(Integer endDate) {
+	public void setEndDate(Long endDate) {
 		this.endDate = endDate;
 	}
 

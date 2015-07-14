@@ -16,7 +16,7 @@ public class GoodsAttr implements java.io.Serializable {
 
 	// Fields
 
-	private Integer goodsAttrId;
+	private Long goodsAttrId;
 	private Integer goodsId;
 	private Short attrId;
 	private String attrValue;
@@ -41,11 +41,11 @@ public class GoodsAttr implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "goods_attr_id", unique = true, nullable = false)
-	public Integer getGoodsAttrId() {
+	public Long getGoodsAttrId() {
 		return this.goodsAttrId;
 	}
 
-	public void setGoodsAttrId(Integer goodsAttrId) {
+	public void setGoodsAttrId(Long goodsAttrId) {
 		this.goodsAttrId = goodsAttrId;
 	}
 

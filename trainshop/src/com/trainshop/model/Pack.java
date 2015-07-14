@@ -16,7 +16,7 @@ public class Pack implements java.io.Serializable {
 
 	// Fields
 
-	private Short packId;
+	private Long packId;
 	private String packName;
 	private String packImg;
 	private Double packFee;
@@ -43,11 +43,11 @@ public class Pack implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "pack_id", unique = true, nullable = false)
-	public Short getPackId() {
+	public Long getPackId() {
 		return this.packId;
 	}
 
-	public void setPackId(Short packId) {
+	public void setPackId(Long packId) {
 		this.packId = packId;
 	}
 

@@ -16,10 +16,10 @@ public class VoteLog implements java.io.Serializable {
 
 	// Fields
 
-	private Integer logId;
-	private Short voteId;
+	private Long logId;
+	private Long voteId;
 	private String ipAddress;
-	private Integer voteTime;
+	private Long voteTime;
 
 	// Constructors
 
@@ -28,7 +28,7 @@ public class VoteLog implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public VoteLog(Short voteId, String ipAddress, Integer voteTime) {
+	public VoteLog(Long voteId, String ipAddress, Long voteTime) {
 		this.voteId = voteId;
 		this.ipAddress = ipAddress;
 		this.voteTime = voteTime;
@@ -38,20 +38,20 @@ public class VoteLog implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "log_id", unique = true, nullable = false)
-	public Integer getLogId() {
+	public Long getLogId() {
 		return this.logId;
 	}
 
-	public void setLogId(Integer logId) {
+	public void setLogId(Long logId) {
 		this.logId = logId;
 	}
 
 	@Column(name = "vote_id", nullable = false)
-	public Short getVoteId() {
+	public Long getVoteId() {
 		return this.voteId;
 	}
 
-	public void setVoteId(Short voteId) {
+	public void setVoteId(Long voteId) {
 		this.voteId = voteId;
 	}
 
@@ -65,11 +65,11 @@ public class VoteLog implements java.io.Serializable {
 	}
 
 	@Column(name = "vote_time", nullable = false)
-	public Integer getVoteTime() {
+	public Long getVoteTime() {
 		return this.voteTime;
 	}
 
-	public void setVoteTime(Integer voteTime) {
+	public void setVoteTime(Long voteTime) {
 		this.voteTime = voteTime;
 	}
 

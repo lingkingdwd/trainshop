@@ -16,18 +16,18 @@ public class Comment implements java.io.Serializable {
 
 	// Fields
 
-	private Integer commentId;
-	private Short commentType;
+	private Long commentId;
+	private Integer commentType;
 	private Integer idValue;
 	private String email;
 	private String userName;
 	private String content;
-	private Boolean commentRank;
-	private Integer addTime;
+	private Integer commentRank;
+	private Long addTime;
 	private String ipAddress;
-	private Short status;
-	private Integer parentId;
-	private Integer userId;
+	private Integer status;
+	private Long parentId;
+	private Long userId;
 
 	// Constructors
 
@@ -36,10 +36,9 @@ public class Comment implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Comment(Short commentType, Integer idValue, String email,
-			String userName, String content, Boolean commentRank,
-			Integer addTime, String ipAddress, Short status, Integer parentId,
-			Integer userId) {
+	public Comment(Integer commentType, Integer idValue, String email,
+			String userName, String content, Integer commentRank, Long addTime,
+			String ipAddress, Integer status, Long parentId, Long userId) {
 		this.commentType = commentType;
 		this.idValue = idValue;
 		this.email = email;
@@ -57,20 +56,20 @@ public class Comment implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "comment_id", unique = true, nullable = false)
-	public Integer getCommentId() {
+	public Long getCommentId() {
 		return this.commentId;
 	}
 
-	public void setCommentId(Integer commentId) {
+	public void setCommentId(Long commentId) {
 		this.commentId = commentId;
 	}
 
 	@Column(name = "comment_type", nullable = false)
-	public Short getCommentType() {
+	public Integer getCommentType() {
 		return this.commentType;
 	}
 
-	public void setCommentType(Short commentType) {
+	public void setCommentType(Integer commentType) {
 		this.commentType = commentType;
 	}
 
@@ -111,20 +110,20 @@ public class Comment implements java.io.Serializable {
 	}
 
 	@Column(name = "comment_rank", nullable = false)
-	public Boolean getCommentRank() {
+	public Integer getCommentRank() {
 		return this.commentRank;
 	}
 
-	public void setCommentRank(Boolean commentRank) {
+	public void setCommentRank(Integer commentRank) {
 		this.commentRank = commentRank;
 	}
 
 	@Column(name = "add_time", nullable = false)
-	public Integer getAddTime() {
+	public Long getAddTime() {
 		return this.addTime;
 	}
 
-	public void setAddTime(Integer addTime) {
+	public void setAddTime(Long addTime) {
 		this.addTime = addTime;
 	}
 
@@ -138,29 +137,29 @@ public class Comment implements java.io.Serializable {
 	}
 
 	@Column(name = "status", nullable = false)
-	public Short getStatus() {
+	public Integer getStatus() {
 		return this.status;
 	}
 
-	public void setStatus(Short status) {
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
 
 	@Column(name = "parent_id", nullable = false)
-	public Integer getParentId() {
+	public Long getParentId() {
 		return this.parentId;
 	}
 
-	public void setParentId(Integer parentId) {
+	public void setParentId(Long parentId) {
 		this.parentId = parentId;
 	}
 
 	@Column(name = "user_id", nullable = false)
-	public Integer getUserId() {
+	public Long getUserId() {
 		return this.userId;
 	}
 
-	public void setUserId(Integer userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 

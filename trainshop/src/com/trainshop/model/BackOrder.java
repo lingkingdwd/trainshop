@@ -16,22 +16,22 @@ public class BackOrder implements java.io.Serializable {
 
 	// Fields
 
-	private Integer backId;
+	private Long backId;
 	private String deliverySn;
 	private String orderSn;
-	private Integer orderId;
+	private Long orderId;
 	private String invoiceNo;
-	private Integer addTime;
-	private Short shippingId;
+	private Long addTime;
+	private Integer shippingId;
 	private String shippingName;
-	private Integer userId;
+	private Long userId;
 	private String actionUser;
 	private String consignee;
 	private String address;
-	private Short country;
-	private Short province;
-	private Short city;
-	private Short district;
+	private Long country;
+	private Long province;
+	private Long city;
+	private Long district;
 	private String signBuilding;
 	private String email;
 	private String zipcode;
@@ -42,11 +42,11 @@ public class BackOrder implements java.io.Serializable {
 	private String howOos;
 	private Double insureFee;
 	private Double shippingFee;
-	private Integer updateTime;
-	private Short suppliersId;
-	private Boolean status;
+	private Long updateTime;
+	private Long suppliersId;
+	private Integer status;
 	private Integer returnTime;
-	private Short agencyId;
+	private Integer agencyId;
 
 	// Constructors
 
@@ -55,8 +55,8 @@ public class BackOrder implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public BackOrder(String deliverySn, String orderSn, Integer orderId,
-			Boolean status) {
+	public BackOrder(String deliverySn, String orderSn, Long orderId,
+			Integer status) {
 		this.deliverySn = deliverySn;
 		this.orderSn = orderSn;
 		this.orderId = orderId;
@@ -64,15 +64,15 @@ public class BackOrder implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public BackOrder(String deliverySn, String orderSn, Integer orderId,
-			String invoiceNo, Integer addTime, Short shippingId,
-			String shippingName, Integer userId, String actionUser,
-			String consignee, String address, Short country, Short province,
-			Short city, Short district, String signBuilding, String email,
+	public BackOrder(String deliverySn, String orderSn, Long orderId,
+			String invoiceNo, Long addTime, Integer shippingId,
+			String shippingName, Long userId, String actionUser,
+			String consignee, String address, Long country, Long province,
+			Long city, Long district, String signBuilding, String email,
 			String zipcode, String tel, String mobile, String bestTime,
 			String postscript, String howOos, Double insureFee,
-			Double shippingFee, Integer updateTime, Short suppliersId,
-			Boolean status, Integer returnTime, Short agencyId) {
+			Double shippingFee, Long updateTime, Long suppliersId,
+			Integer status, Integer returnTime, Integer agencyId) {
 		this.deliverySn = deliverySn;
 		this.orderSn = orderSn;
 		this.orderId = orderId;
@@ -109,11 +109,11 @@ public class BackOrder implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "back_id", unique = true, nullable = false)
-	public Integer getBackId() {
+	public Long getBackId() {
 		return this.backId;
 	}
 
-	public void setBackId(Integer backId) {
+	public void setBackId(Long backId) {
 		this.backId = backId;
 	}
 
@@ -136,11 +136,11 @@ public class BackOrder implements java.io.Serializable {
 	}
 
 	@Column(name = "order_id", nullable = false)
-	public Integer getOrderId() {
+	public Long getOrderId() {
 		return this.orderId;
 	}
 
-	public void setOrderId(Integer orderId) {
+	public void setOrderId(Long orderId) {
 		this.orderId = orderId;
 	}
 
@@ -154,20 +154,20 @@ public class BackOrder implements java.io.Serializable {
 	}
 
 	@Column(name = "add_time")
-	public Integer getAddTime() {
+	public Long getAddTime() {
 		return this.addTime;
 	}
 
-	public void setAddTime(Integer addTime) {
+	public void setAddTime(Long addTime) {
 		this.addTime = addTime;
 	}
 
 	@Column(name = "shipping_id")
-	public Short getShippingId() {
+	public Integer getShippingId() {
 		return this.shippingId;
 	}
 
-	public void setShippingId(Short shippingId) {
+	public void setShippingId(Integer shippingId) {
 		this.shippingId = shippingId;
 	}
 
@@ -181,11 +181,11 @@ public class BackOrder implements java.io.Serializable {
 	}
 
 	@Column(name = "user_id")
-	public Integer getUserId() {
+	public Long getUserId() {
 		return this.userId;
 	}
 
-	public void setUserId(Integer userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 
@@ -217,38 +217,38 @@ public class BackOrder implements java.io.Serializable {
 	}
 
 	@Column(name = "country")
-	public Short getCountry() {
+	public Long getCountry() {
 		return this.country;
 	}
 
-	public void setCountry(Short country) {
+	public void setCountry(Long country) {
 		this.country = country;
 	}
 
 	@Column(name = "province")
-	public Short getProvince() {
+	public Long getProvince() {
 		return this.province;
 	}
 
-	public void setProvince(Short province) {
+	public void setProvince(Long province) {
 		this.province = province;
 	}
 
 	@Column(name = "city")
-	public Short getCity() {
+	public Long getCity() {
 		return this.city;
 	}
 
-	public void setCity(Short city) {
+	public void setCity(Long city) {
 		this.city = city;
 	}
 
 	@Column(name = "district")
-	public Short getDistrict() {
+	public Long getDistrict() {
 		return this.district;
 	}
 
-	public void setDistrict(Short district) {
+	public void setDistrict(Long district) {
 		this.district = district;
 	}
 
@@ -343,29 +343,29 @@ public class BackOrder implements java.io.Serializable {
 	}
 
 	@Column(name = "update_time")
-	public Integer getUpdateTime() {
+	public Long getUpdateTime() {
 		return this.updateTime;
 	}
 
-	public void setUpdateTime(Integer updateTime) {
+	public void setUpdateTime(Long updateTime) {
 		this.updateTime = updateTime;
 	}
 
 	@Column(name = "suppliers_id")
-	public Short getSuppliersId() {
+	public Long getSuppliersId() {
 		return this.suppliersId;
 	}
 
-	public void setSuppliersId(Short suppliersId) {
+	public void setSuppliersId(Long suppliersId) {
 		this.suppliersId = suppliersId;
 	}
 
 	@Column(name = "status", nullable = false)
-	public Boolean getStatus() {
+	public Integer getStatus() {
 		return this.status;
 	}
 
-	public void setStatus(Boolean status) {
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
 
@@ -379,11 +379,11 @@ public class BackOrder implements java.io.Serializable {
 	}
 
 	@Column(name = "agency_id")
-	public Short getAgencyId() {
+	public Integer getAgencyId() {
 		return this.agencyId;
 	}
 
-	public void setAgencyId(Short agencyId) {
+	public void setAgencyId(Integer agencyId) {
 		this.agencyId = agencyId;
 	}
 

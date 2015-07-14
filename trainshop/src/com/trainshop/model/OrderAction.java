@@ -16,15 +16,15 @@ public class OrderAction implements java.io.Serializable {
 
 	// Fields
 
-	private Integer actionId;
-	private Integer orderId;
+	private Long actionId;
+	private Long orderId;
 	private String actionUser;
 	private Boolean orderStatus;
 	private Boolean shippingStatus;
 	private Boolean payStatus;
 	private Boolean actionPlace;
 	private String actionNote;
-	private Integer logTime;
+	private Long logTime;
 
 	// Constructors
 
@@ -33,9 +33,9 @@ public class OrderAction implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public OrderAction(Integer orderId, String actionUser, Boolean orderStatus,
+	public OrderAction(Long orderId, String actionUser, Boolean orderStatus,
 			Boolean shippingStatus, Boolean payStatus, Boolean actionPlace,
-			String actionNote, Integer logTime) {
+			String actionNote, Long logTime) {
 		this.orderId = orderId;
 		this.actionUser = actionUser;
 		this.orderStatus = orderStatus;
@@ -50,20 +50,20 @@ public class OrderAction implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "action_id", unique = true, nullable = false)
-	public Integer getActionId() {
+	public Long getActionId() {
 		return this.actionId;
 	}
 
-	public void setActionId(Integer actionId) {
+	public void setActionId(Long actionId) {
 		this.actionId = actionId;
 	}
 
 	@Column(name = "order_id", nullable = false)
-	public Integer getOrderId() {
+	public Long getOrderId() {
 		return this.orderId;
 	}
 
-	public void setOrderId(Integer orderId) {
+	public void setOrderId(Long orderId) {
 		this.orderId = orderId;
 	}
 
@@ -122,11 +122,11 @@ public class OrderAction implements java.io.Serializable {
 	}
 
 	@Column(name = "log_time", nullable = false)
-	public Integer getLogTime() {
+	public Long getLogTime() {
 		return this.logTime;
 	}
 
-	public void setLogTime(Integer logTime) {
+	public void setLogTime(Long logTime) {
 		this.logTime = logTime;
 	}
 
