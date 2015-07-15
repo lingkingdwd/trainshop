@@ -1,49 +1,19 @@
 var categoryList = new Array();
 
 $(document).ready(function() {
-	$('#example').dataTable({
-		/*基本参数设置，以下参数设置和默认效果一致*/  
-        "bPaginate": true, //翻页功能  
-        "bLengthChange": true, //改变每页显示数据数量  
-        "bFilter": true, //过滤功能  
-        "bSort": true, //排序功能  
-        "bInfo": true,//页脚信息  
-        "bAutoWidth": true,//自动宽度  
-        /*默认排序设置*/  
-        "aaSorting": [[ 4, "desc" ]],//设置第5个元素为默认排序  
-        /*默认翻页样式设置*/  
-        "sPaginationType": "full_numbers",  
-        /*是否开启主题*/  
-        "bJQueryUI": true,  
-        /*语言设置*/  
-        "oLanguage": {  
-            "sLengthMenu": "每页显示 _MENU_条",  
-            "sZeroRecords": "没有找到符合条件的数据",  
-            "sProcessing": "<img src=’./loading.gif’ />",  
-            "sInfo": "当前第 _START_ - _END_ 条　共计 _TOTAL_ 条",  
-            "sInfoEmpty": "木有记录",  
-            "sInfoFiltered": "(从 _MAX_ 条记录中过滤)",  
-            "sSearch": "搜索：",  
-            "oPaginate": {  
-                "sFirst": "首页",  
-                "sPrevious": "前一页",  
-                "sNext": "后一页",  
-                "sLast": "尾页"  
-            }  
-        }  
-    });
 	
-	/*var categoryManage = new CategoryManage();
-	categoryManage.getCategoryList();
 	
-	$("#addCategory").on("click", {getList:categoryManage.getCategoryList}, categoryManage.addCategory);
+	var goodsManage = new GoodsManage();
+	goodsManage.createGoodsTable();
+	
+	$("#addGoods").on("click", {getList:categoryManage.createGoodsTable}, categoryManage.addGoods);
 	
 	$("#saveCategory").on("click",{getList:categoryManage.getCategoryList}, categoryManage.updateCategory);
 	
-	$("#deleteCategory").on("click",{getList:categoryManage.getCategoryList}, categoryManage.deleteCategory);*/
+	$("#deleteCategory").on("click",{getList:categoryManage.getCategoryList}, categoryManage.deleteCategory);
 });
 
-function CategoryManage(){
+function GoodsManage(){
 	var zTreeOnClick = function zTreeOnClick(event, treeId, treeNode) {
 		for(var i = 0; i < categoryList.length; i++){
 			if(treeNode.id == categoryList[i].catId){
@@ -76,7 +46,46 @@ function CategoryManage(){
 		}
 	};
 	
-	this.getCategoryList = function (){
+	this.createGoodsTable = function (){
+		var sAjaxSource = basePath + "goods/getlist";
+		var columns = [{ "mData": "goodsId", 'sClass':'left'},
+        	{ "mData": "trainNumber", 'sClass':'center'}, 
+        	{ "mData": "startTime",'sClass':'left'},
+        	{ "mData": "catId",'sClass':'left'},
+        	{ "mData": "goodsSn",'sClass':'left'},
+        	{ "mData": "goodsName",'sClass':'left'},
+        	{ "mData": "goodsNameStyle",'sClass':'left'},
+        	{ "mData": "clickCount",'sClass':'left'},
+        	{ "mData": "brandId",'sClass':'left'},
+        	{ "mData": "providerName",'sClass':'left'},
+        	{ "mData": "goodsNumber",'sClass':'left'},
+        	{ "mData": "goodsWeight",'sClass':'left'},
+        	{ "mData": "marketPrice",'sClass':'left'},
+        	{ "mData": "shopPrice",'sClass':'left'},
+        	{ "mData": "promotePrice",'sClass':'left'},
+        	{ "mData": "promoteStartDate",'sClass':'left'},
+        	{ "mData": "promoteEndDate",'sClass':'left'},
+        	{ "mData": "warnNumber",'sClass':'left'},
+        	{ "mData": "keywords",'sClass':'left'},
+        	{ "mData": "goodsBrief",'sClass':'left'},
+        	{ "mData": "goodsDesc", 'sClass':'left'}];
+        	
+        var fnServerData = function(sSource, aoData, fnCallback) {
+			$.ajax({
+				"type" : 'post',
+				"url" : sSource,
+				"dataType" : "json",
+				"data" : {
+					aoData : JSON.stringify(aoData)
+				},
+				"success" : function(resp) {
+					fnCallback(resp);
+				}
+			});
+		}
+		
+		
+		createDataTables("goodsTable", sAjaxSource, columns, fnServerData);
 		//分类读取
 		$.ajax({
 			type : 'POST',
@@ -141,7 +150,7 @@ function CategoryManage(){
 		});
 	};
 	
-	this.addCategory = function(event){
+	this.addGoods = function(event){
 		var treeObj = $.fn.zTree.getZTreeObj("categoryTreeId");
 		var sNodes = treeObj.getSelectedNodes();
 		if (sNodes.length > 0) {

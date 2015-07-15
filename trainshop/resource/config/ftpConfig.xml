@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Root>
+    <config>
+		<!-- ftp服务器所在ip地址 -->
+		<hostIp>10.66.1.44</hostIp>
+		<!-- ftp服务器端口号 -->
+		<port>21</port>
+		<!-- 登录ftp帐号 -->
+		<userName>GItest</userName>
+		<!-- 登录ftp帐号密码 -->
+		<password>123456</password>
+		<!--编码 -->
+		<encode>UTF-8</encode>
+		<!-- ftpClientConfig ftp服务器的环境，在window下值是WINDOWS;在linux下则配置为UNIX-->
+		<ftpClientConfig>WINDOWS</ftpClientConfig>
+		<!-- 语言编码 -->
+		<languageCode>zh</languageCode>
+		<!-- 定义主动，被动模式 0 本地主动模式 1 本地被动模式 -->
+		<enterLocalMode>1</enterLocalMode>
+		<!-- 文件内容字符集 -->
+		<contentCharSet>GBK</contentCharSet>
+		<!-- 要登录到ftp相对路径（没有为空） -->
+		<dirPath>/</dirPath>
+		<!-- 连接超时时间 -->
+		<timeout>120000</timeout>
+		<!-- 自动重连时间间隔（单位：这毫秒） -->
+		<reConnSleep>5000</reConnSleep>
+		<!-- 本地日志文件保存目录 -->
+		<logPath>E:/logs/</logPath>
+		<!-- 读写权限，0表示可读写（此权限对服务器上文件作删除或修改操作）;1表示只读（此权限不对服务器上文件作任何操作） -->
+		<permission>1</permission>
+		<!-- FTP服务器子目录生成时间格式（如果没有则为空） -->
+		<subDir></subDir>
+	</config>
+</Root>
+	
+

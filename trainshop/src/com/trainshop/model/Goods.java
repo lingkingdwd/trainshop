@@ -17,20 +17,22 @@ public class Goods implements java.io.Serializable {
 	// Fields
 
 	private Long goodsId;
+	private String trainNumber;
+	private Long startTime;
 	private Integer catId;
 	private String goodsSn;
 	private String goodsName;
 	private String goodsNameStyle;
 	private Integer clickCount;
-	private Integer brandId;
+	private Long brandId;
 	private String providerName;
 	private Integer goodsNumber;
 	private Double goodsWeight;
 	private Double marketPrice;
 	private Double shopPrice;
 	private Double promotePrice;
-	private Integer promoteStartDate;
-	private Integer promoteEndDate;
+	private Long promoteStartDate;
+	private Long promoteEndDate;
 	private Integer warnNumber;
 	private String keywords;
 	private String goodsBrief;
@@ -40,11 +42,11 @@ public class Goods implements java.io.Serializable {
 	private String originalImg;
 	private Integer isReal;
 	private String extensionCode;
-	private Boolean isOnSale;
-	private Boolean isAloneSale;
-	private Boolean isShipping;
+	private Integer isOnSale;
+	private Integer isAloneSale;
+	private Integer isShipping;
 	private Integer integral;
-	private Integer addTime;
+	private Long addTime;
 	private Integer sortOrder;
 	private Integer isDelete;
 	private Integer isBest;
@@ -52,7 +54,7 @@ public class Goods implements java.io.Serializable {
 	private Integer isHot;
 	private Integer isPromote;
 	private Integer bonusTypeId;
-	private Integer lastUpdate;
+	private Long lastUpdate;
 	private Integer goodsType;
 	private String sellerNote;
 	private Integer giveIntegral;
@@ -67,77 +69,42 @@ public class Goods implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Goods(Integer catId, String goodsSn, String goodsName,
-			String goodsNameStyle, Integer clickCount, Integer brandId,
-			String providerName, Integer goodsNumber, Double goodsWeight,
-			Double marketPrice, Double shopPrice, Double promotePrice,
-			Integer promoteStartDate, Integer promoteEndDate,
-			Integer warnNumber, String keywords, String goodsBrief,
-			String goodsDesc, String goodsThumb, String goodsImg,
-			String originalImg, Integer isReal, String extensionCode,
-			Boolean isOnSale, Boolean isAloneSale, Boolean isShipping,
-			Integer integral, Integer addTime, Integer sortOrder,
-			Integer isDelete, Integer isBest, Integer isNew, Integer isHot,
-			Integer isPromote, Integer bonusTypeId, Integer lastUpdate,
-			Integer goodsType, String sellerNote, Integer giveIntegral,
-			Integer rankIntegral) {
+	public Goods(String trainNumber, Long startTime, Integer catId,
+			String goodsName, Integer goodsNumber, Double shopPrice,
+			String goodsBrief, String goodsDesc, String goodsThumb,
+			String goodsImg, String originalImg, Integer isDelete) {
+		this.trainNumber = trainNumber;
+		this.startTime = startTime;
 		this.catId = catId;
-		this.goodsSn = goodsSn;
 		this.goodsName = goodsName;
-		this.goodsNameStyle = goodsNameStyle;
-		this.clickCount = clickCount;
-		this.brandId = brandId;
-		this.providerName = providerName;
 		this.goodsNumber = goodsNumber;
-		this.goodsWeight = goodsWeight;
-		this.marketPrice = marketPrice;
 		this.shopPrice = shopPrice;
-		this.promotePrice = promotePrice;
-		this.promoteStartDate = promoteStartDate;
-		this.promoteEndDate = promoteEndDate;
-		this.warnNumber = warnNumber;
-		this.keywords = keywords;
 		this.goodsBrief = goodsBrief;
 		this.goodsDesc = goodsDesc;
 		this.goodsThumb = goodsThumb;
 		this.goodsImg = goodsImg;
 		this.originalImg = originalImg;
-		this.isReal = isReal;
-		this.extensionCode = extensionCode;
-		this.isOnSale = isOnSale;
-		this.isAloneSale = isAloneSale;
-		this.isShipping = isShipping;
-		this.integral = integral;
-		this.addTime = addTime;
-		this.sortOrder = sortOrder;
 		this.isDelete = isDelete;
-		this.isBest = isBest;
-		this.isNew = isNew;
-		this.isHot = isHot;
-		this.isPromote = isPromote;
-		this.bonusTypeId = bonusTypeId;
-		this.lastUpdate = lastUpdate;
-		this.goodsType = goodsType;
-		this.sellerNote = sellerNote;
-		this.giveIntegral = giveIntegral;
-		this.rankIntegral = rankIntegral;
 	}
 
 	/** full constructor */
-	public Goods(Integer catId, String goodsSn, String goodsName,
-			String goodsNameStyle, Integer clickCount, Integer brandId,
-			String providerName, Integer goodsNumber, Double goodsWeight,
-			Double marketPrice, Double shopPrice, Double promotePrice,
-			Integer promoteStartDate, Integer promoteEndDate,
-			Integer warnNumber, String keywords, String goodsBrief,
-			String goodsDesc, String goodsThumb, String goodsImg,
-			String originalImg, Integer isReal, String extensionCode,
-			Boolean isOnSale, Boolean isAloneSale, Boolean isShipping,
-			Integer integral, Integer addTime, Integer sortOrder,
-			Integer isDelete, Integer isBest, Integer isNew, Integer isHot,
-			Integer isPromote, Integer bonusTypeId, Integer lastUpdate,
-			Integer goodsType, String sellerNote, Integer giveIntegral,
-			Integer rankIntegral, Integer suppliersId, Integer isCheck) {
+	public Goods(String trainNumber, Long startTime, Integer catId,
+			String goodsSn, String goodsName, String goodsNameStyle,
+			Integer clickCount, Long brandId, String providerName,
+			Integer goodsNumber, Double goodsWeight, Double marketPrice,
+			Double shopPrice, Double promotePrice, Long promoteStartDate,
+			Long promoteEndDate, Integer warnNumber, String keywords,
+			String goodsBrief, String goodsDesc, String goodsThumb,
+			String goodsImg, String originalImg, Integer isReal,
+			String extensionCode, Integer isOnSale, Integer isAloneSale,
+			Integer isShipping, Integer integral, Long addTime,
+			Integer sortOrder, Integer isDelete, Integer isBest, Integer isNew,
+			Integer isHot, Integer isPromote, Integer bonusTypeId,
+			Long lastUpdate, Integer goodsType, String sellerNote,
+			Integer giveIntegral, Integer rankIntegral, Integer suppliersId,
+			Integer isCheck) {
+		this.trainNumber = trainNumber;
+		this.startTime = startTime;
 		this.catId = catId;
 		this.goodsSn = goodsSn;
 		this.goodsName = goodsName;
@@ -194,6 +161,24 @@ public class Goods implements java.io.Serializable {
 		this.goodsId = goodsId;
 	}
 
+	@Column(name = "train_number", nullable = false, length = 30)
+	public String getTrainNumber() {
+		return this.trainNumber;
+	}
+
+	public void setTrainNumber(String trainNumber) {
+		this.trainNumber = trainNumber;
+	}
+
+	@Column(name = "start_time", nullable = false)
+	public Long getStartTime() {
+		return this.startTime;
+	}
+
+	public void setStartTime(Long startTime) {
+		this.startTime = startTime;
+	}
+
 	@Column(name = "cat_id", nullable = false)
 	public Integer getCatId() {
 		return this.catId;
@@ -203,7 +188,7 @@ public class Goods implements java.io.Serializable {
 		this.catId = catId;
 	}
 
-	@Column(name = "goods_sn", nullable = false, length = 60)
+	@Column(name = "goods_sn", length = 60)
 	public String getGoodsSn() {
 		return this.goodsSn;
 	}
@@ -221,7 +206,7 @@ public class Goods implements java.io.Serializable {
 		this.goodsName = goodsName;
 	}
 
-	@Column(name = "goods_name_style", nullable = false, length = 60)
+	@Column(name = "goods_name_style", length = 60)
 	public String getGoodsNameStyle() {
 		return this.goodsNameStyle;
 	}
@@ -230,7 +215,7 @@ public class Goods implements java.io.Serializable {
 		this.goodsNameStyle = goodsNameStyle;
 	}
 
-	@Column(name = "click_count", nullable = false)
+	@Column(name = "click_count")
 	public Integer getClickCount() {
 		return this.clickCount;
 	}
@@ -239,16 +224,16 @@ public class Goods implements java.io.Serializable {
 		this.clickCount = clickCount;
 	}
 
-	@Column(name = "brand_id", nullable = false)
-	public Integer getBrandId() {
+	@Column(name = "brand_id")
+	public Long getBrandId() {
 		return this.brandId;
 	}
 
-	public void setBrandId(Integer brandId) {
+	public void setBrandId(Long brandId) {
 		this.brandId = brandId;
 	}
 
-	@Column(name = "provider_name", nullable = false, length = 100)
+	@Column(name = "provider_name", length = 100)
 	public String getProviderName() {
 		return this.providerName;
 	}
@@ -266,7 +251,7 @@ public class Goods implements java.io.Serializable {
 		this.goodsNumber = goodsNumber;
 	}
 
-	@Column(name = "goods_weight", nullable = false, precision = 10, scale = 3)
+	@Column(name = "goods_weight", precision = 10, scale = 3)
 	public Double getGoodsWeight() {
 		return this.goodsWeight;
 	}
@@ -275,7 +260,7 @@ public class Goods implements java.io.Serializable {
 		this.goodsWeight = goodsWeight;
 	}
 
-	@Column(name = "market_price", nullable = false, precision = 10)
+	@Column(name = "market_price", precision = 10)
 	public Double getMarketPrice() {
 		return this.marketPrice;
 	}
@@ -293,7 +278,7 @@ public class Goods implements java.io.Serializable {
 		this.shopPrice = shopPrice;
 	}
 
-	@Column(name = "promote_price", nullable = false, precision = 10)
+	@Column(name = "promote_price", precision = 10)
 	public Double getPromotePrice() {
 		return this.promotePrice;
 	}
@@ -302,25 +287,25 @@ public class Goods implements java.io.Serializable {
 		this.promotePrice = promotePrice;
 	}
 
-	@Column(name = "promote_start_date", nullable = false)
-	public Integer getPromoteStartDate() {
+	@Column(name = "promote_start_date")
+	public Long getPromoteStartDate() {
 		return this.promoteStartDate;
 	}
 
-	public void setPromoteStartDate(Integer promoteStartDate) {
+	public void setPromoteStartDate(Long promoteStartDate) {
 		this.promoteStartDate = promoteStartDate;
 	}
 
-	@Column(name = "promote_end_date", nullable = false)
-	public Integer getPromoteEndDate() {
+	@Column(name = "promote_end_date")
+	public Long getPromoteEndDate() {
 		return this.promoteEndDate;
 	}
 
-	public void setPromoteEndDate(Integer promoteEndDate) {
+	public void setPromoteEndDate(Long promoteEndDate) {
 		this.promoteEndDate = promoteEndDate;
 	}
 
-	@Column(name = "warn_number", nullable = false)
+	@Column(name = "warn_number")
 	public Integer getWarnNumber() {
 		return this.warnNumber;
 	}
@@ -329,7 +314,7 @@ public class Goods implements java.io.Serializable {
 		this.warnNumber = warnNumber;
 	}
 
-	@Column(name = "keywords", nullable = false)
+	@Column(name = "keywords")
 	public String getKeywords() {
 		return this.keywords;
 	}
@@ -383,7 +368,7 @@ public class Goods implements java.io.Serializable {
 		this.originalImg = originalImg;
 	}
 
-	@Column(name = "is_real", nullable = false)
+	@Column(name = "is_real")
 	public Integer getIsReal() {
 		return this.isReal;
 	}
@@ -392,7 +377,7 @@ public class Goods implements java.io.Serializable {
 		this.isReal = isReal;
 	}
 
-	@Column(name = "extension_code", nullable = false, length = 30)
+	@Column(name = "extension_code", length = 30)
 	public String getExtensionCode() {
 		return this.extensionCode;
 	}
@@ -401,34 +386,34 @@ public class Goods implements java.io.Serializable {
 		this.extensionCode = extensionCode;
 	}
 
-	@Column(name = "is_on_sale", nullable = false)
-	public Boolean getIsOnSale() {
+	@Column(name = "is_on_sale")
+	public Integer getIsOnSale() {
 		return this.isOnSale;
 	}
 
-	public void setIsOnSale(Boolean isOnSale) {
+	public void setIsOnSale(Integer isOnSale) {
 		this.isOnSale = isOnSale;
 	}
 
-	@Column(name = "is_alone_sale", nullable = false)
-	public Boolean getIsAloneSale() {
+	@Column(name = "is_alone_sale")
+	public Integer getIsAloneSale() {
 		return this.isAloneSale;
 	}
 
-	public void setIsAloneSale(Boolean isAloneSale) {
+	public void setIsAloneSale(Integer isAloneSale) {
 		this.isAloneSale = isAloneSale;
 	}
 
-	@Column(name = "is_shipping", nullable = false)
-	public Boolean getIsShipping() {
+	@Column(name = "is_shipping")
+	public Integer getIsShipping() {
 		return this.isShipping;
 	}
 
-	public void setIsShipping(Boolean isShipping) {
+	public void setIsShipping(Integer isShipping) {
 		this.isShipping = isShipping;
 	}
 
-	@Column(name = "integral", nullable = false)
+	@Column(name = "integral")
 	public Integer getIntegral() {
 		return this.integral;
 	}
@@ -437,16 +422,16 @@ public class Goods implements java.io.Serializable {
 		this.integral = integral;
 	}
 
-	@Column(name = "add_time", nullable = false)
-	public Integer getAddTime() {
+	@Column(name = "add_time")
+	public Long getAddTime() {
 		return this.addTime;
 	}
 
-	public void setAddTime(Integer addTime) {
+	public void setAddTime(Long addTime) {
 		this.addTime = addTime;
 	}
 
-	@Column(name = "sort_order", nullable = false)
+	@Column(name = "sort_order")
 	public Integer getSortOrder() {
 		return this.sortOrder;
 	}
@@ -464,7 +449,7 @@ public class Goods implements java.io.Serializable {
 		this.isDelete = isDelete;
 	}
 
-	@Column(name = "is_best", nullable = false)
+	@Column(name = "is_best")
 	public Integer getIsBest() {
 		return this.isBest;
 	}
@@ -473,7 +458,7 @@ public class Goods implements java.io.Serializable {
 		this.isBest = isBest;
 	}
 
-	@Column(name = "is_new", nullable = false)
+	@Column(name = "is_new")
 	public Integer getIsNew() {
 		return this.isNew;
 	}
@@ -482,7 +467,7 @@ public class Goods implements java.io.Serializable {
 		this.isNew = isNew;
 	}
 
-	@Column(name = "is_hot", nullable = false)
+	@Column(name = "is_hot")
 	public Integer getIsHot() {
 		return this.isHot;
 	}
@@ -491,7 +476,7 @@ public class Goods implements java.io.Serializable {
 		this.isHot = isHot;
 	}
 
-	@Column(name = "is_promote", nullable = false)
+	@Column(name = "is_promote")
 	public Integer getIsPromote() {
 		return this.isPromote;
 	}
@@ -500,7 +485,7 @@ public class Goods implements java.io.Serializable {
 		this.isPromote = isPromote;
 	}
 
-	@Column(name = "bonus_type_id", nullable = false)
+	@Column(name = "bonus_type_id")
 	public Integer getBonusTypeId() {
 		return this.bonusTypeId;
 	}
@@ -509,16 +494,16 @@ public class Goods implements java.io.Serializable {
 		this.bonusTypeId = bonusTypeId;
 	}
 
-	@Column(name = "last_update", nullable = false)
-	public Integer getLastUpdate() {
+	@Column(name = "last_update")
+	public Long getLastUpdate() {
 		return this.lastUpdate;
 	}
 
-	public void setLastUpdate(Integer lastUpdate) {
+	public void setLastUpdate(Long lastUpdate) {
 		this.lastUpdate = lastUpdate;
 	}
 
-	@Column(name = "goods_type", nullable = false)
+	@Column(name = "goods_type")
 	public Integer getGoodsType() {
 		return this.goodsType;
 	}
@@ -527,7 +512,7 @@ public class Goods implements java.io.Serializable {
 		this.goodsType = goodsType;
 	}
 
-	@Column(name = "seller_note", nullable = false)
+	@Column(name = "seller_note")
 	public String getSellerNote() {
 		return this.sellerNote;
 	}
@@ -536,7 +521,7 @@ public class Goods implements java.io.Serializable {
 		this.sellerNote = sellerNote;
 	}
 
-	@Column(name = "give_integral", nullable = false)
+	@Column(name = "give_integral")
 	public Integer getGiveIntegral() {
 		return this.giveIntegral;
 	}
@@ -545,7 +530,7 @@ public class Goods implements java.io.Serializable {
 		this.giveIntegral = giveIntegral;
 	}
 
-	@Column(name = "rank_integral", nullable = false)
+	@Column(name = "rank_integral")
 	public Integer getRankIntegral() {
 		return this.rankIntegral;
 	}

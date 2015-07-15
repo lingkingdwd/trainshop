@@ -64,7 +64,7 @@ public class OrderController extends BaseController {
 	@RequestMapping(value = "getlist", method = RequestMethod.POST, produces = { "text/json;charset=UTF-8" })
 	public String getlist(HttpServletRequest request, HttpSession session) {
 		String result = null;
-
+		
 		List<OrderInfo> list = orderInfoService.findAll();
 
 		result = JsonPluginsUtil.beanListToJson(list);
@@ -88,11 +88,11 @@ public class OrderController extends BaseController {
 		
 		OrderInfo entity = JsonPluginsUtil.jsonToBean(data, OrderInfo.class);
 		
-		List<OrderGoods> list = entity.getOrderGoods();
+		//List<OrderGoods> list = entity.getOrderGoods();
 
 		orderInfoService.create(entity);
 		
-		orderGoodsService.saveOrUpdateList(list);
+		//orderGoodsService.saveOrUpdateList(list);
 
 		return super.returnData(result);
 	}

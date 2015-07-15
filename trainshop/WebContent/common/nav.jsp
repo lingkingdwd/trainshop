@@ -167,7 +167,7 @@
 				<li><a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>
 						商品管理<span class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
-						<li><a href="flot.html">发布商品</a></li>
+						<li><a href="<%=basePath %>goods/publish">发布商品</a></li>
 						<li><a href="<%=basePath %>goods/init">商品管理</a></li>
 						<li><a href="<%=basePath %>category/init">分类管理</a></li>
 						<li><a href="morris.html">品牌管理</a></li>
@@ -184,6 +184,8 @@
 				<li><a href="#"><i class="fa fa-wrench fa-fw"></i> 用户管理<span
 						class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
+						<li><a href="<%=basePath %>org/init">组织机构管理</a></li>
+						<li><a href="<%=basePath %>train/init">列车管理</a></li>
 						<li><a href="panels-wells.html">用户管理</a></li>
 						<li><a href="buttons.html">角色管理</a></li>
 						<li><a href="notifications.html">权限分配</a></li>

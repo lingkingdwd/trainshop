@@ -101,6 +101,7 @@ function parseJsonData(data)
 	return items;
 }
 
+
 var oLanguage = {  
 	"sLengthMenu": "每页显示 _MENU_条",  
 	"sZeroRecords": "没有找到符合条件的数据",  
@@ -115,4 +116,54 @@ var oLanguage = {
 		"sNext": "后一页",  
 		"sLast": "尾页"  
 	}
+}
+
+function createDataTables(tableId, sAjaxSource, columns, fnServerData){
+	$("#" + tableId).dataTable({
+		"oLanguage" : oLanguage,
+		//"bJQueryUI": true,
+		"bPaginate" : true,// 分页按钮
+		"bFilter" : true,// 搜索栏
+		"bLengthChange" : true,// 每行显示记录数
+		"iDisplayLength" : 10,// 每页显示行数
+		"bSort" : false,// 排序
+		//"aLengthMenu": [[50,100,500,1000,10000], [50,100,500,1000,10000]],//定义每页显示数据数量
+		//"iScrollLoadGap":400,//用于指定当DataTable设置为滚动时，最多可以一屏显示多少条数据
+		//"aaSorting": [[4, "desc"]],
+		"bInfo" : true,// Showing 1 to 10 of 23 entries 总记录数没也显示多少等信息
+		"bWidth":true,
+		//"sScrollY": "62%",
+	    //"sScrollX": "210%",
+	    "bScrollCollapse": true,
+		"sPaginationType" : "full_numbers", // 分页，一共两种样式 另一种为two_button // 是datatables默认
+		"bProcessing" : true,
+		"bServerSide" : true,
+		"bDestroy": true,
+		"bSortCellsTop": true,	
+	    "sAjaxSource": sAjaxSource, /*'/getInfo.action', */
+	    "aoColumns": columns,/*[{ "mData": "id", 'sClass':'left'},
+        	{ "mData": "name", 'sClass':'center'}, 
+        	{ "mData": "account",'sClass':'left'},
+        	{ "mData": "logintime", 'sClass':'left'}
+            	
+            	{ "mData": "pass<a href="http://www.it165.net/edu/ebg/" target="_blank" class="keylink">word</a>",'sClass':'left',"mRender":function(data,type,full){
+            		return "<button type='button' onclick=fuck11("+data+")>"+data+"</button>"
+            		}
+            	}
+            	
+		],*/
+        "fnServerData" : fnServerData/*function(sSource, aoData, fnCallback) {
+			$.ajax({
+				"type" : 'post',
+				"url" : sSource,
+				"dataType" : "json",
+				"data" : {
+					aoData : JSON.stringify(aoData)
+				},
+				"success" : function(resp) {
+					fnCallback(resp);
+				}
+			});
+		}*/
+	});
 }

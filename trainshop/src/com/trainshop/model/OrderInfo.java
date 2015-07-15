@@ -1,13 +1,9 @@
 package com.trainshop.model;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-
 import static javax.persistence.GenerationType.IDENTITY;
-
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -34,6 +30,10 @@ public class OrderInfo implements java.io.Serializable {
 	private Short district;
 	private String address;
 	private String zipcode;
+	private String trainNumber;
+	private String carriage;
+	private String seatNumber;
+	private Long startTime;
 	private String tel;
 	private String mobile;
 	private String email;
@@ -65,10 +65,10 @@ public class OrderInfo implements java.io.Serializable {
 	private Double orderAmount;
 	private Short fromAd;
 	private String referer;
-	private Integer addTime;
-	private Integer confirmTime;
-	private Integer payTime;
-	private Integer shippingTime;
+	private Long addTime;
+	private Long confirmTime;
+	private Long payTime;
+	private Long shippingTime;
 	private Short packId;
 	private Short cardId;
 	private Integer bonusId;
@@ -83,8 +83,6 @@ public class OrderInfo implements java.io.Serializable {
 	private Boolean isSeparate;
 	private Integer parentId;
 	private Double discount;
-	
-	private List<OrderGoods> orderGoods;
 
 	// Constructors
 
@@ -92,12 +90,31 @@ public class OrderInfo implements java.io.Serializable {
 	public OrderInfo() {
 	}
 
+	/** minimal constructor */
+	public OrderInfo(String orderSn, Long userId, Boolean orderStatus,
+			Boolean shippingStatus, Boolean payStatus, Double goodsAmount,
+			Double shippingFee, Double bonus, Double orderAmount, Long addTime,
+			Boolean isSeparate) {
+		this.orderSn = orderSn;
+		this.userId = userId;
+		this.orderStatus = orderStatus;
+		this.shippingStatus = shippingStatus;
+		this.payStatus = payStatus;
+		this.goodsAmount = goodsAmount;
+		this.shippingFee = shippingFee;
+		this.bonus = bonus;
+		this.orderAmount = orderAmount;
+		this.addTime = addTime;
+		this.isSeparate = isSeparate;
+	}
+
 	/** full constructor */
 	public OrderInfo(String orderSn, Long userId, Boolean orderStatus,
 			Boolean shippingStatus, Boolean payStatus, String consignee,
 			Short country, Short province, Short city, Short district,
-			String address, String zipcode, String tel, String mobile,
-			String email, String bestTime, String signBuilding,
+			String address, String zipcode, String trainNumber,
+			String carriage, String seatNumber, Long startTime, String tel,
+			String mobile, String email, String bestTime, String signBuilding,
 			String postscript, Short shippingId, String shippingName,
 			Short payId, String payName, String howOos, String howSurplus,
 			String packName, String cardName, String cardMessage,
@@ -105,9 +122,9 @@ public class OrderInfo implements java.io.Serializable {
 			Double shippingFee, Double insureFee, Double payFee,
 			Double packFee, Double cardFee, Double moneyPaid, Double surplus,
 			Integer integral, Double integralMoney, Double bonus,
-			Double orderAmount, Short fromAd, String referer, Integer addTime,
-			Integer confirmTime, Integer payTime, Integer shippingTime,
-			Short packId, Short cardId, Integer bonusId, String invoiceNo,
+			Double orderAmount, Short fromAd, String referer, Long addTime,
+			Long confirmTime, Long payTime, Long shippingTime, Short packId,
+			Short cardId, Integer bonusId, String invoiceNo,
 			String extensionCode, Integer extensionId, String toBuyer,
 			String payNote, Short agencyId, String invType, Double tax,
 			Boolean isSeparate, Integer parentId, Double discount) {
@@ -123,6 +140,10 @@ public class OrderInfo implements java.io.Serializable {
 		this.district = district;
 		this.address = address;
 		this.zipcode = zipcode;
+		this.trainNumber = trainNumber;
+		this.carriage = carriage;
+		this.seatNumber = seatNumber;
+		this.startTime = startTime;
 		this.tel = tel;
 		this.mobile = mobile;
 		this.email = email;
@@ -231,7 +252,7 @@ public class OrderInfo implements java.io.Serializable {
 		this.payStatus = payStatus;
 	}
 
-	@Column(name = "consignee", nullable = false, length = 60)
+	@Column(name = "consignee", length = 60)
 	public String getConsignee() {
 		return this.consignee;
 	}
@@ -240,7 +261,7 @@ public class OrderInfo implements java.io.Serializable {
 		this.consignee = consignee;
 	}
 
-	@Column(name = "country", nullable = false)
+	@Column(name = "country")
 	public Short getCountry() {
 		return this.country;
 	}
@@ -249,7 +270,7 @@ public class OrderInfo implements java.io.Serializable {
 		this.country = country;
 	}
 
-	@Column(name = "province", nullable = false)
+	@Column(name = "province")
 	public Short getProvince() {
 		return this.province;
 	}
@@ -258,7 +279,7 @@ public class OrderInfo implements java.io.Serializable {
 		this.province = province;
 	}
 
-	@Column(name = "city", nullable = false)
+	@Column(name = "city")
 	public Short getCity() {
 		return this.city;
 	}
@@ -267,7 +288,7 @@ public class OrderInfo implements java.io.Serializable {
 		this.city = city;
 	}
 
-	@Column(name = "district", nullable = false)
+	@Column(name = "district")
 	public Short getDistrict() {
 		return this.district;
 	}
@@ -276,7 +297,7 @@ public class OrderInfo implements java.io.Serializable {
 		this.district = district;
 	}
 
-	@Column(name = "address", nullable = false)
+	@Column(name = "address")
 	public String getAddress() {
 		return this.address;
 	}
@@ -285,7 +306,7 @@ public class OrderInfo implements java.io.Serializable {
 		this.address = address;
 	}
 
-	@Column(name = "zipcode", nullable = false, length = 60)
+	@Column(name = "zipcode", length = 60)
 	public String getZipcode() {
 		return this.zipcode;
 	}
@@ -294,7 +315,43 @@ public class OrderInfo implements java.io.Serializable {
 		this.zipcode = zipcode;
 	}
 
-	@Column(name = "tel", nullable = false, length = 60)
+	@Column(name = "train_number", length = 30)
+	public String getTrainNumber() {
+		return this.trainNumber;
+	}
+
+	public void setTrainNumber(String trainNumber) {
+		this.trainNumber = trainNumber;
+	}
+
+	@Column(name = "carriage", length = 20)
+	public String getCarriage() {
+		return this.carriage;
+	}
+
+	public void setCarriage(String carriage) {
+		this.carriage = carriage;
+	}
+
+	@Column(name = "Seat_Number", length = 20)
+	public String getSeatNumber() {
+		return this.seatNumber;
+	}
+
+	public void setSeatNumber(String seatNumber) {
+		this.seatNumber = seatNumber;
+	}
+
+	@Column(name = "start_time")
+	public Long getStartTime() {
+		return this.startTime;
+	}
+
+	public void setStartTime(Long startTime) {
+		this.startTime = startTime;
+	}
+
+	@Column(name = "tel", length = 60)
 	public String getTel() {
 		return this.tel;
 	}
@@ -303,7 +360,7 @@ public class OrderInfo implements java.io.Serializable {
 		this.tel = tel;
 	}
 
-	@Column(name = "mobile", nullable = false, length = 60)
+	@Column(name = "mobile", length = 60)
 	public String getMobile() {
 		return this.mobile;
 	}
@@ -312,7 +369,7 @@ public class OrderInfo implements java.io.Serializable {
 		this.mobile = mobile;
 	}
 
-	@Column(name = "email", nullable = false, length = 60)
+	@Column(name = "email", length = 60)
 	public String getEmail() {
 		return this.email;
 	}
@@ -321,7 +378,7 @@ public class OrderInfo implements java.io.Serializable {
 		this.email = email;
 	}
 
-	@Column(name = "best_time", nullable = false, length = 120)
+	@Column(name = "best_time", length = 120)
 	public String getBestTime() {
 		return this.bestTime;
 	}
@@ -330,7 +387,7 @@ public class OrderInfo implements java.io.Serializable {
 		this.bestTime = bestTime;
 	}
 
-	@Column(name = "sign_building", nullable = false, length = 120)
+	@Column(name = "sign_building", length = 120)
 	public String getSignBuilding() {
 		return this.signBuilding;
 	}
@@ -339,7 +396,7 @@ public class OrderInfo implements java.io.Serializable {
 		this.signBuilding = signBuilding;
 	}
 
-	@Column(name = "postscript", nullable = false)
+	@Column(name = "postscript")
 	public String getPostscript() {
 		return this.postscript;
 	}
@@ -348,7 +405,7 @@ public class OrderInfo implements java.io.Serializable {
 		this.postscript = postscript;
 	}
 
-	@Column(name = "shipping_id", nullable = false)
+	@Column(name = "shipping_id")
 	public Short getShippingId() {
 		return this.shippingId;
 	}
@@ -357,7 +414,7 @@ public class OrderInfo implements java.io.Serializable {
 		this.shippingId = shippingId;
 	}
 
-	@Column(name = "shipping_name", nullable = false, length = 120)
+	@Column(name = "shipping_name", length = 120)
 	public String getShippingName() {
 		return this.shippingName;
 	}
@@ -366,7 +423,7 @@ public class OrderInfo implements java.io.Serializable {
 		this.shippingName = shippingName;
 	}
 
-	@Column(name = "pay_id", nullable = false)
+	@Column(name = "pay_id")
 	public Short getPayId() {
 		return this.payId;
 	}
@@ -375,7 +432,7 @@ public class OrderInfo implements java.io.Serializable {
 		this.payId = payId;
 	}
 
-	@Column(name = "pay_name", nullable = false, length = 120)
+	@Column(name = "pay_name", length = 120)
 	public String getPayName() {
 		return this.payName;
 	}
@@ -384,7 +441,7 @@ public class OrderInfo implements java.io.Serializable {
 		this.payName = payName;
 	}
 
-	@Column(name = "how_oos", nullable = false, length = 120)
+	@Column(name = "how_oos", length = 120)
 	public String getHowOos() {
 		return this.howOos;
 	}
@@ -393,7 +450,7 @@ public class OrderInfo implements java.io.Serializable {
 		this.howOos = howOos;
 	}
 
-	@Column(name = "how_surplus", nullable = false, length = 120)
+	@Column(name = "how_surplus", length = 120)
 	public String getHowSurplus() {
 		return this.howSurplus;
 	}
@@ -402,7 +459,7 @@ public class OrderInfo implements java.io.Serializable {
 		this.howSurplus = howSurplus;
 	}
 
-	@Column(name = "pack_name", nullable = false, length = 120)
+	@Column(name = "pack_name", length = 120)
 	public String getPackName() {
 		return this.packName;
 	}
@@ -411,7 +468,7 @@ public class OrderInfo implements java.io.Serializable {
 		this.packName = packName;
 	}
 
-	@Column(name = "card_name", nullable = false, length = 120)
+	@Column(name = "card_name", length = 120)
 	public String getCardName() {
 		return this.cardName;
 	}
@@ -420,7 +477,7 @@ public class OrderInfo implements java.io.Serializable {
 		this.cardName = cardName;
 	}
 
-	@Column(name = "card_message", nullable = false)
+	@Column(name = "card_message")
 	public String getCardMessage() {
 		return this.cardMessage;
 	}
@@ -429,7 +486,7 @@ public class OrderInfo implements java.io.Serializable {
 		this.cardMessage = cardMessage;
 	}
 
-	@Column(name = "inv_payee", nullable = false, length = 120)
+	@Column(name = "inv_payee", length = 120)
 	public String getInvPayee() {
 		return this.invPayee;
 	}
@@ -438,7 +495,7 @@ public class OrderInfo implements java.io.Serializable {
 		this.invPayee = invPayee;
 	}
 
-	@Column(name = "inv_content", nullable = false, length = 120)
+	@Column(name = "inv_content", length = 120)
 	public String getInvContent() {
 		return this.invContent;
 	}
@@ -465,7 +522,7 @@ public class OrderInfo implements java.io.Serializable {
 		this.shippingFee = shippingFee;
 	}
 
-	@Column(name = "insure_fee", nullable = false, precision = 10)
+	@Column(name = "insure_fee", precision = 10)
 	public Double getInsureFee() {
 		return this.insureFee;
 	}
@@ -474,7 +531,7 @@ public class OrderInfo implements java.io.Serializable {
 		this.insureFee = insureFee;
 	}
 
-	@Column(name = "pay_fee", nullable = false, precision = 10)
+	@Column(name = "pay_fee", precision = 10)
 	public Double getPayFee() {
 		return this.payFee;
 	}
@@ -483,7 +540,7 @@ public class OrderInfo implements java.io.Serializable {
 		this.payFee = payFee;
 	}
 
-	@Column(name = "pack_fee", nullable = false, precision = 10)
+	@Column(name = "pack_fee", precision = 10)
 	public Double getPackFee() {
 		return this.packFee;
 	}
@@ -492,7 +549,7 @@ public class OrderInfo implements java.io.Serializable {
 		this.packFee = packFee;
 	}
 
-	@Column(name = "card_fee", nullable = false, precision = 10)
+	@Column(name = "card_fee", precision = 10)
 	public Double getCardFee() {
 		return this.cardFee;
 	}
@@ -501,7 +558,7 @@ public class OrderInfo implements java.io.Serializable {
 		this.cardFee = cardFee;
 	}
 
-	@Column(name = "money_paid", nullable = false, precision = 10)
+	@Column(name = "money_paid", precision = 10)
 	public Double getMoneyPaid() {
 		return this.moneyPaid;
 	}
@@ -510,7 +567,7 @@ public class OrderInfo implements java.io.Serializable {
 		this.moneyPaid = moneyPaid;
 	}
 
-	@Column(name = "surplus", nullable = false, precision = 10)
+	@Column(name = "surplus", precision = 10)
 	public Double getSurplus() {
 		return this.surplus;
 	}
@@ -519,7 +576,7 @@ public class OrderInfo implements java.io.Serializable {
 		this.surplus = surplus;
 	}
 
-	@Column(name = "integral", nullable = false)
+	@Column(name = "integral")
 	public Integer getIntegral() {
 		return this.integral;
 	}
@@ -528,7 +585,7 @@ public class OrderInfo implements java.io.Serializable {
 		this.integral = integral;
 	}
 
-	@Column(name = "integral_money", nullable = false, precision = 10)
+	@Column(name = "integral_money", precision = 10)
 	public Double getIntegralMoney() {
 		return this.integralMoney;
 	}
@@ -555,7 +612,7 @@ public class OrderInfo implements java.io.Serializable {
 		this.orderAmount = orderAmount;
 	}
 
-	@Column(name = "from_ad", nullable = false)
+	@Column(name = "from_ad")
 	public Short getFromAd() {
 		return this.fromAd;
 	}
@@ -564,7 +621,7 @@ public class OrderInfo implements java.io.Serializable {
 		this.fromAd = fromAd;
 	}
 
-	@Column(name = "referer", nullable = false)
+	@Column(name = "referer")
 	public String getReferer() {
 		return this.referer;
 	}
@@ -574,42 +631,42 @@ public class OrderInfo implements java.io.Serializable {
 	}
 
 	@Column(name = "add_time", nullable = false)
-	public Integer getAddTime() {
+	public Long getAddTime() {
 		return this.addTime;
 	}
 
-	public void setAddTime(Integer addTime) {
+	public void setAddTime(Long addTime) {
 		this.addTime = addTime;
 	}
 
-	@Column(name = "confirm_time", nullable = false)
-	public Integer getConfirmTime() {
+	@Column(name = "confirm_time")
+	public Long getConfirmTime() {
 		return this.confirmTime;
 	}
 
-	public void setConfirmTime(Integer confirmTime) {
+	public void setConfirmTime(Long confirmTime) {
 		this.confirmTime = confirmTime;
 	}
 
-	@Column(name = "pay_time", nullable = false)
-	public Integer getPayTime() {
+	@Column(name = "pay_time")
+	public Long getPayTime() {
 		return this.payTime;
 	}
 
-	public void setPayTime(Integer payTime) {
+	public void setPayTime(Long payTime) {
 		this.payTime = payTime;
 	}
 
-	@Column(name = "shipping_time", nullable = false)
-	public Integer getShippingTime() {
+	@Column(name = "shipping_time")
+	public Long getShippingTime() {
 		return this.shippingTime;
 	}
 
-	public void setShippingTime(Integer shippingTime) {
+	public void setShippingTime(Long shippingTime) {
 		this.shippingTime = shippingTime;
 	}
 
-	@Column(name = "pack_id", nullable = false)
+	@Column(name = "pack_id")
 	public Short getPackId() {
 		return this.packId;
 	}
@@ -618,7 +675,7 @@ public class OrderInfo implements java.io.Serializable {
 		this.packId = packId;
 	}
 
-	@Column(name = "card_id", nullable = false)
+	@Column(name = "card_id")
 	public Short getCardId() {
 		return this.cardId;
 	}
@@ -627,7 +684,7 @@ public class OrderInfo implements java.io.Serializable {
 		this.cardId = cardId;
 	}
 
-	@Column(name = "bonus_id", nullable = false)
+	@Column(name = "bonus_id")
 	public Integer getBonusId() {
 		return this.bonusId;
 	}
@@ -636,7 +693,7 @@ public class OrderInfo implements java.io.Serializable {
 		this.bonusId = bonusId;
 	}
 
-	@Column(name = "invoice_no", nullable = false)
+	@Column(name = "invoice_no")
 	public String getInvoiceNo() {
 		return this.invoiceNo;
 	}
@@ -645,7 +702,7 @@ public class OrderInfo implements java.io.Serializable {
 		this.invoiceNo = invoiceNo;
 	}
 
-	@Column(name = "extension_code", nullable = false, length = 30)
+	@Column(name = "extension_code", length = 30)
 	public String getExtensionCode() {
 		return this.extensionCode;
 	}
@@ -654,7 +711,7 @@ public class OrderInfo implements java.io.Serializable {
 		this.extensionCode = extensionCode;
 	}
 
-	@Column(name = "extension_id", nullable = false)
+	@Column(name = "extension_id")
 	public Integer getExtensionId() {
 		return this.extensionId;
 	}
@@ -663,7 +720,7 @@ public class OrderInfo implements java.io.Serializable {
 		this.extensionId = extensionId;
 	}
 
-	@Column(name = "to_buyer", nullable = false)
+	@Column(name = "to_buyer")
 	public String getToBuyer() {
 		return this.toBuyer;
 	}
@@ -672,7 +729,7 @@ public class OrderInfo implements java.io.Serializable {
 		this.toBuyer = toBuyer;
 	}
 
-	@Column(name = "pay_note", nullable = false)
+	@Column(name = "pay_note")
 	public String getPayNote() {
 		return this.payNote;
 	}
@@ -681,7 +738,7 @@ public class OrderInfo implements java.io.Serializable {
 		this.payNote = payNote;
 	}
 
-	@Column(name = "agency_id", nullable = false)
+	@Column(name = "agency_id")
 	public Short getAgencyId() {
 		return this.agencyId;
 	}
@@ -690,7 +747,7 @@ public class OrderInfo implements java.io.Serializable {
 		this.agencyId = agencyId;
 	}
 
-	@Column(name = "inv_type", nullable = false, length = 60)
+	@Column(name = "inv_type", length = 60)
 	public String getInvType() {
 		return this.invType;
 	}
@@ -699,7 +756,7 @@ public class OrderInfo implements java.io.Serializable {
 		this.invType = invType;
 	}
 
-	@Column(name = "tax", nullable = false, precision = 10)
+	@Column(name = "tax", precision = 10)
 	public Double getTax() {
 		return this.tax;
 	}
@@ -717,7 +774,7 @@ public class OrderInfo implements java.io.Serializable {
 		this.isSeparate = isSeparate;
 	}
 
-	@Column(name = "parent_id", nullable = false)
+	@Column(name = "parent_id")
 	public Integer getParentId() {
 		return this.parentId;
 	}
@@ -726,7 +783,7 @@ public class OrderInfo implements java.io.Serializable {
 		this.parentId = parentId;
 	}
 
-	@Column(name = "discount", nullable = false, precision = 10)
+	@Column(name = "discount", precision = 10)
 	public Double getDiscount() {
 		return this.discount;
 	}
@@ -735,11 +792,4 @@ public class OrderInfo implements java.io.Serializable {
 		this.discount = discount;
 	}
 
-	public List<OrderGoods> getOrderGoods() {
-		return orderGoods;
-	}
-
-	public void setOrderGoods(List<OrderGoods> orderGoods) {
-		this.orderGoods = orderGoods;
-	}
 }

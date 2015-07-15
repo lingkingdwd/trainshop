@@ -17,6 +17,7 @@ public class AdminUser implements java.io.Serializable {
 	// Fields
 
 	private Long userId;
+	private Long trainId;
 	private String userName;
 	private String email;
 	private String password;
@@ -55,10 +56,11 @@ public class AdminUser implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public AdminUser(String userName, String email, String password,
-			String ecSalt, Long addTime, Long lastLogin, String lastIp,
-			String actionList, String navList, String langType,
+	public AdminUser(Long trainId, String userName, String email,
+			String password, String ecSalt, Long addTime, Long lastLogin,
+			String lastIp, String actionList, String navList, String langType,
 			Integer agencyId, Long suppliersId, String todolist, Long roleId) {
+		this.trainId = trainId;
 		this.userName = userName;
 		this.email = email;
 		this.password = password;
@@ -85,6 +87,15 @@ public class AdminUser implements java.io.Serializable {
 
 	public void setUserId(Long userId) {
 		this.userId = userId;
+	}
+
+	@Column(name = "train_ID")
+	public Long getTrainId() {
+		return this.trainId;
+	}
+
+	public void setTrainId(Long trainId) {
+		this.trainId = trainId;
 	}
 
 	@Column(name = "user_name", nullable = false, length = 60)
