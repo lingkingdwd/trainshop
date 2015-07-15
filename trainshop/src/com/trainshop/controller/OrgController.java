@@ -74,7 +74,7 @@ public class OrgController extends BaseController{
 		
 		Org entity = JsonPluginsUtil.jsonToBean(data, Org.class);
 		entity.setCreatetime(System.currentTimeMillis());
-		if(session.getAttribute("CurrentUserID").equals(null)){
+		if(session.getAttribute("CurrentUserID") != null){
 			entity.setCreateuser(new Long(session.getAttribute("CurrentUserID").toString()));
 		}
 

@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.trainshop.common.util.JsonPluginsUtil;
 import com.trainshop.common.util.PageParameters;
 import com.trainshop.common.util.PageTools;
+import com.trainshop.model.UserTrain;
 import com.trainshop.model.Users;
+import com.trainshop.service.IUserTrainService;
 import com.trainshop.service.IUsersService;
 
 @Controller
@@ -26,6 +28,9 @@ public class UsersController extends BaseController {
 
 	@Resource(name = "usersService")
 	private IUsersService usersService;
+	
+	@Resource(name = "userTrainService")
+	private IUserTrainService userTrainService;
 	
 	@RequestMapping(value = "/initLogin", method = RequestMethod.GET)
 	public String initLogin(HttpServletRequest request, HttpSession session) {
@@ -81,8 +86,6 @@ public class UsersController extends BaseController {
 		page.setDataList(usersService.searchByDetachedCriteria(dc, start, limit));
 		page.setTotalProperty(usersService.getCountByDetachedCriteria(dc));
 		
-		//List<Users> userList = usersService.searchByDetachedCriteria(dc, para.getStart(), para.getLimit()).findAll();
-
 		result = JsonPluginsUtil.beanToJson(page);
 
 		return super.returnData(result);
@@ -115,6 +118,14 @@ public class UsersController extends BaseController {
 						request.getSession(true).setAttribute("CurrentUser", user);
 						request.getSession().setAttribute("CurrentUserID", "" + user.getUserId());
 						request.getSession().setAttribute("CurrentUserName", user.getUserName());
+						
+						List utList = userTrainService.findObjectsByPerptey(UserTrain.class, "userId", user.getUserId());
+						if(utList.size() > 0){
+							UserTrain uTrain  = (UserTrain)utList.get(0);
+							request.getSession().setAttribute("trainNumber", uTrain.getTrainNumber());
+							request.getSession().setAttribute("startTime", uTrain.getStartTime());
+							request.getSession().setAttribute("seatNumber", uTrain.getSeatNumber());
+						}
 					}
 					else{
 						result = "{\"flag\":\"0\",\"message\":\"用户名或密码不对！\"}";

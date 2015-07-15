@@ -1,8 +1,8 @@
 var orgList = new Array();
 
 $(document).ready(function() {
-	var orgManage = new OrgManage();
-	orgManage.getOrgList();
+	var trainManage = new TrainManage();
+	trainManage.createTrainTable();
 	
 	$("#addOrg").on("click", {getList:orgManage.getOrgList}, orgManage.addOrg);
 	
@@ -43,7 +43,7 @@ $(document).ready(function() {
     });
 });
 
-function OrgManage(){
+function TrainManage(){
 	var zTreeOnClick = function(event, treeId, treeNode) {
 		for(var i = 0; i < orgList.length; i++){
 			if(treeNode.id == orgList[i].orgId){
@@ -142,6 +142,48 @@ function OrgManage(){
 			}
 		});
 	};
+	
+	this.createTrainTable = function (){
+		var sAjaxSource = basePath + "goods/getlist";
+		var columns = [{ "mData": "goodsId", 'sClass':'left'},
+        	{ "mData": "trainNumber", 'sClass':'center'}, 
+        	{ "mData": "startTime",'sClass':'left'},
+        	{ "mData": "catId",'sClass':'left'},
+        	{ "mData": "goodsSn",'sClass':'left'},
+        	{ "mData": "goodsName",'sClass':'left'},
+        	{ "mData": "goodsNameStyle",'sClass':'left'},
+        	{ "mData": "clickCount",'sClass':'left'},
+        	{ "mData": "brandId",'sClass':'left'},
+        	{ "mData": "providerName",'sClass':'left'},
+        	{ "mData": "goodsNumber",'sClass':'left'},
+        	{ "mData": "goodsWeight",'sClass':'left'},
+        	{ "mData": "marketPrice",'sClass':'left'},
+        	{ "mData": "shopPrice",'sClass':'left'},
+        	{ "mData": "promotePrice",'sClass':'left'},
+        	{ "mData": "promoteStartDate",'sClass':'left'},
+        	{ "mData": "promoteEndDate",'sClass':'left'},
+        	{ "mData": "warnNumber",'sClass':'left'},
+        	{ "mData": "keywords",'sClass':'left'},
+        	{ "mData": "goodsBrief",'sClass':'left'},
+        	{ "mData": "goodsDesc", 'sClass':'left'}];
+        	
+        var fnServerData = function(sSource, aoData, fnCallback) {
+			$.ajax({
+				"type" : 'post',
+				"url" : sSource,
+				"dataType" : "json",
+				"data" : {
+					aoData : JSON.stringify(aoData)
+				},
+				"success" : function(resp) {
+					fnCallback(resp);
+				}
+			});
+		}
+		
+		
+		createDataTables("goodsTable", sAjaxSource, columns, fnServerData);
+	}
 	
 	this.addOrg = function(event){
 		var treeObj = $.fn.zTree.getZTreeObj("orgTreeId");

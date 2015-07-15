@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.trainshop.common.util.JsonPluginsUtil;
 import com.trainshop.model.AdminUser;
+import com.trainshop.model.Train;
 import com.trainshop.service.IAdminUserService;
+import com.trainshop.service.ITrainService;
 
 @Controller
 @RequestMapping("/adminUserController")
@@ -21,6 +23,9 @@ public class AdminUserController extends BaseController {
 
 	@Resource(name = "adminUserService")
 	private IAdminUserService adminUserService;
+	
+	@Resource(name = "trainService")
+	private ITrainService trainService;
 	
 	@RequestMapping(value = "/initLogin", method = RequestMethod.GET)
 	public String initLogin(HttpServletRequest request, HttpSession session) {
@@ -87,6 +92,10 @@ public class AdminUserController extends BaseController {
 						request.getSession(true).setAttribute("CurrentUser", user);
 						request.getSession().setAttribute("CurrentUserID", "" + user.getUserId());
 						request.getSession().setAttribute("CurrentUserName", user.getUserName());
+						
+						Train train = trainService.find(user.getTrainId());
+						request.getSession().setAttribute("trainNumber", train.getTrainNumber());
+						request.getSession().setAttribute("startTime", train.getStartTime());
 					}
 					else{
 						result = "{\"flag\":\"0\",\"message\":\"用户名或密码不对！\"}";

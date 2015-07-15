@@ -1,9 +1,14 @@
 package com.trainshop.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.Transient;
+
 import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -83,7 +88,8 @@ public class OrderInfo implements java.io.Serializable {
 	private Boolean isSeparate;
 	private Integer parentId;
 	private Double discount;
-
+	
+	private List<OrderGoods> orderGoods;	
 	// Constructors
 
 	/** default constructor */
@@ -792,4 +798,13 @@ public class OrderInfo implements java.io.Serializable {
 		this.discount = discount;
 	}
 
+	@Transient
+	public List<OrderGoods> getOrderGoods() {
+		return orderGoods;
+	}
+
+	@Transient
+	public void setOrderGoods(List<OrderGoods> orderGoods) {
+		this.orderGoods = orderGoods;
+	}
 }

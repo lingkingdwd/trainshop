@@ -38,12 +38,11 @@
 											class="table table-striped table-bordered table-hover">
 											<thead>
 												<tr>
-													<th>姓名</th>
-													<th>职位</th>
-													<th>Office</th>
-													<th>Extn.</th>
-													<th>Start date</th>
-													<th>Salary</th>
+													<th class="text-center">列车车次</th>
+													<th class="text-center">始发站</th>
+													<th class="text-center">终到站</th>
+													<th class="text-center">开车时间</th>
+													<th class="text-center">到站时间</th>
 												</tr>
 											</thead>
 
