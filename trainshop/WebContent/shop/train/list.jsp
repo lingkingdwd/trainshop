@@ -34,8 +34,7 @@
 								</div>
 								<div class="col-md-9" id="right">
 									<div class="col-12 dataTable_wrapper">
-										<table id="example"
-											class="table table-striped table-bordered table-hover">
+										<table id="goodsTable" class="table table-striped table-bordered table-hover">
 											<thead>
 												<tr>
 													<th class="text-center">列车车次</th>

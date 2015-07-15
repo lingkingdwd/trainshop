@@ -145,27 +145,19 @@ function TrainManage(){
 	
 	this.createTrainTable = function (){
 		var sAjaxSource = basePath + "goods/getlist";
-		var columns = [{ "mData": "goodsId", 'sClass':'left'},
-        	{ "mData": "trainNumber", 'sClass':'center'}, 
-        	{ "mData": "startTime",'sClass':'left'},
-        	{ "mData": "catId",'sClass':'left'},
-        	{ "mData": "goodsSn",'sClass':'left'},
-        	{ "mData": "goodsName",'sClass':'left'},
-        	{ "mData": "goodsNameStyle",'sClass':'left'},
-        	{ "mData": "clickCount",'sClass':'left'},
-        	{ "mData": "brandId",'sClass':'left'},
-        	{ "mData": "providerName",'sClass':'left'},
-        	{ "mData": "goodsNumber",'sClass':'left'},
-        	{ "mData": "goodsWeight",'sClass':'left'},
-        	{ "mData": "marketPrice",'sClass':'left'},
-        	{ "mData": "shopPrice",'sClass':'left'},
-        	{ "mData": "promotePrice",'sClass':'left'},
-        	{ "mData": "promoteStartDate",'sClass':'left'},
-        	{ "mData": "promoteEndDate",'sClass':'left'},
-        	{ "mData": "warnNumber",'sClass':'left'},
-        	{ "mData": "keywords",'sClass':'left'},
-        	{ "mData": "goodsBrief",'sClass':'left'},
-        	{ "mData": "goodsDesc", 'sClass':'left'}];
+		var columns = [
+	        { data: 'trainId', sClass:'left'},
+	        { data: 'orgId', sClass:'left' },
+	        { data: 'trainNumber', sClass:'left' },
+	        { data: 'startStation', sClass:'left' },
+	        { data: 'endStation', sClass:'left' },
+	        { data: 'startTime', sClass:'left' },
+	        { data: 'endTime', sClass:'left' },
+	        { data: 'createtime', sClass:'left' },
+	        { data: 'createuser', sClass:'left' },
+	        { data: 'updateuser', sClass:'left' },
+	        { data: 'updatetime', sClass:'left' }
+	    ];
         	
         var fnServerData = function(sSource, aoData, fnCallback) {
 			$.ajax({
