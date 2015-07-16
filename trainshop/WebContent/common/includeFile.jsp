@@ -36,6 +36,7 @@
 <script type="text/javascript" src="<%=basePath %>js/sb-admin-2.js"></script>
 <script type="text/javascript" src="<%=basePath %>js/layer/layer.js"></script>
 <script type="text/javascript" src="<%=basePath %>js/common.js"></script>
+<script type="text/javascript" src="<%=basePath %>js/My97DatePicker/WdatePicker.js"></script>
 
 <script src="<%=basePath %>js/zTree/jquery.ztree.core-3.5.js"></script>
 <script src="<%=basePath %>js/zTree/jquery.ztree.excheck-3.5.js"></script>
