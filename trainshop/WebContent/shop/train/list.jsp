@@ -100,7 +100,7 @@
 							<td><div class="form-group margin-none innerB">
 									<div class="col-md-5 padding-none">
 										<div class="input-group"
-											onclick="WdatePicker({el:'startTime'})">
+											onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm', el:'startTime'})">
 											<input type="text" id="startTime" value="2014-01-01" /> <span
 												class="input-group-addon"><i class="fa fa-calendar"></i></span>
 										</div>
@@ -112,7 +112,7 @@
 							<td colspan="3"><div class="form-group margin-none innerB">
 									<div class="col-md-5 padding-none">
 										<div class="input-group"
-											onclick="WdatePicker({el:'endTime'})">
+											onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm', el:'endTime'})">
 											<input type="text" id="endTime" value="2014-01-01" /> <span
 												class="input-group-addon"><i class="fa fa-calendar"></i></span>
 										</div>

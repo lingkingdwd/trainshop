@@ -116,11 +116,11 @@ public class OrderController extends BaseController {
 				Parameters.put("userId", order.getUserId());
 
 			}
-			if (order.getPayStatus() != null) {
+			if (order.getPayStatus() != 0) {
 				hql.append(" and model.payStatus =:payStatus");
 				Parameters.put("payStatus", order.getPayStatus());
 			}
-			if (order.getOrderStatus() != null) {
+			if (order.getOrderStatus() != 0) {
 				hql.append(" and model.orderStatus =:orderStatus");
 				Parameters.put("orderStatus", order.getOrderStatus());
 			}
@@ -131,7 +131,7 @@ public class OrderController extends BaseController {
 			page.setDataList(list);
 			page.setTotalProperty(sum);
 			
-			result = JsonPluginsUtil.beanListToJson(list);
+			result = JsonPluginsUtil.beanToJson(page);
 			
 			return super.returnData(result);
 		}
@@ -182,6 +182,15 @@ public class OrderController extends BaseController {
 			return result;
 		}
 
+		entity.setOrderStatus(0);
+		entity.setShippingStatus(0);
+		entity.setPayStatus(0);
+		entity.setShippingStatus(0);
+		entity.setShippingStatus(0);
+		entity.setShippingStatus(0);
+		entity.setShippingStatus(0);
+		entity.setShippingStatus(0);
+		
 		orderInfoService.create(entity);
 		
 		orderGoodsService.saveOrUpdateList(entity.getOrderGoods());

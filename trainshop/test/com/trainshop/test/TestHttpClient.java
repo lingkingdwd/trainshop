@@ -62,6 +62,9 @@ public class TestHttpClient {
         
         System.out.println(new TestHttpClient("/trainshop/goods/getlist")
 			.post("{\"goodsName\":\"xxx\",\"catId\":\"xxx\",\"brandId\":\"xxx\"}", 0, 10));
+        
+        System.out.println(new TestHttpClient("/trainshop/order/getlist")
+			.post("{\"goodsName\":\"xxx\",\"catId\":\"xxx\",\"brandId\":\"xxx\"}", 0, 10));
     }
 
 	/**

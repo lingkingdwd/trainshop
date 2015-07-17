@@ -25,9 +25,9 @@ public class OrderInfo implements java.io.Serializable {
 	private Long orderId;
 	private String orderSn;
 	private Long userId;
-	private Boolean orderStatus;
-	private Boolean shippingStatus;
-	private Boolean payStatus;
+	private int orderStatus;
+	private int shippingStatus;
+	private int payStatus;
 	private String consignee;
 	private Short country;
 	private Short province;
@@ -85,7 +85,7 @@ public class OrderInfo implements java.io.Serializable {
 	private Short agencyId;
 	private String invType;
 	private Double tax;
-	private Boolean isSeparate;
+	private int isSeparate;
 	private Integer parentId;
 	private Double discount;
 	
@@ -97,10 +97,10 @@ public class OrderInfo implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public OrderInfo(String orderSn, Long userId, Boolean orderStatus,
-			Boolean shippingStatus, Boolean payStatus, Double goodsAmount,
+	public OrderInfo(String orderSn, Long userId, int orderStatus,
+			int shippingStatus, int payStatus, Double goodsAmount,
 			Double shippingFee, Double bonus, Double orderAmount, Long addTime,
-			Boolean isSeparate) {
+			int isSeparate) {
 		this.orderSn = orderSn;
 		this.userId = userId;
 		this.orderStatus = orderStatus;
@@ -115,8 +115,8 @@ public class OrderInfo implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public OrderInfo(String orderSn, Long userId, Boolean orderStatus,
-			Boolean shippingStatus, Boolean payStatus, String consignee,
+	public OrderInfo(String orderSn, Long userId, int orderStatus,
+			int shippingStatus, int payStatus, String consignee,
 			Short country, Short province, Short city, Short district,
 			String address, String zipcode, String trainNumber,
 			String carriage, String seatNumber, Long startTime, String tel,
@@ -133,7 +133,7 @@ public class OrderInfo implements java.io.Serializable {
 			Short cardId, Integer bonusId, String invoiceNo,
 			String extensionCode, Integer extensionId, String toBuyer,
 			String payNote, Short agencyId, String invType, Double tax,
-			Boolean isSeparate, Integer parentId, Double discount) {
+			int isSeparate, Integer parentId, Double discount) {
 		this.orderSn = orderSn;
 		this.userId = userId;
 		this.orderStatus = orderStatus;
@@ -232,29 +232,29 @@ public class OrderInfo implements java.io.Serializable {
 	}
 
 	@Column(name = "order_status", nullable = false)
-	public Boolean getOrderStatus() {
+	public int getOrderStatus() {
 		return this.orderStatus;
 	}
 
-	public void setOrderStatus(Boolean orderStatus) {
+	public void setOrderStatus(int orderStatus) {
 		this.orderStatus = orderStatus;
 	}
 
 	@Column(name = "shipping_status", nullable = false)
-	public Boolean getShippingStatus() {
+	public int getShippingStatus() {
 		return this.shippingStatus;
 	}
 
-	public void setShippingStatus(Boolean shippingStatus) {
+	public void setShippingStatus(int shippingStatus) {
 		this.shippingStatus = shippingStatus;
 	}
 
 	@Column(name = "pay_status", nullable = false)
-	public Boolean getPayStatus() {
+	public int getPayStatus() {
 		return this.payStatus;
 	}
 
-	public void setPayStatus(Boolean payStatus) {
+	public void setPayStatus(int payStatus) {
 		this.payStatus = payStatus;
 	}
 
@@ -772,11 +772,11 @@ public class OrderInfo implements java.io.Serializable {
 	}
 
 	@Column(name = "is_separate", nullable = false)
-	public Boolean getIsSeparate() {
+	public int getIsSeparate() {
 		return this.isSeparate;
 	}
 
-	public void setIsSeparate(Boolean isSeparate) {
+	public void setIsSeparate(int isSeparate) {
 		this.isSeparate = isSeparate;
 	}
 
