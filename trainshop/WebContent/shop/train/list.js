@@ -117,33 +117,19 @@ function TrainManage(){
 	this.createTrainTable = function (){
 		var sAjaxSource = basePath + "train/getlist";
 		var columns = [
-	        { data: 'trainId', sClass:'left'},
-	        { data: 'orgId', sClass:'left' },
-	        { data: 'trainNumber', sClass:'left' },
-	        { data: 'startStation', sClass:'left' },
-	        { data: 'endStation', sClass:'left' },
-	        { data: 'startTime', sClass:'left' },
-	        { data: 'endTime', sClass:'left' },
-	        { data: 'createtime', sClass:'left' },
-	        { data: 'createuser', sClass:'left' },
-	        { data: 'updateuser', sClass:'left' },
-	        { data: 'updatetime', sClass:'left' }
+	        { "data": "trainId", "class":"left"},
+	        { "data": "orgId", "class":"left" },
+	        { "data": "trainNumber", "class":"left" },
+	        { "data": "startStation", "class":"left" },
+	        { "data": "endStation", "class":"left" },
+	        { "data": "startTime", "class":"left" },
+	        { "data": "endTime", "class":"left" },
+	        { "data": "createtime", "class":"left" },
+	        { "data": "createuser", "class":"left" },
+	        { "data": "updateuser", "class":"left" },
+	        { "data": "updatetime", "class":"left" }
 	    ];
         	
-        var fnServerData = function(sSource, aoData, fnCallback) {
-			$.ajax({
-				"type" : 'post',
-				"url" : sSource,
-				"dataType" : "json",
-				"data" : {
-					aoData : JSON.stringify(aoData)
-				},
-				"success" : function(resp) {
-					fnCallback(resp);
-				}
-			});
-		}
-		
 		var retrieveData = function( sSource, aoData, fnCallback ) {  
 			$.ajax({
 				"type" : 'post',
@@ -157,34 +143,6 @@ function TrainManage(){
 				}
 			});
 		}
-		
-		
-		
-		/*$("#goodsTable").dataTable({
-			//"oLanguage" : oLanguage,
-			"bJQueryUI": true,
-			"bPaginate" : true,// 分页按钮
-			"bFilter" : true,// 搜索栏
-			"bLengthChange" : true,// 每行显示记录数
-			"iDisplayLength" : 10,// 每页显示行数
-			"bSort" : false,// 排序
-			//"aLengthMenu": [[50,100,500,1000,10000], [50,100,500,1000,10000]],//定义每页显示数据数量
-			//"iScrollLoadGap":400,//用于指定当DataTable设置为滚动时，最多可以一屏显示多少条数据
-			//"aaSorting": [[4, "desc"]],
-			"bInfo" : true,// Showing 1 to 10 of 23 entries 总记录数没也显示多少等信息
-			"bWidth":true,
-			//"sScrollY": "62%",
-	        //"sScrollX": "210%",
-	        "bScrollCollapse": true,
-			"sPaginationType" : "full_numbers", // 分页，一共两种样式 另一种为two_button // 是datatables默认
-			"bProcessing" : true,
-			"bServerSide" : true,
-			"bDestroy": true,
-			"bSortCellsTop": true,	
-	        "sAjaxSource": sAjaxSource, 
-	        "aoColumns": columns,
-	        "fnServerData" : fnServerData
-	    });*/
 		
 		createDataTables("goodsTable", sAjaxSource, columns, retrieveData);
 	}

@@ -122,28 +122,28 @@ var oLanguage = {
 
 function createDataTables(tableId, sAjaxSource, columns, retrieveData){
 	$("#goodsTable").dataTable({
-		"oLanguage" : oLanguage,
-		"bJQueryUI": true,
-		"bPaginate" : true,// 分页按钮
-		"bFilter" : false,// 搜索栏
-		"bLengthChange" : false,// 每行显示记录数
-		"iDisplayLength" : 10,// 每页显示行数
-		"bSort" : false,// 排序
+		"language" : oLanguage,
+		"JQueryUI": true,
+		"Paginate" : true,// 分页按钮
+		"filter" : false,// 搜索栏
+		"lengthChange" : false,// 每行显示记录数
+		"displayLength" : 10,// 每页显示行数
+		"sort" : false,// 排序
 		//"aLengthMenu": [[50,100,500,1000,10000], [50,100,500,1000,10000]],//定义每页显示数据数量
 		//"iScrollLoadGap":400,//用于指定当DataTable设置为滚动时，最多可以一屏显示多少条数据
 		//"aaSorting": [[4, "desc"]],
-		"bInfo" : true,// Showing 1 to 10 of 23 entries 总记录数没也显示多少等信息
-		"bWidth":true,
+		"info" : true,// Showing 1 to 10 of 23 entries 总记录数没也显示多少等信息
+		"width":true,
 		//"sScrollY": "62%",
         //"sScrollX": "210%",
-        "bScrollCollapse": true,
-		"sPaginationType" : "full_numbers", // 分页，一共两种样式 另一种为two_button // 是datatables默认
-		"bProcessing" : true,
-		"bServerSide" : true,
-		"bDestroy": true,
-		"bSortCellsTop": true,	
-        "sAjaxSource": sAjaxSource, 
-        "aoColumns": [columns],
-        "fnServerData" : retrieveData
+        "scrollCollapse": true,
+		"paginationType" : "full_numbers", // 分页，一共两种样式 另一种为two_button // 是datatables默认
+		"processing" : true,
+		"serverSide" : true,
+		"destroy": true,
+		"sortCellsTop": true,	
+        "ajaxSource": sAjaxSource, 
+        "columns": [columns],
+        "serverData" : retrieveData
 	});
 }

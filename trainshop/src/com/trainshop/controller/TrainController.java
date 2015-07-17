@@ -88,10 +88,10 @@ public class TrainController extends BaseController {
 		count = trainService.getCountByHql(hql.toString(), null);
 		
 		Map<String, Object> dataMap = new HashMap<String, Object>();
-		dataMap.put("iTotalRecords", count);
-		dataMap.put("sEcho",initEcho);
-		dataMap.put("iTotalDisplayRecords", count);
-		dataMap.put("aaData", list);
+		dataMap.put("recordsTotal", count);
+		dataMap.put("draw",1);
+		dataMap.put("recordsFiltered", count);
+		dataMap.put("data", list);
 		
 
 		//List<Train> list = trainService.findAll();
