@@ -1,19 +1,30 @@
 var categoryList = new Array();
 
 $(document).ready(function() {
+	$("#originalImg").fileinput({
+		showCaption: false,
+		showUpload: false,
+		showPreview: true,
+		previewFileType: "image",
+		maxFileSize: 3000,
+		allowedFileTypes: ["image"]
+	});
 	
+	$("#category").on("click",function(){
+		$('#categoryModalId').modal('show');
+	});
 	
-	var goodsManage = new GoodsManage();
-	goodsManage.createGoodsTable();
+	var goodsPublish = new GoodsPublish();
+	//goodsPublish.createGoodsTable();
 	
-	$("#addGoods").on("click", {getList:categoryManage.createGoodsTable}, categoryManage.addGoods);
-	
-	$("#saveCategory").on("click",{getList:categoryManage.getCategoryList}, categoryManage.updateCategory);
-	
-	$("#deleteCategory").on("click",{getList:categoryManage.getCategoryList}, categoryManage.deleteCategory);
+//	$("#addGoods").on("click", {getList:categoryManage.createGoodsTable}, categoryManage.addGoods);
+//	
+//	$("#saveCategory").on("click",{getList:categoryManage.getCategoryList}, categoryManage.updateCategory);
+//	
+//	$("#deleteCategory").on("click",{getList:categoryManage.getCategoryList}, categoryManage.deleteCategory);
 });
 
-function GoodsManage(){
+function GoodsPublish(){
 	var zTreeOnClick = function zTreeOnClick(event, treeId, treeNode) {
 		for(var i = 0; i < categoryList.length; i++){
 			if(treeNode.id == categoryList[i].catId){
@@ -46,109 +57,68 @@ function GoodsManage(){
 		}
 	};
 	
-	this.createGoodsTable = function (){
-		var sAjaxSource = basePath + "goods/getlist";
-		var columns = [{ "mData": "goodsId", 'sClass':'left'},
-        	{ "mData": "trainNumber", 'sClass':'center'}, 
-        	{ "mData": "startTime",'sClass':'left'},
-        	{ "mData": "catId",'sClass':'left'},
-        	{ "mData": "goodsSn",'sClass':'left'},
-        	{ "mData": "goodsName",'sClass':'left'},
-        	{ "mData": "goodsNameStyle",'sClass':'left'},
-        	{ "mData": "clickCount",'sClass':'left'},
-        	{ "mData": "brandId",'sClass':'left'},
-        	{ "mData": "providerName",'sClass':'left'},
-        	{ "mData": "goodsNumber",'sClass':'left'},
-        	{ "mData": "goodsWeight",'sClass':'left'},
-        	{ "mData": "marketPrice",'sClass':'left'},
-        	{ "mData": "shopPrice",'sClass':'left'},
-        	{ "mData": "promotePrice",'sClass':'left'},
-        	{ "mData": "promoteStartDate",'sClass':'left'},
-        	{ "mData": "promoteEndDate",'sClass':'left'},
-        	{ "mData": "warnNumber",'sClass':'left'},
-        	{ "mData": "keywords",'sClass':'left'},
-        	{ "mData": "goodsBrief",'sClass':'left'},
-        	{ "mData": "goodsDesc", 'sClass':'left'}];
-        	
-        var fnServerData = function(sSource, aoData, fnCallback) {
-			$.ajax({
-				"type" : 'post',
-				"url" : sSource,
-				"dataType" : "json",
-				"data" : {
-					aoData : JSON.stringify(aoData)
-				},
-				"success" : function(resp) {
-					fnCallback(resp);
-				}
-			});
-		}
-		
-		
-		createDataTables("goodsTable", sAjaxSource, columns, fnServerData);
-		//分类读取
-		$.ajax({
-			type : 'POST',
-			url : basePath + "category/getlist",
-			data : {},
-			async : false,
-			dataType : "json",
-			success : function(data) {
-				if (data.flag == "1") {
-					$("#parCategoryName").text("");
-					$("#parCategoryId").val("");
-					$("#categoryName").val("");
-					$("#isShow").val("1");
-					
+	//分类读取
+	$.ajax({
+		type : 'POST',
+		url : basePath + "category/getlist",
+		data : {},
+		async : false,
+		dataType : "json",
+		success : function(data) {
+			if (data.flag == "1") {
+				$("#parCategoryName").text("");
+				$("#parCategoryId").val("");
+				$("#categoryName").val("");
+				$("#isShow").val("1");
+				
+				if(data.DATA != undefined){
 					if(data.DATA != undefined){
-						if(data.DATA != undefined){
-							categoryList = data.DATA;
-							var resultData = data.DATA;
-							
-							var zNodes = new Array();
-							var obj = new Object();
-							obj.id = 0;
-							obj.name = "商品分类";
-							obj.checked = false;
-							zNodes.push(obj);
-							
-							if(resultData instanceof Array){
-							 	for(var i = 0; i < resultData.length; i++){
-									var obj = new Object();
-									obj.id = resultData[i].catId;
-									obj.pId= resultData[i].parentId;
-									obj.name = resultData[i].catName;
-									obj.checked = false;
-									
-									zNodes.push(obj);
-								}
-							}
-							else{
+						categoryList = data.DATA;
+						var resultData = data.DATA;
+						
+						var zNodes = new Array();
+						var obj = new Object();
+						obj.id = 0;
+						obj.name = "商品分类";
+						obj.checked = false;
+						zNodes.push(obj);
+						
+						if(resultData instanceof Array){
+						 	for(var i = 0; i < resultData.length; i++){
 								var obj = new Object();
-								obj.id = resultData.catId;
-								obj.pId= resultData.parentId;
-								obj.name = resultData.catName;
+								obj.id = resultData[i].catId;
+								obj.pId= resultData[i].parentId;
+								obj.name = resultData[i].catName;
 								obj.checked = false;
 								
 								zNodes.push(obj);
 							}
 						}
+						else{
+							var obj = new Object();
+							obj.id = resultData.catId;
+							obj.pId= resultData.parentId;
+							obj.name = resultData.catName;
+							obj.checked = false;
+							
+							zNodes.push(obj);
+						}
 					}
-					
-					$.fn.zTree.init($("#categoryTreeId"), setting, zNodes);
-					
-					var treeObj = $.fn.zTree.getZTreeObj("categoryTreeId");
-					treeObj.expandAll(true);
 				}
-				else {
-					
-				}
-			},
-			error : function(data) {
-				layer.alert("数据请求失败!", 8);
+				
+				$.fn.zTree.init($("#categoryTreeId"), setting, zNodes);
+				
+				var treeObj = $.fn.zTree.getZTreeObj("categoryTreeId");
+				treeObj.expandAll(true);
 			}
-		});
-	};
+			else {
+				
+			}
+		},
+		error : function(data) {
+			layer.alert("数据请求失败!", 8);
+		}
+	});
 	
 	this.addGoods = function(event){
 		var treeObj = $.fn.zTree.getZTreeObj("categoryTreeId");

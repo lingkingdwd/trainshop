@@ -124,7 +124,7 @@ function createDataTables(tableId, sAjaxSource, columns, retrieveData){
 	$("#goodsTable").dataTable({
 		"language" : oLanguage,
 		"JQueryUI": true,
-		"Paginate" : true,// 分页按钮
+		"paginate" : true,// 分页按钮
 		"filter" : false,// 搜索栏
 		"lengthChange" : false,// 每行显示记录数
 		"displayLength" : 10,// 每页显示行数
