@@ -1,5 +1,7 @@
 package com.trainshop.dao.impl;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import com.trainshop.dao.IGoodsDao;
@@ -11,7 +13,11 @@ public class GoodsDao extends AbstractHibernateDao<Goods> implements IGoodsDao {
 
 	public GoodsDao() {
 		super();
-
 		setClazz(Goods.class);
+	}
+	
+	public List<Goods> findGoods()
+	{
+		return super.findAll();
 	}
 }

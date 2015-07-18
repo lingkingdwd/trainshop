@@ -1,6 +1,5 @@
 package com.trainshop.controller;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -9,7 +8,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -65,7 +63,7 @@ public class GoodsController extends BaseController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "getlist", method = RequestMethod.POST, produces = { "text/json;charset=UTF-8" })
+	@RequestMapping(value = "getlist", method = RequestMethod.GET, produces = { "text/json;charset=UTF-8" })
 	public String getlist(HttpServletRequest request, HttpSession session) {
 		String result = null;
 

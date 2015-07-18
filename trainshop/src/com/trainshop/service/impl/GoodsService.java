@@ -1,6 +1,8 @@
 package com.trainshop.service.impl;
 
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -24,5 +26,10 @@ public class GoodsService extends AbstractService<Goods> implements IGoodsServic
     @Override
     protected IOperations<Goods> getDao() {
         return this.goodsDao;
+    }
+    
+    public List<Goods>  findGoods()
+    {
+    	return goodsDao.findAll();
     }
 }
