@@ -230,12 +230,12 @@ function GoodsPublish(){
 				var returnData = eval('(' + data + ')');
 				var flag = returnData.flag;
 				if("1" == flag) {
-					$("#saveBtn").removeAttr("disabled");
+		        	$("#saveBtn").removeAttr("disabled");
 					layer.alert("商品添加成功!");
 				}
-		        else{ 
-		        	$("#saveBtn").removeAttr("disabled");
-					layer.alert("商品添加失败!");  
+		        else{
+					$("#saveBtn").removeAttr("disabled");
+					layer.alert(returnData.message);  
 				}  
 			}  
 		};
@@ -300,6 +300,10 @@ function GoodsPublish(){
 			layer.alert("请选择分类!", 8);
 		}
 	};
+	
+	$('#backList').on('click', function (e) {
+    	location.href = basePath + "goods/init";
+    });
 }
 
 function createOneCondition(fieldname, valList){

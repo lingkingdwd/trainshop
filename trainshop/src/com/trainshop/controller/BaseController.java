@@ -19,4 +19,10 @@ public class BaseController {
 		
 		return result;
 	}
+	
+	public String returnFail(String message){
+		String result = "{\"flag\":\"0\",\"message\":\"" + message + "\"}";
+		
+		return result;
+	}
 }

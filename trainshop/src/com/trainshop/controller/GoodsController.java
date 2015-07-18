@@ -23,7 +23,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.trainshop.common.util.JsonPluginsUtil;
 import com.trainshop.common.util.PageTools;
 import com.trainshop.model.Goods;
-import com.trainshop.model.OrderInfo;
 import com.trainshop.service.IGoodsService;
 
 @Controller
@@ -166,11 +165,15 @@ public class GoodsController extends BaseController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "create", method = RequestMethod.POST, produces = { "text/json;charset=UTF-8" })
+	@RequestMapping(value = "create", method = RequestMethod.POST, produces = { "text/html;charset=UTF-8" })
 	public String create(HttpServletRequest request, HttpSession session) {
 		String result = "";
 		String data = request.getParameter("data");
 		Goods entity = JsonPluginsUtil.jsonToBean(data, Goods.class);
+		
+		if(goodsExist(entity.getGoodsName(), entity.getGoodsSn() )){
+			return super.returnFail("商品已经存在！");
+		}
 
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 		List<MultipartFile> goodsThumb = multipartRequest
@@ -189,10 +192,9 @@ public class GoodsController extends BaseController {
 				} else {
 					try {
 						// 拿到输出流，同时重命名上传的文件
-						String filePath = path + "/"
-								+ System.currentTimeMillis() + "_"
-								+ file.getOriginalFilename();
-						entity.setGoodsThumb(filePath);
+						String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
+						String filePath = path + "/" + fileName;
+						entity.setGoodsThumb("/upload/" + fileName);
 						FileOutputStream os = new FileOutputStream(filePath);
 						// 拿到上传文件的输入流
 						FileInputStream in = (FileInputStream) file
@@ -222,10 +224,9 @@ public class GoodsController extends BaseController {
 				} else {
 					try {
 						// 拿到输出流，同时重命名上传的文件
-						String filePath = path + "/"
-								+ System.currentTimeMillis() + "_"
-								+ file.getOriginalFilename();
-						entity.setGoodsImg(filePath);
+						String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
+						String filePath = path + "/" + fileName;
+						entity.setGoodsImg("/upload/" + fileName);
 						FileOutputStream os = new FileOutputStream(filePath);
 						// 拿到上传文件的输入流
 						FileInputStream in = (FileInputStream) file
@@ -255,10 +256,9 @@ public class GoodsController extends BaseController {
 				} else {
 					try {
 						// 拿到输出流，同时重命名上传的文件
-						String filePath = path + "/"
-								+ System.currentTimeMillis() + "_"
-								+ file.getOriginalFilename();
-						entity.setOriginalImg(filePath);
+						String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
+						String filePath = path + "/" + fileName;
+						entity.setOriginalImg("/upload/" + fileName);
 						FileOutputStream os = new FileOutputStream(filePath);
 						// 拿到上传文件的输入流
 						FileInputStream in = (FileInputStream) file
@@ -284,7 +284,7 @@ public class GoodsController extends BaseController {
 		entity.setIsDelete(0);
 		goodsService.create(entity);
 
-		return super.returnData(result);
+		return super.returnSucess(result);
 	}
 
 	@RequestMapping(value = { "/saveOrUpdate" }, method = RequestMethod.POST)
@@ -323,5 +323,34 @@ public class GoodsController extends BaseController {
 		goodsService.deleteById(Long.parseLong(id));
 
 		return super.returnSucess(result);
+	}
+	
+	/**
+	 * 删除商品
+	 * 
+	 * @param request
+	 * @param session
+	 * @return
+	 */
+	private boolean goodsExist(String goodsName, String goodsSn) {
+		boolean result = false;
+		
+		StringBuffer hql = new StringBuffer();
+		
+		hql.append(" From Goods as g where 1=1 ");
+
+		if (goodsName != null && goodsName != "") {
+			hql.append(" and g.goodsName = '" + goodsName + "'");
+		}
+		if (goodsSn != null && goodsSn != "") {
+			hql.append(" and g.goodsSn = '" + goodsSn + "'");
+		}
+
+		int sum = goodsService.getCountByHql(hql.toString(), null);
+		if(sum > 0){
+			result = true;
+		}
+		
+		return result;
 	}
 }

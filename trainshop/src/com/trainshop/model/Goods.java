@@ -367,7 +367,7 @@ public class Goods implements java.io.Serializable {
 		this.goodsDesc = goodsDesc;
 	}
 
-	@Column(name = "goods_thumb", nullable = false)
+	@Column(name = "goods_thumb")
 	public String getGoodsThumb() {
 		return this.goodsThumb;
 	}
@@ -376,7 +376,7 @@ public class Goods implements java.io.Serializable {
 		this.goodsThumb = goodsThumb;
 	}
 
-	@Column(name = "goods_img", nullable = false)
+	@Column(name = "goods_img")
 	public String getGoodsImg() {
 		return this.goodsImg;
 	}
@@ -385,7 +385,7 @@ public class Goods implements java.io.Serializable {
 		this.goodsImg = goodsImg;
 	}
 
-	@Column(name = "original_img", nullable = false)
+	@Column(name = "original_img")
 	public String getOriginalImg() {
 		return this.originalImg;
 	}

@@ -219,7 +219,7 @@
 								<button type="button" class="btn btn-primary" id="saveBtn">
 									<i class="fa fa-check-circle"></i> 保存
 								</button>
-								<button type="button" class="btn btn-default" id="back">
+								<button type="button" class="btn btn-default" id="backList">
 									<i class="fa fa-arrow-left"></i> 返回
 								</button>
 							</div>

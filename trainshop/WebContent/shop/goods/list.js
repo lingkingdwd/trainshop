@@ -52,6 +52,10 @@ $(document).ready(function() {
        	});
 
        });
+       
+        $('#btn_addGood').on('click', function (e) {
+        	location.href = basePath + "goods/publish";
+        });
 });
 
 function pageInit()
