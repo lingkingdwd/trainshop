@@ -1,6 +1,24 @@
 var categoryList = new Array();
 
 $(document).ready(function() {
+	$("#goodsThumb").fileinput({
+		showCaption: false,
+		showUpload: false,
+		showPreview: true,
+		previewFileType: "image",
+		maxFileSize: 3000,
+		allowedFileTypes: ["image"]
+	});
+	
+	$("#goodsImg").fileinput({
+		showCaption: false,
+		showUpload: false,
+		showPreview: true,
+		previewFileType: "image",
+		maxFileSize: 3000,
+		allowedFileTypes: ["image"]
+	});
+	
 	$("#originalImg").fileinput({
 		showCaption: false,
 		showUpload: false,
@@ -15,6 +33,11 @@ $(document).ready(function() {
 	});
 	
 	var goodsPublish = new GoodsPublish();
+	goodsPublish.createAddCondition();
+	
+	
+	$("#saveBtn").on('click', goodsPublish.addGoods);
+		
 	//goodsPublish.createGoodsTable();
 	
 //	$("#addGoods").on("click", {getList:categoryManage.createGoodsTable}, categoryManage.addGoods);
@@ -25,137 +48,198 @@ $(document).ready(function() {
 });
 
 function GoodsPublish(){
-	var zTreeOnClick = function zTreeOnClick(event, treeId, treeNode) {
-		for(var i = 0; i < categoryList.length; i++){
-			if(treeNode.id == categoryList[i].catId){
-				
-				var treeObj = $.fn.zTree.getZTreeObj("categoryTreeId");
-				var sNodes = treeObj.getSelectedNodes();
-				if (sNodes.length > 0) {
-					var node = sNodes[0].getParentNode();
-					$("#parCategoryName").text(node.name);
-					$("#parCategoryId").val(node.id);
+	this.createAddCondition = function(){
+		var zTreeOnClick = function zTreeOnClick(event, treeId, treeNode) {
+			for(var i = 0; i < categoryList.length; i++){
+				if(treeNode.id == categoryList[i].catId){
+					
+					var treeObj = $.fn.zTree.getZTreeObj("categoryTreeId");
+					var sNodes = treeObj.getSelectedNodes();
+					if (sNodes.length > 0) {
+						var node = sNodes[0].getParentNode();
+						$("#parCategoryName").text(node.name);
+						$("#parCategoryId").val(node.id);
+					}
+					$("#categoryName").val(categoryList[i].catName);
+					$("#isShow").val(categoryList[i].isShow);
 				}
-				$("#categoryName").val(categoryList[i].catName);
-				$("#isShow").val(categoryList[i].isShow);
 			}
-		}
-	};
-	
-	var setting = {
-		/*check: {
-			enable: true,
-			chkStyle: "radio"
-		},*/
-		data: {
-			simpleData: {
-				enable: true
+		};
+		
+		var setting = {
+			/*check: {
+				enable: true,
+				chkStyle: "radio"
+			},*/
+			data: {
+				simpleData: {
+					enable: true
+				}
+			},
+			callback: {
+				onClick: zTreeOnClick
 			}
-		},
-		callback: {
-			onClick: zTreeOnClick
-		}
-	};
-	
-	//分类读取
-	$.ajax({
-		type : 'POST',
-		url : basePath + "category/getlist",
-		data : {},
-		async : false,
-		dataType : "json",
-		success : function(data) {
-			if (data.flag == "1") {
-				$("#parCategoryName").text("");
-				$("#parCategoryId").val("");
-				$("#categoryName").val("");
-				$("#isShow").val("1");
-				
-				if(data.DATA != undefined){
+		};
+		
+		var treeHandleFunc = function () {
+			//单位确定按钮
+			var treeObj = $.fn.zTree.getZTreeObj("categoryTreeId");
+			var nodes = treeObj.getSelectedNodes(true);
+			
+			if(nodes.length > 0){
+				$("#categoryId").val(nodes[0].id);
+				$("#category").val(nodes[0].name);
+			}
+			
+			$('#categoryModalId').hide();
+		};
+		
+		//分类读取
+		$.ajax({
+			type : 'POST',
+			url : basePath + "category/getlist",
+			data : {},
+			async : false,
+			dataType : "json",
+			success : function(data) {
+				if (data.flag == "1") {
+					$("#parCategoryName").text("");
+					$("#parCategoryId").val("");
+					$("#categoryName").val("");
+					$("#isShow").val("1");
+					
 					if(data.DATA != undefined){
-						categoryList = data.DATA;
-						var resultData = data.DATA;
-						
-						var zNodes = new Array();
-						var obj = new Object();
-						obj.id = 0;
-						obj.name = "商品分类";
-						obj.checked = false;
-						zNodes.push(obj);
-						
-						if(resultData instanceof Array){
-						 	for(var i = 0; i < resultData.length; i++){
+						if(data.DATA != undefined){
+							categoryList = data.DATA;
+							var resultData = data.DATA;
+							
+							var zNodes = new Array();
+							var obj = new Object();
+							obj.id = 0;
+							obj.name = "商品分类";
+							obj.checked = false;
+							zNodes.push(obj);
+							
+							if(resultData instanceof Array){
+							 	for(var i = 0; i < resultData.length; i++){
+									var obj = new Object();
+									obj.id = resultData[i].catId;
+									obj.pId= resultData[i].parentId;
+									obj.name = resultData[i].catName;
+									obj.checked = false;
+									
+									zNodes.push(obj);
+								}
+							}
+							else{
 								var obj = new Object();
-								obj.id = resultData[i].catId;
-								obj.pId= resultData[i].parentId;
-								obj.name = resultData[i].catName;
+								obj.id = resultData.catId;
+								obj.pId= resultData.parentId;
+								obj.name = resultData.catName;
 								obj.checked = false;
 								
 								zNodes.push(obj);
 							}
 						}
-						else{
-							var obj = new Object();
-							obj.id = resultData.catId;
-							obj.pId= resultData.parentId;
-							obj.name = resultData.catName;
-							obj.checked = false;
-							
-							zNodes.push(obj);
-						}
+						
 					}
+					
+					$.fn.zTree.init($("#categoryTreeId"), setting, zNodes);
+					
+					var treeObj = $.fn.zTree.getZTreeObj("categoryTreeId");
+					treeObj.expandAll(true);
+					
+					$("#selectCategoryBtnId").click(treeHandleFunc).trigger("click");
 				}
-				
-				$.fn.zTree.init($("#categoryTreeId"), setting, zNodes);
-				
-				var treeObj = $.fn.zTree.getZTreeObj("categoryTreeId");
-				treeObj.expandAll(true);
+				else {
+					
+				}
+			},
+			error : function(data) {
+				layer.alert("数据请求失败!", 8);
 			}
-			else {
-				
-			}
-		},
-		error : function(data) {
-			layer.alert("数据请求失败!", 8);
-		}
-	});
+		});
+	}
 	
 	this.addGoods = function(event){
-		var treeObj = $.fn.zTree.getZTreeObj("categoryTreeId");
-		var sNodes = treeObj.getSelectedNodes();
-		if (sNodes.length > 0) {
-			var node = sNodes[0];
-			
-			var obj = new Object();
-			obj.parentId = node.id;
-			obj.catName = $("#categoryName").val();
-			obj.isShow = $("#isShow").val();
-			obj.showInNav = 0;
-			obj.sortOrder = 50;
-			obj.catDesc = "";
-			obj.grade = 0;
-			obj.filterAttr = "0";
-			obj.keywords = "";
-			
-			var param = {data:JSON.stringify(obj)};
-		
-			callAjax(basePath + "category/create",'POST', param, function(data){
-				if (data.flag == "1") {
-					layer.alert("分类分类添加成功!");
-					
-					if(event != undefined){
-						var getCategoryList = event.data.getList;
-						getCategoryList();
-					}
-				}
-				else{
-					layer.alert("分类分类添加失败!");
-				}
-			});
+		var obj = new Object();
+		var val = "";
+		val = $("#goodsName").val();
+		if (val != "" && val != null) {
+			obj.goodsName = val;
 		}
 		else{
-			layer.alert("请选择父级分类!", 8);
+			layer.alert("请输入商品名称!"); 
+			return;
 		}
+		val = $("#categoryId").val();
+		if (val != "" && val != null) {
+			obj.catId = val;
+		}
+		else{
+			layer.alert("请选择商品分类!"); 
+			return;
+		}
+		val = $("#goodsSn").val();
+		if (val != "" && val != null) {
+			obj.goodsSn = val;
+		}
+		else{
+			layer.alert("请输入商品货号!"); 
+			return;
+		}
+		
+		val = $("#shopPrice").val();
+		if (val != "" && val != null) {
+			obj.shopPrice = val;
+		}
+		else{
+			layer.alert("请输入商品售价!"); 
+			return;
+		}
+		
+		obj.marketPrice = $("#marketPrice").val();
+		obj.promotePrice = $("#promotePrice").val();
+		obj.goodsBrief = $("#goodsBrief").val();
+		obj.goodsDesc = $("#goodsDesc").val();
+		obj.integral = $("#integral").val();
+		obj.isBest = $("input[name='isBest']:checked").val();
+		obj.isNew = $("input[name='isNew']:checked").val();
+		obj.isHot = $("input[name='isHot']:checked").val();
+		obj.isPromote = $("input[name='isPromote']:checked").val();
+		obj.giveIntegral = $("#giveIntegral").val();
+		obj.sellerNote = $("#sellerNote").val();
+		obj.goodsNumber = 0;
+			
+		var param = {data:JSON.stringify(obj)};
+			
+		var options = { 
+			method:"POST",
+			datatype : "text",
+			url: basePath + "goods/create",
+			data: param,
+			semantic:true,
+			beforeSubmit: function (formData, jqForm, options) {   
+				var queryString = $.param(formData);   	
+				return true;
+			}, 
+			error:function(request){
+				
+			},
+			success: function (data) {
+				var returnData = eval('(' + data + ')');
+				var flag = returnData.flag;
+				if("1" == flag) {
+					$("#saveBtn").removeAttr("disabled");
+					layer.alert("商品添加成功!");
+				}
+		        else{ 
+		        	$("#saveBtn").removeAttr("disabled");
+					layer.alert("商品添加失败!");  
+				}  
+			}  
+		};
+		$("#addGoodsForm").ajaxSubmit(options);
 	};
 	
 	this.updateCategory = function(event){
