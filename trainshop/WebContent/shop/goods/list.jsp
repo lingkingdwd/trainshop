@@ -30,17 +30,9 @@
 							<div id="garage-show">
 								<div class="row">
 									<div class="col-md-10 padding-left-none text-left">
-										<button type="button" class="btn btn-success" id="addOrg">
+										<button type="button" class="btn btn-success" id="btn_addGood">
 											<span class="fa fa-plus"></span> 添加商品
 										</button>
-										<!-- <button type="button" id="saveOrg" type="button"
-											class="btn btn-primary" id="save-garage">
-											<i class="fa fa-save"></i> 保存修改
-										</button>
-										<button type="button" id="deleteOrg" type="button"
-											class="btn btn-danger" id="deleteOrg">
-											<i class="fa fa-times"></i> 删除机构
-										</button> -->
 									</div>
 								</div>
 							</div>
@@ -50,15 +42,17 @@
 										class="table table-striped table-bordered table-hover">
 										<thead>
 											<tr>
-												<th>姓名</th>
-												<th>职位</th>
-												<th>Office</th>
-												<th>Extn.</th>
-												<th>Start date</th>
-												<th>Salary</th>
+												<th>商品ID</th>
+												<th>商品编号</th>
+												<th>商品名称</th>
+												<th>库存数量</th>
+												<th>市场售价</th>
+												<th>本店售价</th>
+												<th>商品介绍</th>
+												<th>操作</th>
 											</tr>
 										</thead>
-
+										<tbody></tbody>
 									</table>
 								</div>
 							</div>

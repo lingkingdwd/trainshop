@@ -20,4 +20,9 @@ public class GoodsDao extends AbstractHibernateDao<Goods> implements IGoodsDao {
 	{
 		return super.findAll();
 	}
+	
+	public void  deleteGood(long id)
+	{
+		super.deleteById(id);
+	}
 }

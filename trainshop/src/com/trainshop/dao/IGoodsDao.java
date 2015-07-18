@@ -7,4 +7,5 @@ import com.trainshop.model.Goods;
 
 public interface IGoodsDao extends IOperations<Goods>{
 	public List<Goods> findGoods();
+	public void  deleteGood(long id);
 }

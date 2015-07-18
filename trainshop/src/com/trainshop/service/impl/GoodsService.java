@@ -32,4 +32,10 @@ public class GoodsService extends AbstractService<Goods> implements IGoodsServic
     {
     	return goodsDao.findAll();
     }
+    
+
+    public void  deleteGood(long id)
+    {
+    	goodsDao.deleteById(id);
+    }
 }
