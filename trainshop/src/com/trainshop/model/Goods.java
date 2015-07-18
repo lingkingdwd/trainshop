@@ -3,7 +3,10 @@ package com.trainshop.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.Transient;
+
 import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -59,8 +62,31 @@ public class Goods implements java.io.Serializable {
 	private Integer rankIntegral;
 	private Integer suppliersId;
 	private Integer isCheck;
+	
+	private int start = 0;
+	private int limit = 10;
 
 	// Constructors
+
+	@Transient
+	public int getStart() {
+		return start;
+	}
+
+	@Transient
+	public void setStart(int start) {
+		this.start = start;
+	}
+
+	@Transient
+	public int getLimit() {
+		return limit;
+	}
+
+	@Transient
+	public void setLimit(int limit) {
+		this.limit = limit;
+	}
 
 	/** default constructor */
 	public Goods() {

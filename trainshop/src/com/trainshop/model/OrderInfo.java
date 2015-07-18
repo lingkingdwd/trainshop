@@ -89,7 +89,33 @@ public class OrderInfo implements java.io.Serializable {
 	private Integer parentId;
 	private Double discount;
 	
-	private List<OrderGoods> orderGoods;	
+	private List<OrderGoods> orderGoods;
+	
+	private int start = 0;
+	private int limit = 10;
+
+	// Constructors
+
+	@Transient
+	public int getStart() {
+		return start;
+	}
+
+	@Transient
+	public void setStart(int start) {
+		this.start = start;
+	}
+
+	@Transient
+	public int getLimit() {
+		return limit;
+	}
+
+	@Transient
+	public void setLimit(int limit) {
+		this.limit = limit;
+	}
+	
 	// Constructors
 
 	/** default constructor */

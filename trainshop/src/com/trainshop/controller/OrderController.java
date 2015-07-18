@@ -72,14 +72,16 @@ public class OrderController extends BaseController {
 		String data = request.getParameter("data");
 		int start = 0;
 		int limit = 10;
-		if(!request.getParameter("start").equals(null)){
+		/*if(!request.getParameter("start").equals(null)){
 			start = new Integer(request.getParameter("start"));
 		}
 		if(!request.getParameter("limit").equals(null)){
 			limit = new Integer(request.getParameter("limit"));
-		}
+		}*/
 		
 		OrderInfo order = JsonPluginsUtil.jsonToBean(data, OrderInfo.class);
+		start = order.getStart();
+		limit = order.getLimit();
 		
 		PageTools page = new PageTools();
 		

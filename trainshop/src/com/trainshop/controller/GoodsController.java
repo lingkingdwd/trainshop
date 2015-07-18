@@ -2,9 +2,10 @@ package com.trainshop.controller;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletContext;
@@ -20,7 +21,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.trainshop.common.util.JsonPluginsUtil;
+import com.trainshop.common.util.PageTools;
 import com.trainshop.model.Goods;
+import com.trainshop.model.OrderInfo;
 import com.trainshop.service.IGoodsService;
 
 @Controller
@@ -67,8 +70,8 @@ public class GoodsController extends BaseController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/getlist", method = RequestMethod.GET, produces = { "text/json;charset=UTF-8" })
-	public String getlist(HttpServletRequest request, HttpSession session) {
+	@RequestMapping(value = "/getAllList", method = RequestMethod.GET, produces = { "text/json;charset=UTF-8" })
+	public String getAllList(HttpServletRequest request, HttpSession session) {
 		String result = null;
 
 		List<Goods> list = goodsService.findAll();
@@ -76,6 +79,83 @@ public class GoodsController extends BaseController {
 		result = JsonPluginsUtil.beanListToJson(list);
 
 		return super.returnData(result);
+	}
+
+	/**
+	 * 获取列车商品列表
+	 * 
+	 * @param request
+	 * @param session
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/getlist", method = RequestMethod.POST, produces = { "text/json;charset=UTF-8" })
+	public String getlist(HttpServletRequest request, HttpSession session) {
+		String result = null;
+
+		String data = request.getParameter("data");
+		int start = 0;
+		int limit = 10;
+
+		Goods goods = JsonPluginsUtil.jsonToBean(data, Goods.class);
+		start = goods.getStart();
+		limit = goods.getLimit();
+
+		PageTools page = new PageTools();
+
+		Map parameters = new HashMap();
+		StringBuffer hql = new StringBuffer();
+		hql.append("select g.goodsId, g.goodsName,g.goodsNumber, g.promotePrice, g.warnNumber,g.goodsBrief,"
+				+ "g.goodsDesc,g.goodsThumb,g.goodsImg, g.originalImg, g.isOnSale, g.integral, g.isBest, g.isNew, g.isHot, "
+				+ "g.bonusTypeId, g.sellerNote, tg.goodsNumber, tg.shopPrice, tg.promotePrice, tg.promoteStartDate, "
+				+ " tg.promoteEndDate, tg.warnNumber, t.trainNumber,t.startTime From Goods as g, TrainGoods as tg, Train as t "
+				+ " where t.trainId = tg.trainId and g.goodsId = tg.goodsId ");
+
+		if (session.getAttribute("trainNumber") != null) {
+			String trainNumber = session.getAttribute("trainNumber").toString();
+			hql.append(" and t.trainNumber = '" + trainNumber + "'");
+		}
+		if (session.getAttribute("startTime") != null) {
+			String startTime = session.getAttribute("startTime").toString();
+			hql.append(" and t.startTime = " + startTime);
+		}
+
+		if (goods == null || goods.equals("")) {
+			int sum = goodsService.getCountByHql(hql.toString(), null);
+			List<Goods> list = goodsService.searchByHql(hql.toString(), null,
+					start, limit);
+
+			page.setDataList(list);
+			page.setTotalProperty(sum);
+
+			result = JsonPluginsUtil.beanListToJson(list);
+
+			return super.returnData(result);
+		} else {
+			if (goods != null) {
+				hql.append(" and g.catId = " + goods.getCatId());
+				//parameters.put("catId", goods.getCatId());
+			}
+			/*
+			 * if (goods.getPayStatus() != 0) {
+			 * hql.append(" and model.payStatus =:payStatus");
+			 * Parameters.put("payStatus", order.getPayStatus()); } if
+			 * (goods.getOrderStatus() != 0) {
+			 * hql.append(" and model.orderStatus =:orderStatus");
+			 * Parameters.put("orderStatus", order.getOrderStatus()); }
+			 */
+
+			int sum = goodsService.getCountByHql(hql.toString(), null);
+			List<Goods> list = goodsService.searchByHql(hql.toString(), null,
+					start, limit);
+
+			page.setDataList(list);
+			page.setTotalProperty(sum);
+
+			result = JsonPluginsUtil.beanToJson(page);
+
+			return super.returnData(result);
+		}
 	}
 
 	/**
@@ -93,11 +173,14 @@ public class GoodsController extends BaseController {
 		Goods entity = JsonPluginsUtil.jsonToBean(data, Goods.class);
 
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-		List<MultipartFile> goodsThumb = multipartRequest.getFiles("goodsThumb");
+		List<MultipartFile> goodsThumb = multipartRequest
+				.getFiles("goodsThumb");
 		List<MultipartFile> goodsImg = multipartRequest.getFiles("goodsImg");
-		List<MultipartFile> originalImg = multipartRequest.getFiles("originalImg");
-		
-		String path = request.getSession().getServletContext().getRealPath("upload");  
+		List<MultipartFile> originalImg = multipartRequest
+				.getFiles("originalImg");
+
+		String path = request.getSession().getServletContext()
+				.getRealPath("upload");
 
 		if (goodsThumb != null && goodsThumb.size() > 0) {
 			// 循环获取file数组中得文件
@@ -105,21 +188,24 @@ public class GoodsController extends BaseController {
 				if (file.isEmpty()) {
 				} else {
 					try {
-						//拿到输出流，同时重命名上传的文件 
-						String filePath = path + "/" + System.currentTimeMillis() + "_" + file.getOriginalFilename();
+						// 拿到输出流，同时重命名上传的文件
+						String filePath = path + "/"
+								+ System.currentTimeMillis() + "_"
+								+ file.getOriginalFilename();
 						entity.setGoodsThumb(filePath);
-	                    FileOutputStream os = new FileOutputStream(filePath);  
-	                    //拿到上传文件的输入流  
-	                    FileInputStream in = (FileInputStream) file.getInputStream();  
-	                      
-	                    //以写字节的方式写文件  
-	                    int b = 0;  
-	                    while((b=in.read()) != -1){  
-	                        os.write(b);  
-	                    }  
-	                    os.flush();  
-	                    os.close();  
-	                    in.close();  
+						FileOutputStream os = new FileOutputStream(filePath);
+						// 拿到上传文件的输入流
+						FileInputStream in = (FileInputStream) file
+								.getInputStream();
+
+						// 以写字节的方式写文件
+						int b = 0;
+						while ((b = in.read()) != -1) {
+							os.write(b);
+						}
+						os.flush();
+						os.close();
+						in.close();
 					} catch (IOException e) {
 						e.printStackTrace();
 					} catch (Exception e) {
@@ -128,28 +214,31 @@ public class GoodsController extends BaseController {
 				}
 			}
 		}
-		
+
 		if (goodsImg != null && goodsImg.size() > 0) {
 			// 循环获取file数组中得文件
 			for (MultipartFile file : goodsImg) {
 				if (file.isEmpty()) {
 				} else {
 					try {
-						//拿到输出流，同时重命名上传的文件 
-						String filePath = path + "/" + System.currentTimeMillis() + "_" + file.getOriginalFilename();
+						// 拿到输出流，同时重命名上传的文件
+						String filePath = path + "/"
+								+ System.currentTimeMillis() + "_"
+								+ file.getOriginalFilename();
 						entity.setGoodsImg(filePath);
-	                    FileOutputStream os = new FileOutputStream(filePath);  
-	                    //拿到上传文件的输入流  
-	                    FileInputStream in = (FileInputStream) file.getInputStream();  
-	                      
-	                    //以写字节的方式写文件  
-	                    int b = 0;  
-	                    while((b=in.read()) != -1){  
-	                        os.write(b);  
-	                    }  
-	                    os.flush();  
-	                    os.close();  
-	                    in.close();  
+						FileOutputStream os = new FileOutputStream(filePath);
+						// 拿到上传文件的输入流
+						FileInputStream in = (FileInputStream) file
+								.getInputStream();
+
+						// 以写字节的方式写文件
+						int b = 0;
+						while ((b = in.read()) != -1) {
+							os.write(b);
+						}
+						os.flush();
+						os.close();
+						in.close();
 					} catch (IOException e) {
 						e.printStackTrace();
 					} catch (Exception e) {
@@ -158,28 +247,31 @@ public class GoodsController extends BaseController {
 				}
 			}
 		}
-		
+
 		if (originalImg != null && originalImg.size() > 0) {
 			// 循环获取file数组中得文件
 			for (MultipartFile file : originalImg) {
 				if (file.isEmpty()) {
 				} else {
 					try {
-						//拿到输出流，同时重命名上传的文件 
-						String filePath = path + "/" + System.currentTimeMillis() + "_" + file.getOriginalFilename();
+						// 拿到输出流，同时重命名上传的文件
+						String filePath = path + "/"
+								+ System.currentTimeMillis() + "_"
+								+ file.getOriginalFilename();
 						entity.setOriginalImg(filePath);
-	                    FileOutputStream os = new FileOutputStream(filePath);  
-	                    //拿到上传文件的输入流  
-	                    FileInputStream in = (FileInputStream) file.getInputStream();  
-	                      
-	                    //以写字节的方式写文件  
-	                    int b = 0;  
-	                    while((b=in.read()) != -1){  
-	                        os.write(b);  
-	                    }  
-	                    os.flush();  
-	                    os.close();  
-	                    in.close();  
+						FileOutputStream os = new FileOutputStream(filePath);
+						// 拿到上传文件的输入流
+						FileInputStream in = (FileInputStream) file
+								.getInputStream();
+
+						// 以写字节的方式写文件
+						int b = 0;
+						while ((b = in.read()) != -1) {
+							os.write(b);
+						}
+						os.flush();
+						os.close();
+						in.close();
 					} catch (IOException e) {
 						e.printStackTrace();
 					} catch (Exception e) {
@@ -213,7 +305,7 @@ public class GoodsController extends BaseController {
 		// ps.saveOrUpdate(p);
 		return "redirect:/person/list.action"; // 重定向
 	}
-	
+
 	/**
 	 * 删除商品
 	 * 
@@ -225,9 +317,9 @@ public class GoodsController extends BaseController {
 	@RequestMapping(value = "/deleteGood", method = RequestMethod.POST, produces = { "text/json;charset=UTF-8" })
 	public String deleteGood(HttpServletRequest request, HttpSession session) {
 		String result = "";
-		
+
 		String id = request.getParameter("id");
-		
+
 		goodsService.deleteById(Long.parseLong(id));
 
 		return super.returnSucess(result);
