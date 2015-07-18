@@ -1,8 +1,8 @@
 package com.trainshop.controller;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -67,7 +67,7 @@ public class GoodsController extends BaseController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "getlist", method = RequestMethod.POST, produces = { "text/json;charset=UTF-8" })
+	@RequestMapping(value = "/getlist", method = RequestMethod.GET, produces = { "text/json;charset=UTF-8" })
 	public String getlist(HttpServletRequest request, HttpSession session) {
 		String result = null;
 
@@ -212,5 +212,24 @@ public class GoodsController extends BaseController {
 		}
 		// ps.saveOrUpdate(p);
 		return "redirect:/person/list.action"; // 重定向
+	}
+	
+	/**
+	 * 删除商品
+	 * 
+	 * @param request
+	 * @param session
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/deleteGood", method = RequestMethod.POST, produces = { "text/json;charset=UTF-8" })
+	public String deleteGood(HttpServletRequest request, HttpSession session) {
+		String result = "";
+		
+		String id = request.getParameter("id");
+		
+		goodsService.deleteById(Long.parseLong(id));
+
+		return super.returnSucess(result);
 	}
 }

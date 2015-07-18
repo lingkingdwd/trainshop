@@ -17,8 +17,6 @@ public class Goods implements java.io.Serializable {
 	// Fields
 
 	private Long goodsId;
-	private String trainNumber;
-	private Long startTime;
 	private Integer catId;
 	private String goodsSn;
 	private String goodsName;
@@ -69,12 +67,11 @@ public class Goods implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Goods(String trainNumber, Long startTime, Integer catId,
+	public Goods(Integer catId,
 			String goodsName, Integer goodsNumber, Double shopPrice,
 			String goodsBrief, String goodsDesc, String goodsThumb,
 			String goodsImg, String originalImg, Integer isDelete) {
-		this.trainNumber = trainNumber;
-		this.startTime = startTime;
+//		this.startTime = startTime;
 		this.catId = catId;
 		this.goodsName = goodsName;
 		this.goodsNumber = goodsNumber;
@@ -88,7 +85,7 @@ public class Goods implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Goods(String trainNumber, Long startTime, Integer catId,
+	public Goods(Integer catId,
 			String goodsSn, String goodsName, String goodsNameStyle,
 			Integer clickCount, Long brandId, String providerName,
 			Integer goodsNumber, Double goodsWeight, Double marketPrice,
@@ -103,8 +100,6 @@ public class Goods implements java.io.Serializable {
 			Long lastUpdate, Integer goodsType, String sellerNote,
 			Integer giveIntegral, Integer rankIntegral, Integer suppliersId,
 			Integer isCheck) {
-		this.trainNumber = trainNumber;
-		this.startTime = startTime;
 		this.catId = catId;
 		this.goodsSn = goodsSn;
 		this.goodsName = goodsName;
@@ -159,24 +154,6 @@ public class Goods implements java.io.Serializable {
 
 	public void setGoodsId(Long goodsId) {
 		this.goodsId = goodsId;
-	}
-
-	@Column(name = "train_number", nullable = false, length = 30)
-	public String getTrainNumber() {
-		return this.trainNumber;
-	}
-
-	public void setTrainNumber(String trainNumber) {
-		this.trainNumber = trainNumber;
-	}
-
-	@Column(name = "start_time", nullable = false)
-	public Long getStartTime() {
-		return this.startTime;
-	}
-
-	public void setStartTime(Long startTime) {
-		this.startTime = startTime;
 	}
 
 	@Column(name = "cat_id", nullable = false)
