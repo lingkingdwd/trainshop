@@ -105,20 +105,20 @@ public class GoodsController extends BaseController {
 
 		Map parameters = new HashMap();
 		StringBuffer hql = new StringBuffer();
-		hql.append("select g.goodsId, g.goodsName,g.goodsNumber, g.promotePrice, g.warnNumber,g.goodsBrief,"
+		/*hql.append("select g.goodsId, g.goodsName,g.goodsNumber, g.promotePrice, g.warnNumber,g.goodsBrief,"
 				+ "g.goodsDesc,g.goodsThumb,g.goodsImg, g.originalImg, g.isOnSale, g.integral, g.isBest, g.isNew, g.isHot, "
 				+ "g.bonusTypeId, g.sellerNote, tg.goodsNumber, tg.shopPrice, tg.promotePrice, tg.promoteStartDate, "
 				+ " tg.promoteEndDate, tg.warnNumber, t.trainNumber,t.startTime From Goods as g, TrainGoods as tg, Train as t "
-				+ " where t.trainId = tg.trainId and g.goodsId = tg.goodsId ");
+				+ " where t.trainId = tg.trainId and g.goodsId = tg.goodsId ");*/
+		
+		hql.append(" From Goods as g where 1=1 ");
 
-		if (session.getAttribute("trainNumber") != null) {
-			String trainNumber = session.getAttribute("trainNumber").toString();
-			hql.append(" and t.trainNumber = '" + trainNumber + "'");
+		/*if (goods.getTrainNumber() != null && goods.getTrainNumber() != "") {
+			hql.append(" and t.trainNumber = '" + goods.getTrainNumber() + "'");
 		}
-		if (session.getAttribute("startTime") != null) {
-			String startTime = session.getAttribute("startTime").toString();
-			hql.append(" and t.startTime = " + startTime);
-		}
+		if (goods.getStartTime() != null && goods.getStartTime() != 0) {
+			hql.append(" and t.startTime = " + goods.getStartTime());
+		}*/
 
 		if (goods == null || goods.equals("")) {
 			int sum = goodsService.getCountByHql(hql.toString(), null);

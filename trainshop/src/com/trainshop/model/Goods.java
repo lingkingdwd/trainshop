@@ -65,8 +65,31 @@ public class Goods implements java.io.Serializable {
 	
 	private int start = 0;
 	private int limit = 10;
+	
+	private String trainNumber;
+	private Integer startTime;
 
 	// Constructors
+
+	@Transient
+	public Integer getStartTime() {
+		return startTime;
+	}
+
+	@Transient
+	public void setStartTime(Integer startTime) {
+		this.startTime = startTime;
+	}
+
+	@Transient
+	public String getTrainNumber() {
+		return trainNumber;
+	}
+
+	@Transient
+	public void setTrainNumber(String trainNumber) {
+		this.trainNumber = trainNumber;
+	}
 
 	@Transient
 	public int getStart() {
