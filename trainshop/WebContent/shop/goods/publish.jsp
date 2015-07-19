@@ -262,5 +262,5 @@
 <link rel="stylesheet" href="<%=basePath%>js/bootstrap-fileinput/css/fileinput.css" />
 <script src="<%=basePath%>js/bootstrap-fileinput/js/fileinput.js"></script>
 <script src="<%=basePath%>js/jquery.form.js"></script>
-<script type="text/javascript" src="<%=basePath%>/shop/goods/publish.js"></script>
+<script type="text/javascript" src="<%=basePath%>shop/goods/publish.js"></script>
 </html>

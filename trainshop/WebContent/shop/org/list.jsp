@@ -126,5 +126,5 @@
 	</div>
 	<!-- /#wrapper -->
 </body>
-<script type="text/javascript" src="<%=basePath%>/shop/org/list.js"></script>
+<script type="text/javascript" src="<%=basePath%>shop/org/list.js"></script>
 </html>

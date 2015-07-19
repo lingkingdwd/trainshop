@@ -112,5 +112,5 @@
 	</div>
 	<!-- /#wrapper -->
 </body>
-<script type="text/javascript" src="<%=basePath%>/shop/category/list.js"></script>
+<script type="text/javascript" src="<%=basePath%>shop/category/list.js"></script>
 </html>

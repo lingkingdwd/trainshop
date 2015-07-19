@@ -67,5 +67,5 @@
 	</div>
 	<!-- /#wrapper -->
 </body>
-<script type="text/javascript" src="<%=basePath%>/shop/goods/list.js"></script>
+<script type="text/javascript" src="<%=basePath%>shop/goods/list.js"></script>
 </html>

@@ -133,5 +133,5 @@
 		</div>
 	</div>
 </body>
-<script type="text/javascript" src="<%=basePath%>/shop/train/list.js"></script>
+<script type="text/javascript" src="<%=basePath%>shop/train/list.js"></script>
 </html>
