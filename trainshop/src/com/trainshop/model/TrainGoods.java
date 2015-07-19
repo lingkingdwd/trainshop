@@ -5,169 +5,145 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
 /**
  * TrainGoods entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name="train_goods"
-    ,catalog="trainshop"
-)
+@Table(name = "train_goods", catalog = "trainshop")
+public class TrainGoods implements java.io.Serializable {
 
-public class TrainGoods  implements java.io.Serializable {
+	// Fields
 
+	private Long pkid;
+	private Long goodsId;
+	private Long trainId;
+	private Integer goodsNumber;
+	private Double shopPrice;
+	private Double promotePrice;
+	private Long promoteStartDate;
+	private Long promoteEndDate;
+	private Integer warnNumber;
+	private String remark;
 
-    // Fields    
+	// Constructors
 
-     private Long pkid;
-     private Long goodsId;
-     private Long trainId;
-     private Integer goodsNumber;
-     private Double shopPrice;
-     private Double promotePrice;
-     private Long promoteStartDate;
-     private Long promoteEndDate;
-     private Integer warnNumber;
-     private String remark;
-
-
-    // Constructors
-
-    /** default constructor */
-    public TrainGoods() {
-    }
+	/** default constructor */
+	public TrainGoods() {
+	}
 
 	/** minimal constructor */
-    public TrainGoods(Long pkid, Integer goodsNumber, Double shopPrice) {
-        this.pkid = pkid;
-        this.goodsNumber = goodsNumber;
-        this.shopPrice = shopPrice;
-    }
-    
-    /** full constructor */
-    public TrainGoods(Long pkid, Long goodsId, Long trainId, Integer goodsNumber, Double shopPrice, Double promotePrice, Long promoteStartDate, Long promoteEndDate, Integer warnNumber, String remark) {
-        this.pkid = pkid;
-        this.goodsId = goodsId;
-        this.trainId = trainId;
-        this.goodsNumber = goodsNumber;
-        this.shopPrice = shopPrice;
-        this.promotePrice = promotePrice;
-        this.promoteStartDate = promoteStartDate;
-        this.promoteEndDate = promoteEndDate;
-        this.warnNumber = warnNumber;
-        this.remark = remark;
-    }
+	public TrainGoods(Long pkid, Integer goodsNumber, Double shopPrice) {
+		this.pkid = pkid;
+		this.goodsNumber = goodsNumber;
+		this.shopPrice = shopPrice;
+	}
 
-   
-    // Property accessors
-    @Id 
-    
-    @Column(name="PKID", unique=true, nullable=false)
+	/** full constructor */
+	public TrainGoods(Long pkid, Long goodsId, Long trainId,
+			Integer goodsNumber, Double shopPrice, Double promotePrice,
+			Long promoteStartDate, Long promoteEndDate, Integer warnNumber,
+			String remark) {
+		this.pkid = pkid;
+		this.goodsId = goodsId;
+		this.trainId = trainId;
+		this.goodsNumber = goodsNumber;
+		this.shopPrice = shopPrice;
+		this.promotePrice = promotePrice;
+		this.promoteStartDate = promoteStartDate;
+		this.promoteEndDate = promoteEndDate;
+		this.warnNumber = warnNumber;
+		this.remark = remark;
+	}
 
-    public Long getPkid() {
-        return this.pkid;
-    }
-    
-    public void setPkid(Long pkid) {
-        this.pkid = pkid;
-    }
-    
-    @Column(name="goods_id")
+	// Property accessors
+	@Id
+	@Column(name = "PKID", unique = true, nullable = false)
+	public Long getPkid() {
+		return this.pkid;
+	}
 
-    public Long getGoodsId() {
-        return this.goodsId;
-    }
-    
-    public void setGoodsId(Long goodsId) {
-        this.goodsId = goodsId;
-    }
-    
-    @Column(name="train_ID")
+	public void setPkid(Long pkid) {
+		this.pkid = pkid;
+	}
 
-    public Long getTrainId() {
-        return this.trainId;
-    }
-    
-    public void setTrainId(Long trainId) {
-        this.trainId = trainId;
-    }
-    
-    @Column(name="goods_number", nullable=false)
+	@Column(name = "goods_id")
+	public Long getGoodsId() {
+		return this.goodsId;
+	}
 
-    public Integer getGoodsNumber() {
-        return this.goodsNumber;
-    }
-    
-    public void setGoodsNumber(Integer goodsNumber) {
-        this.goodsNumber = goodsNumber;
-    }
-    
-    @Column(name="shop_price", nullable=false, precision=10)
+	public void setGoodsId(Long goodsId) {
+		this.goodsId = goodsId;
+	}
 
-    public Double getShopPrice() {
-        return this.shopPrice;
-    }
-    
-    public void setShopPrice(Double shopPrice) {
-        this.shopPrice = shopPrice;
-    }
-    
-    @Column(name="promote_price", precision=10)
+	@Column(name = "train_ID")
+	public Long getTrainId() {
+		return this.trainId;
+	}
 
-    public Double getPromotePrice() {
-        return this.promotePrice;
-    }
-    
-    public void setPromotePrice(Double promotePrice) {
-        this.promotePrice = promotePrice;
-    }
-    
-    @Column(name="promote_start_date")
+	public void setTrainId(Long trainId) {
+		this.trainId = trainId;
+	}
 
-    public Long getPromoteStartDate() {
-        return this.promoteStartDate;
-    }
-    
-    public void setPromoteStartDate(Long promoteStartDate) {
-        this.promoteStartDate = promoteStartDate;
-    }
-    
-    @Column(name="promote_end_date")
+	@Column(name = "goods_number", nullable = false)
+	public Integer getGoodsNumber() {
+		return this.goodsNumber;
+	}
 
-    public Long getPromoteEndDate() {
-        return this.promoteEndDate;
-    }
-    
-    public void setPromoteEndDate(Long promoteEndDate) {
-        this.promoteEndDate = promoteEndDate;
-    }
-    
-    @Column(name="warn_number")
+	public void setGoodsNumber(Integer goodsNumber) {
+		this.goodsNumber = goodsNumber;
+	}
 
-    public Integer getWarnNumber() {
-        return this.warnNumber;
-    }
-    
-    public void setWarnNumber(Integer warnNumber) {
-        this.warnNumber = warnNumber;
-    }
-    
-    @Column(name="remark")
+	@Column(name = "shop_price", nullable = false, precision = 10)
+	public Double getShopPrice() {
+		return this.shopPrice;
+	}
 
-    public String getRemark() {
-        return this.remark;
-    }
-    
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
-   
+	public void setShopPrice(Double shopPrice) {
+		this.shopPrice = shopPrice;
+	}
 
+	@Column(name = "promote_price", precision = 10)
+	public Double getPromotePrice() {
+		return this.promotePrice;
+	}
 
+	public void setPromotePrice(Double promotePrice) {
+		this.promotePrice = promotePrice;
+	}
 
+	@Column(name = "promote_start_date")
+	public Long getPromoteStartDate() {
+		return this.promoteStartDate;
+	}
 
+	public void setPromoteStartDate(Long promoteStartDate) {
+		this.promoteStartDate = promoteStartDate;
+	}
 
+	@Column(name = "promote_end_date")
+	public Long getPromoteEndDate() {
+		return this.promoteEndDate;
+	}
 
+	public void setPromoteEndDate(Long promoteEndDate) {
+		this.promoteEndDate = promoteEndDate;
+	}
 
+	@Column(name = "warn_number")
+	public Integer getWarnNumber() {
+		return this.warnNumber;
+	}
 
+	public void setWarnNumber(Integer warnNumber) {
+		this.warnNumber = warnNumber;
+	}
+
+	@Column(name = "remark")
+	public String getRemark() {
+		return this.remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
 }

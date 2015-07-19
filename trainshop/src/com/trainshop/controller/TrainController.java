@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.trainshop.common.util.JsonPluginsUtil;
 import com.trainshop.model.Train;
+import com.trainshop.model.TrainGoods;
 import com.trainshop.service.ITrainService;
 
 @Controller
@@ -103,7 +104,45 @@ public class TrainController extends BaseController {
 
 		return jsonObject.toString();
 	}
+	/**
+	 * 获取所有列车
+	 * 
+	 * @param request
+	 * @param session
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/getAllTrains", method = RequestMethod.POST, produces = { "text/json;charset=UTF-8" })
+	public String getAllTrains(HttpServletRequest request, HttpSession session) {
+		String result = null;
+		
+		List<Train> list=trainService.findAll();
+		
+		result=JsonPluginsUtil.beanListToJson(list);
 
+		return super.returnData(result);
+	}
+
+	
+	/**
+	 * 获取某局下的列车
+	 * 
+	 * @param request
+	 * @param session
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/getListByOrg", method = RequestMethod.POST, produces = { "text/json;charset=UTF-8" })
+	public String getListByOrg(HttpServletRequest request, HttpSession session) {
+		String result = null;
+		String jsondata = request.getParameter("id");
+
+		List<Train> list=trainService.findAll();
+		
+		result=JsonPluginsUtil.beanListToJson(list);
+
+		return super.returnData(result);
+	}
 	/**
 	 * 添加
 	 * 

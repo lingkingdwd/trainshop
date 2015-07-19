@@ -21,13 +21,13 @@
 					</li>
 					<li><a class="amenu">系统管理</a>
 					</li>
-					<li class="active">列车管理</li>
+					<li class="active">列车商品管理</li>
 				</ol>
 			</div>
 			<div class="row">
 				<div class="col-12">
 					<div class="panel panel-default">
-						<div class="panel-heading">列车管理</div>
+						<div class="panel-heading">列车商品管理</div>
 						<div class="panel-body">
 							<div class="row">
 								<div class=" col-md-3" id="left">
@@ -35,16 +35,6 @@
 									<ul id="orgTreeId" class="ztree"></ul>
 								</div>
 								<div class="col-md-9" id="right">
-									<div class="col-md-12">
-										<div class="innerAll  margin-bottom-none padding-top-none">
-											<div class="col-md-12 text-right">
-												<button href="#newTrainWin" data-toggle="modal"
-													type="button" id="createBtn" class="btn btn-success">
-													<i class="fa fa-plus"></i> 创建
-												</button>
-											</div>
-										</div>
-									</div>
 									<div class="col-12 dataTable_wrapper">
 										<table id="trainTable"
 											class="table table-striped table-bordered table-hover">
@@ -55,6 +45,7 @@
 													<th class="text-center">终到站</th>
 													<th class="text-center">开车时间</th>
 													<th class="text-center">到站时间</th>
+													<th class="text-center">操作</th>
 												</tr>
 											</thead>
 											<tbody></tbody>
@@ -141,5 +132,5 @@
 		</div>
 	</div>
 </body>
-<script type="text/javascript" src="<%=basePath%>shop/train/list.js"></script>
+<script type="text/javascript" src="<%=basePath%>/shop/trainManage/list.js"></script>
 </html>
