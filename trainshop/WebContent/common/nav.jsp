@@ -170,28 +170,27 @@
 						<li><a href="<%=basePath %>goods/publish">发布商品</a></li>
 						<li><a href="<%=basePath %>goods/init">商品管理</a></li>
 						<li><a href="<%=basePath %>category/init">分类管理</a></li>
-						<li><a href="morris.html">品牌管理</a></li>
+						<!-- <li><a href="morris.html">品牌管理</a></li>
 						<li><a href="morris.html">消息管理</a></li>
 						<li><a href="morris.html">热门商品</a></li>
-						<li><a href="morris.html">评论管理</a></li>
+						<li><a href="morris.html">评论管理</a></li> -->
 					</ul> <!-- /.nav-second-level --></li>
-				<li><a href="#"><i class="fa fa-files-o fa-fw"></i> 订单管理<span
+				<!-- <li><a href="#"><i class="fa fa-files-o fa-fw"></i> 订单管理<span
 						class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
 						<li><a href="flot.html">未处理订单</a></li>
 						<li><a href="morris.html">已处理订单</a></li>
-					</ul> <!-- /.nav-second-level --></li>
+					</ul> /.nav-second-level</li> -->
 				<li><a href="#"><i class="fa fa-wrench fa-fw"></i> 用户管理<span
 						class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
 						<li><a href="<%=basePath %>org/init">组织机构管理</a></li>
-						<li><a href="<%=basePath %>train/init">列车管理</a></li>
 						<li><a href="panels-wells.html">用户管理</a></li>
 						<li><a href="buttons.html">角色管理</a></li>
 						<li><a href="notifications.html">权限分配</a></li>
 						<li><a href="typography.html">菜单管理</a></li>
 					</ul> <!-- /.nav-second-level --></li>
-				<li><a href="#"><i class="fa fa-sitemap fa-fw"></i> 系统管理<span
+				<!-- <li><a href="#"><i class="fa fa-sitemap fa-fw"></i> 系统管理<span
 						class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
 						<li><a href="#">系统配置</a></li>
@@ -202,17 +201,17 @@
 								<li><a href="#">Third Level Item</a></li>
 								<li><a href="#">Third Level Item</a></li>
 								<li><a href="#">Third Level Item</a></li>
-							</ul> <!-- /.nav-third-level --></li>
-					</ul> <!-- /.nav-second-level --></li>
-				<li><a href="#"><i class="fa fa-files-o fa-fw"></i> 报表管理<span
+							</ul> /.nav-third-level</li>
+					</ul> /.nav-second-level</li> -->
+				<!-- <li><a href="#"><i class="fa fa-files-o fa-fw"></i> 报表管理<span
 						class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
 						<li><a href="blank.html">浏览管理</a></li>
-					</ul> <!-- /.nav-second-level --></li>
+					</ul> /.nav-second-level</li> -->
 				<li><a href="#"><i class="fa fa-files-o fa-fw"></i> 列车管理<span
 						class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
-						<li><a href="blank.html">列车管理</a></li>
+						<li><a href="<%=basePath %>train/init">列车管理</a></li>
 					</ul> <!-- /.nav-second-level --></li>
 			</ul>
 		</div>
