@@ -6,10 +6,17 @@ $(document).ready(function() {
 //	trainGoodsManage.InitTrainTable();
 	trainTable=$("#trainTable").DataTable({
 		ajax: {
-			url:basePath + "train/getListByOrg?id='0'",
-			type : 'POST'
+			url:basePath + "train/getListByOrg",
+			type : 'POST',
+			data : {
+				id : JSON.stringify(0)
+			},
+			success : function(data) {},
+			error : function(data) {
+				layer.alert("数据请求失败!", 8);
+			}
 		},
-//		retrieve: true,
+		retrieve: true,
 		columns :[
 		        { data: "trainId"},
 	//	        { data: "orgId" },
@@ -60,7 +67,7 @@ function TrainGoodsManage(){
 //			$('#trainTable').dataTable().fnClearTable();
 //			//刷新选中局下的列车列表
 //			var trainTable=$('#trainTable').dataTable();
-			trainTable.ajax.url( basePath + "train/getListByOrg?id="+sNodes[0].id ).load();
+			trainTable.ajax.reload(sNodes[0].id);
 //			$.ajax({
 //				type : 'POST',
 //				url : basePath + "train/getListByOrg",
