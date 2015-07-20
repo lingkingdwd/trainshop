@@ -193,10 +193,14 @@ public class OrderController extends BaseController {
 		entity.setShippingStatus(0);
 		entity.setShippingStatus(0);
 		
+		//订单号
+		String orderSn = entity.getTrainNumber() + entity.getCarriage() +  System.currentTimeMillis();
+		entity.setOrderSn(orderSn);
+		
 		orderInfoService.create(entity);
 		
 		orderGoodsService.saveOrUpdateList(entity.getOrderGoods());
 
-		return super.returnData(result);
+		return super.returnData(orderSn);
 	}
 }

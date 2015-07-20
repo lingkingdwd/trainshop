@@ -126,19 +126,18 @@ function TrainManage(){
 			"success" : function(resp) {
 				$("#trainTable").DataTable({
 					data:resp.DATA,
-					columns :[
-						        { "data": "trainId", "class":"left"},
-						        { "data": "orgId", "class":"left" },
-						        { "data": "trainNumber", "class":"left" },
-						        { "data": "startStation", "class":"left" },
-						        { "data": "endStation", "class":"left" },
-						        { "data": "startTime", "class":"left" },
-						        { "data": "endTime", "class":"left" },
-						        { "data": "createtime", "class":"left" },
-						        { "data": "createuser", "class":"left" },
-						        { "data": "updateuser", "class":"left" },
-						        { "data": "updatetime", "class":"left" }
-						    ]
+					columns :[{ "data": "trainId", "class":"left"},
+				        { "data": "orgId", "class":"left" },
+				        { "data": "trainNumber", "class":"left" },
+				        { "data": "startStation", "class":"left" },
+				        { "data": "endStation", "class":"left" },
+				        { "data": "startTime", "class":"left" },
+				        { "data": "endTime", "class":"left" },
+				        { "data": "createtime", "class":"left" },
+				        { "data": "createuser", "class":"left" },
+				        { "data": "updateuser", "class":"left" },
+				        { "data": "updatetime", "class":"left" }
+				    ]
 				});
 			}
 		});

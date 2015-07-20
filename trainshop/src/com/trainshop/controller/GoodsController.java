@@ -194,6 +194,7 @@ public class GoodsController extends BaseController {
 						// 拿到输出流，同时重命名上传的文件
 						String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
 						String filePath = path + "/" + fileName;
+						System.out.println(path);
 						entity.setGoodsThumb("/upload/" + fileName);
 						FileOutputStream os = new FileOutputStream(filePath);
 						// 拿到上传文件的输入流
