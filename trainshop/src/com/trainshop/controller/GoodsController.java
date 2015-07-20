@@ -95,6 +95,26 @@ public class GoodsController extends BaseController {
 		return super.returnData(result);
 	}
 	
+	/**
+	 * 更新商品
+	 * 
+	 * @param request
+	 * @param session
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "update", method = RequestMethod.POST, produces = { "text/json;charset=UTF-8" })
+	public String update(HttpServletRequest request, HttpSession session) {
+		String result = "";
+		
+		String data = request.getParameter("data");
+		
+		Goods entity = JsonPluginsUtil.jsonToBean(data, Goods.class);
+
+		goodsService.update(entity);;
+
+		return super.returnData(result);
+	}
 	@RequestMapping(value={"/saveOrUpdate"}, method = RequestMethod.POST)
 	public String saveOrUpdate(@RequestParam("photo") MultipartFile file,
 	        HttpServletRequest request) throws IOException{

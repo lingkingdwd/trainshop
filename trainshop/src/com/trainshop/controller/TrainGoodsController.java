@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.trainshop.common.HtReturnData;
 import com.trainshop.common.util.JsonPluginsUtil;
 import com.trainshop.model.TrainGoods;
 import com.trainshop.service.ITrainGoodsService;
@@ -64,12 +65,10 @@ public class TrainGoodsController extends BaseController {
 	public String getListByTrain(HttpServletRequest request, HttpSession session) {
 		String result = null;
 		String jsondata = request.getParameter("param");
-		
-		List<TrainGoods> list=trainGoodsService.findObjectsByPerptey(TrainGoods.class, "trainId", Long.getLong(jsondata));
-		
-		result=JsonPluginsUtil.beanListToJson(list);
-
-		return super.returnData(result);
+		int param=Integer.parseInt(jsondata);
+		List data=trainGoodsService.findObjectsByPerptey(TrainGoods.class, "trainId", param);
+		HtReturnData returnData=new HtReturnData(1, data.size(), data.size(), data);
+		return returnData.toJson();
 	}
 //	/**
 //	 * 添加
