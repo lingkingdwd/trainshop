@@ -1,61 +1,10 @@
 var trainTable;
 var trainDatas=new Array;
+var orgId=1;
 $(document).ready(function() {
 	var trainGoodsManage = new TrainGoodsManage();
 	trainGoodsManage.getOrgList();
-//	trainGoodsManage.InitTrainTable();
-	trainTable=$("#trainTable").DataTable({
-		ajax: {
-			url:basePath + "train/getListByOrg",
-			type : 'POST',
-			data : {
-				id : JSON.stringify(0)
-			},
-			success : function(data) {},
-			error : function(data) {
-				layer.alert("数据请求失败!", 8);
-			}
-		},
-		retrieve: true,
-		columns :[
-		        { data: "trainId"},
-	//	        { data: "orgId" },
-		        { data: "trainNumber" },
-		        { data: "startStation" },
-		        { data: "endStation" },
-		        { data: "startTime" },
-		        { data: "endTime" }
-			    ],
-	  "processing": true,
-	   "language": {
-	       "sProcessing": "处理中...",
-	       "sLengthMenu": "显示 _MENU_ 项结果",
-	       "sZeroRecords": "没有匹配结果",
-	       "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
-	       "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
-	       "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
-	       "sInfoPostFix": "",
-	       "sSearch": "搜索:",
-	       "sUrl": "",
-	       "sEmptyTable": "表中数据为空",
-	       "sLoadingRecords": "载入中...",
-	       "sInfoThousands": ",",
-	       "oPaginate": {
-	           "sFirst": "首页",
-	           "sPrevious": "上页",
-	           "sNext": "下页",
-	           "sLast": "末页"
-	       },
-	       "oAria": {
-	           "sSortAscending": ": 以升序排列此列",
-	           "sSortDescending": ": 以降序排列此列"
-	       }
-	   }
-	});
-
-	
-	
-
+	trainGoodsManage.InitTrainTable();
 });
 
 function TrainGoodsManage(){
@@ -64,33 +13,12 @@ function TrainGoodsManage(){
 		var sNodes = treeObj.getSelectedNodes();
 		if (sNodes.length > 0) {
 			//console.log(trainTable);
-//			$('#trainTable').dataTable().fnClearTable();
 //			//刷新选中局下的列车列表
-//			var trainTable=$('#trainTable').dataTable();
-			trainTable.ajax.reload(sNodes[0].id);
-//			$.ajax({
-//				type : 'POST',
-//				url : basePath + "train/getListByOrg",
-//				dataType : "json",
-//				data : {
-//					id : JSON.stringify(sNodes[0].id)
-//				},
-//				"success" : function(resp) {
-//					
-//					if(resp.flag=="1")
-//						{
-////						trainDatas=$.makeArray(resp.DATA);
-//						
-//						
-//						}
-//					else
-//						{
-//						alert(resp.message);
-//						}
-//					
-//				}
-//			});
-//		
+			orgId=sNodes[0].id;
+			trainTable.ajax.reload();
+//			var table = new $.fn.dataTable.Api( '#trainTable' );
+//		    var table=$("#trainTable").DataTable();
+//		    trainTable.draw();
 		}
 	};
 	
@@ -158,43 +86,52 @@ function TrainGoodsManage(){
 		this.InitTrainTable=function()
 		{
 			trainTable=$("#trainTable").DataTable({
-				data:trainDatas,
-				retrieve: true,
-				columns :[
-				        { data: "trainId"},
-			//	        { data: "orgId" },
-				        { data: "trainNumber" },
-				        { data: "startStation" },
-				        { data: "endStation" },
-				        { data: "startTime" },
-				        { data: "endTime" }
-					    ],
-			  "processing": true,
-			   "language": {
-			       "sProcessing": "处理中...",
-			       "sLengthMenu": "显示 _MENU_ 项结果",
-			       "sZeroRecords": "没有匹配结果",
-			       "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
-			       "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
-			       "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
-			       "sInfoPostFix": "",
-			       "sSearch": "搜索:",
-			       "sUrl": "",
-			       "sEmptyTable": "表中数据为空",
-			       "sLoadingRecords": "载入中...",
-			       "sInfoThousands": ",",
-			       "oPaginate": {
-			           "sFirst": "首页",
-			           "sPrevious": "上页",
-			           "sNext": "下页",
-			           "sLast": "末页"
-			       },
-			       "oAria": {
-			           "sSortAscending": ": 以升序排列此列",
-			           "sSortDescending": ": 以降序排列此列"
-			       }
-			   }
-			});
-		};
+			ajax: {
+				url:basePath + "train/getListByOrg",
+				type : 'POST',
+				dataSrc:'data',
+				data: function ( d ) {
+				      return $.extend( {}, d, {
+				        id: orgId
+				      } );
+				    }
+			},
+			serverSide: true,
+			columns :[
+			        { data: "trainId"},
+		//	        { data: "orgId" },
+			        { data: "trainNumber" },
+			        { data: "startStation" },
+			        { data: "endStation" },
+			        { data: "startTime" },
+			        { data: "endTime" }
+				    ],
+//		  "processing": true,
+		   "language": {
+		       "sProcessing": "处理中...",
+		       "sLengthMenu": "显示 _MENU_ 项结果",
+		       "sZeroRecords": "没有匹配结果",
+		       "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+		       "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
+		       "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+		       "sInfoPostFix": "",
+		       "sSearch": "搜索:",
+		       "sUrl": "",
+		       "sEmptyTable": "表中数据为空",
+		       "sLoadingRecords": "载入中...",
+		       "sInfoThousands": ",",
+		       "oPaginate": {
+		           "sFirst": "首页",
+		           "sPrevious": "上页",
+		           "sNext": "下页",
+		           "sLast": "末页"
+		       },
+		       "oAria": {
+		           "sSortAscending": ": 以升序排列此列",
+		           "sSortDescending": ": 以降序排列此列"
+		       }
+		   }
+		});
+			};
 		
 }

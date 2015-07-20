@@ -3,10 +3,15 @@
  var goodDatas=new Array();
 var categoryDatas = new Array();
 var brandDatas=new Array();
+var tr;
+var trRowData;
 $(document).ready(function() {
 	pageInit();
 	
 	$('#goodsTable tbody').on( 'click', 'tr', function () {
+		tr=this;
+		trRowData=goodsTable.row(this).data();
+//		console.log(trRowData);
         if ( $(this).hasClass('selected') ) {
             $(this).removeClass('selected');
         }
@@ -15,7 +20,16 @@ $(document).ready(function() {
             $(this).addClass('selected');
         }
     } );
- 
+	 $('#goodsTable a.view-class').on('click', function (e) {
+		 initModal(trRowData);
+         $("#modalGood").modal("show");
+         $("#add-save").hide();
+     });
+	 $('#goodsTable a.btn-info').on('click', function (e) {
+		 initModal(trRowData);
+		 $("#modalGood").modal("show");
+		 $("#add-save").show();
+     });
     
 	   $('#goodsTable a.btn-danger').on('click', function (e) {
            e.preventDefault();
@@ -56,8 +70,70 @@ $(document).ready(function() {
         $('#btn_addGood').on('click', function (e) {
         	location.href = basePath + "goods/publish";
         });
+	   
+	   $('#add-save').on('click', function () {
+			saveGood();
+		});
 });
 
+function initModal(rowData)
+{
+    $("#goodsName").val(trRowData.goodsName);
+	$("#categoryId").val(trRowData.catId);
+	$("#goodsSn").val(trRowData.goodsSn);
+	$("#shopPrice").val(trRowData.shopPrice);
+	$("#marketPrice").val(trRowData.marketPrice);
+	$("#promotePrice").val(trRowData.promotePrice);
+	$("#goodsBrief").val(trRowData.goodsBrief);
+	$("#goodsDesc").val(trRowData.goodsDesc);
+	$("#integral").val(trRowData.integral);
+	$("input[name='isBest']:checked").val(trRowData.isBest);
+	$("input[name='isNew']:checked").val(trRowData.isNew);
+	$("input[name='isHot']:checked").val(trRowData.isHot);
+	$("input[name='isPromote']:checked").val(trRowData.isPromote);
+	$("#giveIntegral").val(trRowData.giveIntegral);
+	$("#sellerNote").val(trRowData.sellerNote);
+	}
+function deleteGood()
+{
+	}
+function saveGood()
+{
+
+	trRowData.goodsName=$("#goodsName").val();
+//	trRowData.catId=$("#categoryId").val();
+	trRowData.catId=10;
+	trRowData.goodsSn=$("#goodsSn").val();
+	trRowData.shopPrice=$("#shopPrice").val();
+	trRowData.marketPrice=$("#marketPrice").val();
+	trRowData.promotePrice=$("#promotePrice").val();
+	trRowData.goodsBrief=$("#goodsBrief").val();
+	trRowData.goodsDesc=$("#goodsDesc").val();
+	trRowData.integral=$("#integral").val();
+	trRowData.isBest=$("input[name='isBest']:checked").val();
+	trRowData.isNew=$("input[name='isNew']:checked").val();
+	trRowData.isHot=$("input[name='isHot']:checked").val();
+	trRowData.isPromote=$("input[name='isPromote']:checked").val();
+	trRowData.giveIntegral=$("#giveIntegral").val();
+	trRowData.sellerNote=$("#sellerNote").val();
+	
+	var param = {data:JSON.stringify(trRowData)};
+	
+	$.ajax({
+		async: false,
+		type: "POST",
+		url: basePath + "goods/update",
+		dataType: "json",
+		data:param,
+		success: function(data) {
+			goodsTable.row(tr).data(trRowData).draw();
+			alert("商品修改成功！");
+		},
+		error: function() {
+			alert("商品修改成功！");
+		}
+	});
+	}
 function pageInit()
 {
 	$.ajax({
@@ -73,12 +149,21 @@ function pageInit()
 			    data:goodDatas,
 			    columns: [
 			              { data: 'goodsId' },
-			              { data: 'goodsSn' },
-			              { data: 'goodsName' },
 			              { data: 'goodsNumber' },
+			              { data: 'goodsName' },
+			              { data: 'catId' },
 			              { data: 'marketPrice' },
 			              { data: 'shopPrice' },
-			              { data: 'keywords' },
+			              { data: 'promotePrice' },
+			              { data: 'goodsBrief' },
+			              { data: 'goodsDesc' },
+			              { data: 'integral' },
+			              { data: 'isBest' },
+			              { data: 'isNew' },
+			              { data: 'isHot' },
+			              { data: 'isPromote' },
+			              { data: 'giveIntegral' },
+			              { data: 'sellerNote' },
 			              { data: null}
 			          ],
 			          "language": {
@@ -107,19 +192,19 @@ function pageInit()
 					   },
 	                      columnDefs: [{
 	                              visible: false,
-	                              targets: 0
+	                              targets: [0,6,8,9,10,11,12,13,14,15]
 	                          },
 	                          {
 	                        	  targets: 1,
 	                              render: function (data, type, row) {
-	                            	 var html='<td><a href="javascript:;">'+row.goodsSn+'</a></td>';
+	                            	 var html='<td><a class ="view-class" href="javascript:;">'+row.goodsSn+'</a></td>';
 	                                 return html;
 	                              }
 	                          },
 	                          {
-	                        	  targets: 7,
+	                        	  targets: 16,
 	                              render: function (data, type, row) {
-	                            	 var html='<td><a class="btn btn-danger" value="'+row.goodsId+'" href="javascript:;"><i class="glyphicon glyphicon-trash icon-white"></i>删除</a></td>';
+	                            	 var html='<td><a class="btn btn-info" value="'+row.goodsId+'" href="javascript:;">编辑</a><a class="btn btn-danger" value="'+row.goodsId+'" href="javascript:;">删除</a></td>';
 	                                 return html;
 	                              }
 	                          }
@@ -127,7 +212,7 @@ function pageInit()
 			});
 		},
 		error: function() {
-			showMessage("页面加载失败！");
+			alert("页面加载失败！");
 		}
 	});
 	}
