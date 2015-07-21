@@ -2,7 +2,6 @@ var orgList = new Array();
 
 $(document).ready(function() {
 	var trainManage = new TrainManage();
-	//trainManage.createTrainTable();
 	trainManage.getOrgList();
 	
 	trainManage.createTrainTable();
@@ -115,8 +114,81 @@ function TrainManage(){
 	};
 	
 	this.createTrainTable = function (aoData){
-		  
 		$.ajax({
+		async: false,
+		type: "POST",
+		url : basePath + "train/getAllList",
+		dataType: "json",
+		success: function(data) {	
+//			goodsTable.init();
+//			console.log(data);
+			goodDatas=data.DATA;
+			goodsTable =$("#trainTable").DataTable({
+			    data:goodDatas,
+			    columns: [{ "data": "trainId", "class":"left"},
+			        { "data": "orgId", "class":"left" },
+			        { "data": "trainNumber", "class":"left" },
+			        { "data": "startStation", "class":"left" },
+			        { "data": "endStation", "class":"left" },
+			        { "data": "startTime", "class":"left" },
+			        { "data": "endTime", "class":"left" },
+			        { "data": "createtime", "class":"left" },
+			        { "data": "createuser", "class":"left" },
+			        { "data": "updateuser", "class":"left" },
+			        { "data": "updatetime", "class":"left" }
+		          ],
+		          "language": {
+				       "sProcessing": "处理中...",
+				       "sLengthMenu": "显示 _MENU_ 项结果",
+				       "sZeroRecords": "没有匹配结果",
+				       "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+				       "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
+				       "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+				       "sInfoPostFix": "",
+				       "sSearch": "搜索:",
+				       "sUrl": "",
+				       "sEmptyTable": "表中数据为空",
+				       "sLoadingRecords": "载入中...",
+				       "sInfoThousands": ",",
+				       "oPaginate": {
+				           "sFirst": "首页",
+				           "sPrevious": "上页",
+				           "sNext": "下页",
+				           "sLast": "末页"
+				       },
+				       "oAria": {
+				           "sSortAscending": ": 以升序排列此列",
+				           "sSortDescending": ": 以降序排列此列"
+				       }
+				   },
+                  columnDefs: [{
+                          visible: false,
+                          targets: [0,6,8,9,10,11,12,13,14,15]
+                      },
+                      {
+                    	  targets: 1,
+                          render: function (data, type, row) {
+                        	 var html='<td><a class ="view-class" href="javascript:;">'+row.goodsSn+'</a></td>';
+                             return html;
+                          }
+                      },
+                      {
+                    	  targets: 16,
+                          render: function (data, type, row) {
+                        	 var html='<td><a class="btn btn-info" value="'+row.goodsId+'" href="javascript:;">编辑</a><a class="btn btn-danger" value="'+row.goodsId+'" href="javascript:;">删除</a></td>';
+                             return html;
+                          }
+                      }
+                  ]
+			});
+		},
+		error: function() {
+			alert("页面加载失败！");
+		}
+	});
+		
+		  
+		/*$.ajax({
 			type : 'POST',
 			url : basePath + "train/getlist",
 			dataType : "json",
@@ -140,54 +212,54 @@ function TrainManage(){
 				    ]
 				});
 			}
-		});
+		});*/
 	
-//		var sAjaxSource = basePath + "train/getlist";
-//		var columns = [
-//	        { "data": "trainId", "class":"left"},
-//	        { "data": "orgId", "class":"left" },
-//	        { "data": "trainNumber", "class":"left" },
-//	        { "data": "startStation", "class":"left" },
-//	        { "data": "endStation", "class":"left" },
-//	        { "data": "startTime", "class":"left" },
-//	        { "data": "endTime", "class":"left" },
-//	        { "data": "createtime", "class":"left" },
-//	        { "data": "createuser", "class":"left" },
-//	        { "data": "updateuser", "class":"left" },
-//	        { "data": "updatetime", "class":"left" }
-//	    ];
+		/*var sAjaxSource = basePath + "train/getlist";
+		var columns = [
+	        { "data": "trainId", "class":"left"},
+	        { "data": "orgId", "class":"left" },
+	        { "data": "trainNumber", "class":"left" },
+	        { "data": "startStation", "class":"left" },
+	        { "data": "endStation", "class":"left" },
+	        { "data": "startTime", "class":"left" },
+	        { "data": "endTime", "class":"left" },
+	        { "data": "createtime", "class":"left" },
+	        { "data": "createuser", "class":"left" },
+	        { "data": "updateuser", "class":"left" },
+	        { "data": "updatetime", "class":"left" }
+	    ];
         	
-//		var retrieveData = function( sSource, aoData, fnCallback ) {  
-//			$.ajax({
-//				"type" : 'POST',
-//				"url" : sSource,
-//				"dataType" : "json",
-//				"data" : {
-//					data : JSON.stringify(aoData)
-//				},
-//				"success" : function(resp) {
-////					fnCallback(resp);
-//					$("#trainTable").DataTable({
-//						data:resp.DATA,
-//						columns :[
-//							        { "data": "trainId", "class":"left"},
-//							        { "data": "orgId", "class":"left" },
-//							        { "data": "trainNumber", "class":"left" },
-//							        { "data": "startStation", "class":"left" },
-//							        { "data": "endStation", "class":"left" },
-//							        { "data": "startTime", "class":"left" },
-//							        { "data": "endTime", "class":"left" },
-//							        { "data": "createtime", "class":"left" },
-//							        { "data": "createuser", "class":"left" },
-//							        { "data": "updateuser", "class":"left" },
-//							        { "data": "updatetime", "class":"left" }
-//							    ]
-//					});
-//				}
-//			});
-//		}
-//		console.log(retrieveData);
-//		createDataTables("goodsTable", sAjaxSource, columns, retrieveData);
+		var retrieveData = function( sSource, aoData, fnCallback ) {  
+			$.ajax({
+				"type" : 'POST',
+				"url" : sSource,
+				"dataType" : "json",
+				"data" : {
+					data : JSON.stringify(aoData)
+				},
+				"success" : function(resp) {
+					fnCallback(resp);
+					$("#trainTable").DataTable({
+						data:resp.DATA,
+						columns :[
+							        { "data": "trainId", "class":"left"},
+							        { "data": "orgId", "class":"left" },
+							        { "data": "trainNumber", "class":"left" },
+							        { "data": "startStation", "class":"left" },
+							        { "data": "endStation", "class":"left" },
+							        { "data": "startTime", "class":"left" },
+							        { "data": "endTime", "class":"left" },
+							        { "data": "createtime", "class":"left" },
+							        { "data": "createuser", "class":"left" },
+							        { "data": "updateuser", "class":"left" },
+							        { "data": "updatetime", "class":"left" }
+							    ]
+					});
+				}
+			});
+		}
+		//console.log(retrieveData);
+		createDataTables("goodsTable", sAjaxSource, columns, retrieveData);*/
 	}
 	
 	this.addOrg = function(event){

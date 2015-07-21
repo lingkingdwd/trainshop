@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.trainshop.common.HtReturnData;
 import com.trainshop.common.util.JsonPluginsUtil;
+import com.trainshop.model.Goods;
 import com.trainshop.model.Train;
 import com.trainshop.model.TrainGoods;
 import com.trainshop.service.ITrainService;
@@ -46,6 +47,25 @@ public class TrainController extends BaseController {
 		int count = trainService.findAll().size();
 
 		return super.returnData(count);
+	}
+	
+	/**
+	 * 获取商品列表
+	 * 
+	 * @param request
+	 * @param session
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/getAllList", method = RequestMethod.GET, produces = { "text/json;charset=UTF-8" })
+	public String getAllList(HttpServletRequest request, HttpSession session) {
+		String result = null;
+
+		List<Train> list = trainService.findAll();
+
+		result = JsonPluginsUtil.beanListToJson(list);
+
+		return super.returnData(result);
 	}
 
 	/**

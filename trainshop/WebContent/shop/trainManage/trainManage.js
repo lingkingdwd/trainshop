@@ -118,7 +118,7 @@ function TrainManage(){
 		  
 		$.ajax({
 			type : 'POST',
-			url : basePath + "train/getlist",
+			url : basePath + "train/getAllList",
 			dataType : "json",
 			data : {
 				data : JSON.stringify(aoData)

@@ -165,7 +165,7 @@ function pageInit()
 	$.ajax({
 		async: false,
 		type: "GET",
-		url: basePath + "goods/getlist",
+		url: basePath + "goods/getAllList",
 		dataType: "json",
 		success: function(data) {	
 //			goodsTable.init();
@@ -245,7 +245,7 @@ function pageInit()
 	$.ajax({
 		async: false,
 		type: "GET",
-		url: basePath + "goods/getlist",
+		url: basePath + "goods/getAllList",
 		dataType: "json",
 		success: function(data) {	
 //			goodsTable.init();
