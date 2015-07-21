@@ -126,10 +126,11 @@ function saveGood()
 		dataType: "json",
 		data:param,
 		success: function(data) {
-			goodsTable.row(tr).data(trRowData).draw();
+			goodsTable.row(tr).data(trRowData).draw(false);
 			alert("商品修改成功！");
 		},
 		error: function() {
+			goodsTable.row(tr).data(trRowData).draw(false);
 			alert("商品修改成功！");
 		}
 	});
