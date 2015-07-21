@@ -43,13 +43,13 @@
 										<thead>
 											<tr>
 												<th >商品ID</th>
-												<th>编号</th>
-												<th >名称</th>
-												<th >商品分类</th>
-												<th >市场价</th>
-												<th >售价</th>
+												<th class="text-center" style="width: 10%;">编号</th>
+												<th class="text-center" style="width: 22%;">名称</th>
+												<th class="text-center" style="width: 10%;">商品分类</th>
+												<th class="text-center" style="width: 10%;">市场价</th>
+												<th class="text-center" style="width: 8%;">售价</th>
 												<th >促销价格</th>
-												<th >简短描述</th>
+												<th class="text-center" style="width: 28%;">简短描述</th>
 												<th >详细描述</th>
 												<th >可用积分数量</th>
 												<th >是否是精品</th>
@@ -58,7 +58,7 @@
 												<th >是否特价</th>
 												<th >赠送积分数量</th>
 												<th >商家备注</th>
-												<th >操作</th>
+												<th class="text-center" style="width: 12%;">操作</th>
 												
 											</tr>
 										</thead>

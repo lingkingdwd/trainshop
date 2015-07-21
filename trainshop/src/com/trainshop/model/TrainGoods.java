@@ -1,8 +1,14 @@
 package com.trainshop.model;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -24,8 +30,18 @@ public class TrainGoods implements java.io.Serializable {
 	private Long promoteEndDate;
 	private Integer warnNumber;
 	private String remark;
-
-	// Constructors
+//	private Set<Goods> goods;
+//
+//	// Constructors
+//    @OneToMany
+//    @JoinColumn(name="GOODS_ID")
+//	public Set<Goods> getGoods() {
+//		return goods;
+//	}
+//
+//	public void setGoods(Set<Goods> goods) {
+//		this.goods = goods;
+//	}
 
 	/** default constructor */
 	public TrainGoods() {
@@ -58,6 +74,7 @@ public class TrainGoods implements java.io.Serializable {
 	// Property accessors
 	@Id
 	@Column(name = "PKID", unique = true, nullable = false)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getPkid() {
 		return this.pkid;
 	}

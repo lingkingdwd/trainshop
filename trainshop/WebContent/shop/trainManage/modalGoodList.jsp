@@ -21,23 +21,17 @@
 										class="table table-bordered table-hover">
 										<thead>
 											<tr>
-												<th >商品ID</th>
-												<th>编号</th>
+	              								<th>列车ID</th>
+												<th>商品ID</th>
+												<th>商品号码</th>
 												<th >名称</th>
-												<th >商品分类</th>
-												<th >市场价</th>
+												<!-- <th >市场价</th> -->
 												<th >售价</th>
 												<th >促销价格</th>
-												<th >简短描述</th>
-												<th >详细描述</th>
-												<th >可用积分数量</th>
-												<th >是否是精品</th>
-												<th >是否是新品</th>
-												<th >是否热销</th>
-												<th >是否特价</th>
-												<th >赠送积分数量</th>
-												<th >商家备注</th>
-												<th >操作</th>
+												<th >促销开始时间</th>
+												<th >促销结束时间</th>
+												<th >备注说明</th>
+												<th class="text-center" style="width: 5%;">操作</th>
 												
 											</tr>
 										</thead>

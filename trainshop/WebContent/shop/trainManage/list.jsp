@@ -30,23 +30,23 @@
 						<div class="panel-heading">列车商品管理</div>
 						<div class="panel-body">
 							<div class="row">
-								<div class=" col-md-3" id="left">
+								<div class=" col-md-2" id="left">
 									<!--此处放树结构-->
 									<ul id="orgTreeId" class="ztree"></ul>
 								</div>
-								<div class="col-md-9" id="right">
+								<div class="col-md-10" id="right">
 									<div class="col-12 dataTable_wrapper">
 										<table id="trainTable"
 											class="table table-striped table-bordered table-hover">
 											<thead>
 												<tr>
-													<th class="text-center">编号</th>
-													<th class="text-center">列车车次</th>
-													<th class="text-center">始发站</th>
-													<th class="text-center">终到站</th>
-													<th class="text-center">开车时间</th>
-													<th class="text-center">到站时间</th>
-													<th class="text-center">操作</th>
+													<!-- <th class="text-center" style="width: 10%;">编号</th> -->
+													<th class="text-center" style="width: 18%;">列车车次</th>
+													<th class="text-center" style="width: 15%;">始发站</th>
+													<th class="text-center" style="width: 15%;">终到站</th>
+													<th class="text-center" style="width: 15%;">开车时间</th>
+													<th class="text-center" style="width: 15%;">到站时间</th>
+													<th class="text-center" style="width: 22%;">操作</th>
 												</tr>
 											</thead>
 											<tbody></tbody>

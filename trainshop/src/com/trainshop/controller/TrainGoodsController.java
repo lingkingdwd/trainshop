@@ -33,25 +33,6 @@ public class TrainGoodsController extends BaseController {
 		}
 	}
 
-	/**
-	 * 获取所有列车的所有列表
-	 * 
-	 * @param request
-	 * @param session
-	 * @return
-	 */
-	@ResponseBody
-	@RequestMapping(value = "/getList", method = RequestMethod.POST, produces = { "text/json;charset=UTF-8" })
-	public String getList(HttpServletRequest request, HttpSession session) {
-		String result = null;
-		
-		List<TrainGoods> list=trainGoodsService.findAll();
-		
-		result=JsonPluginsUtil.beanListToJson(list);
-
-		return super.returnData(result);
-	}
-
 	
 	/**
 	 * 获取某列车的商品列表
@@ -63,51 +44,39 @@ public class TrainGoodsController extends BaseController {
 	@ResponseBody
 	@RequestMapping(value = "/getListByTrain", method = RequestMethod.POST, produces = { "text/json;charset=UTF-8" })
 	public String getListByTrain(HttpServletRequest request, HttpSession session) {
-		String result = null;
-		String jsondata = request.getParameter("param");
-		int param=Integer.parseInt(jsondata);
-		List data=trainGoodsService.findObjectsByPerptey(TrainGoods.class, "trainId", param);
+		String jsondata = request.getParameter("id");
+		List data=trainGoodsService.findObjectsByPerptey(TrainGoods.class, "trainId", Long.parseLong(jsondata));
 		HtReturnData returnData=new HtReturnData(1, data.size(), data.size(), data);
 		return returnData.toJson();
 	}
-//	/**
-//	 * 添加
-//	 * 
-//	 * @param request
-//	 * @param session
-//	 * @return
-//	 */
-//	@ResponseBody
-//	@RequestMapping(value = "create", method = RequestMethod.POST, produces = { "text/json;charset=UTF-8" })
-//	public String create(HttpServletRequest request, HttpSession session) {
-//		String data = request.getParameter("data");
-//
-//		relate entity = JsonPluginsUtil.jsonToBean(data, relate.class);
-//		entity.setCreatetime(System.currentTimeMillis());
-//		if (session.getAttribute("CurrentUserID").equals(null)) {
-//			entity.setCreateuser(new Long(session.getAttribute("CurrentUserID")
-//					.toString()));
-//		}
-//
-//		relateService.create(entity);
-//
-//		return super.returnSucess("保存成功！");
-//	}
-//
-//	/**
-//	 * 删除
-//	 * 
-//	 * @param request
-//	 * @param session
-//	 * @return
-//	 */
-//	@ResponseBody
-//	@RequestMapping(value = "delete", method = RequestMethod.POST, produces = { "text/json;charset=UTF-8" })
-//	public String delete(HttpServletRequest request, HttpSession session) {
-//		Short entityId = Short.valueOf(request.getParameter("data"));
-//
-//		relateService.delete(relateService.find(entityId));
-//
-//		return super.returnSucess("删除成功！");
-//	}
+	/**
+	 * 上架商品
+	 * 
+	 * @param request
+	 * @param session
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/onGood", method = RequestMethod.POST, produces = { "text/json;charset=UTF-8" })
+	public String onGood(HttpServletRequest request, HttpSession session) {
+		String data = request.getParameter("data");
+		TrainGoods entity = JsonPluginsUtil.jsonToBean(data, TrainGoods.class);
+		trainGoodsService.create(entity);
+		return super.returnSucess("上架成功！");
+	}
+
+	/**
+	 * 下架商品
+	 * 
+	 * @param request
+	 * @param session
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/offGood", method = RequestMethod.POST, produces = { "text/json;charset=UTF-8" })
+	public String offGood(HttpServletRequest request, HttpSession session) {
+		String jsondata = request.getParameter("id");
+		trainGoodsService.deleteById(Long.parseLong(jsondata));
+		return super.returnSucess("下架成功！");
+	}
 }

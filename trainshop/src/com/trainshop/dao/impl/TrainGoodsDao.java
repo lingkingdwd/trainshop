@@ -25,4 +25,9 @@ public class TrainGoodsDao extends AbstractHibernateDao<TrainGoods> implements I
 	{
 		super.deleteById(id);
 	}
+	
+	public void  addTrainGoods(TrainGoods trainGood)
+	{
+		super.save(trainGood);
+	}
 }

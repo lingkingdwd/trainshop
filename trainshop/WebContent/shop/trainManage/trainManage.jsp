@@ -63,44 +63,8 @@
 		<!-- /#page-wrapper -->
 	</div>
 	<!-- /#wrapper -->
-
-	<div class="modal fade" id="newTrainWin" style="display: none;">
-		<div class="modal-dialog">
-			<div class="modal-content border-none">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">&times;</button>
-					<h3 class="modal-title">添加商品到列车</h3>
-				</div>
-				<div class="modal-body">
-					<table id="goodsTable"
-										class="table table-striped table-bordered table-hover">
-										<thead>
-											<tr>
-												<th>商品ID</th>
-												<th>商品编号</th>
-												<th>商品名称</th>
-												<th>库存数量</th>
-												<th>市场售价</th>
-												<th>本店售价</th>
-												<th>商品介绍</th>
-												<th>操作</th>
-											</tr>
-										</thead>
-										<tbody></tbody>
-									</table>
-					<input type="hidden" id="orgId" name="orgId" value="">
-				</div>
-				<div class="modal-footer">
-					<button type="submit" class="btn btn-primary" onclick="save();">
-						<i class="fa fa-check-circle"></i> 保存
-					</button>
-					<a href="#" class="btn btn-default" data-dismiss="modal"><i
-						class="fa fa-times"></i>&nbsp;关闭</a>
-				</div>
-			</div>
-		</div>
-	</div>
+<%@include file="modalGoodAdd.jsp" %>
+<%@include file="modalGoodList.jsp" %>
 </body>
 <script type="text/javascript" src="<%=basePath%>/shop/train/trainManage.js"></script>
 </html>
