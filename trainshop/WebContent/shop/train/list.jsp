@@ -36,7 +36,7 @@
 								</div>
 								<div class="col-md-9" id="right">
 									<div class="col-md-12">
-										<div class="innerAll  margin-bottom-none padding-top-none">
+										<div class="innerAll  padding-top-none">
 											<div class="col-md-12 text-right">
 												<button href="#newTrainWin" data-toggle="modal"
 													type="button" id="createBtn" class="btn btn-success">
@@ -50,11 +50,13 @@
 											class="table table-striped table-bordered table-hover">
 											<thead>
 												<tr>
+													<th class="text-center">编号</th>
 													<th class="text-center">列车车次</th>
 													<th class="text-center">始发站</th>
 													<th class="text-center">终到站</th>
 													<th class="text-center">开车时间</th>
 													<th class="text-center">到站时间</th>
+													<th class="text-center">操作</th>
 												</tr>
 											</thead>
 											<tbody></tbody>

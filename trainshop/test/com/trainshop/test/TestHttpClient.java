@@ -20,7 +20,7 @@ import org.apache.http.util.EntityUtils;
 
 public class TestHttpClient {
 	// 接口地址
-	private String ipAddress = "http://localhost:8080";
+	private String ipAddress = "http://103.41.54.30:8080";
 	private String apiURL = "";
 	private Log logger = LogFactory.getLog(this.getClass());
 	private static final String pattern = "yyyy-MM-dd HH:mm:ss:SSS";
@@ -60,8 +60,8 @@ public class TestHttpClient {
         System.out.println(new TestHttpClient("/trainshop/users/getUserslist")
     		.post("{\"userName\":\"kele\"}", 0, 10));*/
         
-        System.out.println(new TestHttpClient("/trainshop/goods/getlist")
-			.post("{\"goodsName\":\"\",\"catId\":\"1\",\"brandId\":\"xxx\",\"start\":\"0\",\"limit\":\"10\"}"));
+        System.out.println(new TestHttpClient("/goods/getlist")
+			.post("{\"start\":\"0\",\"limit\":\"10\"}"));
         
        /* System.out.println(new TestHttpClient("/trainshop/order/getlist")
 			.post("{\"goodsName\":\"xxx\",\"catId\":\"xxx\",\"brandId\":\"xxx\"}", 0, 10));

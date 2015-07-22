@@ -1,10 +1,15 @@
 var orgList = new Array();
+var trainTable;
+var trainDatas=new Array;
+var orgId=1;
 
 $(document).ready(function() {
 	var trainManage = new TrainManage();
 	trainManage.getOrgList();
-	
 	trainManage.createTrainTable();
+	//createTrainTable();
+	
+	//trainManage.createTrainTable();
 	
 	/*$("#addOrg").on("click", {getList:orgManage.getOrgList}, orgManage.addOrg);
 	
@@ -13,22 +18,99 @@ $(document).ready(function() {
 	$("#deleteOrg").on("click",{getList:orgManage.getOrgList}, orgManage.deleteOrg);*/
 });
 
+function createTrainTable(){
+	$.ajax({
+		async: false,
+		type: "POST",
+		url: basePath + "train/getListByOrg",
+		dataType: "json",
+		data:{id:1},
+		success: function(resp) {	
+			trainDatas = resp.data;
+			trainTable = $("#trainTable").DataTable({
+				data:trainDatas,
+				columns :[
+				        { data: "trainId"},
+			//	        { data: "orgId" },
+				        { data: "trainNumber" },
+				        { data: "startStation" },
+				        { data: "endStation" },
+				        { data: "startTime" },
+				        { data: "endTime" },
+				        {data:null}
+					    ],
+		        columnDefs:[
+		                    {
+		                    	targets:[6],
+		                    	render:function(data,type,row)
+		                    	{
+		                    		 /*var html='<td><a class="btn btn-info" value="'+row.goodsId+'" href="javascript:;">商品上车</a><a class="btn btn-success" value="'+row.goodsId+'" href="javascript:;">商品列表</a></td>';
+	                                 return html;*/
+		                    	}
+		                    }
+		                    ],
+	                      "language": {
+	           		       "sProcessing": "处理中...",
+	           		       "sLengthMenu": "显示 _MENU_ 项结果",
+	           		       "sZeroRecords": "没有匹配结果",
+	           		       "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+	           		       "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
+	           		       "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+	           		       "sInfoPostFix": "",
+	           		       "sSearch": "搜索:",
+	           		       "sUrl": "",
+	           		       "sEmptyTable": "表中数据为空",
+	           		       "sLoadingRecords": "载入中...",
+	           		       "sInfoThousands": ",",
+	           		       "oPaginate": {
+	           		           "sFirst": "首页",
+	           		           "sPrevious": "上页",
+	           		           "sNext": "下页",
+	           		           "sLast": "末页"
+	           		       },
+	           		       "oAria": {
+	           		           "sSortAscending": ": 以升序排列此列",
+	           		           "sSortDescending": ": 以降序排列此列"
+	           		       }
+	           		   }
+			});
+		},
+		error: function() {
+			alert("页面加载失败！");
+		}
+	});
+}
+
+function getTrainData(orgId)
+{
+	trainTable.clear().draw();
+	//组织机构读取
+	$.ajax({
+		type : 'POST',
+		url :basePath + "train/getListByOrg",
+		data : {id:orgId},
+		async : false,
+		dataType : "json",
+		success : function(resp) {
+			trainDatas=$.makeArray(resp.data);
+			$.each(trainDatas,function(index,item){
+				trainTable.row.add(item).draw();
+			});
+//			trainTable.draw();
+		},
+		error : function(data) {
+			layer.alert("数据请求失败!", 8);
+		}
+	});
+}
+
 function TrainManage(){
 	var zTreeOnClick = function(event, treeId, treeNode) {
-		for(var i = 0; i < orgList.length; i++){
-			if(treeNode.id == orgList[i].orgId){
-				
-				var treeObj = $.fn.zTree.getZTreeObj("orgTreeId");
-				var sNodes = treeObj.getSelectedNodes();
-				if (sNodes.length > 0) {
-					var node = sNodes[0].getParentNode();
-					$("#parOrgName").text(node.name);
-					$("#parOrgId").val(node.id);
-				}
-				$("#orgName").val(orgList[i].cnname);
-				$("#status").val(orgList[i].status);
-				$("#orgcode").val(orgList[i].orgcode);
-			}
+		var treeObj = $.fn.zTree.getZTreeObj("orgTreeId");
+		var sNodes = treeObj.getSelectedNodes();
+		if (sNodes.length > 0) {
+			orgId=sNodes[0].id;
+			getTrainData(orgId);
 		}
 	};
 	
@@ -113,153 +195,117 @@ function TrainManage(){
 		});
 	};
 	
-	this.createTrainTable = function (aoData){
+	this.createTrainTable = function (){
 		$.ajax({
-		async: false,
-		type: "POST",
-		url : basePath + "train/getAllList",
-		dataType: "json",
-		success: function(data) {	
-//			goodsTable.init();
-//			console.log(data);
-			goodDatas=data.DATA;
-			goodsTable =$("#trainTable").DataTable({
-			    data:goodDatas,
-			    columns: [{ "data": "trainId", "class":"left"},
-			        { "data": "orgId", "class":"left" },
-			        { "data": "trainNumber", "class":"left" },
-			        { "data": "startStation", "class":"left" },
-			        { "data": "endStation", "class":"left" },
-			        { "data": "startTime", "class":"left" },
-			        { "data": "endTime", "class":"left" },
-			        { "data": "createtime", "class":"left" },
-			        { "data": "createuser", "class":"left" },
-			        { "data": "updateuser", "class":"left" },
-			        { "data": "updatetime", "class":"left" }
-		          ],
-		          "language": {
-				       "sProcessing": "处理中...",
-				       "sLengthMenu": "显示 _MENU_ 项结果",
-				       "sZeroRecords": "没有匹配结果",
-				       "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
-				       "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
-				       "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
-				       "sInfoPostFix": "",
-				       "sSearch": "搜索:",
-				       "sUrl": "",
-				       "sEmptyTable": "表中数据为空",
-				       "sLoadingRecords": "载入中...",
-				       "sInfoThousands": ",",
-				       "oPaginate": {
-				           "sFirst": "首页",
-				           "sPrevious": "上页",
-				           "sNext": "下页",
-				           "sLast": "末页"
-				       },
-				       "oAria": {
-				           "sSortAscending": ": 以升序排列此列",
-				           "sSortDescending": ": 以降序排列此列"
-				       }
-				   },
-                  columnDefs: [{
-                          visible: false,
-                          targets: [0,6,8,9,10,11,12,13,14,15]
-                      },
-                      {
-                    	  targets: 1,
-                          render: function (data, type, row) {
-                        	 var html='<td><a class ="view-class" href="javascript:;">'+row.goodsSn+'</a></td>';
+			async: false,
+			type: "POST",
+			url: basePath + "train/getListByOrg",
+			dataType: "json",
+			data:{id:1},
+			success: function(resp) {	
+				trainDatas=resp.data;
+				trainTable=$("#trainTable").DataTable({
+					data:trainDatas,
+					columns :[{ data: "trainId"},
+			//	        { data: "orgId" },
+				        { data: "trainNumber" },
+				        { data: "startStation" },
+				        { data: "endStation" },
+				        { data: "startTime" },
+				        { data: "endTime" },
+				        {data:null}
+					],
+			        columnDefs:[{
+                    	targets:[6],
+                    	render:function(data,type,row)
+                    	{
+                    		 var html='<button type="button" name="editBtn" trainId="' + row.trainId + '" class="btn btn-stroke btn-xs btn-success marright5 "' +
+								'title="编辑">' +
+								'<i class="fa fa-pencil"></i></button>' + 
+								'<button type="button" name="deleteBtn" trainId="' + row.trainId + '" class="btn btn-stroke btn-xs btn-danger marright5 ' +
+								'title="删除">' +
+								'<i class="fa fa-times"></i></button>';
+								
                              return html;
-                          }
-                      },
-                      {
-                    	  targets: 16,
-                          render: function (data, type, row) {
-                        	 var html='<td><a class="btn btn-info" value="'+row.goodsId+'" href="javascript:;">编辑</a><a class="btn btn-danger" value="'+row.goodsId+'" href="javascript:;">删除</a></td>';
-                             return html;
-                          }
-                      }
-                  ]
-			});
-		},
-		error: function() {
-			alert("页面加载失败！");
-		}
-	});
-		
-		  
-		/*$.ajax({
-			type : 'POST',
-			url : basePath + "train/getlist",
-			dataType : "json",
-			data : {
-				data : JSON.stringify(aoData)
-			},
-			"success" : function(resp) {
-				$("#trainTable").DataTable({
-					data:resp.DATA,
-					columns :[{ "data": "trainId", "class":"left"},
-				        { "data": "orgId", "class":"left" },
-				        { "data": "trainNumber", "class":"left" },
-				        { "data": "startStation", "class":"left" },
-				        { "data": "endStation", "class":"left" },
-				        { "data": "startTime", "class":"left" },
-				        { "data": "endTime", "class":"left" },
-				        { "data": "createtime", "class":"left" },
-				        { "data": "createuser", "class":"left" },
-				        { "data": "updateuser", "class":"left" },
-				        { "data": "updatetime", "class":"left" }
-				    ]
+                    	}
+                    }],
+					"language": {
+						"sProcessing": "处理中...",
+	       		       "sLengthMenu": "显示 _MENU_ 项结果",
+	       		       "sZeroRecords": "没有匹配结果",
+	       		       "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+	       		       "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
+	       		       "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+	       		       "sInfoPostFix": "",
+	       		       "sSearch": "搜索:",
+	       		       "sUrl": "",
+	       		       "sEmptyTable": "表中数据为空",
+	       		       "sLoadingRecords": "载入中...",
+	       		       "sInfoThousands": ",",
+	       		       "oPaginate": {
+	       		           "sFirst": "首页",
+	       		           "sPrevious": "上页",
+	       		           "sNext": "下页",
+	       		           "sLast": "末页"
+	       		       },
+	       		       "oAria": {
+	       		           "sSortAscending": ": 以升序排列此列",
+	       		           "sSortDescending": ": 以降序排列此列"
+	       		   		}
+       		   }
 				});
+			},
+			error: function() {
+				alert("页面加载失败！");
 			}
-		});*/
+		});
 	
-		/*var sAjaxSource = basePath + "train/getlist";
-		var columns = [
-	        { "data": "trainId", "class":"left"},
-	        { "data": "orgId", "class":"left" },
-	        { "data": "trainNumber", "class":"left" },
-	        { "data": "startStation", "class":"left" },
-	        { "data": "endStation", "class":"left" },
-	        { "data": "startTime", "class":"left" },
-	        { "data": "endTime", "class":"left" },
-	        { "data": "createtime", "class":"left" },
-	        { "data": "createuser", "class":"left" },
-	        { "data": "updateuser", "class":"left" },
-	        { "data": "updatetime", "class":"left" }
-	    ];
+//		var sAjaxSource = basePath + "train/getlist";
+//		var columns = [
+//	        { "data": "trainId", "class":"left"},
+//	        { "data": "orgId", "class":"left" },
+//	        { "data": "trainNumber", "class":"left" },
+//	        { "data": "startStation", "class":"left" },
+//	        { "data": "endStation", "class":"left" },
+//	        { "data": "startTime", "class":"left" },
+//	        { "data": "endTime", "class":"left" },
+//	        { "data": "createtime", "class":"left" },
+//	        { "data": "createuser", "class":"left" },
+//	        { "data": "updateuser", "class":"left" },
+//	        { "data": "updatetime", "class":"left" }
+//	    ];
         	
-		var retrieveData = function( sSource, aoData, fnCallback ) {  
-			$.ajax({
-				"type" : 'POST',
-				"url" : sSource,
-				"dataType" : "json",
-				"data" : {
-					data : JSON.stringify(aoData)
-				},
-				"success" : function(resp) {
-					fnCallback(resp);
-					$("#trainTable").DataTable({
-						data:resp.DATA,
-						columns :[
-							        { "data": "trainId", "class":"left"},
-							        { "data": "orgId", "class":"left" },
-							        { "data": "trainNumber", "class":"left" },
-							        { "data": "startStation", "class":"left" },
-							        { "data": "endStation", "class":"left" },
-							        { "data": "startTime", "class":"left" },
-							        { "data": "endTime", "class":"left" },
-							        { "data": "createtime", "class":"left" },
-							        { "data": "createuser", "class":"left" },
-							        { "data": "updateuser", "class":"left" },
-							        { "data": "updatetime", "class":"left" }
-							    ]
-					});
-				}
-			});
-		}
-		//console.log(retrieveData);
-		createDataTables("goodsTable", sAjaxSource, columns, retrieveData);*/
+//		var retrieveData = function( sSource, aoData, fnCallback ) {  
+//			$.ajax({
+//				"type" : 'POST',
+//				"url" : sSource,
+//				"dataType" : "json",
+//				"data" : {
+//					data : JSON.stringify(aoData)
+//				},
+//				"success" : function(resp) {
+////					fnCallback(resp);
+//					$("#trainTable").DataTable({
+//						data:resp.DATA,
+//						columns :[
+//							        { "data": "trainId", "class":"left"},
+//							        { "data": "orgId", "class":"left" },
+//							        { "data": "trainNumber", "class":"left" },
+//							        { "data": "startStation", "class":"left" },
+//							        { "data": "endStation", "class":"left" },
+//							        { "data": "startTime", "class":"left" },
+//							        { "data": "endTime", "class":"left" },
+//							        { "data": "createtime", "class":"left" },
+//							        { "data": "createuser", "class":"left" },
+//							        { "data": "updateuser", "class":"left" },
+//							        { "data": "updatetime", "class":"left" }
+//							    ]
+//					});
+//				}
+//			});
+//		}
+//		console.log(retrieveData);
+//		createDataTables("goodsTable", sAjaxSource, columns, retrieveData);
 	}
 	
 	this.addOrg = function(event){

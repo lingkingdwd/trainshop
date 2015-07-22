@@ -34,6 +34,11 @@ public class TrainGoodsService extends AbstractService<TrainGoods> implements IT
     }
     
 
+    public void  addTrainGoods(TrainGoods good)
+    {
+    	trainGoodsDao.addTrainGoods(good);
+    }
+    
     public void  deleteTrainGoods(long id)
     {
     	trainGoodsDao.deleteById(id);

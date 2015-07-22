@@ -131,10 +131,10 @@ public class GoodsController extends BaseController {
 
 			return super.returnData(result);
 		} else {
-			if (goods != null) {
+			/*if (goods != null) {
 				hql.append(" and g.catId = " + goods.getCatId());
 				//parameters.put("catId", goods.getCatId());
-			}
+			}*/
 			/*
 			 * if (goods.getPayStatus() != 0) {
 			 * hql.append(" and model.payStatus =:payStatus");

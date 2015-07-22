@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.trainshop.common.util.JsonPluginsUtil;
 import com.trainshop.common.util.PageParameters;
 import com.trainshop.common.util.PageTools;
+import com.trainshop.model.Train;
 import com.trainshop.model.UserTrain;
 import com.trainshop.model.Users;
 import com.trainshop.service.IUserTrainService;
@@ -222,5 +223,28 @@ public class UsersController extends BaseController {
 		}
 
 		return result;
+	}
+	
+	/**
+	 * 用户车次信息添加
+	 * 
+	 * @param request
+	 * @param session
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "addUserTrain", method = RequestMethod.POST, produces = { "text/json;charset=UTF-8" })
+	public String addUserTrain(HttpServletRequest request, HttpSession session) {
+		String data = request.getParameter("data");
+
+		UserTrain entity = JsonPluginsUtil.jsonToBean(data, UserTrain.class);
+		if (session.getAttribute("CurrentUserID").equals(null)) {
+			entity.setUserId(new Long(session.getAttribute("CurrentUserID")
+					.toString()));
+		}
+
+		userTrainService.create(entity);
+
+		return super.returnSucess("保存成功！");
 	}
 }
