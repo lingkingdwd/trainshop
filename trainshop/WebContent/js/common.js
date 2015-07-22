@@ -101,6 +101,70 @@ function parseJsonData(data)
 	return items;
 }
 
+/*
+ * 格式化时间显示
+ */
+function dateFormat(date) {
+
+	var year = "2000";
+	var month = "01";
+	var day = "01";
+	if (date != null) {
+		year = date.getFullYear();
+		if ((date.getMonth() + 1) < 10)
+			month = "0" + (date.getMonth() + 1);
+		else
+			month = date.getMonth() + 1;
+		if (date.getDate() < 10)
+			day = "0" + date.getDate();
+		else
+			day = date.getDate();
+
+	}
+	return year + "-" + month + "-" + day;
+}
+
+/*
+ * 格式化时间显示
+ */
+function dateTimeFormat(date) {
+
+	var year = "2000";
+	var month = "01";
+	var day = "01";
+	var hour = "00";
+	var minute = "00";
+	if (date != null) {
+		year = date.getFullYear();
+		if ((date.getMonth() + 1) < 10){
+			month = "0" + (date.getMonth() + 1);
+		}
+		else{
+			month = date.getMonth() + 1;
+		}
+		if (date.getDate() < 10){
+			day = "0" + date.getDate();
+		}
+		else{
+			day = date.getDate();
+		}
+		if (date.getHours() < 10){
+			hour = "0" + date.getHours();
+		}
+		else{
+			hour = date.getHours();
+		}
+		if (date.getMinutes() < 10){
+			minute = "0" + date.getMinutes();
+		}
+		else{
+			minute = date.getMinutes();
+		}
+
+	}
+	return year + "-" + month + "-" + day + " " + hour + ":" + minute;
+}
+
 
 var oLanguage = {
 	"sProcessing" : "正在加载数据...",

@@ -38,7 +38,7 @@ public class OrderInfo implements java.io.Serializable {
 	private String trainNumber;
 	private String carriage;
 	private String seatNumber;
-	private Long startTime;
+	private String startTime;
 	private String tel;
 	private String mobile;
 	private String email;
@@ -145,7 +145,7 @@ public class OrderInfo implements java.io.Serializable {
 			int shippingStatus, int payStatus, String consignee,
 			Short country, Short province, Short city, Short district,
 			String address, String zipcode, String trainNumber,
-			String carriage, String seatNumber, Long startTime, String tel,
+			String carriage, String seatNumber, String startTime, String tel,
 			String mobile, String email, String bestTime, String signBuilding,
 			String postscript, Short shippingId, String shippingName,
 			Short payId, String payName, String howOos, String howSurplus,
@@ -375,11 +375,11 @@ public class OrderInfo implements java.io.Serializable {
 	}
 
 	@Column(name = "start_time")
-	public Long getStartTime() {
+	public String getStartTime() {
 		return this.startTime;
 	}
 
-	public void setStartTime(Long startTime) {
+	public void setStartTime(String startTime) {
 		this.startTime = startTime;
 	}
 

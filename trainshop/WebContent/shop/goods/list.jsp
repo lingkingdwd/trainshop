@@ -45,6 +45,7 @@
 												<th >商品ID</th>
 												<th class="text-center" style="width: 10%;">编号</th>
 												<th class="text-center" style="width: 22%;">名称</th>
+												<th class="text-center" style="width: 10%;">分类ID</th>
 												<th class="text-center" style="width: 10%;">商品分类</th>
 												<th class="text-center" style="width: 10%;">市场价</th>
 												<th class="text-center" style="width: 8%;">售价</th>

@@ -153,6 +153,7 @@ function pageInit()
 			              { data: 'goodsNumber' },
 			              { data: 'goodsName' },
 			              { data: 'catId' },
+			              { data: 'catName' },
 			              { data: 'marketPrice' },
 			              { data: 'shopPrice' },
 			              { data: 'promotePrice' },
@@ -193,7 +194,7 @@ function pageInit()
 					   },
 	                      columnDefs: [{
 	                              visible: false,
-	                              targets: [0,6,8,9,10,11,12,13,14,15]
+	                              targets: [0,3,7,9,10,11,12,13,14,15,16]
 	                          },
 	                          {
 	                        	  targets: 1,
@@ -203,7 +204,7 @@ function pageInit()
 	                              }
 	                          },
 	                          {
-	                        	  targets: 16,
+	                        	  targets: 17,
 	                              render: function (data, type, row) {
 	                            	 var html='<td><a class="btn btn-info" value="'+row.goodsId+'" href="javascript:;">编辑</a><a class="btn btn-danger" value="'+row.goodsId+'" href="javascript:;">删除</a></td>';
 	                                 return html;

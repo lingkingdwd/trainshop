@@ -38,8 +38,7 @@
 									<div class="col-md-12">
 										<div class="innerAll  padding-top-none">
 											<div class="col-md-12 text-right">
-												<button href="#newTrainWin" data-toggle="modal"
-													type="button" id="createBtn" class="btn btn-success">
+												<button	type="button" id="createBtn" class="btn btn-success">
 													<i class="fa fa-plus"></i> 创建
 												</button>
 											</div>
@@ -87,7 +86,10 @@
 					<table class="table table-primary table-vertical-center">
 						<tr>
 							<td class="col-md-3 text-right">列车车次：</td>
-							<td><input type="text" id="trainNumber" class="form-control" />
+							<td>
+								<input type="hidden" id="trainId" />
+								<input type="hidden" id="orgId" />
+								<input type="text" id="trainNumber" class="form-control" />
 							</td>
 						</tr>
 						<tr>
@@ -106,7 +108,7 @@
 							<td><div class="form-group margin-none innerB">
 									<div class="col-md-5 padding-none">
 										<div class="input-group"
-											onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm', el:'startTime'})">
+											onclick="WdatePicker({dateFmt:'HH:mm', el:'startTime'})">
 											<input type="text" id="startTime" value="2014-01-01" /> <span
 												class="input-group-addon"><i class="fa fa-calendar"></i>
 											</span>
@@ -120,7 +122,7 @@
 							<td colspan="3"><div class="form-group margin-none innerB">
 									<div class="col-md-5 padding-none">
 										<div class="input-group"
-											onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm', el:'endTime'})">
+											onclick="WdatePicker({dateFmt:'HH:mm', el:'endTime'})">
 											<input type="text" id="endTime" value="2014-01-01" /> <span
 												class="input-group-addon"><i class="fa fa-calendar"></i>
 											</span>
@@ -130,10 +132,9 @@
 							</td>
 						</tr>
 					</table>
-					<input type="hidden" id="orgId" name="orgId" value="">
 				</div>
 				<div class="modal-footer">
-					<button type="submit" class="btn btn-primary" onclick="save();">
+					<button id="saveBtn" type="submit" class="btn btn-primary">
 						<i class="fa fa-check-circle"></i> 保存
 					</button>
 					<a href="#" class="btn btn-default" data-dismiss="modal"><i

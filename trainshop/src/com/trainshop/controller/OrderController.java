@@ -72,12 +72,6 @@ public class OrderController extends BaseController {
 		String data = request.getParameter("data");
 		int start = 0;
 		int limit = 10;
-		/*if(!request.getParameter("start").equals(null)){
-			start = new Integer(request.getParameter("start"));
-		}
-		if(!request.getParameter("limit").equals(null)){
-			limit = new Integer(request.getParameter("limit"));
-		}*/
 		
 		OrderInfo order = JsonPluginsUtil.jsonToBean(data, OrderInfo.class);
 		start = order.getStart();
@@ -89,7 +83,7 @@ public class OrderController extends BaseController {
 		StringBuffer hql = new StringBuffer();
 		hql.append(" From OrderInfo as model ");
 		
-		if(!session.getAttribute("trainNumber").equals(null)){
+		if(session.getAttribute("trainNumber") != null){
 			String trainNumber = session.getAttribute("trainNumber").toString();
 			hql.append(" where model.trainNumber = '" + trainNumber + "'");
 		}
@@ -97,7 +91,7 @@ public class OrderController extends BaseController {
 			result = "{\"flag\":\"0\",\"message\":\"请先登录！\"}";
 			return result;
 		}
-		if(!session.getAttribute("startTime").equals(null)){
+		if(session.getAttribute("startTime") != null){
 			String startTime = session.getAttribute("startTime").toString();
 			hql.append(" and model.startTime = " + startTime);
 		}

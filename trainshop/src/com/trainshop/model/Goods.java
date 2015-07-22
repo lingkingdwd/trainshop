@@ -67,50 +67,10 @@ public class Goods implements java.io.Serializable {
 	private int limit = 10;
 	
 	private String trainNumber;
-	private Integer startTime;
+	private String startTime;
+	private String catName;
 
 	// Constructors
-
-	@Transient
-	public Integer getStartTime() {
-		return startTime;
-	}
-
-	@Transient
-	public void setStartTime(Integer startTime) {
-		this.startTime = startTime;
-	}
-
-	@Transient
-	public String getTrainNumber() {
-		return trainNumber;
-	}
-
-	@Transient
-	public void setTrainNumber(String trainNumber) {
-		this.trainNumber = trainNumber;
-	}
-
-	@Transient
-	public int getStart() {
-		return start;
-	}
-
-	@Transient
-	public void setStart(int start) {
-		this.start = start;
-	}
-
-	@Transient
-	public int getLimit() {
-		return limit;
-	}
-
-	@Transient
-	public void setLimit(int limit) {
-		this.limit = limit;
-	}
-
 	/** default constructor */
 	public Goods() {
 	}
@@ -131,6 +91,37 @@ public class Goods implements java.io.Serializable {
 		this.goodsImg = goodsImg;
 		this.originalImg = originalImg;
 		this.isDelete = isDelete;
+	}
+	
+	public Goods(Long goodsId, String goodsSn, String goodsName, Integer goodsNumber, Double promotePrice, Integer warnNumber, String goodsBrief,
+			 String goodsDesc,String goodsThumb,String goodsImg,String originalImg, Integer isOnSale, Integer integral, Integer isBest, Integer isNew, Integer isHot, 
+			 Integer bonusTypeId, String sellerNote,  Double marketPrice, Double shopPrice, String catName) {
+//		this.startTime = startTime;
+		this.goodsId = goodsId;
+		this.goodsSn = goodsSn;
+		this.goodsName = goodsName;
+		this.goodsNumber = goodsNumber;
+		this.promotePrice = promotePrice;
+		this.warnNumber = warnNumber;
+		
+		this.goodsBrief = goodsBrief;
+		this.goodsDesc = goodsDesc;
+		this.goodsThumb = goodsThumb;
+		this.goodsImg = goodsImg;
+		this.originalImg = originalImg;
+		
+		this.isOnSale = isOnSale;
+		this.integral = integral;
+		this.isBest = isBest;
+		this.isNew = isNew;
+		this.isHot = isHot;
+		
+		this.bonusTypeId = bonusTypeId;
+		this.sellerNote = sellerNote;
+		this.catName = catName;
+		
+		this.marketPrice = marketPrice;
+		this.shopPrice = shopPrice;
 	}
 
 	/** full constructor */
@@ -191,6 +182,56 @@ public class Goods implements java.io.Serializable {
 		this.rankIntegral = rankIntegral;
 		this.suppliersId = suppliersId;
 		this.isCheck = isCheck;
+	}
+
+	@Transient
+	public String getCatName() {
+		return catName;
+	}
+
+	@Transient
+	public void setCatName(String catName) {
+		this.catName = catName;
+	}
+
+	@Transient
+	public String getStartTime() {
+		return startTime;
+	}
+
+	@Transient
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
+	}
+
+	@Transient
+	public String getTrainNumber() {
+		return trainNumber;
+	}
+
+	@Transient
+	public void setTrainNumber(String trainNumber) {
+		this.trainNumber = trainNumber;
+	}
+
+	@Transient
+	public int getStart() {
+		return start;
+	}
+
+	@Transient
+	public void setStart(int start) {
+		this.start = start;
+	}
+
+	@Transient
+	public int getLimit() {
+		return limit;
+	}
+
+	@Transient
+	public void setLimit(int limit) {
+		this.limit = limit;
 	}
 
 	// Property accessors

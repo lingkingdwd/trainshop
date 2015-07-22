@@ -6,6 +6,7 @@ var goodTable;
 var goodTable2;
 var goodDatas=new Array;
 var goodDatas2=new Array;
+var trTrainData;
 $(document).ready(function() {
 	pageInit();
 	var trainGoodsManage = new TrainGoodsManage();
@@ -14,7 +15,7 @@ $(document).ready(function() {
 //	getTrainData(orgId);
 	$('#trainTable tbody').on( 'click', 'tr', function () {
 		tr=this;
-		trTrainData=trainTable.row(this).data();
+		trTrainData = trainTable.row(this).data();
     } );
 	$('#goodsTable tbody').on( 'click', 'tr', function () {
 		tr=this;
@@ -230,7 +231,7 @@ function pageInit()
 	$.ajax({
 		async: false,
 		type: "GET",
-		url: basePath + "goods/getlist",
+		url: basePath + "goods/getAllList",
 		dataType: "json",
 		success: function(data) {	
 //			goodsTable.init();

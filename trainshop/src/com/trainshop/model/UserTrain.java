@@ -19,8 +19,8 @@ public class UserTrain implements java.io.Serializable {
 	private Long userTrainId;
 	private Long userId;
 	private String trainNumber;
-	private Long startTime;
-	private Long endTime;
+	private String startTime;
+	private String endTime;
 	private String carriage;
 	private String seatNumber;
 	private String seatType;
@@ -39,8 +39,8 @@ public class UserTrain implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public UserTrain(Long userId, String trainNumber, Long startTime,
-			Long endTime, String carriage, String seatNumber, String seatType) {
+	public UserTrain(Long userId, String trainNumber, String startTime,
+			String endTime, String carriage, String seatNumber, String seatType) {
 		this.userId = userId;
 		this.trainNumber = trainNumber;
 		this.startTime = startTime;
@@ -81,20 +81,20 @@ public class UserTrain implements java.io.Serializable {
 	}
 
 	@Column(name = "start_time")
-	public Long getStartTime() {
+	public String getStartTime() {
 		return this.startTime;
 	}
 
-	public void setStartTime(Long startTime) {
+	public void setStartTime(String startTime) {
 		this.startTime = startTime;
 	}
 
 	@Column(name = "end_time")
-	public Long getEndTime() {
+	public String getEndTime() {
 		return this.endTime;
 	}
 
-	public void setEndTime(Long endTime) {
+	public void setEndTime(String endTime) {
 		this.endTime = endTime;
 	}
 

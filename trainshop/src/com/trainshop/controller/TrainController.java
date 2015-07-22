@@ -1,5 +1,6 @@
 package com.trainshop.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -78,9 +79,7 @@ public class TrainController extends BaseController {
 	@ResponseBody
 	@RequestMapping(value = "getlist", method = RequestMethod.POST, produces = { "text/json;charset=UTF-8" })
 	public String getlist(HttpServletRequest request, HttpSession session) {
-		String result = null;
 		String jsondata = request.getParameter("data");
-		String json = null; // 返回的json数据
 		
 		String sEcho = "";// 记录操作的次数  每次加1
 		Integer iDisplayStart = 0;// 起始
@@ -155,11 +154,16 @@ public class TrainController extends BaseController {
 	@ResponseBody
 	@RequestMapping(value = "/getListByOrg", method = RequestMethod.POST, produces = { "text/json;charset=UTF-8" })
 	public String getListByOrg(HttpServletRequest request, HttpSession session) {
-		String result = null;
 		String jsondata = request.getParameter("id");
-		long param=Long.parseLong(jsondata);
-		List data=trainService.findObjectsByPerptey(Train.class, "orgId", param);
-		HtReturnData returnData=new HtReturnData(1, data.size(), data.size(), data);
+		long param = Long.parseLong(jsondata);
+		List<Train> data = new ArrayList<Train>();
+		if(param != 0){
+			data = trainService.findObjectsByPerptey(Train.class, "orgId", param);
+		}
+		else{
+			data = trainService.findAll();
+		}
+		HtReturnData returnData = new HtReturnData(1, data.size(), data.size(), data);
 		return returnData.toJson();
 	}
 	/**
@@ -176,10 +180,12 @@ public class TrainController extends BaseController {
 
 		Train entity = JsonPluginsUtil.jsonToBean(data, Train.class);
 		entity.setCreatetime(System.currentTimeMillis());
-		if (session.getAttribute("CurrentUserID").equals(null)) {
+		if (session.getAttribute("CurrentUserID") != null) {
 			entity.setCreateuser(new Long(session.getAttribute("CurrentUserID")
 					.toString()));
 		}
+		
+		entity.setUpdatetime(System.currentTimeMillis());
 
 		trainService.create(entity);
 

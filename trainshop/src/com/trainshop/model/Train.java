@@ -2,6 +2,8 @@ package com.trainshop.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -19,8 +21,8 @@ public class Train implements java.io.Serializable {
 	private String trainNumber;
 	private String startStation;
 	private String endStation;
-	private Long startTime;
-	private Long endTime;
+	private String startTime;
+	private String endTime;
 	private Long createtime;
 	private Long createuser;
 	private Long updateuser;
@@ -34,7 +36,7 @@ public class Train implements java.io.Serializable {
 
 	/** minimal constructor */
 	public Train(Long trainId, String trainNumber, String startStation,
-			String endStation, Long startTime, Long endTime) {
+			String endStation, String startTime, String endTime) {
 		this.trainId = trainId;
 		this.trainNumber = trainNumber;
 		this.startStation = startStation;
@@ -45,8 +47,8 @@ public class Train implements java.io.Serializable {
 
 	/** full constructor */
 	public Train(Long trainId, Long orgId, String trainNumber,
-			String startStation, String endStation, Long startTime,
-			Long endTime, Long createtime, Long createuser, Long updateuser,
+			String startStation, String endStation, String startTime,
+			String endTime, Long createtime, Long createuser, Long updateuser,
 			Long updatetime) {
 		this.trainId = trainId;
 		this.orgId = orgId;
@@ -64,6 +66,7 @@ public class Train implements java.io.Serializable {
 	// Property accessors
 	@Id
 	@Column(name = "train_ID", unique = true, nullable = false)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getTrainId() {
 		return this.trainId;
 	}
@@ -109,20 +112,20 @@ public class Train implements java.io.Serializable {
 	}
 
 	@Column(name = "start_time", nullable = false)
-	public Long getStartTime() {
+	public String getStartTime() {
 		return this.startTime;
 	}
 
-	public void setStartTime(Long startTime) {
+	public void setStartTime(String startTime) {
 		this.startTime = startTime;
 	}
 
 	@Column(name = "end_time", nullable = false)
-	public Long getEndTime() {
+	public String getEndTime() {
 		return this.endTime;
 	}
 
-	public void setEndTime(Long endTime) {
+	public void setEndTime(String endTime) {
 		this.endTime = endTime;
 	}
 

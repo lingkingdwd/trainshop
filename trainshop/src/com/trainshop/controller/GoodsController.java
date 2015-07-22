@@ -73,11 +73,67 @@ public class GoodsController extends BaseController {
 	public String getAllList(HttpServletRequest request, HttpSession session) {
 		String result = null;
 
-		List<Goods> list = goodsService.findAll();
+		String data = request.getParameter("data");
+		int start = 0;
+		int limit = 10;
 
-		result = JsonPluginsUtil.beanListToJson(list);
+		Goods goods = JsonPluginsUtil.jsonToBean(data, Goods.class);
+		PageTools page = new PageTools();
 
-		return super.returnData(result);
+		Map parameters = new HashMap();
+		StringBuffer hql = new StringBuffer(" select new com.trainshop.model.Goods( " +
+				" g.goodsId, g.goodsSn, g.goodsName,g.goodsNumber, g.promotePrice, g.warnNumber,g.goodsBrief,"
+				+ "g.goodsDesc,g.goodsThumb,g.goodsImg, g.originalImg, g.isOnSale, g.integral, g.isBest, g.isNew, g.isHot, "
+				+ "g.bonusTypeId, g.sellerNote,g.marketPrice, g.shopPrice, c.catName) From Goods as g, Category as c where g.catId = c.catId ");
+		
+		//hql.append(" From Goods as g where 1=1 ");
+
+		/*if (goods.getTrainNumber() != null && goods.getTrainNumber() != "") {
+			hql.append(" and t.trainNumber = '" + goods.getTrainNumber() + "'");
+		}
+		if (goods.getStartTime() != null && goods.getStartTime() != 0) {
+			hql.append(" and t.startTime = " + goods.getStartTime());
+		}*/
+
+		if (goods == null || goods.equals("")) {
+			int sum = goodsService.getCountByHql(hql.toString(), null);
+			List<Goods> list = goodsService.searchByHql(hql.toString(), null,
+					start, limit);
+
+			page.setDataList(list);
+			page.setTotalProperty(sum);
+
+			result = JsonPluginsUtil.beanListToJson(list);
+
+			return super.returnData(result);
+		} else {
+			start = goods.getStart();
+			limit = goods.getLimit();
+			
+			/*if (goods != null) {
+				hql.append(" and g.catId = " + goods.getCatId());
+				//parameters.put("catId", goods.getCatId());
+			}*/
+			/*
+			 * if (goods.getPayStatus() != 0) {
+			 * hql.append(" and model.payStatus =:payStatus");
+			 * Parameters.put("payStatus", order.getPayStatus()); } if
+			 * (goods.getOrderStatus() != 0) {
+			 * hql.append(" and model.orderStatus =:orderStatus");
+			 * Parameters.put("orderStatus", order.getOrderStatus()); }
+			 */
+
+			int sum = goodsService.getCountByHql(hql.toString(), null);
+			List<Goods> list = goodsService.searchByHql(hql.toString(), null,
+					start, limit);
+
+			page.setDataList(list);
+			page.setTotalProperty(sum);
+
+			result = JsonPluginsUtil.beanToJson(page);
+
+			return super.returnData(result);
+		}
 	}
 
 	/**
