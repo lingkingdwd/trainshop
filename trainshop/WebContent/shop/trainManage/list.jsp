@@ -67,5 +67,5 @@
 <%@include file="modalGoodAdd.jsp" %>
 <%@include file="modalGoodList.jsp" %>
 </body>
-<script type="text/javascript" src="<%=basePath%>/shop/trainManage/list.js"></script>
+<script type="text/javascript" src="<%=basePath%>shop/trainManage/list.js"></script>
 </html>
