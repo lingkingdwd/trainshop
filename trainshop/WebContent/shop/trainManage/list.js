@@ -7,6 +7,7 @@ var goodTable2;
 var goodDatas=new Array;
 var goodDatas2=new Array;
 var trTrainData;
+var tr;
 $(document).ready(function() {
 	pageInit();
 	var trainGoodsManage = new TrainGoodsManage();
@@ -15,7 +16,7 @@ $(document).ready(function() {
 //	getTrainData(orgId);
 	$('#trainTable tbody').on( 'click', 'tr', function () {
 		tr=this;
-		trTrainData = trainTable.row(this).data();
+//		trTrainData = trainTable.row(this).data();
     } );
 	$('#goodsTable tbody').on( 'click', 'tr', function () {
 		tr=this;
@@ -27,15 +28,28 @@ $(document).ready(function() {
     } );
 	
 	 $('#trainTable a.btn-success').on('click', function (e) {
-		 var trainId=trTrainData.trainId;
+		 var trainId=$(this).attr("value");
 		 getGoodsData(trainId);
          $("#modalGoodList").modal("show");
      });
 	 $('#trainTable a.btn-info').on('click', function (e) {
+		 var trainId=$(this).attr("value");
+		 $.each(trainDatas,function(index,item)
+				 {
+			      if(item.trainId=trainId)
+			    	  trTrainData=item;
+				 });
 		 $("#modalGoodAdd").modal("show");
      });
 	 
 	 $('#goodsTable a.btn-primary').on('click', function (e) {
+		 var goodsId=$(this).attr("value");
+		 var trGoodData;
+		 $.each(goodDatas,function(index,item)
+				 {
+			      if(item.goodsId=goodsId)
+			    	  trGoodData=item;
+				 });
 		 var good=new Object;
 		 good.goodsId=trGoodData.goodsId;
 		 good.trainId=trTrainData.trainId;
@@ -49,9 +63,9 @@ $(document).ready(function() {
 		 onGood(good);
      });
 	 
-	 $('#goodsTable2 a.btn-warning').on('click', function (e) {
-		 alert('xxx');
-		 var goodId=trGoodData.goodId;
+	 $('body').on('click', 'a[name="btnOff"]', function (e) {
+		 var goodId=$(this).attr("value");
+		 tr=$(this).parents('tr');
 		 offGood(goodId);
      });
 });
@@ -67,6 +81,7 @@ function onGood(good)
             if(data.flag==1)
             	{
             	goodTable2.row.add(good).draw( false );
+            	
             	 alert("商品上架成功!!");
             	}
             else
@@ -96,8 +111,8 @@ function offGood(goodId)
 //			console.log(data);
             if(data.flag==1)
             	{
-            	goodsTable2.row('.selected').remove().draw( false );
-            	 alert("商品下架成功!!");
+            	goodTable2.row(tr).remove().draw( false );
+//            	 alert("商品下架成功!!");
             	}
             else
             	{
@@ -347,13 +362,12 @@ function pageInit()
                       {
                     	  targets: 9,
                           render: function (data, type, row) {
-                        	 var html='<td><a class="btn btn-warning" value="'+row.goodsId+'" href="javascript:;">下架</a></td>';
+                        	 var html='<td><a name="btnOff" class="btn btn-warning" value="'+row.pkid+'" href="javascript:;">下架</a></td>';
                              return html;
                           }
                       }
                   ]
 	});
-	
 	$.ajax({
 		async: false,
 		type: "POST",
@@ -379,7 +393,7 @@ function pageInit()
 		                    	targets:[5],
 		                    	render:function(data,type,row)
 		                    	{
-		                    		 var html='<td><a class="btn btn-info" value="'+row.goodsId+'" href="javascript:;">商品上车</a><a class="btn btn-success" value="'+row.goodsId+'" href="javascript:;">商品列表</a></td>';
+		                    		 var html='<td><a class="btn btn-info" value="'+row.trainId+'" href="javascript:;">商品上车</a><a class="btn btn-success" value="'+row.trainId+'" href="javascript:;">商品列表</a></td>';
 	                                 return html;
 		                    	}
 		                    }
