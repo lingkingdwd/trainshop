@@ -20,7 +20,7 @@ import org.apache.http.util.EntityUtils;
 
 public class TestHttpClient {
 	// 接口地址
-	private String ipAddress = "http://103.41.54.30:8080";
+	private String ipAddress = "http://localhost:8080/trainshop";
 	private String apiURL = "";
 	private Log logger = LogFactory.getLog(this.getClass());
 	private static final String pattern = "yyyy-MM-dd HH:mm:ss:SSS";
@@ -60,13 +60,30 @@ public class TestHttpClient {
         System.out.println(new TestHttpClient("/trainshop/users/getUserslist")
     		.post("{\"userName\":\"kele\"}", 0, 10));*/
         
-        System.out.println(new TestHttpClient("/goods/getlist")
-			.post("{\"start\":\"0\",\"limit\":\"10\"}"));
+        /*System.out.println(new TestHttpClient("/goods/getlist")
+			.post("{\"start\":\"0\",\"limit\":\"10\"}"));*/
         
-       /* System.out.println(new TestHttpClient("/trainshop/order/getlist")
-			.post("{\"goodsName\":\"xxx\",\"catId\":\"xxx\",\"brandId\":\"xxx\"}", 0, 10));
+        System.out.println(new TestHttpClient("/order/getlist")
+			.post("{\"goodsName\":\"xxx\",\"catId\":\"xxx\",\"brandId\":\"xxx\",\"start\":\"0\",\"limit\":\"10\"}"));
         
-        System.out.println(new TestHttpClient("/trainshop/goods/getlist").post(""));*/
+        /*System.out.println(new TestHttpClient("/trainshop/goods/getlist").post(""));*/
+		
+		/*System.out.println(new TestHttpClient("/users/register")
+			.post("{\"userName\":\"qq1\",\"password\":\"123456\",\"mobilePhone\":\"1311111111111\"}"));*/
+		
+		/*System.out.println(new TestHttpClient("/order/create")
+		.post("{\"orderSn\":\"\",\"userId\":\"1\",\"trainNumber\":\"K80\",\"carriage\":\"8\","
+				+ "\"seatNumber\":\"33\",\"startTime\":\"09:00\",\"mobile\":\"15915159111\",\"postscript\":\"啤酒要冰的\","
+				+ "\"goodsAmount\":\"5\",\"shippingFee\":\"0\",\"integralMoney\":\"0\",\"bonus\":\"0\","
+				+ "\"orderAmount\":\"50\",\"discount\":\"0\",\"orderGoods\":[{\"goodsId\":\"7\",\"goodsName\":\"香蕉\","
+				+ "\"goodsNumber\":\"2\",\"goodsPrice\":\"25\",\"goodsAttr\":\"\"}]}"));*/
+		
+		/*System.out.println(new TestHttpClient("/order/create")
+			.post("{\"goodsAmount\":\"4368.0\",\"postscript\":\"dfd\",\"integralMoney\":\"0\",\"orderSn\":\"\",\"discount\":\"0\",\"startTime\":\"08:00\",\"shippingFee\":\"0\",\"orderAmount\":\"4368.0\",\"orderGoods\":[{\"goodsAttr\":\"\",\"goodsPrice\":\"1388.0\",\"goodsId\":\"1\",\"goodsName\":\"红牛\",\"goodsNumber\":\"3\"},{\"goodsAttr\":\"\",\"goodsPrice\":\"58.0\",\"goodsId\":\"4\",\"goodsName\":\"套餐\",\"goodsNumber\":\"2\"},{\"goodsAttr\":\"\",\"goodsPrice\":\"68.0\",\"goodsId\":\"3\",\"goodsName\":\"香蕉\",\"goodsNumber\":\"1\"},{\"goodsAttr\":\"\",\"goodsPrice\":\"20.0\",\"goodsId\":\"5\",\"goodsName\":\"苹果\",\"goodsNumber\":\"1\"}],\"userId\":\"1\",\"seatNumber\":\"122\",\"bonus\":\"0\",\"trainNumber\":\"1234\",\"carriage\":\"12\",\"mobile\":\"12345678912\"}"));
+		*/
+		/*System.out.println(new TestHttpClient("/order/orderStatus")
+			.post("{\"orderSn\":\"K8081437642852362\",\"orderStatus\":\"1\"}"));*/
+		
     }
 
 	/**

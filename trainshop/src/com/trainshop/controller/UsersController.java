@@ -169,6 +169,13 @@ public class UsersController extends BaseController {
 					paraUser.setFlag(new Integer("1"));
 					paraUser.setRegTime(System.currentTimeMillis());
 					paraUser.setVisitCount(new Integer("0"));
+					
+					List<Users> user = usersService.findOne(paraUser.getUserName());
+					if(user.size() > 0){
+						result = "{\"flag\":\"0\",\"message\":\"用户名已经存在，请重新输入！\"}";
+						return result;
+					}
+					
 					usersService.create(paraUser);
 					result = "{\"flag\":\"1\",\"message\":\"注册成功！\"}";
 

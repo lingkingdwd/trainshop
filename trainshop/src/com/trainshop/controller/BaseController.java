@@ -8,6 +8,12 @@ public class BaseController {
 		return result;
 	}
 	
+	public String returnData(String data, String message){
+		String result = "{\"flag\":\"1\",\"DATA\":" + data + ",\"message\":\"" + message +"\"}";
+		
+		return result;
+	}
+	
 	public String returnData(int data){
 		String result = "{\"flag\":\"1\",\"DATA\":" + data + ",\"message\":\"\"}";
 		

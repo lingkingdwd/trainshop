@@ -185,10 +185,10 @@
 						class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
 						<li><a href="<%=basePath %>org/init">组织机构管理</a></li>
-						<li><a href="panels-wells.html">用户管理</a></li>
-						<li><a href="buttons.html">角色管理</a></li>
-						<li><a href="notifications.html">权限分配</a></li>
-						<li><a href="typography.html">菜单管理</a></li>
+						<li><a href="#">用户管理</a></li>
+						<li><a href="#">角色管理</a></li>
+						<li><a href="#">权限分配</a></li>
+						<li><a href="#">菜单管理</a></li>
 					</ul> <!-- /.nav-second-level --></li>
 				<!-- <li><a href="#"><i class="fa fa-sitemap fa-fw"></i> 系统管理<span
 						class="fa arrow"></span></a>

@@ -13,14 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.trainshop.common.JsonUtil;
 import com.trainshop.common.util.JsonPluginsUtil;
 import com.trainshop.common.util.PageTools;
-import com.trainshop.dao.IOrderGoodsDao;
-import com.trainshop.model.Goods;
 import com.trainshop.model.OrderGoods;
 import com.trainshop.model.OrderInfo;
-import com.trainshop.model.Users;
-import com.trainshop.service.IGoodsService;
 import com.trainshop.service.IOrderActionService;
 import com.trainshop.service.IOrderGoodsService;
 import com.trainshop.service.IOrderInfoService;
@@ -81,9 +78,9 @@ public class OrderController extends BaseController {
 		
 		Map Parameters = new HashMap();
 		StringBuffer hql = new StringBuffer();
-		hql.append(" From OrderInfo as model ");
+		hql.append(" From OrderInfo as model where 1=1 ");
 		
-		if(session.getAttribute("trainNumber") != null){
+		/*if(session.getAttribute("trainNumber") != null){
 			String trainNumber = session.getAttribute("trainNumber").toString();
 			hql.append(" where model.trainNumber = '" + trainNumber + "'");
 		}
@@ -94,7 +91,7 @@ public class OrderController extends BaseController {
 		if(session.getAttribute("startTime") != null){
 			String startTime = session.getAttribute("startTime").toString();
 			hql.append(" and model.startTime = " + startTime);
-		}
+		}*/
 		
 		if (order == null || order.equals("")) {
 			int sum = orderInfoService.getCountByHql(hql.toString(), null);
@@ -107,19 +104,19 @@ public class OrderController extends BaseController {
 			
 			return super.returnData(result);
 		} else {
-			if (order != null) {
+			/*if (order != null) {
 				hql.append(" and model.userId =:userId");
 				Parameters.put("userId", order.getUserId());
 
-			}
-			if (order.getPayStatus() != 0) {
+			}*/
+			/*if (order.getPayStatus() != null) {
 				hql.append(" and model.payStatus =:payStatus");
 				Parameters.put("payStatus", order.getPayStatus());
 			}
 			if (order.getOrderStatus() != 0) {
 				hql.append(" and model.orderStatus =:orderStatus");
 				Parameters.put("orderStatus", order.getOrderStatus());
-			}
+			}*/
 			
 			int sum = orderInfoService.getCountByHql(hql.toString(), null);
 			List<OrderInfo> list = orderInfoService.searchByHql(hql.toString(), null, start, limit);
@@ -164,28 +161,24 @@ public class OrderController extends BaseController {
 	@ResponseBody
 	@RequestMapping(value = "create", method = RequestMethod.POST, produces = { "text/json;charset=UTF-8" })
 	public String create(HttpServletRequest request, HttpSession session) {
-		String result = "";
-		
 		String data = request.getParameter("data");
 		
-		OrderInfo entity = JsonPluginsUtil.jsonToBean(data, OrderInfo.class);
-		if(session.getAttribute("CurrentUserID").equals(null)){
+		OrderInfo entity = JsonUtil.json2Bean(data, OrderInfo.class);
+		/*if(session.getAttribute("CurrentUserID").equals(null)){
 			result = "{\"flag\":\"0\",\"message\":\"请先登录！\"}";
 			return result;
 		}
 		if(session.getAttribute("CurrentUserID").equals(null)){
 			result = "{\"flag\":\"0\",\"message\":\"请先登录！\"}";
 			return result;
-		}
+		}*/
 
 		entity.setOrderStatus(0);
 		entity.setShippingStatus(0);
 		entity.setPayStatus(0);
-		entity.setShippingStatus(0);
-		entity.setShippingStatus(0);
-		entity.setShippingStatus(0);
-		entity.setShippingStatus(0);
-		entity.setShippingStatus(0);
+		entity.setAddTime(System.currentTimeMillis());
+		
+		entity.setIsSeparate(0);
 		
 		//订单号
 		String orderSn = entity.getTrainNumber() + entity.getCarriage() +  System.currentTimeMillis();
@@ -193,8 +186,131 @@ public class OrderController extends BaseController {
 		
 		orderInfoService.create(entity);
 		
-		orderGoodsService.saveOrUpdateList(entity.getOrderGoods());
+		List<OrderInfo> info = orderInfoService.findObjectsByPerptey(OrderInfo.class, "orderSn", orderSn);
+		if(info.size() > 0){
+			for(OrderGoods og : entity.getOrderGoods()){
+				og.setOrderId(info.get(0).getOrderId());
+			}
+			orderGoodsService.saveOrUpdateList(entity.getOrderGoods());
+		}
 
-		return super.returnData(orderSn);
+		return super.returnData(orderSn, "订单创建成功！");
+	}
+	
+	/**
+	 * 更新订单状态
+	 * 
+	 * @param request
+	 * @param session
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "orderStatus", method = RequestMethod.POST, produces = { "text/json;charset=UTF-8" })
+	public String updateOrderStatus(HttpServletRequest request, HttpSession session) {
+		String result = "";
+		
+		String data = request.getParameter("data");
+		
+		OrderInfo order = JsonPluginsUtil.jsonToBean(data, OrderInfo.class);
+		if(order.getOrderStatus() == 0){
+			result = "订单未确认！";
+		}
+		if(order.getOrderStatus() == 1){
+			result = "订单已确认！";
+		}
+		if(order.getOrderStatus() == 2){
+			result = "订单已取消！";
+		}
+		if(order.getOrderStatus() == 3){
+			result = "订单无效！";
+		}
+		if(order.getOrderStatus() == 4){
+			result = "订单已退货！";
+		}
+		
+		Map parameters = new HashMap();
+		StringBuffer hql = new StringBuffer();
+		hql.append(" update OrderInfo set orderStatus =:orderStatus where orderSn =:orderSn ");
+		parameters.put("orderStatus", order.getOrderStatus());
+		parameters.put("orderSn", order.getOrderSn());
+			
+		orderInfoService.updateByHql(hql.toString(), parameters);
+		
+		return super.returnSucess(result);
+	}
+	
+	/**
+	 * 商品配送情况
+	 * 
+	 * @param request
+	 * @param session
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "shippingStatus", method = RequestMethod.POST, produces = { "text/json;charset=UTF-8" })
+	public String updateShippingStatus(HttpServletRequest request, HttpSession session) {
+		String result = "";
+		
+		String data = request.getParameter("data");
+		
+		OrderInfo order = JsonPluginsUtil.jsonToBean(data, OrderInfo.class);
+		if(order.getOrderStatus() == 0){
+			result = "未发货！";
+		}
+		if(order.getOrderStatus() == 1){
+			result = "已发货！";
+		}
+		if(order.getOrderStatus() == 2){
+			result = "已收货！";
+		}
+		if(order.getOrderStatus() == 4){
+			result = "退货！";
+		}
+		
+		Map parameters = new HashMap();
+		StringBuffer hql = new StringBuffer();
+		hql.append(" update OrderInfo set shippingStatus =:shippingStatus where orderSn =:orderSn ");
+		parameters.put("shippingStatus", order.getShippingStatus());
+		parameters.put("orderSn", order.getOrderSn());
+			
+		orderInfoService.updateByHql(hql.toString(), parameters);
+		
+		return super.returnSucess(result);
+	}
+	
+	/**
+	 * 付款状态
+	 * 
+	 * @param request
+	 * @param session
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "payStatus", method = RequestMethod.POST, produces = { "text/json;charset=UTF-8" })
+	public String updatePayStatus(HttpServletRequest request, HttpSession session) {
+		String result = "";
+		
+		String data = request.getParameter("data");
+		
+		OrderInfo order = JsonPluginsUtil.jsonToBean(data, OrderInfo.class);
+		if(order.getOrderStatus() == 0){
+			result = "未付款！";
+		}
+		if(order.getOrderStatus() == 1){
+			result = "付款中！";
+		}
+		if(order.getOrderStatus() == 2){
+			result = "已付款！";
+		}
+		
+		Map parameters = new HashMap();
+		StringBuffer hql = new StringBuffer();
+		hql.append(" update OrderInfo set payStatus =:payStatus where orderSn =:orderSn ");
+		parameters.put("payStatus", order.getPayStatus());
+		parameters.put("orderSn", order.getOrderSn());
+			
+		orderInfoService.updateByHql(hql.toString(), parameters);
+		
+		return super.returnSucess(result);
 	}
 }

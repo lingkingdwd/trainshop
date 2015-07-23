@@ -39,6 +39,16 @@ public class OrderGoods implements java.io.Serializable {
 	public OrderGoods() {
 	}
 
+	/** minimal constructor */
+	public OrderGoods(Long orderId, Long goodsId, String goodsName,
+			Integer goodsNumber, Double goodsPrice) {
+		this.orderId = orderId;
+		this.goodsId = goodsId;
+		this.goodsName = goodsName;
+		this.goodsNumber = goodsNumber;
+		this.goodsPrice = goodsPrice;
+	}
+
 	/** full constructor */
 	public OrderGoods(Long orderId, Long goodsId, String goodsName,
 			String goodsSn, Integer productId, Integer goodsNumber,
@@ -101,7 +111,7 @@ public class OrderGoods implements java.io.Serializable {
 		this.goodsName = goodsName;
 	}
 
-	@Column(name = "goods_sn", nullable = false, length = 60)
+	@Column(name = "goods_sn", length = 60)
 	public String getGoodsSn() {
 		return this.goodsSn;
 	}
@@ -110,7 +120,7 @@ public class OrderGoods implements java.io.Serializable {
 		this.goodsSn = goodsSn;
 	}
 
-	@Column(name = "product_id", nullable = false)
+	@Column(name = "product_id")
 	public Integer getProductId() {
 		return this.productId;
 	}
@@ -128,7 +138,7 @@ public class OrderGoods implements java.io.Serializable {
 		this.goodsNumber = goodsNumber;
 	}
 
-	@Column(name = "market_price", nullable = false, precision = 10)
+	@Column(name = "market_price", precision = 10)
 	public Double getMarketPrice() {
 		return this.marketPrice;
 	}
@@ -146,7 +156,7 @@ public class OrderGoods implements java.io.Serializable {
 		this.goodsPrice = goodsPrice;
 	}
 
-	@Column(name = "goods_attr", nullable = false, length = 65535)
+	@Column(name = "goods_attr", length = 65535)
 	public String getGoodsAttr() {
 		return this.goodsAttr;
 	}
@@ -155,7 +165,7 @@ public class OrderGoods implements java.io.Serializable {
 		this.goodsAttr = goodsAttr;
 	}
 
-	@Column(name = "send_number", nullable = false)
+	@Column(name = "send_number")
 	public Integer getSendNumber() {
 		return this.sendNumber;
 	}
@@ -164,7 +174,7 @@ public class OrderGoods implements java.io.Serializable {
 		this.sendNumber = sendNumber;
 	}
 
-	@Column(name = "is_real", nullable = false)
+	@Column(name = "is_real")
 	public Integer getIsReal() {
 		return this.isReal;
 	}
@@ -173,7 +183,7 @@ public class OrderGoods implements java.io.Serializable {
 		this.isReal = isReal;
 	}
 
-	@Column(name = "extension_code", nullable = false, length = 30)
+	@Column(name = "extension_code", length = 30)
 	public String getExtensionCode() {
 		return this.extensionCode;
 	}
@@ -182,7 +192,7 @@ public class OrderGoods implements java.io.Serializable {
 		this.extensionCode = extensionCode;
 	}
 
-	@Column(name = "parent_id", nullable = false)
+	@Column(name = "parent_id")
 	public Integer getParentId() {
 		return this.parentId;
 	}
@@ -191,7 +201,7 @@ public class OrderGoods implements java.io.Serializable {
 		this.parentId = parentId;
 	}
 
-	@Column(name = "is_gift", nullable = false)
+	@Column(name = "is_gift")
 	public Integer getIsGift() {
 		return this.isGift;
 	}
@@ -200,7 +210,7 @@ public class OrderGoods implements java.io.Serializable {
 		this.isGift = isGift;
 	}
 
-	@Column(name = "goods_attr_id", nullable = false)
+	@Column(name = "goods_attr_id")
 	public String getGoodsAttrId() {
 		return this.goodsAttrId;
 	}
