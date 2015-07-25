@@ -67,6 +67,11 @@ $(document).ready(function() {
 
        });
        
+       $("#category").on("click",function(){
+			$('#categoryModalId').modal('show');
+			createAddCondition();
+		});
+       
         $('#btn_addGood').on('click', function (e) {
         	location.href = basePath + "goods/publish";
         });
@@ -76,10 +81,124 @@ $(document).ready(function() {
 		});
 });
 
+function createAddCondition(){
+	var zTreeOnClick = function zTreeOnClick(event, treeId, treeNode) {
+		for(var i = 0; i < categoryList.length; i++){
+			if(treeNode.id == categoryList[i].catId){
+				
+				var treeObj = $.fn.zTree.getZTreeObj("categoryTreeId");
+				var sNodes = treeObj.getSelectedNodes();
+				if (sNodes.length > 0) {
+					var node = sNodes[0].getParentNode();
+					$("#parCategoryName").text(node.name);
+					$("#parCategoryId").val(node.id);
+				}
+				$("#categoryName").val(categoryList[i].catName);
+				$("#isShow").val(categoryList[i].isShow);
+			}
+		}
+	};
+	
+	var setting = {
+		/*check: {
+			enable: true,
+			chkStyle: "radio"
+		},*/
+		data: {
+			simpleData: {
+				enable: true
+			}
+		},
+		callback: {
+			onClick: zTreeOnClick
+		}
+	};
+	
+	var treeHandleFunc = function () {
+		//单位确定按钮
+		var treeObj = $.fn.zTree.getZTreeObj("categoryTreeId");
+		var nodes = treeObj.getSelectedNodes(true);
+		
+		if(nodes.length > 0){
+			$("#categoryId").val(nodes[0].id);
+			$("#category").val(nodes[0].name);
+		}
+		
+		$('#categoryModalId').hide();
+	};
+	
+	//分类读取
+	$.ajax({
+		type : 'POST',
+		url : basePath + "category/getlist",
+		data : {},
+		async : false,
+		dataType : "json",
+		success : function(data) {
+			if (data.flag == "1") {
+				$("#parCategoryName").text("");
+				$("#parCategoryId").val("");
+				$("#categoryName").val("");
+				$("#isShow").val("1");
+				
+				if(data.DATA != undefined){
+					if(data.DATA != undefined){
+						categoryList = data.DATA;
+						var resultData = data.DATA;
+						
+						var zNodes = new Array();
+						var obj = new Object();
+						obj.id = 0;
+						obj.name = "商品分类";
+						obj.checked = false;
+						zNodes.push(obj);
+						
+						if(resultData instanceof Array){
+						 	for(var i = 0; i < resultData.length; i++){
+								var obj = new Object();
+								obj.id = resultData[i].catId;
+								obj.pId= resultData[i].parentId;
+								obj.name = resultData[i].catName;
+								obj.checked = false;
+								
+								zNodes.push(obj);
+							}
+						}
+						else{
+							var obj = new Object();
+							obj.id = resultData.catId;
+							obj.pId= resultData.parentId;
+							obj.name = resultData.catName;
+							obj.checked = false;
+							
+							zNodes.push(obj);
+						}
+					}
+					
+				}
+				
+				$.fn.zTree.init($("#categoryTreeId"), setting, zNodes);
+				
+				var treeObj = $.fn.zTree.getZTreeObj("categoryTreeId");
+				treeObj.expandAll(true);
+				
+				$("#selectCategoryBtnId").click(treeHandleFunc).trigger("click");
+			}
+			else {
+				
+			}
+		},
+		error : function(data) {
+			layer.alert("数据请求失败!", 8);
+		}
+	});
+}
+
 function initModal(rowData)
 {
     $("#goodsName").val(trRowData.goodsName);
 	$("#categoryId").val(trRowData.catId);
+	$("#category").val(trRowData.catName);
 	$("#goodsSn").val(trRowData.goodsSn);
 	$("#shopPrice").val(trRowData.shopPrice);
 	$("#marketPrice").val(trRowData.marketPrice);

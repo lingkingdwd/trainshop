@@ -95,7 +95,7 @@ public class Goods implements java.io.Serializable {
 	
 	public Goods(Long goodsId, String goodsSn, String goodsName, Integer goodsNumber, Double promotePrice, Integer warnNumber, String goodsBrief,
 			 String goodsDesc,String goodsThumb,String goodsImg,String originalImg, Integer isOnSale, Integer integral, Integer isBest, Integer isNew, Integer isHot, 
-			 Integer bonusTypeId, String sellerNote,  Double marketPrice, Double shopPrice, String catName) {
+			 Integer bonusTypeId, String sellerNote,  Double marketPrice, Double shopPrice, Integer catId, String catName) {
 //		this.startTime = startTime;
 		this.goodsId = goodsId;
 		this.goodsSn = goodsSn;
@@ -118,6 +118,7 @@ public class Goods implements java.io.Serializable {
 		
 		this.bonusTypeId = bonusTypeId;
 		this.sellerNote = sellerNote;
+		this.catId = catId;
 		this.catName = catName;
 		
 		this.marketPrice = marketPrice;

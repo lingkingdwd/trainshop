@@ -39,6 +39,7 @@
 								<label class="col-sm-3 control-label"><span
 									class="text-danger">*</span>商品分类：</label>
 								<div class="col-sm-8">
+									<input type="hidden" id="categoryId" name="categoryId">
 									<input type="text" class="form-control" id="category" name="category">
 								</div>
 							</div>
@@ -171,6 +172,33 @@
 					<button type="button" class="btn btn-primary" id="add-save">
 									<i class="fa fa-check-circle"></i> 保存
 								</button>
+					<a href="#" class="btn btn-default" data-dismiss="modal"><i
+						class="fa fa-times"></i> 取消</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="categoryModalId">
+		<div class="modal-dialog">
+			<div class="modal-content border-none">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h3 class="modal-title">商品分类</h3>
+				</div>
+				<div class="modal-body">
+					<div class="col-md-12 marbot10">
+						<!-- 请放树结构 -->
+						<ul id="categoryTreeId" class="ztree" style="margin-top: 0">
+						</ul>
+					</div>
+				</div>
+				<div class="modal-footer" style="clear: both;">
+					<button id="selectCategoryBtnId" type="submit"
+						class="btn btn-primary" data-dismiss="modal" aria-hidden="true">
+						<i class="fa fa-check-circle"></i> 确定
+					</button>
 					<a href="#" class="btn btn-default" data-dismiss="modal"><i
 						class="fa fa-times"></i> 取消</a>
 				</div>

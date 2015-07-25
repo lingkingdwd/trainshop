@@ -60,11 +60,11 @@ public class TestHttpClient {
         System.out.println(new TestHttpClient("/trainshop/users/getUserslist")
     		.post("{\"userName\":\"kele\"}", 0, 10));*/
         
-        /*System.out.println(new TestHttpClient("/goods/getlist")
-			.post("{\"start\":\"0\",\"limit\":\"10\"}"));*/
+        System.out.println(new TestHttpClient("/goods/getlist")
+			.post("{\"catId\":\"3\",\"start\":\"0\",\"limit\":\"10\"}"));
         
-        System.out.println(new TestHttpClient("/order/getlist")
-			.post("{\"goodsName\":\"xxx\",\"catId\":\"xxx\",\"brandId\":\"xxx\",\"start\":\"0\",\"limit\":\"10\"}"));
+        /*System.out.println(new TestHttpClient("/order/getlist")
+			.post("{\"goodsName\":\"xxx\",\"catId\":\"xxx\",\"brandId\":\"xxx\",\"start\":\"0\",\"limit\":\"10\"}"));*/
         
         /*System.out.println(new TestHttpClient("/trainshop/goods/getlist").post(""));*/
 		

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.trainshop.common.util.Cn2Spell;
 import com.trainshop.common.util.JsonPluginsUtil;
 import com.trainshop.common.util.PageTools;
 import com.trainshop.model.Goods;
@@ -75,25 +76,26 @@ public class GoodsController extends BaseController {
 
 		String data = request.getParameter("data");
 		int start = 0;
-		int limit = 10;
+		int limit = 99999;
 
 		Goods goods = JsonPluginsUtil.jsonToBean(data, Goods.class);
 		PageTools page = new PageTools();
 
 		Map parameters = new HashMap();
-		StringBuffer hql = new StringBuffer(" select new com.trainshop.model.Goods( " +
-				" g.goodsId, g.goodsSn, g.goodsName,g.goodsNumber, g.promotePrice, g.warnNumber,g.goodsBrief,"
-				+ "g.goodsDesc,g.goodsThumb,g.goodsImg, g.originalImg, g.isOnSale, g.integral, g.isBest, g.isNew, g.isHot, "
-				+ "g.bonusTypeId, g.sellerNote,g.marketPrice, g.shopPrice, c.catName) From Goods as g, Category as c where g.catId = c.catId ");
-		
-		//hql.append(" From Goods as g where 1=1 ");
+		StringBuffer hql = new StringBuffer(
+				" select new com.trainshop.model.Goods( "
+						+ " g.goodsId, g.goodsSn, g.goodsName,g.goodsNumber, g.promotePrice, g.warnNumber,g.goodsBrief,"
+						+ "g.goodsDesc,g.goodsThumb,g.goodsImg, g.originalImg, g.isOnSale, g.integral, g.isBest, g.isNew, g.isHot, "
+						+ "g.bonusTypeId, g.sellerNote,g.marketPrice, g.shopPrice, g.catId, c.catName) From Goods as g, Category as c where g.catId = c.catId ");
 
-		/*if (goods.getTrainNumber() != null && goods.getTrainNumber() != "") {
-			hql.append(" and t.trainNumber = '" + goods.getTrainNumber() + "'");
-		}
-		if (goods.getStartTime() != null && goods.getStartTime() != 0) {
-			hql.append(" and t.startTime = " + goods.getStartTime());
-		}*/
+		// hql.append(" From Goods as g where 1=1 ");
+
+		/*
+		 * if (goods.getTrainNumber() != null && goods.getTrainNumber() != "") {
+		 * hql.append(" and t.trainNumber = '" + goods.getTrainNumber() + "'");
+		 * } if (goods.getStartTime() != null && goods.getStartTime() != 0) {
+		 * hql.append(" and t.startTime = " + goods.getStartTime()); }
+		 */
 
 		if (goods == null || goods.equals("")) {
 			int sum = goodsService.getCountByHql(hql.toString(), null);
@@ -109,11 +111,11 @@ public class GoodsController extends BaseController {
 		} else {
 			start = goods.getStart();
 			limit = goods.getLimit();
-			
-			/*if (goods != null) {
-				hql.append(" and g.catId = " + goods.getCatId());
-				//parameters.put("catId", goods.getCatId());
-			}*/
+
+			/*
+			 * if (goods != null) { hql.append(" and g.catId = " +
+			 * goods.getCatId()); //parameters.put("catId", goods.getCatId()); }
+			 */
 			/*
 			 * if (goods.getPayStatus() != 0) {
 			 * hql.append(" and model.payStatus =:payStatus");
@@ -160,20 +162,26 @@ public class GoodsController extends BaseController {
 
 		Map parameters = new HashMap();
 		StringBuffer hql = new StringBuffer();
-		/*hql.append("select g.goodsId, g.goodsName,g.goodsNumber, g.promotePrice, g.warnNumber,g.goodsBrief,"
-				+ "g.goodsDesc,g.goodsThumb,g.goodsImg, g.originalImg, g.isOnSale, g.integral, g.isBest, g.isNew, g.isHot, "
-				+ "g.bonusTypeId, g.sellerNote, tg.goodsNumber, tg.shopPrice, tg.promotePrice, tg.promoteStartDate, "
-				+ " tg.promoteEndDate, tg.warnNumber, t.trainNumber,t.startTime From Goods as g, TrainGoods as tg, Train as t "
-				+ " where t.trainId = tg.trainId and g.goodsId = tg.goodsId ");*/
-		
-		hql.append(" From Goods as g where 1=1 ");
+		/*
+		 * hql.append(
+		 * "select g.goodsId, g.goodsName,g.goodsNumber, g.promotePrice, g.warnNumber,g.goodsBrief,"
+		 * +
+		 * "g.goodsDesc,g.goodsThumb,g.goodsImg, g.originalImg, g.isOnSale, g.integral, g.isBest, g.isNew, g.isHot, "
+		 * +
+		 * "g.bonusTypeId, g.sellerNote, tg.goodsNumber, tg.shopPrice, tg.promotePrice, tg.promoteStartDate, "
+		 * +
+		 * " tg.promoteEndDate, tg.warnNumber, t.trainNumber,t.startTime From Goods as g, TrainGoods as tg, Train as t "
+		 * + " where t.trainId = tg.trainId and g.goodsId = tg.goodsId ");
+		 */
 
-		/*if (goods.getTrainNumber() != null && goods.getTrainNumber() != "") {
-			hql.append(" and t.trainNumber = '" + goods.getTrainNumber() + "'");
-		}
-		if (goods.getStartTime() != null && goods.getStartTime() != 0) {
-			hql.append(" and t.startTime = " + goods.getStartTime());
-		}*/
+		hql.append("select new com.trainshop.model.Goods( "
+				+ " g.goodsId, g.goodsSn, g.goodsName,g.goodsNumber, g.promotePrice, g.warnNumber,g.goodsBrief,"
+				+ " g.goodsDesc,g.goodsThumb,g.goodsImg, g.originalImg, g.isOnSale, g.integral, g.isBest, g.isNew, g.isHot, "
+				+ " g.bonusTypeId, g.sellerNote,g.marketPrice, g.shopPrice, g.catId, c.catName) "
+				+ " From Goods as g, TrainGoods as tg, Train as t, Category as c "
+				+ " where t.trainId = tg.trainId and g.goodsId = tg.goodsId and g.catId = c.catId ");
+
+		// hql.append(" From Goods as g where 1=1 ");
 
 		if (goods == null || goods.equals("")) {
 			int sum = goodsService.getCountByHql(hql.toString(), null);
@@ -187,21 +195,13 @@ public class GoodsController extends BaseController {
 
 			return super.returnData(result);
 		} else {
-			/*if (goods != null) {
-				hql.append(" and g.catId = " + goods.getCatId());
-				//parameters.put("catId", goods.getCatId());
-			}*/
-			/*
-			 * if (goods.getPayStatus() != 0) {
-			 * hql.append(" and model.payStatus =:payStatus");
-			 * Parameters.put("payStatus", order.getPayStatus()); } if
-			 * (goods.getOrderStatus() != 0) {
-			 * hql.append(" and model.orderStatus =:orderStatus");
-			 * Parameters.put("orderStatus", order.getOrderStatus()); }
-			 */
+			if (goods.getCatId() != null) {
+				hql.append(" and g.catId =:catId");
+				parameters.put("catId", goods.getCatId());
+			}
 
-			int sum = goodsService.getCountByHql(hql.toString(), null);
-			List<Goods> list = goodsService.searchByHql(hql.toString(), null,
+			int sum = goodsService.getCountByHql(hql.toString(), parameters);
+			List<Goods> list = goodsService.searchByHql(hql.toString(), parameters,
 					start, limit);
 
 			page.setDataList(list);
@@ -226,8 +226,8 @@ public class GoodsController extends BaseController {
 		String result = "";
 		String data = request.getParameter("data");
 		Goods entity = JsonPluginsUtil.jsonToBean(data, Goods.class);
-		
-		if(goodsExist(entity.getGoodsName(), entity.getGoodsSn() )){
+
+		if (goodsExist(entity.getGoodsName(), entity.getGoodsSn())) {
 			return super.returnFail("商品已经存在！");
 		}
 
@@ -248,7 +248,8 @@ public class GoodsController extends BaseController {
 				} else {
 					try {
 						// 拿到输出流，同时重命名上传的文件
-						String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
+						String fileName = System.currentTimeMillis() + "_"
+								+ Cn2Spell.converterToSpell(file.getOriginalFilename());
 						String filePath = path + "/" + fileName;
 						System.out.println(path);
 						entity.setGoodsThumb("/upload/" + fileName);
@@ -281,7 +282,8 @@ public class GoodsController extends BaseController {
 				} else {
 					try {
 						// 拿到输出流，同时重命名上传的文件
-						String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
+						String fileName = System.currentTimeMillis() + "_"
+								+ Cn2Spell.converterToSpell(file.getOriginalFilename());
 						String filePath = path + "/" + fileName;
 						entity.setGoodsImg("/upload/" + fileName);
 						FileOutputStream os = new FileOutputStream(filePath);
@@ -313,7 +315,8 @@ public class GoodsController extends BaseController {
 				} else {
 					try {
 						// 拿到输出流，同时重命名上传的文件
-						String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
+						String fileName = System.currentTimeMillis() + "_"
+								+ Cn2Spell.converterToSpell(file.getOriginalFilename());
 						String filePath = path + "/" + fileName;
 						entity.setOriginalImg("/upload/" + fileName);
 						FileOutputStream os = new FileOutputStream(filePath);
@@ -343,7 +346,7 @@ public class GoodsController extends BaseController {
 
 		return super.returnSucess(result);
 	}
-	
+
 	/**
 	 * 更新商品
 	 * 
@@ -355,17 +358,18 @@ public class GoodsController extends BaseController {
 	@RequestMapping(value = "update", method = RequestMethod.POST, produces = { "text/json;charset=UTF-8" })
 	public String update(HttpServletRequest request, HttpSession session) {
 		String result = "";
-		
+
 		String data = request.getParameter("data");
-		
+
 		Goods entity = JsonPluginsUtil.jsonToBean(data, Goods.class);
 
-		goodsService.update(entity);;
+		goodsService.update(entity);
+		;
 
 		return super.returnData(result);
 	}
 
-	@RequestMapping(value={"/saveOrUpdate"}, method = RequestMethod.POST)
+	@RequestMapping(value = { "/saveOrUpdate" }, method = RequestMethod.POST)
 	public String saveOrUpdate(@RequestParam("photo") MultipartFile file,
 			HttpServletRequest request) throws IOException {
 		if (!file.isEmpty()) {
@@ -402,7 +406,7 @@ public class GoodsController extends BaseController {
 
 		return super.returnSucess(result);
 	}
-	
+
 	/**
 	 * 删除商品
 	 * 
@@ -412,9 +416,9 @@ public class GoodsController extends BaseController {
 	 */
 	private boolean goodsExist(String goodsName, String goodsSn) {
 		boolean result = false;
-		
+
 		StringBuffer hql = new StringBuffer();
-		
+
 		hql.append(" From Goods as g where 1=1 ");
 
 		if (goodsName != null && goodsName != "") {
@@ -425,10 +429,10 @@ public class GoodsController extends BaseController {
 		}
 
 		int sum = goodsService.getCountByHql(hql.toString(), null);
-		if(sum > 0){
+		if (sum > 0) {
 			result = true;
 		}
-		
+
 		return result;
 	}
 }
