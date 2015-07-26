@@ -147,7 +147,7 @@ function getTrainData(orgId)
 			layer.alert("数据请求失败!", 8);
 		}
 	});
-	}
+}
 
 function getGoodsData(trainId)
 {

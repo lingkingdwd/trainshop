@@ -1,6 +1,6 @@
- var goodsTable;
+var goodsTable;
  
- var goodDatas=new Array();
+var goodDatas=new Array();
 var categoryDatas = new Array();
 var brandDatas=new Array();
 var tr;
@@ -20,56 +20,73 @@ $(document).ready(function() {
             $(this).addClass('selected');
         }
     } );
-	 $('#goodsTable a.view-class').on('click', function (e) {
-		 initModal(trRowData);
-         $("#modalGood").modal("show");
-         $("#add-save").hide();
-     });
-	 $('#goodsTable a.btn-info').on('click', function (e) {
+	$('#goodsTable').on('click', '.view-class', function (e) {
+		var goodsId = $(this).attr('goodsId');
+		initModal(goodsId);
+		$("#modalGood").modal("show");
+		$("#add-save").hide();
+	});
+	 /*$('#goodsTable a.btn-info').on('click', function (e) {
 		 initModal(trRowData);
 		 $("#modalGood").modal("show");
 		 $("#add-save").show();
-     });
-    
-	   $('#goodsTable a.btn-danger').on('click', function (e) {
-           e.preventDefault();
+     });*/
+	$('body').on('click', 'button[name="editBtn"]', function(){
+		var goodsId = $(this).attr('goodsId');
+		location.href = basePath + "goods/initUpdate?goodsId=" + goodsId;
+	});
+	$('body').on('click', 'button[name="deleteBtn"]', function (e) {
+		e.preventDefault();
 
-           if (confirm("确定删除该商品吗 ?") == false) {
-               return;
-           }
+		if (confirm("确定删除该商品吗 ?") == false) {
+			return;
+		}
+		
+		var btn = $(this);
 
-        
-           var goodId=$(this).attr('value');
-           console.log(goodId);
-       	$.ajax({
+		var goodId = $(this).attr('goodsId');
+		$.ajax({
        		async: false,
        		type: "POST",
        		url: basePath + "goods/deleteGood",
        		dataType: "json",
        		data:{id:goodId},
        		success: function(data) {	
-//       			console.log(data);
-                   if(data.flag==1)
-                   	{
-                	 goodsTable.row('.selected').remove().draw( false );
-                   	 alert("商品删除成功!!");
-                   	}
-                   else
-                   	{
-                   	alert(data.message);
-                   	}
-             
+				if(data.flag==1) {
+					goodsTable.clear().draw();
+					$.ajax({
+						type : 'GET',
+						url :basePath + "goods/getAllList",
+						async : false,
+						dataType : "json",
+						success : function(resp) {
+							goodDatas=$.makeArray(resp.DATA);
+							$.each(goodDatas,function(index,item){
+								goodsTable.row.add(item).draw();
+							});
+				//			trainTable.draw();
+						},
+						error : function(data) {
+							layer.alert("数据请求失败!", 8);
+						}
+					});
+					//$(btn).parent().parent().remove();
+					layer.alert("商品删除成功!");
+				}
+				else{
+					alert(data.message);
+				}
        		},
        		error: function() {
        			alert("删除失败！");
        		}
        	});
-
-       });
+	});
+       
+       createAddCondition();
        
        $("#category").on("click",function(){
 			$('#categoryModalId').modal('show');
-			createAddCondition();
 		});
        
         $('#btn_addGood').on('click', function (e) {
@@ -194,25 +211,94 @@ function createAddCondition(){
 	});
 }
 
-function initModal(rowData)
+function initModal(goodsId)
 {
-    $("#goodsName").val(trRowData.goodsName);
-	$("#categoryId").val(trRowData.catId);
-	$("#category").val(trRowData.catName);
-	$("#goodsSn").val(trRowData.goodsSn);
-	$("#shopPrice").val(trRowData.shopPrice);
-	$("#marketPrice").val(trRowData.marketPrice);
-	$("#promotePrice").val(trRowData.promotePrice);
-	$("#goodsBrief").val(trRowData.goodsBrief);
-	$("#goodsDesc").val(trRowData.goodsDesc);
-	$("#integral").val(trRowData.integral);
-	$("input[name='isBest']:checked").val(trRowData.isBest);
-	$("input[name='isNew']:checked").val(trRowData.isNew);
-	$("input[name='isHot']:checked").val(trRowData.isHot);
-	$("input[name='isPromote']:checked").val(trRowData.isPromote);
-	$("#giveIntegral").val(trRowData.giveIntegral);
-	$("#sellerNote").val(trRowData.sellerNote);
+	var rowData;
+	for(var i = 0; i < goodDatas.length; i++){
+		if(goodDatas[i].goodsId == goodsId){
+			rowData = goodDatas[i];
+		}
 	}
+	
+    $("#goodsName").val(rowData.goodsName);
+	$("#categoryId").val(rowData.catId);
+	$("#category").val(rowData.catName);
+	$("#goodsSn").val(rowData.goodsSn);
+	$("#shopPrice").val(rowData.shopPrice);
+	$("#marketPrice").val(rowData.marketPrice);
+	$("#promotePrice").val(rowData.promotePrice);
+	$("#goodsBrief").val(rowData.goodsBrief);
+	$("#goodsDesc").val(rowData.goodsDesc);
+	$("#integral").val(rowData.integral);
+	$("input[name='isBest']:checked").val(rowData.isBest);
+	$("input[name='isNew']:checked").val(rowData.isNew);
+	$("input[name='isHot']:checked").val(rowData.isHot);
+	$("input[name='isPromote']:checked").val(rowData.isPromote);
+	$("#giveIntegral").val(rowData.giveIntegral);
+	$("#sellerNote").val(rowData.sellerNote);
+	
+	$('#goodsThumb').fileinput('clear');
+	$('#goodsImg').fileinput('clear');
+	$('#originalImg').fileinput('clear');
+
+	var goodsThumb = "";
+	if(rowData.goodsThumb != ""){
+		goodsThumb = "<img src='" + pathNoSlash + rowData.goodsThumb + "' class='file-preview-image' alt='微缩图片' title='微缩图片'>";
+	}
+	
+	var thumb = [];
+	if(goodsThumb != ""){
+		thumb = [goodsThumb];
+	}
+	
+	$("#goodsThumb").fileinput({
+		initialPreview : thumb,
+		showCaption: false,
+		showUpload: false,
+		showPreview: true,
+		previewFileType: "image",
+		maxFileSize: 3000,
+		allowedFileTypes: ["image"]
+	});
+	
+	var goodsImg = "";
+	if(rowData.goodsImg != ""){
+		goodsImg = "<img src='" + pathNoSlash + rowData.goodsImg + "' class='file-preview-image' alt='实际大小图片' title='实际大小图片'>";
+	}
+	
+	var img = [];
+	if(goodsImg != ""){
+		img = [goodsImg];
+	}
+	$("#goodsImg").fileinput({
+		initialPreview: img,
+		showCaption: false,
+		showUpload: false,
+		showPreview: true,
+		previewFileType: "image",
+		maxFileSize: 3000,
+		allowedFileTypes: ["image"]
+	});
+	
+	var originalImg = "";
+	if(rowData.originalImg != ""){
+		originalImg = "<img src='" + pathNoSlash + rowData.originalImg + "' class='file-preview-image' alt='原始图片' title='原始图片'>";
+	}
+	
+	var original = [];
+	if(originalImg != ""){
+		original = [originalImg];
+	}
+	$("#originalImg").fileinput({
+		initialPreview: original,
+		showCaption: false,
+		showUpload: false,
+		showPreview: true,
+		previewFileType: "image",
+		maxFileSize: 3000,
+		allowedFileTypes: ["image"]
+	});
+}
 function deleteGood()
 {
 	}
@@ -318,14 +404,21 @@ function pageInit()
 	                          {
 	                        	  targets: 1,
 	                              render: function (data, type, row) {
-	                            	 var html='<td><a class ="view-class" href="javascript:;">'+row.goodsSn+'</a></td>';
+	                            	 var html='<td>'+row.goodsSn+'</td>';
+	                                 return html;
+	                              }
+	                          },
+	                          {
+	                        	  targets: 2,
+	                              render: function (data, type, row) {
+	                            	 var html='<td><a class ="view-class" goodsId="' + row.goodsId + '">'+row.goodsName+'</a></td>';
 	                                 return html;
 	                              }
 	                          },
 	                          {
 	                        	  targets: 17,
 	                              render: function (data, type, row) {
-	                            	 var html='<td><a class="btn btn-info" value="'+row.goodsId+'" href="javascript:;">编辑</a><a class="btn btn-danger" value="'+row.goodsId+'" href="javascript:;">删除</a></td>';
+	                            	 var html='<td><button type="button" class="btn btn-info" name="editBtn" goodsId="' + row.goodsId + '" href="javascript:;">编辑</button><button type="button" class="btn btn-danger" name="deleteBtn" goodsId="' + row.goodsId + '">删除</button></td>';
 	                                 return html;
 	                              }
 	                          }

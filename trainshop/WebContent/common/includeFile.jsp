@@ -13,6 +13,7 @@
 %>
 
 <script type="text/javascript">
+	var pathNoSlash = '<%=path %>';
 	var basePath = '<%=basePath %>';
 </script>
 <link rel="stylesheet" href="<%=basePath %>js/bootstrap/css/bootstrap.css" />

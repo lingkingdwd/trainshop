@@ -162,34 +162,88 @@
 								</span>
 							</div> /input-group
 						</li> -->
-				<li><a href="<%=basePath %>indexController/index"><i
-						class="fa fa-dashboard fa-fw"></i> 首页</a></li>
+				<li><a href="<%=basePath%>indexController/index"><i
+						class="fa fa-dashboard fa-fw"></i> 首页</a>
+				</li>
 				<li><a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>
 						商品管理<span class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
-						<li><a href="<%=basePath %>goods/publish">发布商品</a></li>
-						<li><a href="<%=basePath %>goods/init">商品管理</a></li>
-						<li><a href="<%=basePath %>category/init">分类管理</a></li>
-						<!-- <li><a href="morris.html">品牌管理</a></li>
-						<li><a href="morris.html">消息管理</a></li>
-						<li><a href="morris.html">热门商品</a></li>
-						<li><a href="morris.html">评论管理</a></li> -->
-					</ul> <!-- /.nav-second-level --></li>
-				<!-- <li><a href="#"><i class="fa fa-files-o fa-fw"></i> 订单管理<span
+						<li><a href="<%=basePath%>goods/publish">发布商品</a></li>
+						<li><a href="<%=basePath%>goods/init">商品管理</a></li>
+						<li><a href="<%=basePath%>category/init">分类管理</a></li>
+						<li><a href="#">用户评论</a></li>
+						<li><a href="#">商品品牌</a></li>
+					</ul>
+				</li>
+				<li><a href="#"><i class="fa fa-train fa-fw"></i> 列车管理<span
 						class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
-						<li><a href="flot.html">未处理订单</a></li>
-						<li><a href="morris.html">已处理订单</a></li>
-					</ul> /.nav-second-level</li> -->
+						<li><a href="<%=basePath%>train/init">列车管理</a></li>
+						<li><a href="<%=basePath%>trainGoods/init">列车商品管理</a></li>
+					</ul>
+				</li>
+				<li><a href="#"><i class="fa fa-wrench fa-fw"></i> 订单管理<span
+						class="fa arrow"></span></a>
+					<ul class="nav nav-second-level">
+						<li><a href="#">订单列表</a></li>
+						<li><a href="#">发货单列表</a></li>
+						<li><a href="#">退货单列表</a></li>
+					</ul>
+				</li>
+				<li><a href="#"><i class="fa fa-sitemap fa-fw"></i> 促销管理<span
+						class="fa arrow"></span></a>
+					<ul class="nav nav-second-level">
+						<li><a href="#">夺宝奇兵</a></li>
+						<li><a href="#">红包类型</a></li>
+						<li><a href="#">祝福贺卡</a></li>
+						<li><a href="#">团购活动</a></li>
+						<li><a href="#">专题管理</a></li>
+						<li><a href="#">拍卖活动</a></li>
+						<li><a href="#">优惠活动</a></li>
+						<li><a href="#">批发管理</a></li>
+						<li><a href="#">超值礼包</a></li>
+						<li><a href="#">积分商城商品</a></li>
+					</ul>
+				</li>
 				<li><a href="#"><i class="fa fa-wrench fa-fw"></i> 用户管理<span
 						class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
-						<li><a href="<%=basePath %>org/init">组织机构管理</a></li>
+						<li><a href="<%=basePath%>org/init">组织机构管理</a></li>
 						<li><a href="#">用户管理</a></li>
 						<li><a href="#">角色管理</a></li>
 						<li><a href="#">权限分配</a></li>
 						<li><a href="#">菜单管理</a></li>
-					</ul> <!-- /.nav-second-level --></li>
+					</ul>
+				</li>
+				<li><a href="#"><i class="fa fa-wrench fa-fw"></i> 会员管理<span
+						class="fa arrow"></span></a>
+					<ul class="nav nav-second-level">
+						<li><a href="#">会员列表</a></li>
+						<li><a href="#">会员等级</a></li>
+						<li><a href="#">会员留言</a></li>
+					</ul>
+				</li>
+				<li><a href="#"><i class="fa fa-wrench fa-fw"></i> 系统设置<span
+						class="fa arrow"></span></a>
+					<ul class="nav nav-second-level">
+						<li><a href="#">支付方式</a></li>
+						<li><a href="#">计划任务</a></li>
+						<li><a href="#">计划任务</a></li>
+					</ul>
+				</li>
+				<li><a href="#"><i class="fa fa-wrench fa-fw"></i> 报表统计<span
+						class="fa arrow"></span></a>
+					<ul class="nav nav-second-level">
+						<li><a href="#">流量分析</a></li>
+						<li><a href="#">客户统计</a></li>
+						<li><a href="#">订单统计</a></li>
+						<li><a href="#">销售概况</a></li>
+						<li><a href="#">会员排行</a></li>
+						<li><a href="#">销售明细</a></li>
+						<li><a href="#">销售排行</a></li>
+						<li><a href="#">访问购买率</a></li>
+					</ul>
+				</li>
 				<!-- <li><a href="#"><i class="fa fa-sitemap fa-fw"></i> 系统管理<span
 						class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
@@ -208,12 +262,6 @@
 					<ul class="nav nav-second-level">
 						<li><a href="blank.html">浏览管理</a></li>
 					</ul> /.nav-second-level</li> -->
-				<li><a href="#"><i class="fa fa-files-o fa-fw"></i> 列车管理<span
-						class="fa arrow"></span></a>
-					<ul class="nav nav-second-level">
-						<li><a href="<%=basePath %>train/init">列车管理</a></li>
-						<li><a href="<%=basePath %>trainGoods/init">列车商品管理</a></li>
-					</ul> <!-- /.nav-second-level --></li>
 			</ul>
 		</div>
 		<!-- /.sidebar-collapse -->

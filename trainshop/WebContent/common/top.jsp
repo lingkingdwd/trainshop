@@ -13,5 +13,6 @@
 %>
 
 <script type="text/javascript">
+	var pathNoSlash = '<%=path %>';
 	var basePath = '<%=basePath %>';
 </script>

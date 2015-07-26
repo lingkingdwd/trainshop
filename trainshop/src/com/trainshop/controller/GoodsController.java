@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -47,6 +48,19 @@ public class GoodsController extends BaseController {
 	public String publish(HttpServletRequest request, HttpSession session) {
 		try {
 			return "shop/goods/publish";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "/error";
+		}
+	}
+
+	@RequestMapping(value = "/initUpdate", method = RequestMethod.GET)
+	public String initUpdate(HttpServletRequest request, Model model) {
+		try {
+			String goodsId = request.getParameter("goodsId");
+
+			model.addAttribute("goodsId", goodsId);
+			return "shop/goods/update";
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "/error";
@@ -201,8 +215,8 @@ public class GoodsController extends BaseController {
 			}
 
 			int sum = goodsService.getCountByHql(hql.toString(), parameters);
-			List<Goods> list = goodsService.searchByHql(hql.toString(), parameters,
-					start, limit);
+			List<Goods> list = goodsService.searchByHql(hql.toString(),
+					parameters, start, limit);
 
 			page.setDataList(list);
 			page.setTotalProperty(sum);
@@ -214,21 +228,23 @@ public class GoodsController extends BaseController {
 	}
 
 	/**
-	 * 添加商品
+	 * 添加、修改商品
 	 * 
 	 * @param request
 	 * @param session
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "create", method = RequestMethod.POST, produces = { "text/html;charset=UTF-8" })
-	public String create(HttpServletRequest request, HttpSession session) {
+	@RequestMapping(value = "saveOrUpdate", method = RequestMethod.POST, produces = { "text/html;charset=UTF-8" })
+	public String saveOrUpdate(HttpServletRequest request, HttpSession session) {
 		String result = "";
 		String data = request.getParameter("data");
 		Goods entity = JsonPluginsUtil.jsonToBean(data, Goods.class);
 
-		if (goodsExist(entity.getGoodsName(), entity.getGoodsSn())) {
-			return super.returnFail("商品已经存在！");
+		if(entity.getGoodsId() == null){
+			if (goodsExist(entity.getGoodsName(), entity.getGoodsSn())) {
+				return super.returnFail("商品已经存在！");
+			}
 		}
 
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
@@ -248,8 +264,10 @@ public class GoodsController extends BaseController {
 				} else {
 					try {
 						// 拿到输出流，同时重命名上传的文件
-						String fileName = System.currentTimeMillis() + "_"
-								+ Cn2Spell.converterToSpell(file.getOriginalFilename());
+						String fileName = System.currentTimeMillis()
+								+ "_"
+								+ Cn2Spell.converterToSpell(file
+										.getOriginalFilename());
 						String filePath = path + "/" + fileName;
 						System.out.println(path);
 						entity.setGoodsThumb("/upload/" + fileName);
@@ -282,8 +300,10 @@ public class GoodsController extends BaseController {
 				} else {
 					try {
 						// 拿到输出流，同时重命名上传的文件
-						String fileName = System.currentTimeMillis() + "_"
-								+ Cn2Spell.converterToSpell(file.getOriginalFilename());
+						String fileName = System.currentTimeMillis()
+								+ "_"
+								+ Cn2Spell.converterToSpell(file
+										.getOriginalFilename());
 						String filePath = path + "/" + fileName;
 						entity.setGoodsImg("/upload/" + fileName);
 						FileOutputStream os = new FileOutputStream(filePath);
@@ -315,8 +335,10 @@ public class GoodsController extends BaseController {
 				} else {
 					try {
 						// 拿到输出流，同时重命名上传的文件
-						String fileName = System.currentTimeMillis() + "_"
-								+ Cn2Spell.converterToSpell(file.getOriginalFilename());
+						String fileName = System.currentTimeMillis()
+								+ "_"
+								+ Cn2Spell.converterToSpell(file
+										.getOriginalFilename());
 						String filePath = path + "/" + fileName;
 						entity.setOriginalImg("/upload/" + fileName);
 						FileOutputStream os = new FileOutputStream(filePath);
@@ -342,7 +364,7 @@ public class GoodsController extends BaseController {
 		}
 
 		entity.setIsDelete(0);
-		goodsService.create(entity);
+		goodsService.saveOrUpdate(entity);;
 
 		return super.returnSucess(result);
 	}
@@ -364,12 +386,11 @@ public class GoodsController extends BaseController {
 		Goods entity = JsonPluginsUtil.jsonToBean(data, Goods.class);
 
 		goodsService.update(entity);
-		;
 
 		return super.returnData(result);
 	}
 
-	@RequestMapping(value = { "/saveOrUpdate" }, method = RequestMethod.POST)
+	/*@RequestMapping(value = { "/saveOrUpdate" }, method = RequestMethod.POST)
 	public String saveOrUpdate(@RequestParam("photo") MultipartFile file,
 			HttpServletRequest request) throws IOException {
 		if (!file.isEmpty()) {
@@ -386,7 +407,7 @@ public class GoodsController extends BaseController {
 		}
 		// ps.saveOrUpdate(p);
 		return "redirect:/person/list.action"; // 重定向
-	}
+	}*/
 
 	/**
 	 * 删除商品
@@ -408,7 +429,48 @@ public class GoodsController extends BaseController {
 	}
 
 	/**
-	 * 删除商品
+	 * 获取商品列表
+	 * 
+	 * @param request
+	 * @param session
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/getGoodsById", method = RequestMethod.POST, produces = { "text/json;charset=UTF-8" })
+	public String getGoodsById(HttpServletRequest request, HttpSession session) {
+		String result = null;
+
+		String data = request.getParameter("data");
+
+		Goods goods = JsonPluginsUtil.jsonToBean(data, Goods.class);
+		Map parameters = new HashMap();
+
+		StringBuffer hql = new StringBuffer(
+				" select new com.trainshop.model.Goods( "
+						+ " g.goodsId, g.goodsSn, g.goodsName,g.goodsNumber, g.promotePrice, g.warnNumber,g.goodsBrief,"
+						+ "g.goodsDesc,g.goodsThumb,g.goodsImg, g.originalImg, g.isOnSale, g.integral, g.isBest, g.isNew, g.isHot, "
+						+ "g.bonusTypeId, g.sellerNote,g.marketPrice, g.shopPrice, g.catId, c.catName) From Goods as g, Category as c where g.catId = c.catId ");
+
+		if (goods == null || goods.equals("")) {
+			return super.returnFail("获取商品失败！");
+		} else {
+			if (goods.getGoodsId() != 0) {
+				hql.append(" and g.goodsId =:goodsId");
+				parameters.put("goodsId", goods.getGoodsId());
+			}
+
+			List<Goods> list = goodsService.searchByHql(hql.toString(), parameters);
+			
+			if(list.size() > 0){
+				result = JsonPluginsUtil.beanToJson(list.get(0));
+			}
+
+			return super.returnData(result);
+		}
+	}
+
+	/**
+	 * 商品是否存在
 	 * 
 	 * @param request
 	 * @param session

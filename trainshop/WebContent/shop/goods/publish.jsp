@@ -35,6 +35,7 @@
 								<label class="col-sm-3 control-label"><span
 									class="text-danger">*</span>商品名称：</label>
 								<div class="col-sm-8">
+									<input type="hidden" id="goodsId" name="goodsId" value="<%=request.getParameter("goodsId") %>">
 									<input type="text" class="form-control" id="goodsName" name="goodsName">
 								</div>
 							</div>
@@ -63,7 +64,7 @@
 								<label class="col-sm-3 control-label">市场价：</label>
 								<div class="col-sm-8">
 									<input type="text" class="form-control text-right" id="marketPrice" name="marketPrice" 
-										onkeyup='this.value=this.value.replace(/[^0-9|.]/g,"")' onafterpaste='this.value=this.value.replace(/[/[^0-9]/g,"")'/>
+										onkeyup='this.value=this.value.replace(/[^0-9|.]/g,"")' onafterpaste='this.value=this.value.replace(/[/[^0-9|.]/g,"")'/>
 								</div>
 							</div>
 						</div>
@@ -73,7 +74,7 @@
 									class="text-danger">*</span>售价：</label>
 								<div class="col-sm-8">
 									<input type="text" class="form-control text-right" value="" id="shopPrice" name="shopPrice" 
-									onkeyup='this.value=this.value.replace(/[^0-9|.]/g,"")' onafterpaste='this.value=this.value.replace(/[/[^0-9]/g,"")' />
+									onkeyup='this.value=this.value.replace(/[^0-9|.]/g,"")' onafterpaste='this.value=this.value.replace(/[/[^0-9|.]/g,"")' />
 								</div>
 							</div>
 						</div>
@@ -82,7 +83,7 @@
 								<label class="col-sm-3 control-label">促销价格：</label>
 								<div class="col-sm-8">
 									<input type="text" class="form-control text-right" value="" id="promotePrice" name="promotePrice" 
-									onkeyup='this.value=this.value.replace(/[^0-9|.]/g,"")' onafterpaste='this.value=this.value.replace(/[/[^0-9]/g,"")'/>
+									onkeyup='this.value=this.value.replace(/[^0-9|.]/g,"")' onafterpaste='this.value=this.value.replace(/[/[^0-9|.]/g,"")'/>
 								</div>
 							</div>
 						</div>
@@ -106,7 +107,8 @@
 							<div class="form-group">
 								<label class="col-sm-3 control-label">可用积分数量：</label>
 								<div class="col-sm-8">
-									<input type="text" class="form-control" value="" id="integral" name="integral" />
+									<input type="text" class="form-control" value="" id="integral" name="integral" 
+										onkeyup='this.value=this.value.replace(/[^0-9|.]/g,"")' onafterpaste='this.value=this.value.replace(/[/[^0-9|.]/g,"")'/>
 								</div>
 							</div>
 						</div>
@@ -175,7 +177,7 @@
 								<label class="col-sm-3 control-label">赠送积分数量：</label>
 								<div class="col-sm-8">
 									<input type="text" class="form-control" value="" id=giveIntegral name="giveIntegral" 
-									onkeyup='this.value=this.value.replace(/[^0-9|.]/g,"")' onafterpaste='this.value=this.value.replace(/[/[^0-9]/g,"")'/>
+									onkeyup='this.value=this.value.replace(/[^0-9|.]/g,"")' onafterpaste='this.value=this.value.replace(/[/[^0-9|.]/g,"")'/>
 								</div>
 							</div>
 						</div>
@@ -208,8 +210,7 @@
 							</div>
 						</div>
 						<div class="col-md-12 martop10">
-							<label
-								class="col-md-2 control-label padding-left-none marleft45">原始图片：</label>
+							<label class="col-md-2 control-label padding-left-none marleft45">原始图片：</label>
 							<div class="col-sm-9 marright13">
 								<input id="originalImg" name="originalImg" type="file" class="fileupload-new" />
 							</div>

@@ -29,7 +29,7 @@
 						<div class="panel-body">
 							<div id="garage-show">
 								<div class="row">
-									<div class="col-md-10 padding-left-none text-left">
+									<div class="col-md-12 padding-left-none text-right">
 										<button type="button" class="btn btn-success" id="btn_addGood">
 											<span class="fa fa-plus"></span> 添加商品
 										</button>
@@ -79,5 +79,8 @@
 	<!-- /#wrapper -->
 	<%@ include file="modalGood.jsp"%>
 </body>
+<link rel="stylesheet" href="<%=basePath%>js/bootstrap-fileinput/css/fileinput.css" />
+<script src="<%=basePath%>js/bootstrap-fileinput/js/fileinput.js"></script>
+<script src="<%=basePath%>js/jquery.form.js"></script>
 <script type="text/javascript" src="<%=basePath%>shop/goods/list.js"></script>
 </html>
