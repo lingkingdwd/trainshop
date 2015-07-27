@@ -185,9 +185,9 @@
 				<li><a href="#"><i class="fa fa-wrench fa-fw"></i> 订单管理<span
 						class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
-						<li><a href="#">订单列表</a></li>
-						<li><a href="#">发货单列表</a></li>
-						<li><a href="#">退货单列表</a></li>
+						<li><a href="<%=basePath%>order/orderInit">订单列表</a></li>
+						<li><a href="<%=basePath%>order/shipInit">发货单列表</a></li>
+						<li><a href="<%=basePath%>order/backInit">退货单列表</a></li>
 					</ul>
 				</li>
 				<li><a href="#"><i class="fa fa-sitemap fa-fw"></i> 促销管理<span

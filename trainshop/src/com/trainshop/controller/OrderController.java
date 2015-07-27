@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.trainshop.common.HtReturnData;
 import com.trainshop.common.JsonUtil;
 import com.trainshop.common.util.JsonPluginsUtil;
 import com.trainshop.common.util.PageTools;
+import com.trainshop.model.OrderAction;
 import com.trainshop.model.OrderGoods;
 import com.trainshop.model.OrderInfo;
 import com.trainshop.service.IOrderActionService;
@@ -35,10 +37,28 @@ public class OrderController extends BaseController {
 	@Resource(name = "orderGoodsService")
 	private IOrderGoodsService orderGoodsService;
 	
-	@RequestMapping(value = "/init", method = RequestMethod.GET)
+	@RequestMapping(value = "/orderInit", method = RequestMethod.GET)
 	public String init(HttpServletRequest request, HttpSession session) {
 		try {
-			return "shop/order/list";
+			return "shop/order/order_list";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "/error";
+		}
+	}
+	@RequestMapping(value = "/backInit", method = RequestMethod.GET)
+	public String backInit(HttpServletRequest request, HttpSession session) {
+		try {
+			return "shop/order/back_list";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "/error";
+		}
+	}
+	@RequestMapping(value = "/shipInit", method = RequestMethod.GET)
+	public String shipInit(HttpServletRequest request, HttpSession session) {
+		try {
+			return "shop/order/ship_list";
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "/error";
@@ -130,6 +150,78 @@ public class OrderController extends BaseController {
 		}
 	}
 	
+	
+	/**
+	 * 获取订单列表
+	 * 
+	 * @param request
+	 * @param session
+	 * @return
+	 * author:lingking
+	 */
+	@ResponseBody
+	@RequestMapping(value = "getOrderlist", method = RequestMethod.GET, produces = { "text/json;charset=UTF-8" })
+	public String getOrderlist(HttpServletRequest request, HttpSession session) {
+		HtReturnData result = new HtReturnData();
+		
+		List<OrderInfo> orders = orderInfoService.findAll();
+		int total=orders.size();
+		result.setData(orders);
+		result.setDraw(0);
+		result.setRecordsFiltered(total);
+		result.setRecordsTotal(total);
+		
+		return result.toJson();
+			
+	}
+	
+	/**
+	 * 获取退货列表
+	 * 
+	 * @param request
+	 * @param session
+	 * @return
+	 * author:lingking
+	 */
+	@ResponseBody
+	@RequestMapping(value = "getBacklist", method = RequestMethod.GET, produces = { "text/json;charset=UTF-8" })
+	public String getBacklist(HttpServletRequest request, HttpSession session) {
+		HtReturnData result = new HtReturnData();
+
+		List<OrderAction> orders = orderActionService.findObjectsByPerptey(OrderAction.class, "orderStatus", 4);
+		int total=orders.size();
+		result.setData(orders);
+		result.setDraw(0);
+		result.setRecordsFiltered(total);
+		result.setRecordsTotal(total);
+		
+		return result.toJson();
+			
+	}
+	
+	/**
+	 * 获取发货列表
+	 * 
+	 * @param request
+	 * @param session
+	 * @return
+	 * author:lingking
+	 */
+	@ResponseBody
+	@RequestMapping(value = "getShiplist", method = RequestMethod.GET, produces = { "text/json;charset=UTF-8" })
+	public String getShiplist(HttpServletRequest request, HttpSession session) {
+		HtReturnData result = new HtReturnData();
+
+		List<OrderAction> orders = orderActionService.findObjectsByPerptey(OrderAction.class, "shippingStatus", 1);
+		int total=orders.size();
+		result.setData(orders);
+		result.setDraw(0);
+		result.setRecordsFiltered(total);
+		result.setRecordsTotal(total);
+		
+		return result.toJson();
+			
+	}
 	/**
 	 * 获取订单商品列表
 	 * 

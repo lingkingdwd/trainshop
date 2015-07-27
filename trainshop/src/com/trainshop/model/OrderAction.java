@@ -19,10 +19,10 @@ public class OrderAction implements java.io.Serializable {
 	private Long actionId;
 	private Long orderId;
 	private String actionUser;
-	private Boolean orderStatus;
-	private Boolean shippingStatus;
-	private Boolean payStatus;
-	private Boolean actionPlace;
+	private int orderStatus;
+	private int shippingStatus;
+	private int payStatus;
+	private int actionPlace;
 	private String actionNote;
 	private Long logTime;
 
@@ -33,8 +33,8 @@ public class OrderAction implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public OrderAction(Long orderId, String actionUser, Boolean orderStatus,
-			Boolean shippingStatus, Boolean payStatus, Boolean actionPlace,
+	public OrderAction(Long orderId, String actionUser, int orderStatus,
+			int shippingStatus, int payStatus, int actionPlace,
 			String actionNote, Long logTime) {
 		this.orderId = orderId;
 		this.actionUser = actionUser;
@@ -77,38 +77,38 @@ public class OrderAction implements java.io.Serializable {
 	}
 
 	@Column(name = "order_status", nullable = false)
-	public Boolean getOrderStatus() {
+	public int getOrderStatus() {
 		return this.orderStatus;
 	}
 
-	public void setOrderStatus(Boolean orderStatus) {
+	public void setOrderStatus(int orderStatus) {
 		this.orderStatus = orderStatus;
 	}
 
 	@Column(name = "shipping_status", nullable = false)
-	public Boolean getShippingStatus() {
+	public int getShippingStatus() {
 		return this.shippingStatus;
 	}
 
-	public void setShippingStatus(Boolean shippingStatus) {
+	public void setShippingStatus(int shippingStatus) {
 		this.shippingStatus = shippingStatus;
 	}
 
 	@Column(name = "pay_status", nullable = false)
-	public Boolean getPayStatus() {
+	public int getPayStatus() {
 		return this.payStatus;
 	}
 
-	public void setPayStatus(Boolean payStatus) {
+	public void setPayStatus(int payStatus) {
 		this.payStatus = payStatus;
 	}
 
 	@Column(name = "action_place", nullable = false)
-	public Boolean getActionPlace() {
+	public int getActionPlace() {
 		return this.actionPlace;
 	}
 
-	public void setActionPlace(Boolean actionPlace) {
+	public void setActionPlace(int actionPlace) {
 		this.actionPlace = actionPlace;
 	}
 
