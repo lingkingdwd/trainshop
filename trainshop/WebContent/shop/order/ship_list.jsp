@@ -46,7 +46,7 @@
 		<!-- /#page-wrapper -->
 	</div>
 	<!-- /#wrapper -->
-	<%@ include file="modalGood.jsp"%>
+	<%@ include file="modalOrder.jsp"%>
 </body>
 <script type="text/javascript"
 	src="<%=basePath%>shop/order/ship_list.js"></script>

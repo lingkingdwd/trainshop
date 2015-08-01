@@ -12,43 +12,90 @@ $(document).ready(function() {
             $(this).addClass('selected');
         }
     } );
-	$('#orderTable a.btn-info').on( 'click', function () {
+	
+	$('body').on('click', 'button[name="editBtn"]', function(){
 		var orderId=$(this).attr("orderId");
 		initModal(orderId);
+		$("#btn_save").show();
+		$("#modalOrder").modal("show");
+	});
+	
+	$('body').on('click', 'button[name="showBtn"]', function(){
+		var orderId=$(this).attr("orderId");
+		initModal(orderId);
+		$("#btn_save").hide();
+		$("#modalOrder").modal("show");
+	});
+	$('#btn_search').on( 'click', function () {
+		orderTable.clear().draw();
+		var param={};
+		if($("#i_train").val()!="")
+		     param.trainNumber=$("#i_train").val();
+		else
+			param.trainNumber="";
+		
+		if($("#i_order").val()!="")
+		     param.orderSn=$("#i_order").val();
+		else
+			param.orderSn="";
+		
+		if($("#s_status").val()!="")
+			param.orderStatus=$("#s_status").val();
+		
+		console.log(JSON.stringify(param));
+		
+		$.ajax({
+			async: false,
+			type: "POST",
+			url: basePath + "order/queryOrderlist",
+			dataType: "json",
+			data:{data:JSON.stringify(param)},
+			success: function(resp) {	
+				orderDatas=resp.data;
+				$.each(orderDatas,function(index,item){
+					orderTable.row.add(item).draw();
+				});
+			},
+			error: function() {
+				alert("数据加载失败！");
+			}
+		});
     } );
+	
        
 });
 
 function initModal(orderId)
 {
-	var rowData;
 	$.each(orderDatas,function(index,item)
 			{
 		       if(item.orderId==orderId)
-		    	   rowData=item;
+		    $("#i_orderId").val(item.orderId);
+		   	$("#i_orderSn").val(item.orderSn);
+		   	$("#i_time").val(item.addTime);
+		   	$("#i_train").val(item.trainNumber);
+		   	$("#i_carriage").val(item.carriage);
+		   	$("#i_seat").val(item.seatNumber);
+		   	$("#i_gAmount").val(item.goodsAmount);
+		   	$("#i_oAmount").val(item.orderAmount);
+		   	$("#s_status").val(item.orderStatus);
 			});
-	
-    $("#OrdersName").val(rowData.OrdersName);
-	$("#categoryId").val(rowData.catId);
-	$("#category").val(rowData.catName);
-	$("#OrdersSn").val(rowData.OrdersSn);
-	$("#shopPrice").val(rowData.shopPrice);
-	$("#marketPrice").val(rowData.marketPrice);
-	$("#promotePrice").val(rowData.promotePrice);
-	$("#OrdersBrief").val(rowData.OrdersBrief);
-	$("#OrdersDesc").val(rowData.OrdersDesc);
-	$("#integral").val(rowData.integral);
-	$("input[name='isBest']:checked").val(rowData.isBest);
-	$("input[name='isNew']:checked").val(rowData.isNew);
-	$("input[name='isHot']:checked").val(rowData.isHot);
-	$("input[name='isPromote']:checked").val(rowData.isPromote);
-	$("#giveIntegral").val(rowData.giveIntegral);
-	$("#sellerNote").val(rowData.sellerNote);
-	
-	$('#OrdersThumb').fileinput('clear');
-	$('#OrdersImg').fileinput('clear');
-	$('#originalImg').fileinput('clear');
 
+}
+
+function saveOrder()
+{
+	alert("保存成功!");
+//	
+//	    $("#i_orderId").val(item.orderId);
+//	   	$("#i_orderSn").val(item.orderSn);
+//	   	$("#i_time").val(item.addTime);
+//	   	$("#i_train").val(item.trainNumber);
+//	   	$("#i_carriage").val(item.carriage);
+//	   	$("#i_seat").val(item.seatNumber);
+//	   	$("#i_gAmount").val(item.goodsAmount);
+//	   	$("#i_oAmount").val(item.orderAmount);
+//	   	$("#s_status").val(item.orderStatus);
 }
 function pageInit()
 {
@@ -67,7 +114,7 @@ function pageInit()
 			              { data: 'trainNumber' },
 			              { data: 'carriage' },
 			              { data: 'seatNumber' },
-			              { data: 'OrdersAmount' },
+			              { data: 'goodsAmount' },
 			              { data: 'orderAmount' },
 			              { data: 'orderStatus' },
 			              { data: null}
@@ -97,24 +144,36 @@ function pageInit()
 					       }
 					   },
 	                      columnDefs: [
-//	                          {
-//	                        	  targets: 1,
-//	                              render: function (data, type, row) {
-//	                            	 var html='<td>'+row.orderId+'</td>';
-//	                                 return html;
-//	                              }
-//	                          },
-//	                          {
-//	                        	  targets: 2,
-//	                              render: function (data, type, row) {
-//	                            	 var html='<td><a class ="view-class" orderId="' + row.orderId + '">'+row.OrdersName+'</a></td>';
-//	                                 return html;
-//	                              }
-//	                          },
+	                          {
+	                        	  targets: 1,
+	                              render: function (data, type, row) {
+	                            	  var dat=new Date();
+	                            	 return dat.getFullYear()+'-'+dat.getMonth()+'-'+dat.getDate()+" "+dat.getHours()+":"+dat.getMinutes()+":"+dat.getSeconds();
+	                              }
+	                          },
+	                          {
+	                        	  targets: 7,
+	                              render: function (data, type, row) {
+	                            	 var status="未确认";
+	                            	 if(row.orderStatus==1)
+	                            		 status="已确认";
+	                            	 if(row.orderStatus==2)
+	                            		 status="已取消";
+	                            	 if(row.orderStatus==3)
+	                            		 status="无效";
+	                            	 if(row.orderStatus==4)
+	                            		 status="退货";
+	                            	 if(row.orderStatus==5)
+	                            		 status="已分单";
+	                            	 else
+	                            		 status="未确认";
+	                            	 return status;
+	                              }
+	                          },
 	                          {
 	                        	  targets: 8,
 	                              render: function (data, type, row) {
-	                            	 var html='<td><button type="button" class="btn btn-info" name="showBtn" orderId="' + row.orderId + '" href="javascript:;">订单明细</button></td>';
+	                            	 var html='<td><button type="button" class="btn btn-success" name="editBtn" orderId="' + row.orderId + '" href="javascript:;">编辑</button><button type="button" class="btn btn-info" name="showBtn" orderId="' + row.orderId + '" href="javascript:;">订单详情</button></td>';
 	                                 return html;
 	                              }
 	                          }

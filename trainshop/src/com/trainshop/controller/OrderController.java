@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSONObject;
 import com.trainshop.common.HtReturnData;
 import com.trainshop.common.JsonUtil;
 import com.trainshop.common.util.JsonPluginsUtil;
@@ -243,6 +244,47 @@ public class OrderController extends BaseController {
 		return super.returnData(result);
 	}
 	
+	/**
+	 * 查询订单列表
+	 * 
+	 * @param request
+	 * @param session
+	 * @return
+	 * author:lingking
+	 */
+	@ResponseBody
+	@RequestMapping(value = "queryOrderlist", method = RequestMethod.POST, produces = { "text/json;charset=UTF-8" })
+	public String queryOrderlist(HttpServletRequest request, HttpSession session) {
+		HtReturnData result = new HtReturnData();
+		String param=request.getParameter("data");
+		JSONObject obj=JSONObject.parseObject(param);
+		
+		
+		
+//		HashMap<String,Object> condition=new HashMap<String,Object>();
+//		if(obj.get("trainNumber")!="")
+//			condition.put("trainNumber", obj.get("trainNumber"));
+//		if(obj.get("orderSn")!="")
+//			condition.put("orderSn", obj.get("orderSn"));
+//		if(obj.get("orderStatus")!="")
+//			condition.put("orderStatus", obj.get("orderStatus"));
+//		
+//		List<OrderInfo> orders = orderInfoService.searchByHql("from OrderInfo",condition);
+		
+		StringBuffer hql=new StringBuffer(" from OrderInfo");
+		hql.append(" where trainNumber LIKE '%"+obj.get("trainNumber")+"%'");
+		hql.append(" and orderSn LIKE '%"+obj.get("orderSn")+"%'");
+		hql.append(" and orderStatus ='"+obj.get("orderStatus")+"'");
+		List<OrderInfo> orders = orderInfoService.searchByHql(hql.toString(),null);
+		int total=orders.size();
+		result.setData(orders);
+		result.setDraw(0);
+		result.setRecordsFiltered(total);
+		result.setRecordsTotal(total);
+		
+		return result.toJson();
+			
+	}
 	/**
 	 * 订单创建
 	 * 
