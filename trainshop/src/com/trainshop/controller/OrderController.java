@@ -18,6 +18,7 @@ import com.trainshop.common.HtReturnData;
 import com.trainshop.common.JsonUtil;
 import com.trainshop.common.util.JsonPluginsUtil;
 import com.trainshop.common.util.PageTools;
+import com.trainshop.model.Goods;
 import com.trainshop.model.OrderAction;
 import com.trainshop.model.OrderGoods;
 import com.trainshop.model.OrderInfo;
@@ -233,14 +234,29 @@ public class OrderController extends BaseController {
 	@ResponseBody
 	@RequestMapping(value = "getOrderGoods", method = RequestMethod.POST, produces = { "text/json;charset=UTF-8" })
 	public String getOrderGoods(HttpServletRequest request, HttpSession session) {
-		String result = null;
+		String result = "";
 		
-		String orderId = request.getParameter("orderId");
-		
-		List<OrderGoods> list = orderGoodsService.findOne(orderId);
+		String data = request.getParameter("data");
 
-		result = JsonPluginsUtil.beanListToJson(list);
+		OrderGoods goods = JsonPluginsUtil.jsonToBean(data, OrderGoods.class);
 		
+		Map parameters = new HashMap();
+		StringBuffer hql = new StringBuffer();
+		hql.append(" From OrderGoods as model where 1=1 ");
+		
+		if (goods != null) {
+			hql.append(" and model.orderId =:orderId");
+			
+			parameters.put("orderId", goods.getOrderId());
+			
+			
+			List<OrderGoods> list = orderGoodsService.searchByHql(hql.toString(), parameters);
+
+			result = JsonPluginsUtil.beanListToJson(list);
+
+			return super.returnData(result);
+		}
+
 		return super.returnData(result);
 	}
 	
