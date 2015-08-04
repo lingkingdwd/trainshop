@@ -69,7 +69,7 @@ public class HtReturnData {
 	}
 	public String toJson()
 	{
-		return JsonUtil.obj2Json(this);
+		return JsonPluginsUtil.beanToJson(this);
 	}
 
 }

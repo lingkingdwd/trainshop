@@ -49,7 +49,7 @@
 							<div class="col-sm-6">
 								<select class="form-control" id="s_status"
 									name="s_status">
-									<option value="99">全部</option>
+									<option value="-1">全部</option>
 									<option value="0">未确认</option>
 									<option value="1">已确认</option>
 									<option value="2">已取消</option>

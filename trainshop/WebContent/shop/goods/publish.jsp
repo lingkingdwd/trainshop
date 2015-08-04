@@ -181,6 +181,16 @@
 								</div>
 							</div>
 						</div>
+						<!-- <div class="col-md-12">
+							<div class="form-group">
+								<label class="col-md-1 control-label padding-left-none marleft45">详细描述：</label>
+								<div class="col-sm-10 marright13">
+									<div id="edgoodsDescitor">
+									
+									</div>
+								</div>
+							</div>
+						</div> -->
 						<div class="col-md-12">
 							<div class="form-group">
 								<label
@@ -263,5 +273,6 @@
 <link rel="stylesheet" href="<%=basePath%>js/bootstrap-fileinput/css/fileinput.css" />
 <script src="<%=basePath%>js/bootstrap-fileinput/js/fileinput.js"></script>
 <script src="<%=basePath%>js/jquery.form.js"></script>
+<script src="<%=basePath%>js/ckeditor/ckeditor.js"></script>
 <script type="text/javascript" src="<%=basePath%>shop/goods/publish.js"></script>
 </html>

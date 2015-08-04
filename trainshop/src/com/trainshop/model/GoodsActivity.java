@@ -3,7 +3,10 @@ package com.trainshop.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.Transient;
+
 import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -27,6 +30,30 @@ public class GoodsActivity implements java.io.Serializable {
 	private Long endTime;
 	private Integer isFinished;
 	private String extInfo;
+	
+	private int start = 0;
+	private int limit = 10;
+	
+	@Transient
+	public int getLimit() {
+		return limit;
+	}
+
+	@Transient
+	public void setLimit(int limit) {
+		this.limit = limit;
+	}
+
+	@Transient
+	public int getStart() {
+		return start;
+	}
+
+	@Transient
+	public void setStart(int start) {
+		this.start = start;
+	}
+
 
 	// Constructors
 

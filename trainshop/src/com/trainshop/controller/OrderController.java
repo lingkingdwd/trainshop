@@ -1,5 +1,6 @@
 package com.trainshop.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -98,7 +99,7 @@ public class OrderController extends BaseController {
 		
 		PageTools page = new PageTools();
 		
-		Map Parameters = new HashMap();
+		Map parameters = new HashMap();
 		StringBuffer hql = new StringBuffer();
 		hql.append(" From OrderInfo as model where 1=1 ");
 		
@@ -140,8 +141,12 @@ public class OrderController extends BaseController {
 				Parameters.put("orderStatus", order.getOrderStatus());
 			}*/
 			
-			int sum = orderInfoService.getCountByHql(hql.toString(), null);
-			List<OrderInfo> list = orderInfoService.searchByHql(hql.toString(), null, start, limit);
+			int sum = orderInfoService.getCountByHql(hql.toString(), parameters);
+			List<OrderInfo> list = orderInfoService.searchByHql(hql.toString(), parameters, start, limit);
+			
+			for(OrderInfo oi : list){
+				oi.setOrderGoods(this.getOrderGoods(oi.getOrderId()));
+			}
 			
 			page.setDataList(list);
 			page.setTotalProperty(sum);
@@ -166,8 +171,12 @@ public class OrderController extends BaseController {
 	public String getOrderlist(HttpServletRequest request, HttpSession session) {
 		HtReturnData result = new HtReturnData();
 		
-		List<OrderInfo> orders = orderInfoService.findAll();
-		int total=orders.size();
+		Map parameters = new HashMap();
+		StringBuffer hql = new StringBuffer();
+		hql.append(" From OrderInfo as model where 1=1 order by model.orderId DESC");
+		
+		List<OrderInfo> orders = orderInfoService.searchByHql(hql.toString(), null);
+		int total = orders.size();
 		result.setData(orders);
 		result.setDraw(0);
 		result.setRecordsFiltered(total);
@@ -272,25 +281,25 @@ public class OrderController extends BaseController {
 	@RequestMapping(value = "queryOrderlist", method = RequestMethod.POST, produces = { "text/json;charset=UTF-8" })
 	public String queryOrderlist(HttpServletRequest request, HttpSession session) {
 		HtReturnData result = new HtReturnData();
-		String param=request.getParameter("data");
-		JSONObject obj=JSONObject.parseObject(param);
+		String param = request.getParameter("data");
+		JSONObject obj = JSONObject.parseObject(param);
 		
+		StringBuffer hql = new StringBuffer(" from OrderInfo where 1 = 1");
 		
+		if(obj != null){
+			if(!obj.get("trainNumber").equals("")){
+				hql.append(" and trainNumber LIKE '%" + obj.get("trainNumber") + "%'");
+			}
+			if(!obj.get("orderSn").equals("")){
+				hql.append(" and orderSn LIKE '%" + obj.get("orderSn") + "%'");
+			}
+			if(obj.get("orderStatus") != null){
+				hql.append(" and orderStatus ='" + obj.get("orderStatus") + "'");
+			}
+		}
 		
-//		HashMap<String,Object> condition=new HashMap<String,Object>();
-//		if(obj.get("trainNumber")!="")
-//			condition.put("trainNumber", obj.get("trainNumber"));
-//		if(obj.get("orderSn")!="")
-//			condition.put("orderSn", obj.get("orderSn"));
-//		if(obj.get("orderStatus")!="")
-//			condition.put("orderStatus", obj.get("orderStatus"));
-//		
-//		List<OrderInfo> orders = orderInfoService.searchByHql("from OrderInfo",condition);
+		hql.append("order by orderId DESC");
 		
-		StringBuffer hql=new StringBuffer(" from OrderInfo");
-		hql.append(" where trainNumber LIKE '%"+obj.get("trainNumber")+"%'");
-		hql.append(" and orderSn LIKE '%"+obj.get("orderSn")+"%'");
-		hql.append(" and orderStatus ='"+obj.get("orderStatus")+"'");
 		List<OrderInfo> orders = orderInfoService.searchByHql(hql.toString(),null);
 		int total=orders.size();
 		result.setData(orders);
@@ -462,5 +471,22 @@ public class OrderController extends BaseController {
 		orderInfoService.updateByHql(hql.toString(), parameters);
 		
 		return super.returnSucess(result);
+	}
+	
+	private List<OrderGoods> getOrderGoods(Long orderId) {
+		Map parameters = new HashMap();
+		StringBuffer hql = new StringBuffer();
+		hql.append(" From OrderGoods as model where 1=1 ");
+		
+		if (orderId != null) {
+			hql.append(" and model.orderId =:orderId");
+			
+			parameters.put("orderId", orderId);
+			
+			
+			return orderGoodsService.searchByHql(hql.toString(), parameters);
+		}
+
+		return new ArrayList<OrderGoods>();
 	}
 }

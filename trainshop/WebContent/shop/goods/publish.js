@@ -37,6 +37,11 @@ $(document).ready(function() {
 	
 	
 	$("#saveBtn").on('click', goodsPublish.addGoods);
+	
+	/*var editor = null;
+    window.onload = function(){
+        editor = CKEDITOR.replace('edgoodsDescitor'); //参数‘content’是textarea元素的name属性值，而非id属性值
+    }*/
 		
 	//goodsPublish.createGoodsTable();
 	

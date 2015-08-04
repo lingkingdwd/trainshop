@@ -29,7 +29,7 @@ $(document).ready(function() {
 	$('#btn_search').on( 'click', function () {
 		orderTable.clear().draw();
 		var param={};
-		if($("#i_train").val()!="")
+		if($("#i_train").val() != "")
 		     param.trainNumber=$("#i_train").val();
 		else
 			param.trainNumber="";
@@ -39,10 +39,12 @@ $(document).ready(function() {
 		else
 			param.orderSn="";
 		
-		if($("#s_status").val()!="")
-			param.orderStatus=$("#s_status").val();
-		
-		console.log(JSON.stringify(param));
+		if($("#s_status").val() != "-1"){
+			param.orderStatus = $("#s_status").val();
+		}
+		else{
+			param.orderStatus = "";
+		}
 		
 		$.ajax({
 			async: false,
@@ -67,10 +69,9 @@ $(document).ready(function() {
 
 function initModal(orderId)
 {
-	$.each(orderDatas,function(index,item)
-			{
-		       if(item.orderId==orderId)
-		    $("#i_orderId").val(item.orderId);
+	$.each(orderDatas,function(index,item){
+		if(item.orderId==orderId){
+			$("#i_orderId").val(item.orderId);
 		   	$("#i_orderSn").val(item.orderSn);
 		   	$("#i_time").val(item.addTime);
 		   	$("#i_train").val(item.trainNumber);
@@ -79,8 +80,8 @@ function initModal(orderId)
 		   	$("#i_gAmount").val(item.goodsAmount);
 		   	$("#i_oAmount").val(item.orderAmount);
 		   	$("#s_status").val(item.orderStatus);
-			});
-
+		}
+	});
 }
 
 function saveOrder()
@@ -101,8 +102,8 @@ function pageInit()
 {
 	$.ajax({
 		async: false,
-		type: "GET",
-		url: basePath + "order/getOrderlist",
+		type: "POST",
+		url: basePath + "order/queryOrderlist",
 		dataType: "json",
 		success: function(resp) {	
 			orderDatas=resp.data;
