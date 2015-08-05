@@ -27,18 +27,18 @@ $(document).ready(function() {
 		trGoodData2=goodTable2.row(this).data();
     } );
 	
-	 $('#trainTable a.btn-success').on('click', function (e) {
+	  $('#trainTable').on('click', 'button[name="trainGoosBtn"]', function (e) {
 		 var trainId=$(this).attr("value");
 		 getGoodsData(trainId);
          $("#modalGoodList").modal("show");
      });
-	 $('#trainTable a.btn-info').on('click', function (e) {
-		 var trainId=$(this).attr("value");
-		 $.each(trainDatas,function(index,item)
-				 {
-			      if(item.trainId=trainId)
-			    	  trTrainData=item;
-				 });
+	$('#trainTable').on('click', 'button[name="goodsUpTrainBtn"]', function (e) {
+		var trainId = $(this).attr("value");
+		$.each(trainDatas,function(index,item){
+			if(item.trainId = trainId){
+				trTrainData = item;
+			}
+		});
 		 $("#modalGoodAdd").modal("show");
      });
 	 
@@ -52,7 +52,7 @@ $(document).ready(function() {
 				 });
 		 var good=new Object;
 		 good.goodsId=trGoodData.goodsId;
-		 good.trainId=trTrainData.trainId;
+		 good.trainId = trTrainData.trainId;
 		 good.goodsNumber=trGoodData.goodsNumber;
 		 good.shopPrice=trGoodData.shopPrice;
 		 good.promotePrice=trGoodData.promotePrice;
@@ -169,7 +169,7 @@ function getGoodsData(trainId)
 			layer.alert("数据请求失败!", 8);
 		}
 	});
-	}
+}
 function TrainGoodsManage(){
 	var zTreeOnClick = function(event, treeId, treeNode) {
 		var treeObj = $.fn.zTree.getZTreeObj("orgTreeId");
@@ -393,7 +393,7 @@ function pageInit()
 		                    	targets:[5],
 		                    	render:function(data,type,row)
 		                    	{
-		                    		 var html='<td><a class="btn btn-info" value="'+row.trainId+'" href="javascript:;">商品上车</a><a class="btn btn-success" value="'+row.trainId+'" href="javascript:;">商品列表</a></td>';
+		                    		 var html='<td><button type="button" class="btn btn-info" name="goodsUpTrainBtn" value="'+row.trainId+'" >商品上车</button><button type="button" name="trainGoosBtn" class="btn btn-success" value="'+row.trainId+'" >商品列表</button></td>';
 	                                 return html;
 		                    	}
 		                    }

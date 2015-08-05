@@ -30,18 +30,9 @@ public class TrainGoods implements java.io.Serializable {
 	private Long promoteEndDate;
 	private Integer warnNumber;
 	private String remark;
-//	private Set<Goods> goods;
-//
-//	// Constructors
-//    @OneToMany
-//    @JoinColumn(name="GOODS_ID")
-//	public Set<Goods> getGoods() {
-//		return goods;
-//	}
-//
-//	public void setGoods(Set<Goods> goods) {
-//		this.goods = goods;
-//	}
+	
+	private String goodsName;
+	private String trainNumber;
 
 	/** default constructor */
 	public TrainGoods() {

@@ -20,7 +20,7 @@ import org.apache.http.util.EntityUtils;
 
 public class TestHttpClient {
 	// 接口地址
-	private String ipAddress = "http://localhost:8080/trainshop";
+	private String ipAddress = "http://103.41.54.30:8080";
 	private String apiURL = "";
 	private Log logger = LogFactory.getLog(this.getClass());
 	private static final String pattern = "yyyy-MM-dd HH:mm:ss:SSS";

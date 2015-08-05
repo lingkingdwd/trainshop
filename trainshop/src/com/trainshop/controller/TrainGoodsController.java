@@ -45,7 +45,7 @@ public class TrainGoodsController extends BaseController {
 	@RequestMapping(value = "/getListByTrain", method = RequestMethod.POST, produces = { "text/json;charset=UTF-8" })
 	public String getListByTrain(HttpServletRequest request, HttpSession session) {
 		String jsondata = request.getParameter("id");
-		List data=trainGoodsService.findObjectsByPerptey(TrainGoods.class, "trainId", Long.parseLong(jsondata));
+		List data = trainGoodsService.findObjectsByPerptey(TrainGoods.class, "trainId", Long.parseLong(jsondata));
 		HtReturnData returnData=new HtReturnData(1, data.size(), data.size(), data);
 		return returnData.toJson();
 	}
@@ -61,8 +61,14 @@ public class TrainGoodsController extends BaseController {
 	public String onGood(HttpServletRequest request, HttpSession session) {
 		String data = request.getParameter("data");
 		TrainGoods entity = JsonPluginsUtil.jsonToBean(data, TrainGoods.class);
-		trainGoodsService.create(entity);
-		return super.returnSucess("上架成功！");
+		
+		if(!checkIsOn(entity)){
+			trainGoodsService.create(entity);
+			return super.returnSucess("上架成功！");
+		}
+		else{
+			return super.returnFail("该商品已上架，请选择其他商品！");
+		}
 	}
 
 	/**
@@ -78,5 +84,26 @@ public class TrainGoodsController extends BaseController {
 		String jsondata = request.getParameter("id");
 		trainGoodsService.deleteById(Long.parseLong(jsondata));
 		return super.returnSucess("下架成功！");
+	}
+	
+	private boolean checkIsOn(TrainGoods tg){
+		boolean isOn = false;
+		StringBuffer hql = new StringBuffer();
+
+		hql.append(" From TrainGoods as tg where 1=1 ");
+
+		if (tg.getGoodsId() != null) {
+			hql.append(" and tg.goodsId = " + tg.getGoodsId());
+		}
+		if (tg.getTrainId() != null) {
+			hql.append(" and tg.trainId = " + tg.getTrainId());
+		}
+
+		int sum = trainGoodsService.getCountByHql(hql.toString(), null);
+		if (sum > 0) {
+			isOn = true;
+		}
+		
+		return isOn;
 	}
 }

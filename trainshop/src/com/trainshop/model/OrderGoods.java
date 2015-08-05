@@ -3,7 +3,10 @@ package com.trainshop.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.Transient;
+
 import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -32,6 +35,92 @@ public class OrderGoods implements java.io.Serializable {
 	private Integer parentId;
 	private Integer isGift;
 	private String goodsAttrId;
+	
+	private String goodsThumb;
+	private String goodsImg;
+	private String originalImg;
+	private String goodsBrief;
+	private String goodsDesc;
+	
+	@Transient
+	public String getGoodsThumb() {
+		return goodsThumb;
+	}
+
+	@Transient
+	public void setGoodsThumb(String goodsThumb) {
+		this.goodsThumb = goodsThumb;
+	}
+
+	@Transient
+	public String getGoodsImg() {
+		return goodsImg;
+	}
+
+	@Transient
+	public void setGoodsImg(String goodsImg) {
+		this.goodsImg = goodsImg;
+	}
+
+	@Transient
+	public String getOriginalImg() {
+		return originalImg;
+	}
+
+	@Transient
+	public void setOriginalImg(String originalImg) {
+		this.originalImg = originalImg;
+	}
+
+	@Transient
+	public String getGoodsBrief() {
+		return goodsBrief;
+	}
+
+	@Transient
+	public void setGoodsBrief(String goodsBrief) {
+		this.goodsBrief = goodsBrief;
+	}
+
+	@Transient
+	public String getGoodsDesc() {
+		return goodsDesc;
+	}
+
+	@Transient
+	public void setGoodsDesc(String goodsDesc) {
+		this.goodsDesc = goodsDesc;
+	}
+	
+	public OrderGoods(Long orderId, Long goodsId, String goodsName,
+			String goodsSn, Integer productId, Integer goodsNumber,
+			Double marketPrice, Double goodsPrice, String goodsAttr,
+			Integer sendNumber, Integer isReal, String extensionCode,
+			Integer parentId, Integer isGift, String goodsAttrId, 
+			String goodsThumb, String goodsImg, String originalImg,
+			String goodsBrief, String goodsDesc) {
+		this.orderId = orderId;
+		this.goodsId = goodsId;
+		this.goodsName = goodsName;
+		this.goodsSn = goodsSn;
+		this.productId = productId;
+		this.goodsNumber = goodsNumber;
+		this.marketPrice = marketPrice;
+		this.goodsPrice = goodsPrice;
+		this.goodsAttr = goodsAttr;
+		this.sendNumber = sendNumber;
+		this.isReal = isReal;
+		this.extensionCode = extensionCode;
+		this.parentId = parentId;
+		this.isGift = isGift;
+		this.goodsAttrId = goodsAttrId;
+		
+		this.goodsThumb = goodsThumb;
+		this.goodsImg = goodsImg;
+		this.originalImg = originalImg;
+		this.goodsBrief = goodsBrief;
+		this.goodsDesc = goodsDesc;
+	}
 
 	// Constructors
 
