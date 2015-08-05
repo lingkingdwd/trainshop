@@ -41,8 +41,9 @@ $(document).ready(function() {
 		});
 		 $("#modalGoodAdd").modal("show");
      });
+     
 	 
-	 $('#goodsTable a.btn-primary').on('click', function (e) {
+     $('#goodsTable').on('click', 'button[name="goodsUpBtn"]', function (e) {
 		 var goodsId=$(this).attr("value");
 		 var trGoodData;
 		 $.each(goodDatas,function(index,item)
@@ -304,7 +305,7 @@ function pageInit()
 	                          {
 	                        	  targets: 16,
 	                              render: function (data, type, row) {
-	                            	  var html='<td><a class="btn btn-primary" value="'+row.goodsId+'" href="javascript:;">上架</a></td>';
+	                            	  var html='<td><button type="button" class="btn btn-primary" name="goodsUpBtn" value="'+row.goodsId+'" >上架</button></td>';
 	                                   return html;
 	                              }
 	                          }
