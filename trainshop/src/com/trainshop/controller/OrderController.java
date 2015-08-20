@@ -19,7 +19,6 @@ import com.trainshop.common.HtReturnData;
 import com.trainshop.common.JsonUtil;
 import com.trainshop.common.util.JsonPluginsUtil;
 import com.trainshop.common.util.PageTools;
-import com.trainshop.model.Goods;
 import com.trainshop.model.OrderAction;
 import com.trainshop.model.OrderGoods;
 import com.trainshop.model.OrderInfo;
@@ -76,11 +75,45 @@ public class OrderController extends BaseController {
 
 	@ResponseBody
 	@RequestMapping(value = "orderCount", method = RequestMethod.POST, produces = { "text/json;charset=UTF-8" })
-	public String orderCount() {
+	public String orderCount(HttpServletRequest request, HttpSession session) {
+		int sum = 0;
+		String data = request.getParameter("data");
 
-		int count = orderInfoService.findAll().size();
+		OrderInfo order = JsonPluginsUtil.jsonToBean(data, OrderInfo.class);
 
-		return super.returnData(count);
+		Map parameters = new HashMap();
+		StringBuffer hql = new StringBuffer();
+		hql.append(" From OrderInfo as model where 1=1 ");
+
+		if (session.getAttribute("trainNumber") != null) {
+			String trainNumber = session.getAttribute("trainNumber").toString();
+			hql.append(" where model.trainNumber = '" + trainNumber + "'");
+		} 
+		if (session.getAttribute("startTime") != null) {
+			String startTime = session.getAttribute("startTime").toString();
+			hql.append(" and model.startTime = " + startTime);
+		}
+
+		if (order == null ) {
+			sum = orderInfoService.getCountByHql(hql.toString(), null);
+		} else {
+			if (order != null) { 
+				hql.append(" and model.userId =:userId");
+				parameters.put("userId", order.getUserId());
+			 }
+			
+			 if (order.getPayStatus() != null) { 
+				 hql.append(" and model.payStatus =:payStatus"); 
+				 parameters.put("payStatus", order.getPayStatus()); 
+			 } 
+			 if (order.getOrderStatus() != 0) {
+				 hql.append(" and model.orderStatus =:orderStatus");
+				 parameters.put("orderStatus", order.getOrderStatus()); 
+			 }
+
+			sum = orderInfoService.getCountByHql(hql.toString(), parameters);
+		}
+		return super.returnData(sum);
 	}
 
 	/**
@@ -111,18 +144,17 @@ public class OrderController extends BaseController {
 
 		/*
 		 * if(session.getAttribute("trainNumber") != null){ String trainNumber =
-		 * session.getAttribute("trainNumber").toString();
-		 * hql.append(" where model.trainNumber = '" + trainNumber + "'"); }
-		 * else{ result = "{\"flag\":\"0\",\"message\":\"请先登录！\"}"; return
-		 * result; } if(session.getAttribute("startTime") != null){ String
-		 * startTime = session.getAttribute("startTime").toString();
-		 * hql.append(" and model.startTime = " + startTime); }
+		 * session.getAttribute("trainNumber").toString(); hql.append(
+		 * " where model.trainNumber = '" + trainNumber + "'"); } else{ result =
+		 * "{\"flag\":\"0\",\"message\":\"请先登录！\"}"; return result; }
+		 * if(session.getAttribute("startTime") != null){ String startTime =
+		 * session.getAttribute("startTime").toString(); hql.append(
+		 * " and model.startTime = " + startTime); }
 		 */
 
 		if (order == null || order.equals("")) {
 			int sum = orderInfoService.getCountByHql(hql.toString(), null);
-			List<OrderInfo> list = orderInfoService.searchByHql(hql.toString(),
-					null, start, limit);
+			List<OrderInfo> list = orderInfoService.searchByHql(hql.toString(), null, start, limit);
 
 			page.setDataList(list);
 			page.setTotalProperty(sum);
@@ -138,18 +170,15 @@ public class OrderController extends BaseController {
 			 * }
 			 */
 			/*
-			 * if (order.getPayStatus() != null) {
-			 * hql.append(" and model.payStatus =:payStatus");
-			 * Parameters.put("payStatus", order.getPayStatus()); } if
-			 * (order.getOrderStatus() != 0) {
+			 * if (order.getPayStatus() != null) { hql.append(
+			 * " and model.payStatus =:payStatus"); Parameters.put("payStatus",
+			 * order.getPayStatus()); } if (order.getOrderStatus() != 0) {
 			 * hql.append(" and model.orderStatus =:orderStatus");
 			 * Parameters.put("orderStatus", order.getOrderStatus()); }
 			 */
 
-			int sum = orderInfoService
-					.getCountByHql(hql.toString(), parameters);
-			List<OrderInfo> list = orderInfoService.searchByHql(hql.toString(),
-					parameters, start, limit);
+			int sum = orderInfoService.getCountByHql(hql.toString(), parameters);
+			List<OrderInfo> list = orderInfoService.searchByHql(hql.toString(), parameters, start, limit);
 
 			for (OrderInfo oi : list) {
 				oi.setOrderGoods(this.getOrderGoods(oi.getOrderId()));
@@ -180,8 +209,7 @@ public class OrderController extends BaseController {
 		StringBuffer hql = new StringBuffer();
 		hql.append(" From OrderInfo as model where 1=1 order by model.orderId DESC");
 
-		List<OrderInfo> orders = orderInfoService.searchByHql(hql.toString(),
-				null);
+		List<OrderInfo> orders = orderInfoService.searchByHql(hql.toString(), null);
 		int total = orders.size();
 		result.setData(orders);
 		result.setDraw(0);
@@ -204,8 +232,7 @@ public class OrderController extends BaseController {
 	public String getBacklist(HttpServletRequest request, HttpSession session) {
 		HtReturnData result = new HtReturnData();
 
-		List<OrderAction> orders = orderActionService.findObjectsByPerptey(
-				OrderAction.class, "orderStatus", 4);
+		List<OrderAction> orders = orderActionService.findObjectsByPerptey(OrderAction.class, "orderStatus", 4);
 		int total = orders.size();
 		result.setData(orders);
 		result.setDraw(0);
@@ -228,8 +255,7 @@ public class OrderController extends BaseController {
 	public String getShiplist(HttpServletRequest request, HttpSession session) {
 		HtReturnData result = new HtReturnData();
 
-		List<OrderAction> orders = orderActionService.findObjectsByPerptey(
-				OrderAction.class, "shippingStatus", 1);
+		List<OrderAction> orders = orderActionService.findObjectsByPerptey(OrderAction.class, "shippingStatus", 1);
 		int total = orders.size();
 		result.setData(orders);
 		result.setDraw(0);
@@ -265,8 +291,7 @@ public class OrderController extends BaseController {
 
 			parameters.put("orderId", goods.getOrderId());
 
-			List<OrderGoods> list = orderGoodsService.searchByHql(
-					hql.toString(), parameters);
+			List<OrderGoods> list = orderGoodsService.searchByHql(hql.toString(), parameters);
 
 			result = JsonPluginsUtil.beanListToJson(list);
 
@@ -294,8 +319,7 @@ public class OrderController extends BaseController {
 
 		if (obj != null) {
 			if (!obj.get("trainNumber").equals("")) {
-				hql.append(" and trainNumber LIKE '%" + obj.get("trainNumber")
-						+ "%'");
+				hql.append(" and trainNumber LIKE '%" + obj.get("trainNumber") + "%'");
 			}
 			if (!obj.get("orderSn").equals("")) {
 				hql.append(" and orderSn LIKE '%" + obj.get("orderSn") + "%'");
@@ -307,8 +331,7 @@ public class OrderController extends BaseController {
 
 		hql.append("order by orderId DESC");
 
-		List<OrderInfo> orders = orderInfoService.searchByHql(hql.toString(),
-				null);
+		List<OrderInfo> orders = orderInfoService.searchByHql(hql.toString(), null);
 		int total = orders.size();
 		result.setData(orders);
 		result.setDraw(0);
@@ -341,20 +364,18 @@ public class OrderController extends BaseController {
 
 		entity.setOrderStatus(0);
 		entity.setShippingStatus(0);
-		//entity.setPayStatus(0);
+		// entity.setPayStatus(0);
 		entity.setAddTime(System.currentTimeMillis());
 
 		entity.setIsSeparate(0);
 
 		// 订单号
-		String orderSn = entity.getTrainNumber() + entity.getCarriage()
-				+ System.currentTimeMillis();
+		String orderSn = entity.getTrainNumber() + entity.getCarriage() + System.currentTimeMillis();
 		entity.setOrderSn(orderSn);
 
 		orderInfoService.create(entity);
 
-		List<OrderInfo> info = orderInfoService.findObjectsByPerptey(
-				OrderInfo.class, "orderSn", orderSn);
+		List<OrderInfo> info = orderInfoService.findObjectsByPerptey(OrderInfo.class, "orderSn", orderSn);
 		if (info.size() > 0) {
 			for (OrderGoods og : entity.getOrderGoods()) {
 				og.setOrderId(info.get(0).getOrderId());
@@ -374,8 +395,7 @@ public class OrderController extends BaseController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "orderStatus", method = RequestMethod.POST, produces = { "text/json;charset=UTF-8" })
-	public String updateOrderStatus(HttpServletRequest request,
-			HttpSession session) {
+	public String updateOrderStatus(HttpServletRequest request, HttpSession session) {
 		String result = "";
 
 		String data = request.getParameter("data");
@@ -417,8 +437,7 @@ public class OrderController extends BaseController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "shippingStatus", method = RequestMethod.POST, produces = { "text/json;charset=UTF-8" })
-	public String updateShippingStatus(HttpServletRequest request,
-			HttpSession session) {
+	public String updateShippingStatus(HttpServletRequest request, HttpSession session) {
 		String result = "";
 
 		String data = request.getParameter("data");
@@ -457,8 +476,7 @@ public class OrderController extends BaseController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "payStatus", method = RequestMethod.POST, produces = { "text/json;charset=UTF-8" })
-	public String updatePayStatus(HttpServletRequest request,
-			HttpSession session) {
+	public String updatePayStatus(HttpServletRequest request, HttpSession session) {
 		String result = "";
 
 		String data = request.getParameter("data");
@@ -498,9 +516,8 @@ public class OrderController extends BaseController {
 
 			parameters.put("orderId", orderId);
 
-			List<OrderGoods> list = orderGoodsService.searchByHql(
-					hql.toString(), parameters);
-			
+			List<OrderGoods> list = orderGoodsService.searchByHql(hql.toString(), parameters);
+
 			return list;
 		}
 

@@ -119,7 +119,6 @@ function dateFormat(date) {
 			day = "0" + date.getDate();
 		else
 			day = date.getDate();
-
 	}
 	return year + "-" + month + "-" + day;
 }
@@ -134,6 +133,7 @@ function dateTimeFormat(date) {
 	var day = "01";
 	var hour = "00";
 	var minute = "00";
+	var seconds = "00";
 	if (date != null) {
 		year = date.getFullYear();
 		if ((date.getMonth() + 1) < 10){
@@ -160,9 +160,15 @@ function dateTimeFormat(date) {
 		else{
 			minute = date.getMinutes();
 		}
+		if (date.getSeconds < 10){
+			seconds = "0" + date.getSeconds();
+		}
+		else{
+			seconds = date.getSeconds();
+		}
 
 	}
-	return year + "-" + month + "-" + day + " " + hour + ":" + minute;
+	return year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + seconds;
 }
 
 

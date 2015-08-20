@@ -25,10 +25,10 @@ public class GoodsActivityController extends BaseController {
 	@Resource(name = "goodsActivityService")
 	private IGoodsActivityService goodsActivityService;
 
-	@RequestMapping(value = "/init", method = RequestMethod.GET)
+	@RequestMapping(value = "/snatch", method = RequestMethod.GET)
 	public String init(HttpServletRequest request, HttpSession session) {
 		try {
-			return "shop/activity/list";
+			return "shop/activity/snatch";
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "/error";

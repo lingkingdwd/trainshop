@@ -20,6 +20,7 @@
 	<context:component-scan base-package="com.trainshop.dao" />
 	<context:component-scan base-package="com.trainshop.service" />
 	<context:component-scan base-package="com.trainshop.controller" />
+	<context:component-scan base-package="com.trainshop.common.ckeditor" />
 	
 	<mvc:resources location="html" mapping="*.html" />
 	<mvc:resources location="jsp" mapping="*.jsp" />
@@ -32,6 +33,7 @@
 	<mvc:resources location="/shop/" mapping="/shop/**" />
 	<mvc:resources location="/pages/" mapping="/pages/**" />
 	<mvc:resources location="/upload/" mapping="/upload/**"/>
+	<mvc:resources location="/shopImg/" mapping="/shopImg/**"/>
 	
 	<mvc:view-controller path="/" view-name="users/initLogin"/>
 	

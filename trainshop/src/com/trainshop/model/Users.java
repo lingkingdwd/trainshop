@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 /**
@@ -51,8 +52,30 @@ public class Users implements java.io.Serializable {
 	private Double creditLine;
 	private String passwdQuestion;
 	private String passwdAnswer;
+	
+	private String payPoints_min;
+	private String payPoints_max;
 
 	// Constructors
+	@Transient
+	public String getPayPoints_min() {
+		return payPoints_min;
+	}
+
+	@Transient
+	public void setPayPoints_min(String payPoints_min) {
+		this.payPoints_min = payPoints_min;
+	}
+
+	@Transient
+	public String getPayPoints_max() {
+		return payPoints_max;
+	}
+
+	@Transient
+	public void setPayPoints_max(String payPoints_max) {
+		this.payPoints_max = payPoints_max;
+	}
 
 	/** default constructor */
 	public Users() {

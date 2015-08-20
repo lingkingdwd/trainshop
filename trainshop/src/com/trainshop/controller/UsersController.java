@@ -1,6 +1,8 @@
 package com.trainshop.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.io.Serializable;
 import java.lang.reflect.Field;
 
@@ -18,6 +20,7 @@ import com.trainshop.common.util.JsonPluginsUtil;
 import com.trainshop.common.util.PageParameters;
 import com.trainshop.common.util.PageTools;
 import com.trainshop.model.Train;
+import com.trainshop.model.UserRank;
 import com.trainshop.model.UserTrain;
 import com.trainshop.model.Users;
 import com.trainshop.service.IUserTrainService;
@@ -37,6 +40,16 @@ public class UsersController extends BaseController {
 	public String initLogin(HttpServletRequest request, HttpSession session) {
 		try {
 			return "login";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "/error";
+		}
+	}
+	
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public String list(HttpServletRequest request, HttpSession session) {
+		try {
+			return "shop/member/list";
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "/error";
@@ -63,33 +76,34 @@ public class UsersController extends BaseController {
 	@RequestMapping(value = "getUserslist", method = RequestMethod.POST, produces = { "text/json;charset=UTF-8" })
 	public String getUserslist(HttpServletRequest request, HttpSession session) {
 		String result = null;
-		
-		String data = request.getParameter("data");
-		int start = 0;
-		int limit = 10;
-		if(!request.getParameter("start").equals(null)){
-			start = new Integer(request.getParameter("start"));
-		}
-		if(!request.getParameter("limit").equals(null)){
-			limit = new Integer(request.getParameter("limit"));
-		}
-		
-		Users user = JsonPluginsUtil.jsonToBean(data, Users.class);
-		
-		DetachedCriteria dc = DetachedCriteria.forClass(Users.class);  
-		
-		Field[] fields = Users.class.getDeclaredFields();
-		for(Field f : fields){
-			f.getName();
-		}
-		
-		PageTools page = new PageTools();
-		page.setDataList(usersService.searchByDetachedCriteria(dc, start, limit));
-		page.setTotalProperty(usersService.getCountByDetachedCriteria(dc));
-		
-		result = JsonPluginsUtil.beanToJson(page);
 
-		return super.returnData(result);
+		String data = request.getParameter("data");
+
+		Users us = JsonPluginsUtil.jsonToBean(data, Users.class);
+
+		Map parameters = new HashMap();
+		StringBuffer hql = new StringBuffer();
+		hql.append(" From Users as model where 1=1 ");
+
+		if (us == null) {
+			List<Users> list = usersService.searchByHql(hql.toString(), null);
+
+			result = JsonPluginsUtil.beanListToJson(list);
+
+			return super.returnData(result);
+		} else {
+			 if (us.getUserName() != null  && !us.getUserName().equals("")) { 
+				 hql.append(" and model.userName =:userName");
+				 parameters.put("userName", us.getUserName());
+			 }
+			 
+			List<Users> list = usersService.searchByHql(hql.toString(),
+					parameters);
+
+			result = JsonPluginsUtil.beanListToJson(list);
+
+			return super.returnData(result);
+		}
 	}
 
 	/**

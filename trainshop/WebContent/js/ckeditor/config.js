@@ -6,12 +6,14 @@
 CKEDITOR.editorConfig = function( config ) {
 	// Define changes to default configuration here. For example:
 	config.language = 'zh-cn';
+	config.width = 500;
+	config.height = 600;
 	//config.uiColor = '#AADC6E';
 	// 图片上传配置  
-    /*config.filebrowserUploadUrl = 'upload.do?type=File';  
-    config.filebrowserImageUploadUrl = 'upload.do?type=Image';  
-    config.filebrowserFlashUploadUrl = 'upload.do?type=Flash';  
+    config.filebrowserUploadUrl = basePath + 'fileUpload/upload?type=File';  
+    config.filebrowserImageUploadUrl = basePath + 'fileUpload/upload?type=Image';  
+    config.filebrowserFlashUploadUrl = basePath + 'fileUpload/upload?type=Flash';  
       
     // 图片浏览配置  
-    config.filebrowserImageBrowseUrl = 'browerServer.do?type=image';*/
+    config.filebrowserImageBrowseUrl = basePath + 'browerServer/brower?type=image';
 };

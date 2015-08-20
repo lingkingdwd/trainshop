@@ -193,7 +193,7 @@
 				<li><a href="#"><i class="fa fa-sitemap fa-fw"></i> 促销管理<span
 						class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
-						<li><a href="#">夺宝奇兵</a></li>
+						<li><a href="<%=basePath %>goodsActivity/snatch">夺宝奇兵</a></li>
 						<li><a href="#">红包类型</a></li>
 						<li><a href="#">祝福贺卡</a></li>
 						<li><a href="#">团购活动</a></li>
@@ -208,19 +208,19 @@
 				<li><a href="#"><i class="fa fa-wrench fa-fw"></i> 用户管理<span
 						class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
-						<li><a href="<%=basePath%>org/init">组织机构管理</a></li>
-						<li><a href="#">用户管理</a></li>
+						<li><a href="<%=basePath %>org/init">组织机构管理</a></li>
+						<!-- <li><a href="#">用户管理</a></li>
 						<li><a href="#">角色管理</a></li>
 						<li><a href="#">权限分配</a></li>
-						<li><a href="#">菜单管理</a></li>
+						<li><a href="#">菜单管理</a></li> -->
 					</ul>
 				</li>
 				<li><a href="#"><i class="fa fa-wrench fa-fw"></i> 会员管理<span
 						class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
-						<li><a href="#">会员列表</a></li>
-						<li><a href="#">会员等级</a></li>
-						<li><a href="#">会员留言</a></li>
+						<li><a href="<%=basePath %>users/list">会员列表</a></li>
+						<li><a href="<%=basePath %>userRank/init">会员等级</a></li>
+						<li><a href="<%=basePath %>users/list">会员留言</a></li>
 					</ul>
 				</li>
 				<li><a href="#"><i class="fa fa-wrench fa-fw"></i> 系统设置<span

@@ -87,22 +87,14 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-md-6">
-							<div class="form-group">
-								<label class="col-sm-3 control-label">简短描述：</label>
-								<div class="col-sm-8">
-									<input type="text" class="form-control" value="" id="goodsBrief" name="goodsBrief" />
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6">
+						<!-- <div class="col-md-6">
 							<div class="form-group">
 								<label class="col-sm-3 control-label">详细描述：</label>
 								<div class="col-sm-8">
 									<input type="text" class="form-control" value="" id="goodsDesc" name="goodsDesc" />
 								</div>
 							</div>
-						</div>
+						</div> -->
 						<div class="col-md-6">
 							<div class="form-group">
 								<label class="col-sm-3 control-label">可用积分数量：</label>
@@ -181,16 +173,22 @@
 								</div>
 							</div>
 						</div>
-						<!-- <div class="col-md-12">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="col-sm-3 control-label">简短描述：</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" value="" id="goodsBrief" name="goodsBrief" />
+								</div>
+							</div>
+						</div>
+						<div class="col-md-12">
 							<div class="form-group">
 								<label class="col-md-1 control-label padding-left-none marleft45">详细描述：</label>
 								<div class="col-sm-10 marright13">
-									<div id="edgoodsDescitor">
-									
-									</div>
+									<input type="text" class="form-control" value="" id="goodsDesc" name="goodsDesc" />
 								</div>
 							</div>
-						</div> -->
+						</div>
 						<div class="col-md-12">
 							<div class="form-group">
 								<label

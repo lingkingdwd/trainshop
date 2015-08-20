@@ -1,6 +1,8 @@
 var categoryList = new Array();
 var currentGoods;
 
+var editor = null;
+
 $(document).ready(function() {
 	var goodsUpdate = new GoodsUpdate();
 	goodsUpdate.createAddCondition();
@@ -14,6 +16,8 @@ $(document).ready(function() {
 		callAjax(basePath + "goods/getGoodsById",'POST', param, function(data){
 			if (data.flag == "1") {
 				currentGoods = data.DATA;
+				
+				editor = CKEDITOR.replace('goodsDesc'); 
 				
 				goodsUpdate.initModal(data);
 			}
@@ -49,7 +53,7 @@ function GoodsUpdate(){
 		$("#marketPrice").val(rowData.marketPrice);
 		$("#promotePrice").val(rowData.promotePrice);
 		$("#goodsBrief").val(rowData.goodsBrief);
-		$("#goodsDesc").val(rowData.goodsDesc);
+		//$("#goodsDesc").val(rowData.goodsDesc);
 		$("#integral").val(rowData.integral);
 		$("input[name='isBest']:checked").val(rowData.isBest);
 		$("input[name='isNew']:checked").val(rowData.isNew);
@@ -57,6 +61,8 @@ function GoodsUpdate(){
 		$("input[name='isPromote']:checked").val(rowData.isPromote);
 		$("#giveIntegral").val(rowData.giveIntegral);
 		$("#sellerNote").val(rowData.sellerNote);
+		
+		editor.setData(rowData.goodsDesc); 
 		
 		var goodsThumb = "";
 		if(rowData.goodsThumb != ""){
@@ -281,7 +287,6 @@ function GoodsUpdate(){
 		obj.marketPrice = $("#marketPrice").val();
 		obj.promotePrice = $("#promotePrice").val();
 		obj.goodsBrief = $("#goodsBrief").val();
-		obj.goodsDesc = $("#goodsDesc").val();
 		obj.integral = $("#integral").val();
 		obj.isBest = $("input[name='isBest']:checked").val();
 		obj.isNew = $("input[name='isNew']:checked").val();
@@ -290,6 +295,10 @@ function GoodsUpdate(){
 		obj.giveIntegral = $("#giveIntegral").val();
 		obj.sellerNote = $("#sellerNote").val();
 		obj.goodsNumber = 0;
+		//obj.goodsDesc = $("#goodsDesc").val();
+		
+		var content = editor.getData(); 
+		obj.goodsDesc = content;
 		
 		obj.goodsThumb = currentGoods.goodsThumb;
 		obj.goodsImg = currentGoods.goodsImg;

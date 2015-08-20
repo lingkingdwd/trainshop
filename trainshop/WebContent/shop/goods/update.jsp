@@ -89,22 +89,6 @@
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
-								<label class="col-sm-3 control-label">简短描述：</label>
-								<div class="col-sm-8">
-									<input type="text" class="form-control" value="" id="goodsBrief" name="goodsBrief" />
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="form-group">
-								<label class="col-sm-3 control-label">详细描述：</label>
-								<div class="col-sm-8">
-									<input type="text" class="form-control" value="" id="goodsDesc" name="goodsDesc" />
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="form-group">
 								<label class="col-sm-3 control-label">可用积分数量：</label>
 								<div class="col-sm-8">
 									<input type="text" class="form-control" value="" id="integral" name="integral" 
@@ -178,6 +162,22 @@
 								<div class="col-sm-8">
 									<input type="text" class="form-control" value="" id=giveIntegral name="giveIntegral" 
 									onkeyup='this.value=this.value.replace(/[^0-9|.]/g,"")' onafterpaste='this.value=this.value.replace(/[/[^0-9|.]/g,"")'/>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="col-sm-3 control-label">简短描述：</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" value="" id="goodsBrief" name="goodsBrief" />
+								</div>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="form-group">
+								<label class="col-md-1 control-label padding-left-none marleft45">详细描述：</label>
+								<div class="col-sm-10 marright13">
+									<input type="text" class="form-control" value="" id="goodsDesc" name="goodsDesc" />
 								</div>
 							</div>
 						</div>
@@ -263,5 +263,6 @@
 <link rel="stylesheet" href="<%=basePath%>js/bootstrap-fileinput/css/fileinput.css" />
 <script src="<%=basePath%>js/bootstrap-fileinput/js/fileinput.js"></script>
 <script src="<%=basePath%>js/jquery.form.js"></script>
+<script src="<%=basePath%>js/ckeditor/ckeditor.js"></script>
 <script type="text/javascript" src="<%=basePath%>shop/goods/update.js"></script>
 </html>

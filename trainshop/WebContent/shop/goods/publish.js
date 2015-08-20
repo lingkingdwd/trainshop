@@ -1,5 +1,10 @@
 var categoryList = new Array();
 
+var editor = null;
+$(window).load( function(){
+	editor = CKEDITOR.replace('goodsDesc'); 
+});
+
 $(document).ready(function() {
 	$("#goodsThumb").fileinput({
 		showCaption: false,
@@ -37,12 +42,6 @@ $(document).ready(function() {
 	
 	
 	$("#saveBtn").on('click', goodsPublish.addGoods);
-	
-	/*var editor = null;
-    window.onload = function(){
-        editor = CKEDITOR.replace('edgoodsDescitor'); //参数‘content’是textarea元素的name属性值，而非id属性值
-    }*/
-		
 	//goodsPublish.createGoodsTable();
 	
 //	$("#addGoods").on("click", {getList:categoryManage.createGoodsTable}, categoryManage.addGoods);
@@ -206,7 +205,6 @@ function GoodsPublish(){
 		obj.marketPrice = $("#marketPrice").val();
 		obj.promotePrice = $("#promotePrice").val();
 		obj.goodsBrief = $("#goodsBrief").val();
-		obj.goodsDesc = $("#goodsDesc").val();
 		obj.integral = $("#integral").val();
 		obj.isBest = $("input[name='isBest']:checked").val();
 		obj.isNew = $("input[name='isNew']:checked").val();
@@ -215,6 +213,9 @@ function GoodsPublish(){
 		obj.giveIntegral = $("#giveIntegral").val();
 		obj.sellerNote = $("#sellerNote").val();
 		obj.goodsNumber = 0;
+		
+		var content = editor.getData(); 
+		obj.goodsDesc = content;
 			
 		var param = {data:JSON.stringify(obj)};
 			

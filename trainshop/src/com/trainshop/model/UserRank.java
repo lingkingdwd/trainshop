@@ -1,9 +1,10 @@
 package com.trainshop.model;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -20,9 +21,9 @@ public class UserRank implements java.io.Serializable {
 	private String rankName;
 	private Integer minPoints;
 	private Integer maxPoints;
-	private Short discount;
-	private Boolean showPrice;
-	private Boolean specialRank;
+	private Integer discount;
+	private Integer showPrice;
+	private Integer specialRank;
 
 	// Constructors
 
@@ -31,8 +32,10 @@ public class UserRank implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public UserRank(String rankName, Integer minPoints, Integer maxPoints,
-			Short discount, Boolean showPrice, Boolean specialRank) {
+	public UserRank(Long rankId, String rankName, Integer minPoints,
+			Integer maxPoints, Integer discount, Integer showPrice,
+			Integer specialRank) {
+		this.rankId = rankId;
 		this.rankName = rankName;
 		this.minPoints = minPoints;
 		this.maxPoints = maxPoints;
@@ -81,29 +84,29 @@ public class UserRank implements java.io.Serializable {
 	}
 
 	@Column(name = "discount", nullable = false)
-	public Short getDiscount() {
+	public Integer getDiscount() {
 		return this.discount;
 	}
 
-	public void setDiscount(Short discount) {
+	public void setDiscount(Integer discount) {
 		this.discount = discount;
 	}
 
 	@Column(name = "show_price", nullable = false)
-	public Boolean getShowPrice() {
+	public Integer getShowPrice() {
 		return this.showPrice;
 	}
 
-	public void setShowPrice(Boolean showPrice) {
+	public void setShowPrice(Integer showPrice) {
 		this.showPrice = showPrice;
 	}
 
 	@Column(name = "special_rank", nullable = false)
-	public Boolean getSpecialRank() {
+	public Integer getSpecialRank() {
 		return this.specialRank;
 	}
 
-	public void setSpecialRank(Boolean specialRank) {
+	public void setSpecialRank(Integer specialRank) {
 		this.specialRank = specialRank;
 	}
 
