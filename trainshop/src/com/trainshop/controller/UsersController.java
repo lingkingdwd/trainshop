@@ -78,6 +78,8 @@ public class UsersController extends BaseController {
 		String result = null;
 
 		String data = request.getParameter("data");
+		String pay_points_lt =request.getParameter("pay_points_lt");
+		String pay_points_gt =request.getParameter("pay_points_gt");
 
 		Users us = JsonPluginsUtil.jsonToBean(data, Users.class);
 
@@ -97,6 +99,20 @@ public class UsersController extends BaseController {
 				 parameters.put("userName", us.getUserName());
 			 }
 			 
+			 if (pay_points_lt != null  && !"".equals(pay_points_lt)) { 
+				 hql.append(" and model.payPoints <:pay_points_lt");
+				 parameters.put("pay_points_lt", Integer.valueOf(pay_points_lt));
+			 }
+			 
+			 if (pay_points_gt != null  && !"".equals(pay_points_gt)) { 
+				 hql.append(" and model.payPoints >=:pay_points_gt");
+				 parameters.put("pay_points_gt", Integer.valueOf(pay_points_gt));
+			 }
+			 
+			 if (us.getUserRank() != null  && !us.getUserRank().equals("")) { 
+				 hql.append(" and model.userRank >=:userRank");
+				 parameters.put("userRank", us.getUserRank());
+			 }
 			List<Users> list = usersService.searchByHql(hql.toString(),
 					parameters);
 

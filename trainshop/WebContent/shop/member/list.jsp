@@ -35,9 +35,11 @@
 												<div class="form-group">
 													<label class="control-label col-md-5">会员等级：</label>
 													<div class="col-md-7">
-														<select class="form-control" id="userRankSelect">
-															<!-- <option>普通版</option>
-																	<option>奋斗版</option> -->
+														<select class="form-control" id="userRankSelect" name="user_rank">
+															<option value="0">所用等级</option>
+															<option value="1">注销用户</option>
+															<option value="3">代销用户</option>
+															<option value="2">vip</option>
 														</select>
 													</div>
 												</div>
@@ -46,7 +48,7 @@
 												<div class="form-group">
 													<label class="control-label col-md-5"> 会员积分大于：</label>
 													<div class="col-md-7">
-														<input id="payPoints_max" type="text" class="form-control">
+														<input id="pay_points_gt" type="text" class="form-control">
 													</div>
 												</div>
 											</div>
@@ -54,7 +56,7 @@
 												<div class="form-group">
 													<label class="control-label col-md-5"> 会员积分小于：</label>
 													<div class="col-md-7">
-														<input id="payPoints_min" type="text" class="form-control">
+														<input id="pay_points_lt" type="text" class="form-control">
 													</div>
 												</div>
 											</div>
@@ -62,12 +64,12 @@
 												<div class="form-group">
 													<label class="control-label col-md-5"> 会员名称：</label>
 													<div class="col-md-7">
-														<input id="userName" type="text" class="form-control">
+														<input id="userName" type="text" class="form-control" name="user_name">
 													</div>
 												</div>
 											</div>
 											<div class="col-md-8 text-right">
-												<button type="button" class="btn btn-primary">
+												<button type="button" class="btn btn-primary" id="searchBtn">
 													<i class="fa fa-search"></i> 搜索
 												</button>
 												<button type="button" class="btn btn-success">

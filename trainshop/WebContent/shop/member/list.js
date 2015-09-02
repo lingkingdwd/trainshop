@@ -6,7 +6,7 @@ $(document).ready(function() {
 	usersManage.createUsersTable();
 	
 	$("#createBtn").on("click", usersManage.addUsers);
-	$("#searchBtn").on("click", usersManage.queryUsers);
+	$("#searchBtn").on("click", usersManage.querysRank);
 	
 	$("#saveBtn").on("click",{queryUsers:usersManage.queryUsers}, usersManage.saveUsers);
 	
@@ -19,11 +19,13 @@ function UsersManage(){
 		usersTable.clear().draw();
 		
 		var obj = new Object();
-		obj.userName = $("#searchUsersName").val();
+		obj.userName = $("#userName").val();
+		pay_points_lt = $("#pay_points_lt").val();
+		pay_points_gt = $("#pay_points_gt").val();
+		obj.userRank = $("#userRankSelect").val();
+
 		
-		var param = {data:JSON.stringify(obj)};
-	
-		callAjax(basePath + "users/getUserslist", 'POST',  param, function(resp){
+		callAjax(basePath + "users/getUserslist", 'POST',  {"data":JSON.stringify(obj),"pay_points_gt":pay_points_gt,"pay_points_lt":pay_points_lt}, function(resp){
 			usersData = resp.DATA;
 			$.each(usersData,function(index,item){
 				usersTable.row.add(item).draw();
@@ -33,8 +35,6 @@ function UsersManage(){
 	
 	this.createUsersTable = function (){
 		var obj = new Object();
-		obj.userName = $("#searchUsersName").val();
-		
 		var param = {data:JSON.stringify(obj)};
 	
 		callAjax(basePath + "users/getUserslist", 'POST',  param, function(resp){
