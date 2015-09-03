@@ -95,8 +95,7 @@ public class UsersController extends BaseController {
 			return super.returnData(result);
 		} else {
 			 if (us.getUserName() != null  && !us.getUserName().equals("")) { 
-				 hql.append(" and model.userName =:userName");
-				 parameters.put("userName", us.getUserName());
+				 hql.append(" and model.userName like '%" + us.getUserName() +"%'");
 			 }
 			 
 			 if (pay_points_lt != null  && !"".equals(pay_points_lt)) { 
