@@ -155,7 +155,6 @@ function UsersManage() {
 	};
 	// 保存
 	this.saveUsers = function(event) {
-		// var userId = $("#userId").val();
 		var obj = new Object();
 
 		if ($("#userName1").val() == "") {
@@ -178,6 +177,7 @@ function UsersManage() {
 			layer.alert("手机不能为空!");
 			return;
 		}
+		obj.userId=$("#userId").val();
 		obj.userName=$("#userName1").val();
 		obj.email=$("#email").val();
 		obj.password=$.trim($("#password").val());
@@ -220,13 +220,17 @@ function UsersManage() {
 		for (var i = 0; i < usersData.length; i++) {
 			if (userId == usersData[i].userId) {
 				$("#userId").val(usersData[i].userId);
-				$("#rankName").val(usersData[i].rankName);
-				$("#minPoints").val(usersData[i].minPoints);
-				$("#maxPoints").val(usersData[i].maxPoints);
-				$("#discount").val(usersData[i].discount);
-
-				$("#showPrice").val(usersData[i].showPrice);
-				$("#specialRank").val(usersData[i].specialRank);
+				$("#userName1").val(usersData[i].userName);
+				$("#email").val(usersData[i].email);
+				$("#password").val(usersData[i].password);
+				$("#confirmPassword").val(usersData[i].confirmPassword);
+				$("#mobilePhone").val(usersData[i].mobilePhone);
+				$("#userRankSelect1").val(usersData[i].userRankSelect);
+				$("input[name='sex']:checked").val(usersData[i].sex);
+				$("#birthday").val(usersData[i].birthday);
+				$("#creditLine").val(usersData[i].creditLine);
+				$("#msn").val(usersData[i].msn);
+				$("#qq").val(usersData[i].qq);
 
 				$("#usersWin").modal("show");
 			}

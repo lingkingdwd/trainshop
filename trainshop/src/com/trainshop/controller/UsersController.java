@@ -1,5 +1,6 @@
 package com.trainshop.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -327,15 +328,34 @@ public class UsersController extends BaseController {
 			return result;
 		}
 		try {
-			List<Users> userList = usersService.findOne(paraUser.getUserName());
-			if (userList.size() > 0) {
-				result = "{\"flag\":\"1\",\"message\":\"用户名已经存在，请重新输入！\"}";
-				return result;
-			}
+			List<Users> userList = new ArrayList<Users>();
 			paraUser.setFlag(new Integer("1"));
 			paraUser.setRegTime(System.currentTimeMillis());
-			usersService.create(paraUser);
-			result = "{\"flag\":\"1\",\"message\":\"添加会员成功！\"}";
+			if (paraUser.getUserId() == null) {
+				userList = usersService.findOne(paraUser.getUserName());
+				if (userList.size() > 0) {
+					result = "{\"flag\":\"1\",\"message\":\"用户名已经存在，请重新输入！\"}";
+					return result;
+				}
+				usersService.create(paraUser);
+				result = "{\"flag\":\"1\",\"message\":\"添加会员成功！\"}";
+
+			} else {
+				Users user = usersService.findOne(paraUser.getUserId());
+				if (user.getUserName().equals(paraUser.getUserName())) {
+					usersService.update(paraUser);
+					result = "{\"flag\":\"1\",\"message\":\"修改会员成功！\"}";
+				} else {
+					userList = usersService.findOne(paraUser.getUserName());
+					if (userList.size() > 0) {
+						result = "{\"flag\":\"1\",\"message\":\"用户名已经存在，请重新输入！\"}";
+						return result;
+					} else {
+						usersService.update(paraUser);
+						result = "{\"flag\":\"1\",\"message\":\"修改会员成功！\"}";
+					}
+				}
+			}
 		} catch (Exception e) {
 			result = "{\"flag\":\"0\",\"message\":\"添加会员失败\"}";
 			return result;
