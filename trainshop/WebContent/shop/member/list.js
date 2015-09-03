@@ -5,11 +5,12 @@ $(document).ready(function() {
 	var usersManage = new UsersManage();
 	usersManage.createUsersTable();
 
+	$("#searchBtn").on("click", usersManage.queryUsers);
+	
 	$("#createBtn").on("click", usersManage.addUsers);
 	$("#saveBtn").on("click", {
 		queryUsers : usersManage.queryUsers
 	}, usersManage.saveUsers);
-	$("#searchBtn").on("click", usersManage.queryUsers);
 
 	$('body').on('click', 'button[name="editBtn"]', usersManage.update);
 	$('body').on('click', 'button[name="deleteBtn"]', {
@@ -138,14 +139,19 @@ function UsersManage() {
 	}
 	// 创建
 	this.addUsers = function() {
-		 $("#rankId").val("");
-		 $("#rankName").val("");
-		 $("#minPoints").val("");
-		 $("#maxPoints").val("");
-		 $("#discount").val("");
-		 $("#showPrice").val("");
-		 $("#specialRank").val("");
-		$("#usersWin").modal("show");
+		 $("#userName1").val("");
+		 $("#email").val("");
+		 $("#password").val("");
+		 $("#confirmPassword").val("");
+		 $("#mobilePhone").val("");
+		 $("#userRankSelect1").val("");
+		 $("input[name='sex']:checked").val("");
+		 $("#birthday").val("");
+		 $("#creditLine").val("");
+		 $("#msn").val("");
+		 $("#qq").val("");
+		 
+		 $("#usersWin").modal("show");
 	};
 	// 保存
 	this.saveUsers = function(event) {
@@ -156,18 +162,6 @@ function UsersManage() {
 			layer.alert("用户名称不能为空!");
 			return;
 		}
-		// if ($("#minPoints").val() == "") {
-		// layer.alert("积分下限不能为空!");
-		// return;
-		// }
-		// if ($("#maxPoints").val() == "") {
-		// layer.alert("积分上限不能为空!");
-		// return;
-		// }
-		// if ($("#discount").val() == "") {
-		// layer.alert("初始折扣率不能为空!");
-		// return;
-		// }
 		if ($("#email").val() == "") {
 			layer.alert("邮件地址不能为空!");
 			return;
@@ -184,17 +178,6 @@ function UsersManage() {
 			layer.alert("手机不能为空!");
 			return;
 		}
-
-		// if ("checked" == $("#showPrice").attr("checked")) {
-		// obj.showPrice = 1;
-		// } else {
-		// obj.showPrice = 0;
-		// }
-		// if ("checked" == $("#specialRank").attr("checked")) {
-		// obj.specialRank = 1;
-		// } else {
-		// obj.specialRank = 0;
-		// }
 		obj.userName=$("#userName1").val();
 		obj.email=$("#email").val();
 		obj.password=$.trim($("#password").val());
@@ -205,13 +188,6 @@ function UsersManage() {
 		obj.creditLine=$("#creditLine").val();
 		obj.msn=$("#msn").val();
 		obj.qq=$("#qq").val();
-		
-		
-		// obj.rankName = $("#rankName").val();
-		// obj.minPoints = $("#minPoints").val();
-		// obj.maxPoints = $("#maxPoints").val();
-		// obj.discount = $("#discount").val();
-
 		var param = {
 			data : JSON.stringify(obj),
 			confirmPassword:$.trim($("#confirmPassword").val())
@@ -257,28 +233,30 @@ function UsersManage() {
 		}
 	};
 
+	//删除会员信息
 	this.deleteUsers = function(event) {
 		var userId = $(this).attr("userId");
 		if (userId == "" || userId == null) {
 			layer.alert("用户号为空！");
 			return;
 		}
+		
+		var obj=new Object();
+		obj.userId = $(this).attr("userId");
 
 		var param = {
-			data : userId
+			data : JSON.stringify(obj)
 		};
 
-		callAjax(basePath + "users/delete", 'POST', param, function(data) {
+		callAjax(basePath + "users/deleteUsers", 'POST', param, function(data) {
 			if (data.flag == "1") {
 				layer.alert("删除成功！");
-
 				if (event != undefined) {
-					alert(78);
 					var queryUsers = event.data.queryUsers;
 					queryUsers();
 				}
 			} else {
-				layer.alert(data.msg);
+				layer.alert(data.message);
 			}
 		});
 	};

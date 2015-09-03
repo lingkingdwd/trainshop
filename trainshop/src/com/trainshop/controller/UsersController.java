@@ -52,9 +52,7 @@ public class UsersController extends BaseController {
 	@ResponseBody
 	@RequestMapping(value = "usersCount", method = RequestMethod.POST, produces = { "text/json;charset=UTF-8" })
 	public String usersCount() {
-
 		int count = usersService.findAll().size();
-
 		return super.returnData(count);
 	}
 
@@ -286,6 +284,14 @@ public class UsersController extends BaseController {
 		return super.returnSucess("保存成功！");
 	}
 
+	// ===============================================================
+	/**
+	 * 保存会员信息
+	 * 
+	 * @param request
+	 * @param session
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value = "saveOrUpdate", method = RequestMethod.POST, produces = { "text/json;charset=UTF-8" })
 	public String saveOrUpdate(HttpServletRequest request, HttpSession session) {
@@ -331,8 +337,28 @@ public class UsersController extends BaseController {
 			usersService.create(paraUser);
 			result = "{\"flag\":\"1\",\"message\":\"添加会员成功！\"}";
 		} catch (Exception e) {
-			e.printStackTrace();
 			result = "{\"flag\":\"0\",\"message\":\"添加会员失败\"}";
+			return result;
+		}
+		return result;
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "deleteUsers", method = RequestMethod.POST, produces = { "text/json;charset=UTF-8" })
+	public String deleteUsers(HttpServletRequest request, HttpSession session) {
+		String result = null;
+
+		String data = request.getParameter("data");
+		Users paraUser = JsonPluginsUtil.jsonToBean(data, Users.class);
+		if (paraUser == null) {
+			result = "{\"flag\":\"1\",\"message\":\"要删除的会员不存在!\"}";
+			return result;
+		}
+		try {
+			usersService.deleteById(paraUser.getUserId());
+			result = "{\"flag\":\"1\",\"message\":\"删除会员成功！\"}";
+		} catch (Exception e) {
+			result = "{\"flag\":\"0\",\"message\":\"删除会员失败\"}";
 			return result;
 		}
 		return result;
