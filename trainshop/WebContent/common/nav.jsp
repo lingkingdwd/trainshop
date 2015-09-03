@@ -220,7 +220,10 @@
 					<ul class="nav nav-second-level">
 						<li><a href="<%=basePath %>users/list">会员列表</a></li>
 						<li><a href="<%=basePath %>userRank/init">会员等级</a></li>
-						<li><a href="<%=basePath %>users/list">会员留言</a></li>
+						<li><a href="<%=basePath %>comment/init">会员留言</a></li>
+						<li><a href="<%=basePath %>users/list">会员整合</a></li>
+						<li><a href="<%=basePath %>users/list">充值和提现申请</a></li>
+						<li><a href="<%=basePath %>users/list">资金管理</a></li>
 					</ul>
 				</li>
 				<li><a href="#"><i class="fa fa-wrench fa-fw"></i> 系统设置<span

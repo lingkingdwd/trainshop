@@ -102,7 +102,6 @@ function UserRankManage(){
 	}
 	
 	this.saveUserRank = function(event){
-		var rankId = $("#rankId").val();
 		
 		var obj = new Object();
 		
@@ -135,16 +134,17 @@ function UserRankManage(){
 			obj.specialRank = 0;
 		}
 		
-		obj.rankName = $("#rankName").val();
+		obj.rankName =$.trim($("#rankName").val());
 		obj.minPoints = $("#minPoints").val();
 		obj.maxPoints = $("#maxPoints").val();
 		obj.discount = $("#discount").val();
+		obj.rankId = $("#rankId").val();
 		
 		var param = {data:JSON.stringify(obj)};
 	
 		callAjax(basePath + "userRank/saveOrUpdate",'POST', param, function(data){
 			if (data.flag == "1") {
-				layer.alert("会员等级创建成功!");
+				layer.alert(data.message);
 				
 				if(event != undefined){
 					var queryUserRank = event.data.queryUserRank;
@@ -160,6 +160,8 @@ function UserRankManage(){
 	};
 	
 	this.update = function(){
+		$(".modal-title").html("修改会员等级");
+		$("#saveBtn").html("修改");
 		var rankId = $(this).attr("rankId");
 		for(var i = 0; i < userRankData.length; i++){
 			if(rankId == userRankData[i].rankId){

@@ -1,5 +1,6 @@
 package com.trainshop.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,14 +9,12 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.trainshop.common.util.JsonPluginsUtil;
-import com.trainshop.common.util.PageTools;
 import com.trainshop.model.UserRank;
 import com.trainshop.service.IUserRankService;
 
@@ -27,7 +26,7 @@ public class UserRankController extends BaseController {
 	private IUserRankService userRankService;
 	
 	@RequestMapping(value = "/init", method = RequestMethod.GET)
-	public String initLogin(HttpServletRequest request, HttpSession session) {
+	public String initUserRank(HttpServletRequest request, HttpSession session) {
 		try {
 			return "shop/member/userRank";
 		} catch (Exception e) {
@@ -74,7 +73,7 @@ public class UserRankController extends BaseController {
 		} else {
 			 if (ur.getRankName() != null  && !ur.getRankName().equals("")) { 
 				 hql.append(" and model.rankName =:rankName");
-				 parameters.put("rankName", ur.getRankName());
+				 hql.append(" and model.userName like '%" + ur.getRankName().trim() +"%'");
 			 }
 			 
 			List<UserRank> list = userRankService.searchByHql(hql.toString(),
@@ -93,6 +92,7 @@ public class UserRankController extends BaseController {
 	 * @param session
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	@ResponseBody
 	@RequestMapping(value = "saveOrUpdate", method = RequestMethod.POST, produces = { "text/json;charset=UTF-8" })
 	public String saveOrUpdate(HttpServletRequest request, HttpSession session) {
@@ -101,31 +101,37 @@ public class UserRankController extends BaseController {
 		String data = request.getParameter("data");
 		
 		UserRank ur = JsonPluginsUtil.jsonToBean(data, UserRank.class);
-
-		if (!ur.getRankName().trim().equals("")) {
-			try {
-				List<UserRank> user = userRankService.findObjectsByPerptey(UserRank.class, "rankName", ur.getRankName());
-				if(user.size() > 0){
-					result = "{\"flag\":\"0\",\"message\":\"会员等级已经存在，请重新输入！\"}";
-					return result;
-				}
-				
-				if(ur.getRankId() == null){
+		if (!ur.getRankName().trim().equals("") && ur.getRankName().trim() !=null) {
+			List<UserRank> user = new ArrayList<UserRank>();
+		    if(ur.getRankId() == null){
+		    	try {
+		    		user = userRankService.findObjectsByPerptey(UserRank.class, "rankName", ur.getRankName().trim());
+					if(user.size() > 0){
+						result = "{\"flag\":\"0\",\"message\":\"会员等级已经存在，请重新输入！\"}";
+						return result;
+					}
 					userRankService.save(ur);
-				}
-				else{
+					result = "{\"flag\":\"1\",\"message\":\"创建成功！\"}";
+		    	  }catch(Exception e){
+		    		  result = "{\"flag\":\"0\",\"message\":\"创建失败\"}";
+		    		  return result;
+				  }
+			}else{
+				try {
+					if(user.size() > 1){
+						result = "{\"flag\":\"0\",\"message\":\"会员等级已经存在，请重新输入！\"}";
+						return result;
+					}
 					userRankService.saveOrUpdate(ur);
-				}
-				result = "{\"flag\":\"1\",\"message\":\"创建成功！\"}";
-			} catch (Exception e       ) {
-				result = "{\"flag\":\"0\",\"message\":\"创建失败\"}";
-				return result;
+					result = "{\"flag\":\"1\",\"message\":\"修改成功！\"}";
+				 }catch(Exception e){
+		    		  result = "{\"flag\":\"0\",\"message\":\"修改失败\"}";
+		    		  return result;
+				  }
 			}
-		}
-		else{
+		}else{
 			result = "{\"flag\":\"0\",\"message\":\"会员等级名不能为空！\"}";
 		}
-
 		return result;
 	}
 	
