@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.trainshop.common.util.JsonPluginsUtil;
 import com.trainshop.model.UserRank;
+import com.trainshop.model.Users;
 import com.trainshop.service.IUserRankService;
 
 @Controller
@@ -72,8 +73,7 @@ public class UserRankController extends BaseController {
 			return super.returnData(result);
 		} else {
 			 if (ur.getRankName() != null  && !ur.getRankName().equals("")) { 
-				 hql.append(" and model.rankName =:rankName");
-				 hql.append(" and model.userName like '%" + ur.getRankName().trim() +"%'");
+				 hql.append(" and model.rankName like '%" + ur.getRankName().trim() +"%'");
 			 }
 			 
 			List<UserRank> list = userRankService.searchByHql(hql.toString(),
@@ -102,10 +102,9 @@ public class UserRankController extends BaseController {
 		
 		UserRank ur = JsonPluginsUtil.jsonToBean(data, UserRank.class);
 		if (!ur.getRankName().trim().equals("") && ur.getRankName().trim() !=null) {
-			List<UserRank> user = new ArrayList<UserRank>();
+			List<UserRank> user = userRankService.findObjectsByPerptey(UserRank.class, "rankName", ur.getRankName().trim());;
 		    if(ur.getRankId() == null){
 		    	try {
-		    		user = userRankService.findObjectsByPerptey(UserRank.class, "rankName", ur.getRankName().trim());
 					if(user.size() > 0){
 						result = "{\"flag\":\"0\",\"message\":\"会员等级已经存在，请重新输入！\"}";
 						return result;
@@ -118,12 +117,19 @@ public class UserRankController extends BaseController {
 				  }
 			}else{
 				try {
-					if(user.size() > 1){
-						result = "{\"flag\":\"0\",\"message\":\"会员等级已经存在，请重新输入！\"}";
-						return result;
+					UserRank userRank = userRankService.findOne(ur.getRankId());
+					if(userRank.getRankName().equals(ur.getRankName())){
+						userRankService.update(ur);
+						result = "{\"flag\":\"1\",\"message\":\"修改成功！\"}";
+					}else{
+						if(user.size() > 0){
+							result = "{\"flag\":\"0\",\"message\":\"会员等级已经存在，请重新输入！\"}";
+							return result;
+						}else{
+							userRankService.update(ur);
+							result = "{\"flag\":\"1\",\"message\":\"修改成功！\"}";
+						}
 					}
-					userRankService.saveOrUpdate(ur);
-					result = "{\"flag\":\"1\",\"message\":\"修改成功！\"}";
 				 }catch(Exception e){
 		    		  result = "{\"flag\":\"0\",\"message\":\"修改失败\"}";
 		    		  return result;

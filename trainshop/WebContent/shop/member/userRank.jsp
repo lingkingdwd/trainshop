@@ -116,7 +116,7 @@
 							<td>
 								<div class="col-md-12 text-left marbot10">
 									<label class="checkbox-inline"> 
-										<input type="checkbox" id="showPrice" value="1"> 在商品详情页显示该会员等级的商品价格
+										<input type="checkbox" id="showPrice" value=""> 在商品详情页显示该会员等级的商品价格
 									</label>
 									<!-- <button type="button" class="btn btn-primary"><i class="fa fa-copy"></i> 复制上一版计划数据</button> -->
 								</div>
@@ -127,7 +127,7 @@
 							<td>
 								<div class="col-md-12 text-left marbot10">
 									<label class="checkbox-inline"> 
-										<input type="checkbox" id="specialRank" value="1"> 特殊会员组
+										<input type="checkbox" id="specialRank" value=""> 特殊会员组
 									</label>
 								</div>
 							</td>

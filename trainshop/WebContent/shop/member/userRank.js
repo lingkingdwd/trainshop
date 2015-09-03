@@ -46,9 +46,9 @@ function UserRankManage(){
 				        { data: "rankName" },
 				        { data: "minPoints" },
 				        { data: "maxPoints" },
-				        { data: "discount" },
-				        { data: "showPrice" },
+				        { data: "discount" },				        
 				        { data: "specialRank"},
+				        { data: "showPrice" },
 				        {data : ""}
 					],
 			        columnDefs:[{
@@ -121,13 +121,13 @@ function UserRankManage(){
 			layer.alert("初始折扣率不能为空!");
 			return;
 		}
-		if ("checked" == $("#showPrice").attr("checked")) {
+		if ($("#showPrice").is(':checked')) {
 			obj.showPrice = 1;
 		}
 		else{
 			obj.showPrice = 0;
 		}
-		if ("checked" == $("#specialRank").attr("checked")) {
+		if ($("#specialRank").get(0).checked) {
 			obj.specialRank = 1;
 		}
 		else{
@@ -145,12 +145,12 @@ function UserRankManage(){
 		callAjax(basePath + "userRank/saveOrUpdate",'POST', param, function(data){
 			if (data.flag == "1") {
 				layer.alert(data.message);
-				
+				$("#userRankWin").modal("hide");
 				if(event != undefined){
 					var queryUserRank = event.data.queryUserRank;
 					queryUserRank();
 					
-					$("#userRankWin").modal("hide");
+					//$("#userRankWin").modal("hide");
 				}
 			}
 			else{
@@ -173,6 +173,10 @@ function UserRankManage(){
 				
 				$("#showPrice").val(userRankData[i].showPrice);
 				$("#specialRank").val(userRankData[i].specialRank);
+				
+				
+				if(userRankData[i].specialRank == 1){$("#specialRank").attr('checked',true);}else{$("#specialRank").attr('checked',false);}
+				if(userRankData[i].showPrice == 1){$("#showPrice").attr('checked',true);}else{$("#showPrice").attr('checked',false);}
 				
 				$("#userRankWin").modal("show");
 			}
