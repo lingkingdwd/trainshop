@@ -163,6 +163,8 @@ function UserRankManage(){
 		$(".modal-title").html("修改会员等级");
 		$("#saveBtn").html("修改");
 		var rankId = $(this).attr("rankId");
+//		$("#showPrice").val("");
+//		$("#specialRank").val("");
 		for(var i = 0; i < userRankData.length; i++){
 			if(rankId == userRankData[i].rankId){
 				$("#rankId").val(userRankData[i].rankId);
@@ -173,10 +175,18 @@ function UserRankManage(){
 				
 				$("#showPrice").val(userRankData[i].showPrice);
 				$("#specialRank").val(userRankData[i].specialRank);
-				
-				
-				if(userRankData[i].specialRank == 1){$("#specialRank").attr('checked',true);}else{$("#specialRank").attr('checked',false);}
-				if(userRankData[i].showPrice == 1){$("#showPrice").attr('checked',true);}else{$("#showPrice").attr('checked',false);}
+				 var cBoxAll = document.getElementById("showPrice");
+				 var cBoxABB = document.getElementById("specialRank");
+				if(String($("#showPrice").val()) == String(1) ){
+					cBoxAll.checked=true;
+				  }else{
+					  cBoxAll.checked=false;
+				  }
+				if(String($("#specialRank").val()) == String(1)){
+					   cBoxABB.checked=true;
+					}else{
+						cBoxABB.checked=false;
+					  }
 				
 				$("#userRankWin").modal("show");
 			}
@@ -220,6 +230,13 @@ function UserRankManage(){
 		$("#showPrice").val("");
 		$("#specialRank").val("");
 		
+		$(".modal-title").html("添加会员等级");
+		$("#saveBtn").html("保存");
+		
+		 var cBoxAll = document.getElementById("showPrice");
+		 var cBoxABB = document.getElementById("specialRank");
+		 cBoxAll.checked=false;
+		 cBoxABB.checked=false;
 		$("#userRankWin").modal("show");
 	};
 }

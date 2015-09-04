@@ -16,6 +16,18 @@ $(document).ready(function() {
 	$('body').on('click', 'button[name="deleteBtn"]', {
 		queryUsers : usersManage.queryUsers
 	}, usersManage.deleteUsers);
+	
+	//显示会员等级数据
+	var obj = new Object();
+	var param = {
+		data : JSON.stringify(obj)
+	};
+	callAjax(basePath + "userRank/getList", 'POST', param, function(data) {
+	    $.each(data.DATA,function(i,val){
+	        $("#userRankSelect").append("<option value='"+val.rankId+"'>"+val.rankName+"</option>")
+	        $("#userRankSelect1").append("<option value='"+val.rankId+"'>"+val.rankName+"</option>")
+	    })
+	});
 });
 
 function UsersManage() {
@@ -150,6 +162,9 @@ function UsersManage() {
 		 $("#creditLine").val("");
 		 $("#msn").val("");
 		 $("#qq").val("");
+		 $("#userId").val("");
+		 $(".modal-title").html("添加会员");
+		 $("#saveBtn").html("保存");
 		 
 		 $("#usersWin").modal("show");
 	};
@@ -202,12 +217,10 @@ function UsersManage() {
 				function(data) {
 					if (data.flag == "1") {
 						layer.alert(data.message);
-
+						$("#usersWin").modal("hide");
 						if (event != undefined) {
 							var queryUsers = event.data.queryUsers;
 							queryUsers();
-
-							$("#usersWin").modal("hide");
 						}
 					} else {
 						layer.alert(data.message);
@@ -216,6 +229,8 @@ function UsersManage() {
 	};
 
 	this.update = function() {
+		$(".modal-title").html("修改会员");
+		$("#saveBtn").html("修改");
 		var userId = $(this).attr("userId");
 		for (var i = 0; i < usersData.length; i++) {
 			if (userId == usersData[i].userId) {
@@ -225,12 +240,13 @@ function UsersManage() {
 				$("#password").val(usersData[i].password);
 				$("#confirmPassword").val(usersData[i].confirmPassword);
 				$("#mobilePhone").val(usersData[i].mobilePhone);
-				$("#userRankSelect1").val(usersData[i].userRankSelect);
+				$("#userRankSelect1").val(usersData[i].userRank);
 				$("input[name='sex']:checked").val(usersData[i].sex);
 				$("#birthday").val(usersData[i].birthday);
 				$("#creditLine").val(usersData[i].creditLine);
 				$("#msn").val(usersData[i].msn);
 				$("#qq").val(usersData[i].qq);
+				$("#userRankSelect1").find("option[value="+usersData[i].userRank+"]").attr("selected",true);
 
 				$("#usersWin").modal("show");
 			}

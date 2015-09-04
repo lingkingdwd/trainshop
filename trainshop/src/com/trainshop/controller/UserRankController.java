@@ -1,6 +1,5 @@
 package com.trainshop.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.trainshop.common.util.JsonPluginsUtil;
 import com.trainshop.model.UserRank;
-import com.trainshop.model.Users;
 import com.trainshop.service.IUserRankService;
 
 @Controller

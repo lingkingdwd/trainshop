@@ -37,10 +37,7 @@
 													<div class="col-md-7">
 														<select class="form-control" id="userRankSelect"
 															name="user_rank">
-															<option value="">所用等级</option>
-															<option value="1">注销用户</option>
-															<option value="3">代销用户</option>
-															<option value="2">vip</option>
+															<option value="">请选择会员等级</option>
 														</select>
 													</div>
 												</div>
@@ -160,8 +157,7 @@
 							<td class="col-md-3 text-right">会员等级：</td>
 							<td>
 								<select class="form-control" id="userRankSelect1">
-									<option value="0">非特殊用户</option>
-									<option value="1">代销用户</option>
+								    <option value="">请选择会员等级</option>
 								</select>
 							</td>
 						</tr>
