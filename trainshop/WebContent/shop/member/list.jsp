@@ -25,7 +25,7 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="panel panel-default">
-						<div class="panel-heading">会员列表</div>
+						<div class="panel-heading">会员列表</div> 
 						<div class="panel-body">
 							<div class="row marbot10 border-bottom ">
 								<form class="form-horizontal" role="form">
